@@ -1,0 +1,247 @@
+# Four Parameters: Categorical 
+
+```{r}
+#| label: hidden-libraries
+#| message: false
+#| echo: false
+#| warning: false
+library(gt)
+```
+
+Packages:
+
+```{r}
+#| message: false
+#| code-fold: false
+library(primer.data)
+library(brms)
+library(tidybayes)
+library(tidyverse)
+```
+
+The **primer.data** package includes the `nes`, a tibble with the data from the [American National Election Studies](https://electionstudies.org/).  We use the **brms** and **tidybayes** packages to create and manipulate Bayesian models. As always, we use the **tidyverse** package.
+
+Consider:
+
+> *What was the relationship between sex and voting in the 1992 US Presidential election?*
+
+
+## Wisdom
+
+### Preceptor Table
+
+A Preceptor Table is smallest possible table with rows and columns such that, if there is no missing data, our question is easy to answer.
+
+*Causal or predictive model*: This model is predictive not causal. Sex can not be a treatment because there is no (plausible) way to manipulate.
+
+*Units*: The rows of the Preceptor Table refer to individual US voters. The question suggests that we are not interested in people who did not vote, although one might explore if men were more or less likely to vote in the first place. As always, the initial question rarely specifies the Preceptor Table precisely.
+
+*Outcome*: We want to Presidential voting behavior in 1992. Such explorations are often restricted to just the two "major party" candidates, the nominees of the Democratic and the Republican parties, Bill Clinton and George HW Bush. But, in 1992, Ross Perot was a very successful "third party" candidate, winning almost 19% of the vote. Should he be included in the analysis? What about the 4th place finisher, Libertarian Andre Marrou? Again, the question does not specify.
+
+*Covariates*: The only covariate we will consider is sex, with two values: "male" and "female". Whatever your feelings about the contemporary limits of the sex binary, this is all that data collected in 1992 will give us. In a full analysis, we would make use of more covariates, but the primary purpose of this chapter is to explore a categorical model with three possible outcomes.
+
+*Moment in Time*: The Preceptor Table refers to the election season in the fall of 1992. We make no claims about other US presidential elections, not least because few feature a third party candidate as popular as Perot. Our purpose here is historical. We want to better understand what happened in this election, not make claims about other time periods. The moment in time is, however, longer than just Election Day itself since mail-in votes were cast in the week proceeding.
+
+
+```{r}
+#| echo: false
+tibble(ID = c("1", "2", "...", "10", "11", "...", "103,754,865"),
+       vote = c("Democrat", "Third Party", "...", "Republican", "Democrat", "...", "Republican"),
+       sex = c("M", "F", "...", "F", "F", "...", "M")) |>
+  
+  gt() |>
+  tab_header(title = "Preceptor Table") |> 
+  cols_label(ID = md("ID"),
+             vote = md("Vote"),
+             sex = md("Sex")) |>
+  tab_style(cell_borders(sides = "right"),
+            location = cells_body(columns = c(ID))) |>
+  tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
+            locations = cells_column_labels(columns = c(ID))) |>
+  cols_align(align = "center", columns = everything()) |>
+  cols_align(align = "left", columns = c(ID)) |>
+  fmt_markdown(columns = everything()) |>
+  tab_spanner(label = "Outcome", columns = c(vote)) |>
+  tab_spanner(label = "Covariate", columns = c(sex))
+```
+
+As usual the ID column is irrelevant. It is also just by chance that the person with ID 103,754,865 (and ID 1, ID 2, ID 10 and ID 11) happened to be surveyed.
+
+There were 104,425,014 total votes cast in the 1992 Presidential election. But our table only has 103,754,865 rows because we are only modeling people who cast their votes for one of the three main candidates. Is that the "right" approach? It depends! As always, data science is a *dialogue* between the question with which we start and the data/tools we have available to answer it. In this case, we *choose* to simplify the question, to focus on only the three main candidates, mainly because we want to use a model with three outcomes. We could, instead, create a more complicated model which included votes cast for other candidates. Our new question is now:
+
+> *What was the relationship between sex and voting in the 1992 US Presidential election among supporters of the three leading candidates: Clinton, Bush and Perot?*
+
+
+### EDA
+
+Our data comes from [American National Election Studies](https://electionstudies.org/). The **primer.data** package includes a version of the main dataset with a selection of variables. The full ANES data is much richer than this relatively simple tibble.
+
+
+```{r}
+#| code-fold: false
+nes
+```
+
+See the `?nes` for details. We only need a small subset of this data:
+
+
+```{r}
+#| code-fold: false
+
+nes_92 <- nes |> 
+  filter(year == 1992) |> 
+  select(sex, pres_vote) |> 
+  drop_na() |> 
+  mutate(pres_vote = case_when(
+    pres_vote == "Democrat" ~ "Clinton",
+    pres_vote == "Republican" ~ "Bush",
+    pres_vote == "Third Party" ~ "Perot",
+  ))
+
+```
+
+```{r}
+#| code-fold: false
+
+nes_92 |> 
+  ggplot(aes(x = pres_vote, fill = sex)) +
+    geom_bar(position = "dodge") +
+    labs(title = "Survey of 1992 Presidential Election Votes",
+         subtitle = "Men were much more likely to support Ross Perot",
+         x = NULL,
+         y = "Count",
+         caption = "Source: American National Election Survey")
+```
+
+
+
+### Validity
+
+Our Preceptor Table includes the 103,754,865 people who voted for one of the three leading candidates in the 1992 presidential election. Our data includes a (tiny) subset of those people. This is a standard aspect of a "historical" data science project, when the data we want (the Preceptor Table) and the data we have come from the same moment in time. This makes the assumptions of validity and stability much easier to maintain. Of course, there can always be problems. A response to the nice ANES surveyer about one's vote (or sex) is not the same thing as one's actual vote (or sex). Indeed, a standard artifact of political surveys is that more people claim to have voted for the winning candidate than actually did. In this case, however, we will assume that validity holds and that we can "stack" the columns from the Preceptor Table and the data on top of each other. In fact, validity allows us to assume that the data is actually a *subset* of the Preceptor Table.
+
+## Justice
+
+Justice concerns four topics: the Population Table, stability, representativeness, and unconfoundedness.
+
+### Population Table
+
+Because this project is historical, the Population Table has the same number of rows as the Preceptor Table.
+
+```{r}
+#| echo: false
+tibble(source = c("PT/Data", "PT/Data", "PT", "PT", "PT", "PT", "...", "PT/Data", "PT/Data", "PT",  "PT",  "...", "PT/Data"),
+       ID = c("1", "2", "3", "4", "5", "6", "...", "10", "11", "12", "13", "...", "103,754,865"),
+       vote = c("Democrat", "Third Party", "Republican", "Democrat", "Democrat", "Democrat",  "...", "Republican", "Democrat", "Democrat", "Republican", "...", "Republican"),
+       sex = c("M", "F", "M", "F", "F", "M", "...", "F", "F", "...", "F", "...", "M")) |>
+  
+  gt() |>
+  tab_header(title = "Population Table") |> 
+  cols_label(source = md("Source"),
+             ID = md("ID"),
+             vote = md("Vote"),
+             sex = md("Sex")) |>
+  tab_style(cell_borders(sides = "right"),
+            location = cells_body(columns = c(ID))) |>
+  tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
+            locations = cells_column_labels(columns = c(ID))) |>
+  cols_align(align = "center", columns = everything()) |>
+  cols_align(align = "left", columns = c(ID)) |>
+  fmt_markdown(columns = everything()) |>
+  tab_spanner(label = "Outcome", columns = c(vote)) |>
+  tab_spanner(label = "Covariate", columns = c(sex))
+```
+
+
+### Stability
+
+If the assumption of stability holds, then the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn.
+
+### Representativeness
+
+
+
+
+
+### Unconfoundedness
+
+Because this is a predictive, not causal, model, the assumption of unconfoundedness is irrelevant.
+
+## Courage
+
+Justice gave us the Population Table. Courage selects the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have. 
+Because we have three possible outcomes, and because there is no natural ordering among the outcomes, a *categorical* model is the most natural choice. The binomial model which we used in @sec-models is just a special case of a categorical model, one in which there are only two outcomes. Recall:
+
+$$ red_i  \sim Bernoulli(\rho) $$
+A more verbose way to present this same model would be:
+
+$$ red_i  \sim Categorical(\rho_0, \rho_1) $$
+After all, there are two possible values for $red_i$, 0 and 1. There is, therefore, a probability that bead comes back not-red and a probability that it comes back red. Labels those probabilities $\rho_0$ and $\rho_1$. In a Bernoulli model, we don't both to consider both $\rho_0$ and $\rho_1$ because of the mathematical relationship which must hold between them:
+
+$$ \rho_0 + \rho_1 = 1 $$
+If you know the value of $\rho_1$, then you can calculate the value of $\rho_0$ easily. So, in Bernoulli models we don't bother to even consider both $\rho_0$ and $\rho_1$. We just worry about the value of $\rho_1$, and define it as $\rho$, with the 1 underscore understood by convention.
+
+Things get more complex, however, with more than two possible outcomes.
+
+$$ vote_i  \sim Categorical(\rho_{bush}, \rho_{clinton}, \rho_{perot}) $$
+The vote of person $i$ takes on one of three possible values: Bush (Republican), Clinton (Democrat) or Perot (Third Party). The probability of each outcome is given by the respective $\rho$. And, by definition:
+
+$$ \rho_{bush} + \rho_{clinton} + \rho_{perot} = 1 $$
+So, once we know two of the probabilities, we know the third. That means that we can't estimate them separately. If we do, we run the risk of violating this equality. We must estimate them together. Fortunately, **brms** takes care of all the details.
+
+Recall the logit link function from the Bernoulli model in @sec-models:
+
+$$
+\rho = \frac{e^{\beta_0}}{1 + e^{\beta_0}}
+$$
+We expand this in the Categorical case as:
+
+$$
+\rho_{clinton} = \frac{e^{\beta_0}}{1 + e^{\beta_0}}
+$$
+
+$$
+\rho_{clinton} = \frac{e^{\beta_{0}}{1 + e^{\beta_0}}}
+$$
+
+
+
+
+### Models
+
+```{r}
+#| code-fold: false
+fit_nes <- brm(formula = pres_vote ~ sex,
+               data = nes_92,
+               family = categorical())
+
+
+```
+
+```{r}
+#| code-fold: false
+fit_nes |> 
+  add_epred_draws(newdata = tibble(sex = "Female")) |> 
+  ggplot(aes(x = .epred, color = .category)) +
+    geom_density()
+```
+
+
+### Data Generating Mechanism
+
+### Tests
+
+
+```{r}
+#| code-fold: false
+pp_check(fit_nes, type = "bars")
+```
+
+
+## Temperance
+
+### Questions and Answers
+
+### Humility
+
+## Summary
+
