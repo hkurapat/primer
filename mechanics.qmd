@@ -1,4 +1,4 @@
-# Four Parameters {#sec-four-parameters}
+# Mechanics {#sec-mechanics}
 
 ```{r}
 #| label: hidden-libraries
@@ -8,21 +8,11 @@
 library(patchwork)
 ```
 
-
-<!-- Change Justice section to discuss the math of three possible models you are considering. Predictive or am I doing causal? What is the treatment effect is my question? So, must be causal. Key point: Just because you are using treatment, does not mean that you care it is causal. You may not care. You might only want prediction. So, everything really starts with your question. If you are not asking a causal question, then you don't care if a lefthand side variable has a causal interpretation. You just care if it helps you make better predictions. -->
-
-<!-- Add a question to Temperance and answer it. Probably posterior_epred(). Probably a causation question. Meaning the expected causal effect for a certain sort of person. Which is also a parameter in the regression, which is a good connection to make. MF: Did not have time for this, but I can complete it this week. -->
-
-<!-- Transforming the outcome variable. Give some more thoughts or advice. -->
-
-<!-- Comparing within rows of the Preceptor Table versus across rows, which is all you can do without two potential outcomes. -->
-
-<!-- Also, does not work in logistic. But divide by four rule.  -->
+<!-- Not sure where this chapter goes. It makes use of models with two independent variables, which means four parameters. -->
 
 *Our forecasts are more uncertain that a naive use of our models would suggest.*
 
-In our haste to make progress --- to get all the way through the process of building, interpreting and using models --- we have given short shrift to some of the messy details of model building and evaluation. This chapter fills in those lacunae. We will also introduce models with four parameters, including *parallel slopes* models. 
-
+In our haste to make progress --- to get all the way through the process of building, interpreting and using models --- we have given short shrift to some of the messy details of model building and evaluation. This chapter fills in those lacunae. 
 
 ## Transforming variables
 
@@ -38,31 +28,32 @@ Recall our model of `income` as a function of `age`.
 
 $$ y_i = \beta_0  + \beta_1 age_i + \epsilon_i$$
 
+<!-- DK: Drop broom.mixed? -->
+
 We fit this using the `trains` data from **primer.data**. We will also be using a new package, **broom.mixed**, which allows us to tidy regression data for plotting.
 
-<!-- broom.mixed generates a weird warning about TMB was built with Matrix version -->
-<!-- 1.3.4 and Current Matrix version is 1.3.3. Not sure what to do, besides turn -->
-<!-- it off for now. -->
 
 
 ```{r}
+#| code-fold: false
 #| message: false
-#| warning: false
+
 library(tidyverse)
 library(primer.data)
-library(rstanarm)
+library(brms)
 library(broom.mixed)
 ```
 
-
+<!-- DK: Have we taught what fixef() means does? -->
 
 ```{r}
-fit_1 <- stan_glm(formula = income ~ age, 
-         data = trains, 
-         refresh = 0,
-         seed = 9)
+#| code-fold: false
 
-print(fit_1, detail = FALSE)
+fit_1 <- brm(formula = income ~ age, 
+             data = trains,
+             family = gaussian())
+
+fixef(fit_1)
 ```
 
 There is nothing wrong with this model. Yet the interpretation of $\beta_0$, the intercept in the regression, is awkward. It represents the average income for people of age zero. That is useless! There are no people of zero age in our data. And, even if there were, it would be weird to think about such people taking the commuter train into Boston and filling out our survey forms.
@@ -71,38 +62,40 @@ It is easy, however, to *transform* `age` into a variable which makes the interc
 
 
 ```{r}
+#| code-fold: false
+
 trains_2 <- trains |> 
   mutate(c_age = age - mean(age))
 
-fit_1_c <- stan_glm(formula = income ~ c_age, 
-                    data = trains_2, 
-                    refresh = 0,
-                    seed = 9)
+fit_1_c <- brm(formula = income ~ c_age, 
+               data = trains_2,
+               family = gaussian())
 
-print(fit_1_c, detail = FALSE)
+fixef(fit_1_c)
 ```
 
-The intercept, `r scales::comma(round(coef(fit_1_c)["(Intercept)"], 0))`, is the expected income for someone with `c_age = 0`, i.e., someone of an average age in the data, which is around `r round(mean(trains$age), 0)`. 
+The intercept, `r scales::comma(round(fixef(fit_1_c)["Intercept", "Estimate"], 0))`, is the expected income for someone with `c_age = 0`, i.e., someone of an average age in the data, which is around `r round(mean(trains$age), 0)`. 
 
 ### Scaling
 
 Centering --- changing a variable via addition/subtraction --- often makes the intercept easier to interpret. Scaling --- changing a variable via multiplication/division --- often makes it easier to interpret coefficients. The most common scaling method is to divide the variable by its standard deviation.
 
 ```{r}
+#| code-fold: false
+
 trains_3 <- trains |> 
   mutate(s_age = age / sd(age))
 
-fit_1_s <- stan_glm(formula = income ~ s_age, 
-                    data = trains_3, 
-                    refresh = 0,
-                    seed = 9)
+fit_1_s <- brm(formula = income ~ s_age, 
+               data = trains_3,
+               family = gaussian())
 
-print(fit_1_s, detail = FALSE)
+fixef(fit_1_s)
 ```
 
 `s_age` is age **s**caled by its own standard deviation. A change in one unit of `s_age` is the same as a change in one standard deviation of the `age`, which is about `r round(sd(trains$age))`. The interpretation of $\beta_1$ is now:
 
-*When comparing two people, one about 1 standard deviation worth of years older than the other, we expect the older person to earn about `r scales::comma(round(coef(fit_1_s)["s_age"], -3))` dollars more.*
+*When comparing two people, one about 1 standard deviation worth of years older than the other, we expect the older person to earn about `r scales::comma(round(fixef(fit_1_s)["s_age", "Estimate"], -3))` dollars more.*
 
 But, because we scaled without centering, the intercept is now back to the (nonsensical) meaning of the expected income for people of age 0. 
 
@@ -112,24 +105,27 @@ But, because we scaled without centering, the intercept is now back to the (nons
 The most common transformation applies both centering and scaling. The base R function `scale()` subtracts the mean and divides by the standard deviation. A variable so transformed is a "*z*-score," meaning a variable with a mean of zero and a standard deviation of one. Using *z*-scores makes interpretation easier, especially when we seek to compare the importance of different predictors.
 
 ```{r}
+#| code-fold: false
+
 trains_4 <- trains |> 
   mutate(z_age = scale(age))
 
-fit_1_z <- stan_glm(formula = income ~ z_age, 
-                    data = trains_4, 
-                    refresh = 0,
-                    seed = 9)
 
-print(fit_1_z, detail = FALSE)
+fit_1_z <- brm(formula = income ~ z_age, 
+               data = trains_4,
+               family = gaussian())
+
+fixef(fit_1_z)
+
 ```
 
 The two parameters are easy to interpret after this transformation.
 
-*The expected income of someone of average age, which is about `r round(mean(trains$age))` in this study, is about `r scales::comma(round(coef(fit_1_z)["(Intercept)"], -3))` dollars.*
+*The expected income of someone of average age, which is about `r round(mean(trains$age))` in this study, is about `r scales::comma(round(fixef(fit_1_z)["Intercept", "Estimate"], -3))` dollars.*
 
-*When comparing two individuals who differ in age by one standard deviation, which is about `r round(sd(trains$age))` years in this study, the older person is expected to earn about `r scales::comma(round(coef(fit_1_z)["z_age"], -3))` dollars more than the younger.*
+*When comparing two individuals who differ in age by one standard deviation, which is about `r round(sd(trains$age))` years in this study, the older person is expected to earn about `r scales::comma(round(fixef(fit_1_z)["z_age", "Estimate"], -3))` dollars more than the younger.*
 
-Note that, when using *z*-scores, we would often phrase this comparison in terms of "sigmas." One person is "one sigma" older than another person means that they are one standard deviation older. This is simple enough, once you get used to it, but also confusing since we are already using the word "sigma" to mean $\sigma$, the standard deviation of $\epsilon_i$. Alas, *language is something we deal with rather than control.* You will hear the same word "sigma" applied to both concepts, even in the same sentence. Determine meaning by context.
+Note that, when using *z*-scores, we would often phrase this comparison in terms of "sigmas." One person is "one sigma" older than another person means that they are one standard deviation older. This is simple enough, once you get used to it, but also confusing since we are already using the word "sigma" to mean $\sigma$, the standard deviation of $\epsilon_i$. Alas, *language is something we deal with rather than something we control.* You will hear the same word "sigma" applied to both concepts, even in the same sentence. Determine meaning by context.
 
 ### Taking logs
 
@@ -176,6 +172,7 @@ Many of these suggestions apply to every aspect of the modeling process.
 Instead of simply transforming variables, we can add more terms which are transformed versions of a variable. Consider the relation of `height` to `age` in `nhanes`. Let's start by dropping the missing values.
 
 ```{r}
+#| code-fold: false
 no_na_nhanes <- nhanes |> 
   select(height, age) |> 
   drop_na() 
@@ -184,16 +181,18 @@ no_na_nhanes <- nhanes |>
 Fit and plot a simple linear model:
 
 ```{r}
-nhanes_1 <- stan_glm(height ~ age,
-                     data = no_na_nhanes,
-                     refresh = 0,
-                     seed = 47)
+#| code-fold: false
+nhanes_1 <- brm(height ~ age,
+                data = no_na_nhanes,
+                family = gaussian())
+
 
 no_na_nhanes |> 
   ggplot(aes(x = age, y = height)) +
     geom_point(alpha = 0.1) +
-    geom_line(aes(y = fitted(nhanes_1)), 
-              color = "red") +
+    geom_line(aes(y = fitted(nhanes_1)[, "Estimate"]),
+             color = "red",
+             linewidth = 2) +
     labs(title = "Age and Height",
          subtitle = "Children are shorter, but a linear fit is poor",
          x = "Age",
@@ -207,15 +206,15 @@ Adding a quadratic term makes it better. (Note the need for `I()` in creating th
 
 
 ```{r}
-nhanes_2 <- stan_glm(height ~ age + I(age^2),
-                     data = no_na_nhanes,
-                     refresh = 0,
-                     seed = 33)
+#| code-fold: false
+nhanes_2 <- brm(height ~ age + I(age^2),
+                data = no_na_nhanes,
+                family = gaussian())
 
 no_na_nhanes |> 
   ggplot(aes(x = age, y = height)) +
     geom_point(alpha = 0.1) +
-    geom_line(aes(y = fitted(nhanes_2)), 
+    geom_line(aes(y = fitted(nhanes_2)[, "Estimate"]), 
               color = "red") +
     labs(title = "Age and Height",
          subtitle = "Quadratic fit is much better, but still poor",
@@ -227,15 +226,16 @@ no_na_nhanes |>
 Still, we have not made use of our background knowledge in creating these variables. We know that people don't get any taller after age 18 or so. Let's create variables which capture that break.
 
 ```{r}
-nhanes_3 <- stan_glm(height ~ I(ifelse(age > 18, 18, age)),
-                     data = no_na_nhanes,
-                     refresh = 0,
-                     seed = 23)
+#| code-fold: false
+nhanes_3 <- brm(height ~ I(ifelse(age > 18, 18, age)),
+                data = no_na_nhanes,
+                family = gaussian())
+
 
 no_na_nhanes |> 
   ggplot(aes(x = age, y = height)) +
     geom_point(alpha = 0.1) +
-    geom_line(aes(y = fitted(nhanes_3)), 
+    geom_line(aes(y = fitted(nhanes_3)[, "Estimate"]), 
               color = "red") +
     labs(title = "Age and Height",
          subtitle = "Domain knowledge makes for better models",
@@ -246,11 +246,6 @@ no_na_nhanes |>
 
 The point is that we should not take the variables we receive as *given*. We are the captains of our souls. We transform variables as needed.
 
-
-
-<!-- ### If parameters are unicorns, why bother with transformations? -->
-
-<!-- * standardizing variables. Key advantage is to make the coefficients easier to interpret. Even though the "right" thing to do in looking at models is to use posterior_* to look at model predictions, this takes some time. It is very handy, first pass, to look at all the coefficients and get a sense of which ones are "interesting." Then, focus on those when making newobs tibbles. -->
 
 ### Transforming the outcome variable
 
@@ -263,11 +258,11 @@ Transforming the outcome variable is a much more difficult question. Imagine tha
 * Much of the same advice with regard to taking logs of predictor variables applies here as well.
 
 
-See @roas
+See @roas for more useful discussion.
 
 ### Interpreting coefficients
 
-<!-- Give example of logistic regression. Intercept of logistic regression is impossible to interpret. -->
+<!-- DK: Give example of logistic regression. Intercept of logistic regression is impossible to interpret. -->
 
 When we interpret coefficients, it is important to know the difference between *across unit* and *within unit* comparisons. When we compare *across unit*, meaning comparing Joe and George, we are not looking at a causal relationship. *Within unit* discussions, where we are comparing Joe under treatment versus Joe under control, are causal. This means that within unit interpretation is only possible in causal models, where we are studying **one unit** under **two conditions**. When we talk about two potential outcomes, we are discussing the same person or unit under two conditions. 
 
@@ -303,9 +298,6 @@ When deciding which variables to keep or discard in our models, our advice is to
 
 * Your boss/client/reviewer/supervisor wants to include X.
 
-
-
-
 Let's use the `trains` dataset to evaluate how helpful certain variables are to creating an effective model, based on the guidelines above.
 
 ### Variables in the `trains` dataset
@@ -323,11 +315,12 @@ set.seed(78)
 
 
 ```{r}
-fit_1_model <- stan_glm(att_end ~ treatment + att_start, 
-                    data = trains, 
-                    refresh = 0)
+#| code-fold: false
+fit_1_model <- brm(att_end ~ treatment + att_start,
+                   data = trains,
+                   family = gaussian())
 
-fit_1_model
+fixef(fit_1_model)
 ```
 
 How do we decide which variables are useful? First, let's interpret our coefficients. 
@@ -336,19 +329,19 @@ How do we decide which variables are useful? First, let's interpret our coeffici
 
 * The explanatory variables are `treatment`, which says whether a commuter relieved treatment or control conditions, and `att_start`, which measures attitude at the start of the study. 
 
-- The 95% confidence interval for  `att_end` is equal to the coefficient-- `r scales::comma(round(coef(fit_1_model)["(Intercept)"], 1))`-- plus or minus two standard errors. This shows the estimate for the `att_end` where the commuters were under treatment and **were not** in the control group. 
-- The variable `treatmentControl` represents the *offset* in `att_end` from the estimate for our `(Intercept)`. This offset is for the group of people that were in the Control group. To find the estimated `att_end` for those in this group, you must add the median for `treatmentControl` to the `(Intercept)` median. 
+- The 95% confidence interval for  `att_end` is equal to the coefficient-- `r round(fixef(fit_1_model)["Intercept", "Estimate"], 2)`-- plus or minus two standard errors. This shows the estimate for the `att_end` where the commuters were under treatment and **were not** in the control group. 
+- The variable `treatmentControl` represents the *offset* in `att_end` from the estimate for our `Intercept`. This offset is for the group of people that were in the Control group. To find the estimated `att_end` for those in this group, you must add the median for `treatmentControl` to the `Intercept`. 
 - The variable `att_start` measures the expected difference in `att_end` for every one unit increase in `att_start`. 
 
 
 
-The causal effect of the variable `treatmentControl` is `r scales::comma(round(coef(fit_1_model)["treatmentControl"], 0))`. This means that, compared with the predicted `att_end` for groups under treatment, those in the control group have a predicted attitude that is one entire point lower. As we can see, this is a large and well estimated coefficient. Recall that this means, roughly, that the 95% confidence interval excludes zero. To calculate the 95% confidence interval, we take the coefficient plus or minus two standard errors: `r round(((coef(fit_1_model)["treatmentControl"]) - (2 * .2)), 1)` and `r round(((coef(fit_1_model)["treatmentControl"]) + (2 * .2)), 1)`. As we can see, the 95% confidence interval *does* exclude zero, suggesting that `treatment` is a worthy variable. 
+The causal effect of the variable `treatmentControl` is `r round(fixef(fit_1_model)["treatmentControl", "Estimate"], 2)`. This means that, compared with the predicted `att_end` for groups under treatment, those in the control group have a predicted attitude that is almost one entire point lower. As we can see, this is a large and well estimated coefficient. Recall that this means, roughly, that the 95% confidence interval excludes zero. To calculate the 95% confidence interval, we take the coefficient plus or minus two standard errors. As we can see, the 95% confidence interval *does* exclude zero, suggesting that `treatment` is a worthy variable. 
 
 In addition to being meaningful, which is enough to justify inclusion in our model, this variable satisfies a number of other qualifications:
 - The variable has a small standard error.
 - The variable is considered an indicator variable, which separates two groups of significance (treatment and control) that we would like to study. 
 
-The variable `att_start`, with a coefficient of `r scales::comma(round(coef(fit_1_model)["att_start"], 1))`, is also meaningful. Due to the fact that the `MAD_SD` value here is 0, we do not need to find the 95% confidence interval to know --intuitively-- that this variable has a large and well estimated coefficient. 
+The variable `att_start`, with a coefficient of `r round(fixef(fit_1_model)["att_start", "Estimate"], 2)`, is also meaningful. 
 
 **Conclusion**: keep both variables! `treatment` and `att_start` are both significant, as well as satisfying other requirements in our guidelines. They are *more* than worthy of inclusion in our model.  
 
@@ -357,11 +350,12 @@ The variable `att_start`, with a coefficient of `r scales::comma(round(coef(fit_
 Now, we will look at `income` as a function of `age` and `liberal`, a proxy for political party. 
 
 ```{r}
-fit_2 <- stan_glm(income ~ age + liberal, 
-                    data = trains, 
-                    refresh = 0)
+#| code-fold: false
+fit_2_model <- brm(income ~ age + liberal,
+                   data = trains,
+                   family = gaussian())
 
-fit_2
+fixef(fit_2_model)
 ```
 
 Great! We have an estimate for income of those who fall into the category of `liberalFALSE`, as well as data on our right hand side variables of `age` and `liberalTRUE`. 
@@ -370,39 +364,20 @@ First, let's interpret our coefficients.
 
 * The variable before the tilde, `income`, is our outcome. 
 
-* The explanatory variables are `liberal`, which has a resulting value of TRUE or FALSE, and `age`, a numeric variable. 
+* The explanatory variables are `liberal`, a logical value of TRUE or FALSE, and `age`, a numeric variable. 
 
-- The `(Intercept)` is estimating income where `liberal == FALSE`. Therefore, it is the estimated income for commuters that are not liberals and who have `age = 0`. The estimate for `age` is showing the increase in income with every additional year of age.  
+- The `Intercept` is estimating income where `liberal == FALSE`. Therefore, it is the estimated income for commuters that are not liberals and who have `age = 0`. The estimate for `age` is showing the increase in income with every additional year of age.  
 - The estimate for `liberalTRUE` represents the offset in predicted income for commuters who *are* liberal. To find the estimate, we must add the coefficient to our `(Intercept)` value. We see that, on average, liberal commuters make less money. 
 
 It is important to note that we are not looking at a causal relationship for either of these explanatory variables. We are noting the differences between two groups, without considering causality. This is known as an *across unit* comparison. When we compare *across unit* we are not looking at a causal relationship. 
 
-When comparing `liberalTRUE` with our `(Intercept)`, recall that the `(Intercept)` is calculating income for the case where `liberal == FALSE`. As we can see, then, the coefficient for `liberalTRUE`, `r scales::comma(round(coef(fit_2)["liberalTRUE"], 1))`, shows that the  liberals in our dataset make less on average than non-liberals in our dataset. The coefficient is large relative to the `(Intercept)` and, with rough mental math, we see that the 95% confidence interval excludes 0. Therefore, `liberal` is a helpful variable!
+When comparing `liberalTRUE` with our `(Intercept)`, recall that the `Intercept` is calculating income for the case where `liberal == FALSE`. As we can see, then, the coefficient for `liberalTRUE`, `r scales::comma(round(fixef(fit_2_model)["liberalTRUE", "Estimate"], 1))`, shows that the  liberals in our dataset make less on average than non-liberals. The coefficient is large relative to the `Intercept` and, with rough mental math, we see that the 95% confidence interval excludes 0. Therefore, `liberal` is a helpful variable.
 
-The variable `age`, however, does not appear to have a meaningful impact on our `(Intercept)`. The coefficient of `age` is low and the 95% confidence interval *does not* exclude 0. 
+The variable `age`, however, does not appear to have a meaningful impact on our `Intercept`. The coefficient of `age` is low and the 95% confidence interval *does not* exclude 0. 
 
 **Conclusion**: definitely keep `liberal`! `age` is less clear. It is really a matter of preference at this point. 
 
-### liberal ~ I(income/1e+05) + party
-
-We will now look at liberal as a function of a transformed `income` and `party`. The reason we have transformed `income` here is due to the fact that, without a transformation, income makes predictions according to *very small income disparities*. This is not helpful. To enhance the significance of income, we have divided the variable by $100000$. (Note the need for `I()` in creating the income term within the `formula` argument.)
-
-
-```{r}
-fit_3 <- stan_glm(liberal ~ I(income/1e+05) + party, 
-                    data = trains, 
-                    refresh = 0)
-
-fit_3
-```
-
-Recall that, for logistic models, the `(Intercept)` is nearly impossible to interpret. To evaluate the impact of variables, we will need to use the Divide-by-Four rule. This instructs us to take a logistic regression coefficient (other than the constant term) and divide it by 4 to get an upper bound on the predictive difference corresponding to a unit difference in that variable. All this means is that, when evaluating if a predictor is helpful, *in a logistic regression only*, to divide the coefficient by four.
-
-For `partyRepublican`, we take our coefficient, `r scales::comma(round(coef(fit_3)["partyRepublican"], 1))`, and divide it by 4: `r round(((coef(fit_3)["partyRepublican"])/4), 3)`. This is the upper bound on the predictive difference corresponding to a unit difference in this variable. Therefore, we see that `partyRepublican` is meaningful. We want this variable in our model. 
-
-The variable `income`, however, seems less promising. In addition to the resulting value from the Divide-by-Four rule being low (`r round(((coef(fit_3)["I(income/1e+05)"])/4), 3)`), the `MAD_SD` for income is also equal to the posterior median itself, indicating a standard error which is large relative to the magnitude of the coefficient. Though we may choose to include `income` for reasons unrelated to its impact in our model, it does not appear to be worthy of inclusion on the basis of predictive value alone. 
-
-**Conclusion**: the variable `party` is significant; we will include it in our model. Unless we have a strong reason to include `income`, we should exclude it. 
+<!-- DK: Add another example?  -->
 
 ### Final thoughts
 
@@ -412,7 +387,7 @@ The variables we decided to keep and discard are *not necessarily the variables 
 
 The process of selecting variables -- though we have guidelines -- is complicated. There are many reasons to include a variable in a model. The main reasons to exclude a variable are if the variable isn't significant or if the variable has a large standard error. 
 
-<!-- Discuss indicator & index variables prior to explaining guidelines? Not this week! -->
+<!-- DK: Discuss indicator & index variables prior to explaining guidelines? -->
 
 
 ## Comparing models in theory
@@ -422,22 +397,22 @@ Deciding which variables to include in a model is a subset of the larger questio
 Consider two models which explain attitudes to immigration among Boston commuters.
 
 ```{r}
-fit_liberal <- stan_glm(formula = att_end ~ liberal,
-                  data = trains,
-                  refresh = 0,
-                  seed = 42)
+#| code-fold: false
+fit_liberal <- brm(att_end ~ liberal,
+                   data = trains,
+                   family = gaussian())
 
-print(fit_liberal, detail = FALSE)
+fixef(fit_liberal)
 ```
 
 
 ```{r}
-fit_att_start <- stan_glm(formula = att_end ~ att_start,
-                  data = trains,
-                  refresh = 0,
-                  seed = 85)
+#| code-fold: false
+fit_att_start <- brm( att_end ~ att_start,
+                   data = trains,
+                   family = gaussian())
 
-print(fit_att_start, detail = FALSE)
+fixef(fit_att_start)
 ```
 
 They both seem like good models! The results make sense. People who are liberal have more liberal attitudes about immigration, so we would expect their `att_end` scores to be lower. We would also expect people to provide similar answers in two surveys administered a week or two apart. It makes sense that those with higher (more conservative) values for `att_start` would also have higher values for `att_end`.
@@ -451,7 +426,7 @@ The most obvious criteria for comparing models is the accuracy of the prediction
 
 ```{r}
 trains |> 
-  mutate(pred_liberal = fitted(fit_liberal)) |> 
+  mutate(pred_liberal = fitted(fit_liberal)[,"Estimate"]) |> 
   ggplot(aes(x = pred_liberal, y = att_end)) +
     geom_jitter(width = 0.05, height = 0.2, alpha = 0.5) +
   
@@ -480,7 +455,7 @@ Consider our second model, using `att_start` to forecast `att_end`.
 
 ```{r}
 trains |> 
-  mutate(pred_liberal = fitted(fit_att_start)) |> 
+  mutate(pred_liberal = fitted(fit_att_start)[,"Estimate"]) |> 
   ggplot(aes(x = pred_liberal, y = att_end)) +
     geom_jitter(width = 0.05, height = 0.2, alpha = 0.5) +
   
@@ -500,21 +475,23 @@ Because `att_end` takes on `r length(unique(trains$att_end))` unique values, the
 Rather than looking at individual cases, we need to look at the errors for all the predictions. Fortunately, a prediction error is the same thing as a residual, which is easy enough to calculate.
 
 ```{r}
+#| code-fold: false
 trains |> 
   select(att_end, att_start, liberal) |> 
-  mutate(pred_lib = fitted(fit_liberal)) |> 
-  mutate(resid_lib = fitted(fit_liberal) - att_end) |> 
-  mutate(pred_as = fitted(fit_att_start)) |> 
-  mutate(resid_as = fitted(fit_att_start) - att_end)
+  mutate(pred_lib = fitted(fit_liberal)[,"Estimate"]) |> 
+  mutate(resid_lib = pred_lib - att_end) |> 
+  mutate(pred_as = fitted(fit_liberal)[,"Estimate"]) |> 
+  mutate(resid_as = pred_as - att_end)
 ```
 
 Let's look at the square root of the average squared error. 
 
 ```{r}
+#| code-fold: false
 trains |> 
   select(att_end, att_start, liberal) |> 
-  mutate(lib_err = (fitted(fit_liberal) - att_end)^2) |> 
-  mutate(as_err = (fitted(fit_att_start) - att_end)^2) |> 
+  mutate(lib_err = (fitted(fit_liberal)[,"Estimate"] - att_end)^2) |> 
+  mutate(as_err = (fitted(fit_att_start)[,"Estimate"] - att_end)^2) |> 
   summarize(lib_sigma = sqrt(mean(lib_err)),
             as_sigma = sqrt(mean(as_err))) 
 ```
@@ -660,7 +637,7 @@ To perform leave-one-out(LOO) cross validation, we will be using the function `l
 First, we will refamiliarize ourselves with our first model, `fit_liberal`. 
 
 ```{r}
-fit_liberal
+fixef(fit_liberal)
 ```
 
 Now, we will perform `loo()` on our model and look at the results. 
@@ -690,7 +667,7 @@ Basically, when we run `loo()`, we are telling R to take a piece of data out of 
 Let's turn our attention to our second model. To begin, let's observe the qualities of `fit_att_start` once again. 
 
 ```{r}
-fit_att_start
+fixef(fit_att_start)
 ```
 
 Great! Now, let's perform `loo()` on this model. 
@@ -739,261 +716,7 @@ The premise of hypothesis testing is to answer a specific question -- one that m
 - There is no reason to **test** when you can summarize by providing the full posterior probability distribution.
 
 
-## Parallel lines
 
-To conclude this chapter, we will look at a four parameter model. The model we will use will measure `att_end` as a function of `liberal` or `att_start` or `treatment` or some combination of these variables. 
-
-<!-- DK: We are no longer in the business of telling you what the model should be. There are lots of models we could use! We need to explore the different models and then pick one. -->
-
-<!-- DK: There are three different four parameter models that you could make here. Let's look at all three, pick one and then use it. -->
-
-### Wisdom
-
-```{r}
-#| echo: false
-#| fig.cap: Wisdom
-knitr::include_graphics("other/images/Wisdom.jpg")
-```
-
-Before making a model which seeks to explain `att_end`, we should plot it and the variables we think are connected to it:
-
-```{r}
-ggplot(trains, aes(x = att_start, y = att_end, color = liberal)) +
-  geom_point() +
-  labs(title = "Attitude End Compared with Attitude Start and Liberal",
-       x = "Attitude at Start of Study",
-       y = "Attitude at End of Study",
-       color = "Liberal?")
-```
-
-Is that data believable? Maybe? One could imagine that `att_end` would be predicted fairly well by `att_start`. This makes sense for most of our data points, which show not much difference between the attitudes. But what about the great disparities in attitude shown for the individual with a starting attitude of 9 and an ending attitude around 15? In a real data science project, this would require further investigation. For now, we ignore the issue and blithely press on.
-
-Another component of Wisdom is the population. The concept of the "population" is subtle and important. *The population is not the set of commuters for which we have data.* That is the dataset. The population is the larger --- potentially much larger --- set of individuals about whom we want to make inferences. *The parameters in our models refer to the population, not to the dataset.*
-
-There are many different populations, each with its own $\mu$, in which we might be interested. For instance:
-
-* The population of Boston commuters on the specific train and time included in our dataset. 
-
-* The population of *all* Boston commuters.
-
-* The population of commuters in the United States. 
-
-All of these populations are different, so each has a different $\mu$. Which $\mu$ we are interested in depends on the problem we are trying to solve. It is a judgment call, a matter of Wisdom, as to whether or not that data we have is "close enough" to the population we are interested in to justify making a model. 
-
-**The major part of Wisdom is deciding what questions you can't answer because of the data you don't have.**
-
-### Justice 
-
-```{r}
-#| echo: false
-#| fig.cap: Justice
-knitr::include_graphics("other/images/Justice.jpg")
-```
-
-Now that we have considered the connection between our data and the predictions we seek to make, we will need to consider our model. 
-
-First: is our model causal or predictive? Recall that our model measures `att_end` as a function of `liberal` and `att_start`. The variables `liberal` and `att_start` do not involve a control or treatment dynamic. There is no manipulation with these variables. Given that **there is no causation without manipulation**, this is a predictive model. 
-
-We are making inferences about groups of people according to their political affiliation and starting attitude. We are not measuring causality, but we *are* predicting outcomes. 
-
-When creating a parallel slops model, we use the basic equation of a line: 
-
-$$y_i = \beta_0  + \beta_1 x_{1,i} + \beta_2 x_{2,i}$$
-
-If $y = att\_end$, $x_1 = att\_start$, $x\_2 = liberal$, then the equations are as follows:
-
-If liberal = FALSE:
-
-$$y_i = \beta_0  + \beta_1 x_{1,i}$$
-Which equates to, in `y = b + mx` form:
-
-$$y_i = intercept +  \beta_1 att\_start_i$$
-
-If liberal = TRUE: 
-
-$$y_i = (\beta_0  + \beta_2) + \beta_1 x_{1,i}$$
-
-Which equates to, in `y = b + mx` form:
-
-$$y_i = (intercept + liberal\_true) + \beta_1 att\_start_i$$
-
-<!-- DK: Explain, slowly, how we interpret the coefficients, and combinations of the coefficients in the case with treatment and liberal. The intercept is the expected value for someone with FALSE for both treatment and liberal.  The expected value for someone who is both liberal and got the treatment is b_0 + b_1 + b_2. -->
-
-### Courage
-
-```{r}
-#| echo: false
-#| fig.cap: Courage
-knitr::include_graphics("other/images/Courage.jpg")
-``` 
-
-The use of `stan_glm` is the same as usual. Using `stan_glm`, we will create our model, `fit_1`. 
-
-```{r}
-fit_1 <- stan_glm(formula = att_end ~ liberal + att_start,
-                  data = trains,
-                  refresh = 0,
-                  seed = 42)
-
-fit_1
-```
-
-
-To remind ourselves, recall that the `(Intercept)` here is representing the `att_end` value for cases where `liberal = FALSE` and `treatment does not equal Control`. The next row, `liberalTRUE` gives a median value which represents the *offset* in the prediction compared with the `(Intercept)`. In other words, the true intercept for cases where `liberal = TRUE` is represented by $(Intercept) + liberalTRUE$. The value of `treatmentControl` is the offset in `att_end` for those in the Control group. 
-
-To find our intercepts, we will need to tidy our regression using the `tidy()` function from the **broom.mixed** package. We tidy our data and extract values to create a parallel slopes model. The parallel slopes model allows us to visualize multi-variate Bayesian modeling (i.e. modeling with more than one explanatory variable). That is a complicated way of saying that we will visualize the fitted model created above in a way that allows us to see the intercepts and slopes for two different groups, `liberalTRUE` and `liberalFALSE`: 
-
-```{r}
-# First, we will tidy the data from our model and select the term and estimate.
-# This allows us to create our regression lines more easily.
-
-tidy <- fit_1 |> 
-  tidy() |> 
-  select(term, estimate)
-
-tidy
-
-# Extract and name the columns of our tidy object. By calling tidy$estimate[1],
-# we are telling R to extract the first value from the estimate column in our
-# tidy object.
-
-intercept <- tidy$estimate[1]
-liberal_true <- tidy$estimate[2]
-att_start <- tidy$estimate[3]
-
-```
-
-Now, we can define the following terms—- `liberal_false_intercept` and `liberal_false_att_slope`; and `liberal_true_intercept` and `liberal_true_att_slope`:
-
-
-```{r}
-# Recall that the (Intercept) shows us the estimate for the case where liberal =
-# FALSE. We want to extract the liberal_false_intercept to indicate where the
-# intercept in our visualization should be. The slope for this case, and for the
-# liberal = TRUE case, is att_start.
-
-liberal_false_intercept <- intercept
-liberal_false_att_slope <- att_start
-
-#  When wanting the intercept for liberal = TRUE, recall that the estimate for
-#  liberalTRUE is the offset from our (Intercept). Therefore, to know the true
-#  intercept, we must add liberal_true to our intercept.
-
-liberal_true_intercept <- intercept + liberal_true
-liberal_true_att_slope <- att_start
-```
-
-All we've done here is extracted the values for our intercepts and slopes, and named them to be separated into two groups. This allows us to create a `geom_abline` object that takes a unique slope and intercept value, so we can separate the `liberalTRUE` and `liberalFALSE` observations. 
-
-```{r}
-# From the dataset trains, use att_start for the x-axis and att_end for
-# the y-axis with color as liberal. This will split our data into two color
-# coordinates (one for liberal = TRUE and one for liberal = FALSE)
-
-ggplot(trains, aes(x = att_start, y = att_end, color = liberal)) +
-  
-  # Use geom_point to show the datapoints. 
-  
-  geom_point() +
-  
-  # Create a geom_abline object for the liberal false values. Set the intercept
-  # equal to our previously created liberal_false_intercept, while setting slope
-  # equal to our previously created liberal_false_att_slope. The color call is
-  # for coral, to match the colors used by tidyverse for geom_point().
-  
-  geom_abline(intercept = liberal_false_intercept,
-              slope = liberal_false_att_slope, 
-              color = "#F8766D", 
-              size = 1) +
-  
-  # Create a geom_abline object for the liberal TRUE values. Set the intercept
-  # equal to our previously created liberal_true_intercept, while setting slope
-  # equal to our previously created liberal_true_att_slope. The color call is
-  # for teal, to match the colors used by tidyverse for geom_point().
-
-  geom_abline(intercept = liberal_true_intercept,
-              slope = liberal_true_att_slope,
-              color = "#00BFC4", 
-              size = 1) +
-  
-  # Add the appropriate titles and axis labels. 
-  
-  labs(title = "Parallel Slopes Model",
-       x = "Attitude at Start", 
-       y = "Attitude at End", 
-       color = "Liberal") 
-```
-
-This is our parallel slopes model. What we have done, essentially, is created a unique line for `liberalTRUE` and `liberalFALSE` to observe the differences in the groups as related to attitude start and attitude end. 
-
-As we can see, commuters who are *not* liberal tend to start with slightly higher values for `att_start`. Commuters who *are* liberal tend to have lower starting values for `att_start`. 
-
-Now, what if we want to look at another model? To judge whether we can have a superior model? Let's create another object, using `stan_glm`, that looks at `att_end` as a function of `treatment` and `att_start`. 
-
-
-```{r}
-fit_2 <- stan_glm(formula = att_end ~ treatment + att_start,
-                  data = trains,
-                  refresh = 0,
-                  seed = 56)
-
-fit_2
-```
-
-To interpret briefly: 
-
-* `(Intercept)` here is representing the `att_end` value for cases where `treatment does not equal Control`. 
-
-* `treamtmentControl` gives a median value which represents the *offset* in the prediction compared with the `(Intercept)`. In other words, the true intercept for cases where `treatment = Control` is represented by $(Intercept) + treatmentControl$. 
-
-* `att_start` represents the slope for both groups representing a unit change. 
-
-An important point here is that **these models are causal**. When including the variable `treatment`, we have a measured causal effect of a condition. This is different from our prior parallel slopes model, where we were modeling for prediction, not causation. 
-
-
-<!-- DK: A causal model is one in which, at least in theory, one of the righthand side variables could have been manipulated, and when you care about estimating causal effects. If someone just needs to forecast or predict something that, almost always, she is not asking a causal question, so she does not care if the righthand side variables could be manipulated. Is the sunset beautiful if no one is looking at it? Is the model causal if I just want to predict? -->
-
-To see how these models compare in performance, we will perform leave-one-out (LOO) cross validation again. 
-
-
-```{r}
-L1 <- loo(fit_1)
-
-L1
-```
-Perform `loo()` on our second model:
-
-```{r}
-L2 <- loo(fit_2)
-
-L2
-```
-
-Recall that the relevant data is the data from `elpd_loo`. The estimates for `elpd_loo` vary quite a bit. Recall that the superior model will have a value of `elpd_loo()` that is closer to 0. The standard error (SE) for these models also differs some. To compare these directly, we will use `loo_compare`.  
-
-```{r}
-loo_compare(L1, L2)
-```
-
-Recall that, with `loo_compare()`, the resulting data shows the superior model first, with values of 0 for `elpd_diff` and `se_diff`, since it compares the models to the best option. The values of `elpd_diff` and `se_diff` for `fit_1` show the difference in the models. As we can see, `fit_2`, the model which looks at `treatment` + `att_start`, is better. 
-
-But how certain can we be that it is better? Note that the difference between the two models is not quite two standard errors. So, there is a reasonable possibility that the difference is due to chance.
-
-<!-- DK: Say more here! -->
-
-### Temperance
-
-What we really care about is data we haven't seen yet, mostly data from tomorrow. But what if the world changes, as it always does? If it doesn't change much, maybe we are OK. If it changes a lot, then what good will our model be? In general, the world changes some. That means that are forecasts are more uncertain that a naive use of our model might suggest. 
-Having created (and checked) a model, we now use the model to answer questions. Models are made for use, not for beauty. The world confronts us. Make decisions we must. Our decisions will be better ones if we use high quality models to help make them.
-
-Preceptor's Posterior is the posterior you would calculate if all the assumptions you made under Wisdom and Justice were correct. Sadly, they never are! So, you can never know Preceptor's Posterior. Our posterior will, we hope, be a close-ish approximation of Preceptor's Posterior.
-
-
-<!-- Discuss the difference in our estimated treatment effect for this chapter and the model in chapter 8 and in the model we did not use here. There is no truth! Which is why we need to be humble and cautious when using our posterior. Be Temperate! -->
-
-<!-- att_end ~ liberal + att_start. Same thing as chapters before. Show graphic of parallel lines. Cardinal virtues as always. And, extra, at the end we can use loo_compare to see if this model is better than simpler model of att_end ~ att_start. -->
-
-<!-- What is the expected difference in attitude end between a liberal with start 6 and a non liberal with start 10? Do that by hand with posterior_epred. Then show how you can get a similar answer just by interpreting coefficents. -->
 
 
 ## Summary
@@ -1001,7 +724,7 @@ Preceptor's Posterior is the posterior you would calculate if all the assumption
 In this chapter, we covered a number of topics important to effectively creating models. 
 
 *Key commands*:
-- Create a model using `stan_glm()`. 
+- Create a model using `brm()`. 
 - After creating a model, we can use `loo()` to perform leave-one-out cross validation. This assesses how effectively our model makes predictions for data it has not seen yet.
 - The command `loo_compare()` allows us to compare two models, to see which one performs better in leave-one-out cross validation. The superior model makes better predictions. 
 
