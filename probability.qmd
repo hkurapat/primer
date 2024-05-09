@@ -35,7 +35,7 @@ library(primer.data)
 
 <!-- Why bother teaching them how to calculate the probabilities by hand, with list-columns and map_* functions in the first place? After all, we are never going to do this again! (If we get rid of them, we would need to remove them from the tutorials, of course.) In the same way that we don't teach them rayshader, we just use it as a teaching tool, we could avoid teaching them map_* functions and then just use the outputs. On the other hand, aren't there some examples in later chapters in which, in fact, we do need map_* functions to answer the question? -->
 
-<!-- Perhaps change the joint and conditional distribution section to use gender/height from NHANES? It is true that this is a discrete and continuous joint distribution, but that is probably fine. Certainly connects nicely with the male height example. Certainly works well with the joint and conditional together. Certainly would be nice to do the empirical/mathematical/posterior trypycht as in the first three examples. Posterior could be for a WNBA practice session. Most of the women will be tall, but the men will be of more typical height. -->
+<!-- Perhaps change the joint and conditional distribution section to use sex/height from NHANES? It is true that this is a discrete and continuous joint distribution, but that is probably fine. Certainly connects nicely with the male height example. Certainly works well with the joint and conditional together. Certainly would be nice to do the empirical/mathematical/posterior trypycht as in the first three examples. Posterior could be for a WNBA practice session. Most of the women will be tall, but the men will be of more typical height. -->
 
 <!-- Shouldn't we have a question which we answer with a dgm for each distribution example, as we do with three heads in a row? -->
 
@@ -769,7 +769,7 @@ The *empirical distribution* involves using data from the National Health and Nu
 # Use nhanes dataset for this exercise, filter for adult and male.
 
 nhanes |>
-  filter(gender == "Male", age >= 18) |>
+  filter(sex == "Male", age >= 18) |>
   select(height)|>
   drop_na() |>
   ggplot(aes(x = height)) +

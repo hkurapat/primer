@@ -1,7 +1,10 @@
 # Priorities
 
+Change 2023 to 2024 everywhere.
 
-Could have an addendum at the end of some/all chapters which would cover other random stuff, allowing all later chapters to just focus on the cardinal virtues. Or could begin each chapter with new stuff which is then applied in the chapter. Or could have non-cardinal virtue chapters which cover that material. Lots of options!
+We need at least one time series forecasting chapter: https://otexts.com/fpp3/. Looks like brms has some simple time series models which will work well. Goal is to do something simple enough that a student who picks a simple time series data set can do at least a basic arima or whatever. As long as the brms works the same, and allows making a forecast, we are OK. Univariate only, of course. Should add the example data set to primer.data.
+
+There are real issues with our chapter names. Do we mention the number of parameters? Whether causal or predictive? The distribution of the dependent variable?
 
 Instead of fit_1 everywhere, should use like fit_att_end or fit_income?
 
@@ -13,13 +16,15 @@ Replace rstanarm with brms everywhere.
 
 Need to remove all rstanarm usages.
 
-Are questions bolded, italicized, indented or more than one of these things?
+Questions should be italicized and indented.
 
 Change sampling.qmd to samples.qmd?
 
 Split up 3 parameters into four chapters.
 
 Introduce tidy()? That requires **broom.mixed**. I don't like using so many packages. Could also move directly to gtsummary::tbl_regression(). Need to figure out how I want students to present regression summaries, and then teach them how to do so.
+
+https://citibikenyc.com/system-data is cool!
 
 
 In the short term, we could leave the two parameter and later chapters alone. They all still work, even though we are moving away from this naming scheme and/or structure.

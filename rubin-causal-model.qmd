@@ -15,10 +15,7 @@ library(gtsummary)
 
 <!-- DK: Consider dropping the Simple models sections. Add other stuff? -->
 
-<!-- DK: Need to update the tutorial, given the reorganization. -->
-
-<!-- DK: Should gender become sex, here and in the data itself? As long as I am changing that, might as well change connectedness to ec. -->
-
+<!-- Update the tutorial, given the reorganization. -->
 
 <!-- Older comments: -->
 
@@ -27,8 +24,7 @@ library(gtsummary)
 
 <!-- In the Data source rows never show data that we can't possibly have, like both the treated and control outcomes. Same rule for the Preceptor Table? Not sure! -->
 
-
-<!-- The column names which require math text, like Y_t, do not line up with the column names which don't use math, like gender. They should look the same. Maybe we use $$\text{gender}$$ to achieve that? -->
+<!-- The column names which require math text, like Y_t, do not line up with the column names which don't use math, like sex. They should look the same. Maybe we use $$\text{sex}$$ to achieve that? -->
 
 <!-- Simplify tables. Do they really need `$$`, for example? -->
 
@@ -43,7 +39,7 @@ library(gtsummary)
 
 <!-- https://stats.stackexchange.com/questions/3520/can-someone-explain-the-concept-of-exchangeability. Mention this under stability? -->
 
-<!-- Need to emphasize units, variables and (if causal) treatments/outcomes throughout. Every time you mention creating the Preceptor Table, we should mention these three.  When predictive, an outcome like immigration attitude has a single column, where it is the name of the column. When causal, the column names are the name of the treatment, and the value in the column is the outcome variable. An outcome variable in a causal model does not have one column, it has two or more. -->
+<!-- Need to emphasize units, outcomes, and (if causal) treatments throughout. Every time you mention creating the Preceptor Table, we should mention these three.  When predictive, an outcome like immigration attitude has a single column, where it is the name of the column. When causal, the column names are the name of the treatment, and the value in the column is the outcome variable. An outcome variable in a causal model does not have one column, it has two or more. -->
 
 <!-- Rough idea: Organize the set of problems which can plague us into broad categories, united in a similar structure. I *think* that the way to do this is to discuss the missing data mechanisms which can cause trouble.  -->
 
@@ -60,7 +56,7 @@ for discussion. I think that something like c("$$13 - \\tau_M$$") could become c
 ->
 
 
-<!-- Replace Sliding Doors in Summary with something from Wonderful Life that references "An angel gets his wings."  Every time a predictive model is interpreted causally, a devil gets his pitchfork. -->
+
 
 <!-- Lots of useful material here: https://chabefer.github.io/STCI/. Raises the possibility of using $Y^{t}_i to indicate potential outcome under treatment for unit i. -->
 
@@ -76,7 +72,8 @@ Have you ever wondered what the world would be like without you?
 
 {{< video https://www.youtube.com/embed/cR7p-IB6INM >}}
 
-George Bailey, the main character in "[It's a Wonderful Life](https://en.wikipedia.org/wiki/It%27s_a_Wonderful_Life)," believes that his existence has served no purpose. The movie follows George as he explores a world in which he was never born. It is clear that he had a profound impact on the lives of many people in his community. His actions mattered, more than he ever realized.
+
+In the classic film "[It's a Wonderful Life](https://en.wikipedia.org/wiki/It%27s_a_Wonderful_Life)," the protagonist, George Bailey, finds himself in a state of despair, convinced that his life has been meaningless. The movie takes the audience on a journey alongside George as he is granted a glimpse into an alternate reality—a world in which he had never existed. Through this experience, it becomes evident that George's life had a significant and positive impact on the lives of countless individuals within his community. His selfless actions and kind-hearted nature had touched the lives of many, leaving an indelible mark that he had never fully appreciated. The film serves as a poignant reminder that our lives, no matter how seemingly ordinary, have the power to make a profound difference in the world around us.
 
 By showing what the world would have been like without George, we get an idea of the *causal effect* of his life on his town and the people who live there. This chapter explains causation using the framework of *potential outcomes* and the *Rubin Causal Model* (RCM).
 
@@ -103,8 +100,6 @@ tibble(ID = c("Student 1", "Student 2", "...", "Student 47", "Student 48",
   tab_header(title = "Preceptor Table") |> 
   cols_label(ID = md("ID"),
                 Heights = "Height (cm)") |>
-  tab_style(cell_borders(sides = "right"),
-            location = cells_body(columns = c(ID))) |>
   tab_style(style = cell_text(align = "left", v_align = "middle"), 
             locations = cells_column_labels(columns = c(ID))) |>
   cols_align(align = "center", columns = everything()) |>
@@ -132,8 +127,6 @@ tibble(ID = c("Student 11", "Student 32", "Student 47", "Student 68",
   tab_header(title = "Data for New College Students") |> 
   cols_label(ID = md("ID"),
                 Heights = "Height (cm)") |>
-  tab_style(cell_borders(sides = "right"),
-            location = cells_body(columns = c(ID))) |>
   tab_style(style = cell_text(align = "left", v_align = "middle"), 
             locations = cells_column_labels(columns = c(ID))) |>
   cols_align(align = "center", columns = everything()) |>
@@ -156,7 +149,7 @@ We create the *Population Table*^[The term Population Table is, perhaps unsurpri
 
 <!-- Sloppy use of both year (to mean the variable) and Year (to mean the column in the table). Should this be in italics or quotes or backticks? -->
 
-We are trying to answer questions about the height of New College students in 2023, so the "year" entries for these rows will read "2023." In this case, the actual data comes from a survey of New College students in 2015.
+We are trying to answer questions about the height of New College students in 2024, so the "year" entries for these rows will read "2024." In this case, the actual data comes from a survey of New College students in 2015.
 
 <!-- Do we need to add ID to this table? To any/all Population Tables? -->
 
@@ -168,7 +161,7 @@ tibble(source = c("...", "...",  "Data", "Data",
                   "...", "...", "...", 
                   "Preceptor Table", "Preceptor Table", "...", "...", "..."),
        year = c("2010", "...", "2015", "2015", 
-                "...","2018", "...", "2023", "2023", "...", "2030", "2030"),
+                "...","2018", "...", "2024", "2024", "...", "2030", "2030"),
        height = c("...", "...", "180", "163", "...", "...", "...","?", "?", "...", "...", "...")) |> 
   
   # Then, we use the gt function to make it pretty
@@ -178,8 +171,6 @@ tibble(source = c("...", "...",  "Data", "Data",
   cols_label(source = md("Source"),
              year = md("Year"),
              height = md("Height")) |>
-  tab_style(cell_borders(sides = "right"),
-            location = cells_body(columns = c(source))) |>
   tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
             locations = cells_column_labels(columns = c(source))) |>
   cols_align(align = "center", columns = everything()) |>
@@ -189,7 +180,15 @@ tibble(source = c("...", "...",  "Data", "Data",
 
 The question marks indicate the data which we do not know but which we need in order to answer the questions.
 
-Implicit in the Preceptor Table is a notion of time. Now that we can see our actual data compared with our greater population and our desired data, we must expand our observations. That is to say that, given our data is sourced from 2015 and our desired data is from 2023, we should include, by assumption, a greater time span in our population.
+Implicit in the Preceptor Table is a notion of time. Now that we can see our actual data compared with our greater population and our desired data, we must expand our observations. That is to say that, given our data is sourced from 2015 and our desired data is from 2024, we should include, by assumption, a greater time span in our population.
+
+Never forget that **time is always a lie** in the Population Table. Indeed, any time variable is suspect in data science more broadly. 
+
+* A moment in time is rarely measured accurately. In this example, we refer to the data being recorded in 2015. But that isn't true! We didn't record student heights across a year. We recorded them once, on a specific date like August 9, 2015 and at a specific time like 3:16 PM.
+
+* Identical values often aren't truly identical. Even though the data measures for different students all refer to 2015, they almost certainly occurred at different moments in time, even if all measurements were taken in 2015. In fact, measurements can and do occur on different days or even months. Using `2015` a the value for `Year` hides that variation.
+
+* The value for the time variable for rows corresponding to the Preceptor Table is always hazy. Does it refer to now? Tomorrow? Whenever we finish the analysis? In general, we don't know the time period for which we are answering our question until we actually get to the point of answering.
 
 ## Causal effect
 
@@ -208,7 +207,7 @@ The commuter survey consisted of three questions, each measuring agreement on a 
 
 <!-- But we also use Y for just regular outcomes. -->
 
-We will use the symbol $Y$ to represent potential outcomes, the variable we are interested in understanding and modeling. $Y$ is called the *response* or *outcome* variable. It is the variable we want to "explain." In our case this would be the attitude score. If we are trying to understand a causal effect, we need two symbols so that control and treated values can be represented separately: $Y_t$ and $Y_c$.
+We will use the symbol $Y$ to represent potential outcomes, the variable we are interested in understanding and modeling. $Y$ is called the *response* or *outcome* variable. It is the variable we want to "explain." In our case this would be the attitude score. If we are trying to understand a causal effect, we need two symbols so that the value with treatment and the value with control can be represented separately: $Y_t$ and $Y_c$.
 
 ### Potential outcomes
 
@@ -230,8 +229,6 @@ tibble(ID = "Yao",
   cols_label(ID = md("ID"),
                 ytreat = "Attitude if Treated",
                 ycontrol = "Attitude if Control") |>
-  tab_style(cell_borders(sides = "right"),
-            location = cells_body(columns = c(ID)))  |>
   tab_style(style = cell_text(align = "left", v_align = "middle"), 
             locations = cells_column_labels(columns = c(ID))) |>
   cols_align(align = "center", columns = everything()) |>
@@ -263,8 +260,6 @@ tibble(subject = "Yao",
     cols_label(subject = md("ID"),
                   ytreat = md("$$Y_t$$"),
                   ycontrol = md("$$Y_c$$")) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", 
                                 v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = 
@@ -297,8 +292,6 @@ tibble(subject = "Yao",
                   ycontrol = md("$$Y_c$$"),
                   ydiff = md("$$Y_t - Y_c$$")) |>
     cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
@@ -350,7 +343,7 @@ This then raises the question of what can and cannot be manipulated. If somethin
 
 Take color-blindness for example. Say we are interested in how color-blindness impacts ability to complete a jig-saw puzzle. Because color-blindness is genetic some might argue it cannot be manipulated. But advances in technology like gene-therapy might allow us to actually change someone's genes. Could we then claim the ability to manipulate color-blindness? If yes, we could then measure the causal effect of color-blindness on ability to complete jig-saw puzzles.
 
-The slogan of "No causation without manipulation" may at first seem straight-forward, but it is clearly not so simple. Questions about race, sex, gender and genetics are very complex and should be considered with care.
+The slogan of "No causation without manipulation" may at first seem straight-forward, but it is clearly not so simple. Questions about race, sex, and genetics are very complex and should be considered with care.
 
 ### Multiple units
 
@@ -384,8 +377,6 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
                   ycontrol = md("$$Y_c(u)$$"),
                   ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
     cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
@@ -418,7 +409,7 @@ tibble(source = c("...", "...",  "Data", "Data",
                   "...", "...", "...", 
                   "Preceptor Table", "...", "..."),
        year = c("2010", "...", "2015", "2015", 
-                "...","2018", "...", "2023", "...", "2030"),
+                "...","2018", "...", "2024", "...", "2030"),
        ID = c("?", "...", "Yao", "Cassidy","...", "?","...","Yao", "...","?"),
        ytreated = c("?", "...", "5", "3", "...", "?", "...","13", "...", "?"),
        ycontroled = c("?", "...", "3", "6", "...", "?", "...","9", "...", "?"),
@@ -432,8 +423,6 @@ tibble(source = c("...", "...",  "Data", "Data",
              ytreated = md("$$Y_t(u)$$"), 
              ycontroled = md("$$Y_c(u)$$"),
              causaleffect = md("$$Y_t(u) - Y_c(u)$$")) |>
-  tab_style(cell_borders(sides = "right"),
-            location = cells_body(columns = c(source))) |>
   tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
             locations = cells_column_labels(columns = c(source))) |>
   cols_align(align = "center", columns = everything()) |>
@@ -479,8 +468,6 @@ causal_table <- tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
                   ycontrol = md("$$Y_c(u)$$"),
                   ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
     cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
@@ -498,8 +485,6 @@ gt() |>
     cols_label(subject = md("ID"),
                   yall = md("$$Y_t(u)$$")) |>
     cols_move(columns = c(yall), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
@@ -533,8 +518,8 @@ tibble(source = c("...", "...", "...",
                   "...", "..."), 
        year = c("2010", "2010", "...",
                 "2012", "2012", "...",
-                "2023", "2023", "...",
-                "2023", "2023"),
+                "2024", "2024", "...",
+                "2024", "2024"),
        sex = c("?", "?", "...",
                "Male", "Female", "...",
                "Female", "Female", "...",
@@ -549,33 +534,31 @@ tibble(source = c("...", "...", "...",
                     "?", "?"),
        ydiff = c("?", "?", "...",
                  "?", "?", "...",
-                 "?", "?", "...", "?", "?")) %>%
+                 "?", "?", "...", "?", "?")) |>
   
   # Then, we use the gt function to make it pretty
   
-  gt() %>%
-    tab_header(title = "Population Table") %>% 
+  gt() |>
+    tab_header(title = "Population Table") |> 
     cols_label(source = md("Source"),
                year = md("Year"),
                sex = md("Sex"),
                ytreat = md("$$Y_t(u)$$"),
                ycontrol = md("$$Y_c(u)$$"),
-               ydiff = md("$$Y_t(u) - Y_c(u)$$")) %>%
-    cols_move(columns = c(ytreat, ycontrol), after = c(source)) %>%
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(source))) %>%
+               ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
+    cols_move(columns = c(ytreat, ycontrol), after = c(source)) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
-              locations = cells_column_labels(columns = c(source))) %>%
-    cols_align(align = "center", columns = everything()) %>%
-    cols_align(align = "left", columns = c(source)) %>%
-    tab_spanner(label = "Outcomes", c(ytreat, ycontrol)) %>%
-    tab_spanner(label = "Causal Effect", c(ydiff)) %>% 
+              locations = cells_column_labels(columns = c(source))) |>
+    cols_align(align = "center", columns = everything()) |>
+    cols_align(align = "left", columns = c(source)) |>
+    tab_spanner(label = "Outcomes", c(ytreat, ycontrol)) |>
+    tab_spanner(label = "Causal Effect", c(ydiff)) |> 
     tab_spanner(label = "Covariates", c(sex)) |> 
   tab_style(style = cell_text(v_align = "bottom"),
             locations = cells_column_labels())         
 ```
 
-The rows from our data have covariates and two potential outcomes. (By definition, we only know the value for one of the potential outcomes for each unit.) The rows from the Preceptor Table include covariates, but not outcomes. (We have no outcome data for 2023, but we will, in theory, be given the sex of any units about whom we need to make inferences.) The rows from our greater population include no data, as we know nothing about these units.
+The rows from our data have covariates and two potential outcomes. (By definition, we only know the value for one of the potential outcomes for each unit.) The rows from the Preceptor Table include covariates, but not outcomes. (We have no outcome data for 2024, but we will, in theory, be given the sex of any units about whom we need to make inferences.) The rows from our greater population include no data, as we know nothing about these units.
 
 <!-- More detail here? -->
 
@@ -587,7 +570,7 @@ The rows from our data have covariates and two potential outcomes. (By definitio
 
 **Validity** is the consistency, or lack there of, in the columns of your dataset and the corresponding columns in your Preceptor Table. In order to consider the two datasets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*.
 
-Consider the potential outcomes: attitude toward immigration under treatment and control. How is this measured? In this case, we use answers to survey questions. Our we going to use the *exact* same questions in 2023 as were used in our data from 2012? Probably not. Even if we used the same wording, will the *meaning* of the words be constant. Almost certainly not! The word "undocumented" could mean something very different in the America before the election of Donald Trump in 2016. Consider the treatment: exposure to Spanish speakers on a train platform. The speakers used in 2012 will not be available in 2023 if we were to redo the experiment. 
+Consider the potential outcomes: attitude toward immigration under treatment and control. How is this measured? In this case, we use answers to survey questions. Our we going to use the *exact* same questions in 2024 as were used in our data from 2012? Probably not. Even if we used the same wording, will the *meaning* of the words be constant. Almost certainly not! The word "undocumented" could mean something very different in the America before the election of Donald Trump in 2016. Consider the treatment: exposure to Spanish speakers on a train platform. The speakers used in 2012 will not be available in 2024 if we were to redo the experiment. 
 
 *Validity* is an assumption which allows us to "stack" the data and the Preceptor Table on top of one another, into a single Population Table. The variables from each source, while not identical in meaning, are similar enough that we can treat them *as if* they are the same thing. 
 
@@ -598,7 +581,7 @@ Consider the potential outcomes: attitude toward immigration under treatment and
 
 We will be constructing *models*, mathematical relationships between different variables. For example, perhaps the treatment has a greater effect on women than on men. However, we can only directly observe that relationship in the data which we have, from 2012. We must *assume* stability in order to use the model created from the data to make inferences about other rows in the Population Table, specifically the rows corresponding to the Preceptor Table.
 
-Must the world be stable? No! In fact, the world is always changing! The *stability* assumption, in this case, is a claim that the world has not changes that much between 2012 and 2023. Stability applies, not just to the data and the Preceptor Table rows, but to the entire Population Table. *Stability allows us to ignore the passage of time.*
+Must the world be stable? No! In fact, the world is always changing! The *stability* assumption, in this case, is a claim that the world has not changes that much between 2012 and 2024. Stability applies, not just to the data and the Preceptor Table rows, but to the entire Population Table. *Stability allows us to ignore the passage of time.*
 
 ### Representativeness
 
@@ -629,23 +612,21 @@ Consider the "Perfect Doctor" as an example of the problems caused by confounded
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego", "MEAN"),
        ytreat = c("130", "120", "100", "115", "135", "120"),
        ycontrol = c("105", "140", "170", "125", "100", "128"),
-       ydiff = c("+25", "-20", "-70", "-10", "35", "-8")) %>%
+       ydiff = c("+25", "-20", "-70", "-10", "35", "-8")) |>
   
-  gt() %>%
-    tab_header(title = "Holy Grail of Information") %>% 
+  gt() |>
+    tab_header(title = "Holy Grail of Information") |> 
     cols_label(subject = md("ID"),
                   ytreat = md("$$Y_t(u)$$"),
                   ycontrol = md("$$Y_c(u)$$"),
-                  ydiff = md("$$Y_t(u) - Y_c(u)$$")) %>%
-    cols_move(columns = c(ytreat, ycontrol), after = c(subject)) %>%
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) %>%
+                  ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
+    cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
-              locations = cells_column_labels(columns = c(subject))) %>%
-    cols_align(align = "center", columns = everything()) %>%
-    cols_align(align = "left", columns = c(subject)) %>%
-    tab_spanner(label = "Blood Pressure Outcomes", c(ytreat, ycontrol)) %>%
-    tab_spanner(label = "Causal Effect", c(ydiff)) %>%
+              locations = cells_column_labels(columns = c(subject))) |>
+    cols_align(align = "center", columns = everything()) |>
+    cols_align(align = "left", columns = c(subject)) |>
+    tab_spanner(label = "Blood Pressure Outcomes", c(ytreat, ycontrol)) |>
+    tab_spanner(label = "Causal Effect", c(ydiff)) |>
     fmt_markdown(columns = everything()) |> 
   tab_style(style = cell_text(v_align = "bottom"),
             locations = cells_column_labels())
@@ -660,25 +641,23 @@ We, the non-Perfect Doctors, do not have access to the entire Preceptor Table. W
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego", "MEAN"),
        ytreat = c("?", "120", "100", "115", "?", "111.66"),
        ycontrol = c("105", "?", "?", "?", "100", "102.5"),
-       ydiff = c("?", "?", "?", "?", "?", "9.16")) %>%
+       ydiff = c("?", "?", "?", "?", "?", "9.16")) |>
   
   # Then, we use the gt function to make it pretty
   
-  gt() %>%
-    tab_header(title = "Skewed Holy Grail of Information") %>% 
+  gt() |>
+    tab_header(title = "Skewed Holy Grail of Information") |> 
     cols_label(subject = md("ID"),
                   ytreat = md("$$Y_t(u)$$"),
                   ycontrol = md("$$Y_c(u)$$"),
-                  ydiff = md("$$Y_t(u) - Y_c(u)$$")) %>%
-    cols_move(columns = c(ytreat, ycontrol), after = c(subject)) %>%
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) %>%
+                  ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
+    cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
-              locations = cells_column_labels(columns = c(subject))) %>%
-    cols_align(align = "center", columns = everything()) %>%
-    cols_align(align = "left", columns = c(subject)) %>%
-    tab_spanner(label = "Blood Pressure Outcomes", c(ytreat, ycontrol)) %>%
-    tab_spanner(label = "Causal Effect", c(ydiff)) %>%
+              locations = cells_column_labels(columns = c(subject))) |>
+    cols_align(align = "center", columns = everything()) |>
+    cols_align(align = "left", columns = c(subject)) |>
+    tab_spanner(label = "Blood Pressure Outcomes", c(ytreat, ycontrol)) |>
+    tab_spanner(label = "Causal Effect", c(ydiff)) |>
     fmt_markdown(columns = everything()) |> 
   tab_style(style = cell_text(v_align = "bottom"),
             locations = cells_column_labels())
@@ -719,8 +698,6 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
                   ycontrol = md("$$Y_c(u)$$"),
                   ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
     cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
@@ -754,8 +731,6 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
                   ycontrol = md("$$Y_c(u)$$"),
                   ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
     cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
@@ -795,8 +770,6 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
                   ycontrol = md("$$Y_c(u)$$"),
                   ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
     cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
@@ -828,8 +801,6 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
                   ycontrol = md("$$Y_c(u)$$"),
                   ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
     cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
@@ -849,16 +820,16 @@ If we make the assumption that there is a single value for $\tau$ *and* that $1$
 
 A second model might assume that the causal effect is different between levels of a category but the same within those levels. For example, perhaps there is a $\tau_F$ for females and $\tau_M$ for males where $\tau_F != \tau_M$. We are making this assumption to give us a different model with which we can fill in the missing values in our Preceptor Table. We can't make any progress unless we make some assumptions. That is an inescapable consequence of the *Fundamental Problem of Causal Inference*.
 
-Consider a model in which causal effects differ based on sex. When we are looking at a "category" of units --- for instance, gender --- we call this a *covariate*. Possible covariates include, but are not limited to, sex, age, political party and almost everything else which might be associated with attitudes toward immigration.
+Consider a model in which causal effects differ based on sex. When we are looking at a "category" of units --- for instance, sex --- we call this a *covariate*. Possible covariates include, but are not limited to, sex, age, political party and almost everything else which might be associated with attitudes toward immigration.
 
-<!-- Not sure that I like this table. Also, maybe introduce the notion of covariates in a predictive context first. Knowing gender helps to predict Yao's attitude toward immigration, regardless of causal effects. -->
+<!-- Not sure that I like this table. Also, maybe introduce the notion of covariates in a predictive context first. Knowing sex helps to predict Yao's attitude toward immigration, regardless of causal effects. -->
 
 ```{r}
 #| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
-       Gender = c("Male", "Female", "Female", "Male", "Male"),
+       Sex = c("Male", "Female", "Female", "Male", "Male"),
        ytreat = c("13", "14", "$$6 + \\tau_F$$", "$$12 + \\tau_M$$", "3"),
        ycontrol = c("$$13 - \\tau_M$$", "$$14 - \\tau_F$$", "6", "12", "$$3 - \\tau_M$$"),
        ydiff = c("$$\\tau_M$$", "$$\\tau_F$$", "$$\\tau_F$$", "$$\\tau_M$$", "$$\\tau_M$$")) |>
@@ -872,15 +843,13 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
                   ycontrol = md("$$Y_c(u)$$"),
                   ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
     cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
     cols_align(align = "left", columns = c(subject)) |>
     tab_spanner(label = "Outcomes", c(ytreat, ycontrol)) |>
     tab_spanner(label = "Causal Effect", c(ydiff)) |>
-    tab_spanner(label = "Covariate", c(Gender)) |>
+    tab_spanner(label = "Covariate", c(Sex)) |>
     fmt_markdown(columns = everything())|> 
   tab_style(style = cell_text(v_align = "bottom"),
             locations = cells_column_labels())
@@ -910,8 +879,6 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
                   ycontrol = md("$$Y_c(u)$$"),
                   ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
     cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
@@ -943,8 +910,6 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
                   ycontrol = md("$$Y_c(u)$$"),
                   ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
     cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
@@ -982,8 +947,6 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
                   ycontrol = md("$$Y_c(u)$$"),
                   ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
     cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
               locations = cells_column_labels(columns = c(subject))) |>
     cols_align(align = "center", columns = everything()) |>
@@ -1037,16 +1000,14 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
     cols_label(subject = md("ID"),
                   ytreat = md("$$Y_t(u)$$"),
                   ycontrol = md("$$Y_c(u)$$"),
-                  ydiff = md("$$Y_t(u) - Y_c(u)$$")) %>%
-    cols_move(columns = c(ytreat, ycontrol), after = c(subject)) %>%
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) %>%
+                  ydiff = md("$$Y_t(u) - Y_c(u)$$")) |>
+    cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
     tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
-              locations = cells_column_labels(columns = c(subject))) %>%
-    cols_align(align = "center", columns = everything()) %>%
-    cols_align(align = "left", columns = c(subject)) %>%
-    tab_spanner(label = "Outcomes", c(ytreat, ycontrol)) %>%
-    tab_spanner(label = "Causal Effect", c(ydiff)) %>%
+              locations = cells_column_labels(columns = c(subject))) |>
+    cols_align(align = "center", columns = everything()) |>
+    cols_align(align = "left", columns = c(subject)) |>
+    tab_spanner(label = "Outcomes", c(ytreat, ycontrol)) |>
+    tab_spanner(label = "Causal Effect", c(ydiff)) |>
     fmt_markdown(columns = everything())|> 
   tab_style(style = cell_text(v_align = "bottom"),
             locations = cells_column_labels())
@@ -1076,6 +1037,8 @@ In this example, there is indeed a constant treatment effect for everyone: $+3$.
 The fundamental components of every problem in causal inference are units, treatments and outcomes. The units are the rows in the table. The treatments are (some of) the columns. The outcomes are the values under the treatment columns. (There are also covariate columns and the values within them.) **Whenever you confront a problem in causal inference, start by identifying the units, treatments and outcomes.**
 
 A causal effect is the difference between one potential outcome and another. How different would your life be if you missed the train?
+
+<!-- Replace Sliding Doors in Summary with something from Wonderful Life that references "An angel gets his wings."  Every time a predictive model is interpreted causally, a devil gets his pitchfork. -->
 
 {{< video https://www.youtube.com/embed/BvUbv4iwbDs >}}
 

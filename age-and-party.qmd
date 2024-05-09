@@ -39,9 +39,9 @@ In this chapter, we are going to ask a series of questions involving train commu
 
 We want to build a model and then use that model to make claims about the world. Our questions about the relationship between `age` and `party` are the following:
 
-*What is the probability that, if a Democrat shows up at the train station, he will be over 50 years old?*
+> *What is the probability that, if a Democrat shows up at the train station, he will be over 50 years old?*
 
-*In a group of three Democrats and three Republicans, what will the age difference be between the oldest Democrat and the youngest Republican?*
+> *In a group of three Democrats and three Republicans, what will the age difference be between the oldest Democrat and the youngest Republican?*
 
 We can answer these and similar questions by creating a model that uses party affiliation to predict age. Let's follow the four Cardinal Virtues: Wisdom, Justice, Courage and Temperance.
 

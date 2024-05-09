@@ -5,23 +5,34 @@
 #| message: false
 #| echo: false
 #| warning: false
+library(tidyverse)
+library(primer.data)
+library(gt)
 library(patchwork)
 ```
 
-<!-- This chapter is left-over after removing all the transformation stuff to the mechanics chapter. Not sure what to do with it. -->
+<!-- This chapter is left-over after removing all the transformation stuff to the mechanics chapter. Turn it into a full scale chapter: four parameters continuous. 
+
+Explore more than one family. Start with gaussian as usual. Then try poisson. Maybe some other positive only distributions. Maybe the special roll-your-own dependent variable.
+
+This will be a predictive model, but it will explore the use of the treatment. Sometimes, we just treat a treatment like any other covariate.
+
+There are several different four parameter models that you could make here. Perhaps look at three, and pick one?
+
+Should we continue to use trains or switch to a different data set? The more I look at att_end as an outcome variable, the less I like it. 
+
+Think of this as the chapter which comes directly after mechanics? And tries to illustrate some points?
+-->
 
 
-*Our forecasts are more uncertain that a naive use of our models would suggest.*
+<!-- *Our forecasts are more uncertain that a naive use of our models would suggest.* -->
 
-In our haste to make progress --- to get all the way through the process of building, interpreting and using models --- we have given short shrift to some of the messy details of model building and evaluation. This chapter fills in those lacunae. We will also introduce models with four parameters, including *parallel slopes* models. 
+The questions we are asked are always more complex than they appear. Consider:
 
+> *What are the odds that at least 3 out of 5 people will have a conservative attitude toward immigration given that they have all been exposed to Spanish-speakers?*
 
+This question seems straightforward. We simply build a model and then use our favorite tools to create a posterior distribution which will answer the question. But such simplicity depends on an entire set of unstated assumptions about precisely what the words in the question mean. We need to unpack those assumptions step-by-step. The Cardinal Virtues show us the way.
 
-To conclude this chapter, we will look at a four parameter model. The model we will use will measure `att_end` as a function of `liberal` or `att_start` or `treatment` or some combination of these variables. 
-
-<!-- DK: We are no longer in the business of telling you what the model should be. There are lots of models we could use! We need to explore the different models and then pick one. -->
-
-<!-- DK: There are three different four parameter models that you could make here. Let's look at all three, pick one and then use it. -->
 
 ## Wisdom
 
@@ -31,22 +42,132 @@ To conclude this chapter, we will look at a four parameter model. The model we w
 knitr::include_graphics("other/images/Wisdom.jpg")
 ```
 
+Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of validity, as to whether or not we can (reasonably!) assume that the two come from the same population.
 
-<!-- ### Preceptor Table -->
+### Preceptor Table
 
-<!-- *Causal or predictive model*: -->
+To create the Preceptor Table we first determine its components.
 
-<!-- *Units*: -->
+*Causal or predictive model*: At first glance, this model might appear *causal*. After all, the data involving exposure to Spanish-speakers comes from a randomized experiment. But look closer. We are not interested in a causal effect. We don't care about the *difference* between two potential outcomes. Instead, we care only about a person's attitude toward immigration conditional on receiving the treament. We don't care what their attitude would have been if, counter-factually, they had been assigned to control. There is only on outcome column in the Preceptor Table, so the model is *predictive*.
 
-<!-- *Outcome*: -->
+*Units*: The units are individual people. However, the question does not make clear which people we care about. We should go back to our client/colleague/boss and clarify. Let's assume that she is interested in attitudes for adults living in Canada.
 
-<!-- *Treatment*: -->
+*Outcome*: The outcome involves attitudes toward immigration but, apparently, in a binary manner. A person either has a "conservative" attitude toward immigration or he does not. Again, further conversation with our client would be useful, especially once we start looking at the data we have available. 
 
-<!-- *Covariates*: -->
+*Treatment*: Because this is not a causal model, there is no reason to refer to any of the specific covariates as a "treatment." Again, a treatment is simply a covariate that we could, at least in theory, vary in order to answer the question. In this case, we don't care about the effect of the treatment. We are simply building a predictive model for the subset of the population who have been exposed to Spanish-speakers. 
 
-<!-- *Moment in Time*:  -->
+*Covariates*: Besides exposure to Spanish-speakers, it is not clear what other covariates might be useful in answering the question. We need to explore our dataset to see what we have available. (Hint: We have a variable about political orientation, `liberal`,  which will prove useful.)
 
-Before making a model which seeks to explain `att_end`, we should plot it and the variables we think are connected to it:
+*Moment in Time*: The question does not indicate *when* these attitudes will be measured. Time for more conversation. Assume that the client is interested in the present day, 2024.
+
+Putting these all together, the Preceptor Table might look something like:
+
+```{r}
+#| echo: false
+tibble(ID = c("1", "2", "...", "10", "11", "...", "N"),
+       conservative = c("TRUE", "FALSE", "...", "TRUE", "FALSE", "...", "TRUE"),
+       treated = c("TRUE", "FALSE", "...", "FALSE", "TRUE", "...", "TRUE"),
+       liberal = c("FALSE", "TRUE", "...", "FALSE", "TRUE", "...", "TRUE"),
+       age = c("63", "47", "...", "52", "75", "...", "68"),
+       sex = c("Female", "Male", "...", "Female", "Female", "...", "Male")) |>
+  gt() |>
+  tab_header(title = "Preceptor Table") |>
+  cols_label(ID = md("ID"),
+             conservative = md("Conservative"),
+             treated = md("Treated"),
+             liberal = md("Liberal"),
+             age = md("Age"),
+             sex = md("Sex")) |>
+  tab_style(cell_borders(sides = "right"),
+            location = cells_body(columns = c(ID))) |>
+  tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
+            locations = cells_column_labels(columns = c(ID))) |>
+  cols_align(align = "center", columns = everything()) |>
+  cols_align(align = "left", columns = c(ID)) |>
+  fmt_markdown(columns = everything()) |>
+  tab_spanner(label = "Outcome", columns = c(conservative)) |>
+  tab_spanner(label = "Covariates", columns = c(sex, treated, liberal, age))
+```
+
+Now that our problems are getting more complex, we allow a little more latitude in the initial design of the Preceptor Table. In the vast majority of real world situtations, it is impossible to fully specify the Preceptor Table at the start of the investigation. It, like the question, evolve over the course of the analysis. In particular, the set of covariates required depends on (changes in) the question(s) being answered.
+
+Recall the definition of a Preceptor Table: "the smallest possible table of data with rows and columns such that, if there is no missing data, then it is easy to calculate the quantities of interest." The initial version of our question only specifies two variables: an attitude toward immigration (the outcome) and exposure to Spanish-speakers (a covariate which really just specifies the units of interest). In other words, the *true* Preceptor Table for the *initial* version of the question really looks like this:
+
+```{r}
+#| echo: false
+tibble(ID = c("1", "2", "...", "10", "11", "...", "N"),
+       conservative = c("TRUE", "FALSE", "...", "TRUE", "FALSE", "...", "TRUE"),
+       treated = c("TRUE", "FALSE", "...", "FALSE", "TRUE", "...", "TRUE"),
+       liberal = c("FALSE", "TRUE", "...", "FALSE", "TRUE", "...", "TRUE"),
+       age = c("63", "47", "...", "52", "75", "...", "68"),
+       sex = c("Female", "Male", "...", "Female", "Female", "...", "Male")) |>
+  filter(! ID %in% c("2", "10")) |> 
+  select(ID, conservative) |> 
+  gt() |>
+  tab_header(title = "Preceptor Table") |>
+  cols_label(ID = md("ID"),
+             conservative = md("Conservative")) |>
+  tab_style(cell_borders(sides = "right"),
+            location = cells_body(columns = c(ID))) |>
+  tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
+            locations = cells_column_labels(columns = c(ID))) |>
+  cols_align(align = "center", columns = everything()) |>
+  cols_align(align = "left", columns = c(ID)) |>
+  fmt_markdown(columns = everything()) |>
+  tab_spanner(label = "Outcome", columns = c(conservative))
+```
+
+Note:
+
+<!-- DK: Clean/expand? -->
+
+* The rows for ID "2" and "10" have been removed. Those individuals did not receive the treatment, so we don't really care what their attitude toward immigration is. (This is a subtle, and contestable, point which we will return to in later chapters. Understanding which rows you "really" need in your Preceptor Table, or your Population Table, is non-trivial.)
+
+* There are no rows for covariates because the question does not specify them. The question does mention exposure to Spanish-speakers, but that just specifies the relevant universe. We are, by the terms of the question, uninterested in immigration attitudes among people who were not exposed to Spanish-speakers.
+
+* We have one row for every adult in Canada in 2024 who is exposed to Spanish-speakers. Of course, before we define precisely what we mean by such an exposure and/or before we actually cause that exposure, we are not certain which people really qualify for inclusion.
+
+* The table would allow us, via the magic of simulation, to answer our question, and any similar one. Just draw, at random, 5 people from the table and determine whether or not (at least) three are conservative. Do that 1,000 times. The proportion of the draws which have (at least) three conservatives is a good estimate of the odds of getting (at least) three conservatives.
+
+In some sense, the "true" Preceptor Table would just have 5 rows, one for each of the people being referred to in the original question:
+
+```{r}
+#| echo: false
+tibble(ID = c("63", "122", "3,987", "465,234", "8,001,654"),
+       conservative = c("TRUE", "FALSE", "TRUE", "FALSE", "TRUE")) |>
+  gt() |>
+  tab_header(title = "Preceptor Table") |>
+  cols_label(ID = md("ID"),
+             conservative = md("Conservative")) |>
+  tab_style(cell_borders(sides = "right"),
+            location = cells_body(columns = c(ID))) |>
+  tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
+            locations = cells_column_labels(columns = c(ID))) |>
+  cols_align(align = "center", columns = everything()) |>
+  cols_align(align = "left", columns = c(ID)) |>
+  fmt_markdown(columns = everything()) |>
+  tab_spanner(label = "Outcome", columns = c(conservative))
+```
+
+If we knew the exact five people, all Canadian adults in 2024 who were exposed to Spanish-speakers, and we knew whether or not they were "conservative," then we could answer the question easily. Note that the answer is not 60%, even though 60% (3 out of 5) of these individuals are conservative. The answer to the question is 100% because we know the exact individuals in the group of 5 and we know that 3 of them are, in fact, conservative on immigration.
+
+Of course, such a Preceptor Table, even though it makes answering our question maximally easy, is a fantasy. A good Preceptor Table is not just "the smallest possible table of data with rows and columns such that, if there is no missing data, then it is easy to calculate the quantities of interest," even though that is our (basic) definition. It needs to have some connection to the real world, some tether to reality, which makes the connection to the Population Table more sensible.
+
+
+### EDA 
+
+We have explored the `trains` tibble from the **primer.data** package in previous chapters. But you can never look at your data too much! So, let's explore some more:
+
+
+```{r}
+#| code-fold: false
+trains |> 
+  select(att_end, att_start, treatment, liberal, age, sex) |> 
+  summary()
+```
+
+Recall that `att_end` is a measure of a person's attitude toward immigration, conducted after the experiment. It is on an integer scale, with values ranging from 3 to 15, with higher values corresponding to more conservative views. `att_start` is the same thing, but measured before the experiment.
+
 
 ```{r}
 ggplot(trains, aes(x = att_start, y = att_end, color = liberal)) +
@@ -59,19 +180,26 @@ ggplot(trains, aes(x = att_start, y = att_end, color = liberal)) +
 
 Is that data believable? Maybe? One could imagine that `att_end` would be predicted fairly well by `att_start`. This makes sense for most of our data points, which show not much difference between the attitudes. But what about the great disparities in attitude shown for the individual with a starting attitude of 9 and an ending attitude around 15? In a real data science project, this would require further investigation. For now, we ignore the issue and blithely press on.
 
-Another component of Wisdom is the population. The concept of the "population" is subtle and important. *The population is not the set of commuters for which we have data.* That is the dataset. The population is the larger --- potentially much larger --- set of individuals about whom we want to make inferences. *The parameters in our models refer to the population, not to the dataset.*
+### Validity
 
-There are many different populations, each with its own $\mu$, in which we might be interested. For instance:
+*Validity* is the consistency, or lack thereof, in the columns of your dataset and the corresponding columns in your Preceptor Table. In order to consider the two datasets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*, which is the first step in Justice.
 
-* The population of Boston commuters on the specific train and time included in our dataset. 
+The original question refers to "conservative attitude toward immigration" without any clear discussion about what that phrase means. There are many ways to measure a person's attitude toward immigration. There are many possible definitions of "conservative" which might be applied to these measures. For the assumption of *validity* to hold, the relevant variable in our data must be close enough to the variable descripion implicit in our question.
 
-* The population of *all* Boston commuters.
+The biggest problem is that `att_end` is a (mostly) continuous variable, measured on a 3 - 15 scale. The question, and the Preceptor Table we created from it, imply a TRUE/FALSE measure as to whether a person has a conservative attitude or does not have a conservative attitude. 
 
-* The population of commuters in the United States. 
+Given that contradiction, we have three options. First, we can give up. *The major part of Wisdom is deciding what questions you can't answer because of the data you don't have.* In this case, however, that seems a bit extreme. The data we have and the data we want are close enough that just a little adjustment will allow the assumption of validity to hold.
 
-All of these populations are different, so each has a different $\mu$. Which $\mu$ we are interested in depends on the problem we are trying to solve. It is a judgment call, a matter of Wisdom, as to whether or not that data we have is "close enough" to the population we are interested in to justify making a model. 
+Second, we can adjust our question. Instead of asking about a TRUE/FALSE state, we can ponder:
 
-**The major part of Wisdom is deciding what questions you can't answer because of the data you don't have.**
+> *What are the odds that at least 3 out of 5 people will have a conservative attitude toward immigration (meaning a value of 10 or more on a 3-15 scale) given that they have all been exposed to Spanish-speakers?*
+
+Changing the question is not cheating. It is a natural part of the process by which we perform data analysis.
+
+Third, we can adjust our data. Again, this is not cheating, as long as are explicit and transparent. Create a new variable, `att_conservative` which is TRUE of `att_end >= 10` and FALSE otherwise. In practice, changing the data and changing the question generally result in similar answers, as they would here. The important thing is to check for *validity*, to ensure that columns in our Preceptor Table and the columns in our data have a *valid correspondence* with one another. This applies, not just to the outcome variable, but to any covariates.
+
+<!-- DK: Explore some of the covariates, at least exposure to Spanish speakers? -->
+
 
 ## Justice 
 
@@ -80,6 +208,22 @@ All of these populations are different, so each has a different $\mu$. Which $\m
 #| fig.cap: Justice
 knitr::include_graphics("other/images/Justice.jpg")
 ```
+
+*Justice* is the second [Cardinal Virtue](https://en.wikipedia.org/wiki/Cardinal_virtues) in data science. Justice starts with the Population Table – the data we want to have, the data which we actually have, and all the other data from that same population. Each row of the Population Table is defined by a unique unit/time combination. We explore three key issues. First, does the relationship among the variables demonstrate *stability*, meaning is the model stable across different time periods? Second, are the rows associated with the data and, separately, the rows associated with the Preceptor Table *representative* of all the units from the population? Third, for causal models only, we consider *unconfoundedness*
+
+### Population Table
+
+*The population is not the set of units for which we have data.* That is the dataset. The population is the larger --- potentially much larger --- set of units about whom we want to make inferences. *The parameters in our models refer to the population, not to the dataset.*
+
+
+
+
+
+### Stability
+
+### Representativeness
+
+### Unconfoundedness
 
 Now that we have considered the connection between our data and the predictions we seek to make, we will need to consider our model. 
 
@@ -117,6 +261,12 @@ $$y_i = (intercept + liberal\_true) + \beta_1 att\_start_i$$
 #| fig.cap: Courage
 knitr::include_graphics("other/images/Courage.jpg")
 ``` 
+
+Justice gave us the Population Table. Courage selects the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have. We explore different models. We need to decide which variables to include and to estimate the values of unknown parameters. We check our models for consistency with the data we have. We avoid hypothesis tests. We select one model.
+
+### Models
+
+
 
 The use of `stan_glm` is the same as usual. Using `stan_glm`, we will create our model, `fit_1`. 
 
@@ -271,6 +421,12 @@ Recall that, with `loo_compare()`, the resulting data shows the superior model f
 But how certain can we be that it is better? Note that the difference between the two models is not quite two standard errors. So, there is a reasonable possibility that the difference is due to chance.
 
 <!-- DK: Say more here! -->
+
+### Tests
+
+### Data Generating Mechanism
+
+
 
 ## Temperance
 

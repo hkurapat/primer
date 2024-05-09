@@ -212,7 +212,7 @@ This might take awhile since the "Tidyverse" includes so many [useful packages](
 
 This is a different error message than the one you just saw about a package not having been installed yet. R is telling you that you are trying to use a function in a package that has not yet been loaded. R doesn't know where to "find" the function you want to use.
 
-Let's install two packages that are not available from CRAN: **r4ds.tutorials** and **primer.tutorials**. Copy and paste the following to the R Console:
+Let's install two other packages: **r4ds.tutorials** and **primer.tutorials**. Copy and paste the following to the R Console:
 
 ```{r}
 #| eval: false
@@ -221,19 +221,7 @@ library(remotes)
 install_github("PPBDS/r4ds.tutorials")
 ```
 
-<!-- DK: Will need to update this once we remove primer.data from the r4ds.tutorials package. But, even then, we will certainly need primer.data in the primer.tutorials package, so we will just be moving this discussion lower. -->
-
-This package is fairly simple and should install without any problems. Some other new packages will be installed as well, most importantly **primer.data**, which includes most of the data we use in the *Primer*.
-
-If the download fails, try
-
-```{r}
-#| eval: false
-#| code-fold: false
-options("timeout" = 600)
-```
-
-This gives the download more time to complete. Try `install_github("PPBDS/r4ds.tutorials")` again.
+This should install easily. There is a version of **r4ds.tutorials** available on CRAN, but we want to get the latest version, often called the "development" version.
 
 Next, copy and paste the following to the R Console:
 
@@ -245,7 +233,17 @@ remotes::install_github("PPBDS/primer.tutorials")
 
 Instead of loading the **remotes** package explicitly, we used the double colon notation --- `::` --- to refer directly to the `install_github()` function which resides in the **remotes** package.
 
-Other new packages will be installed. It may take a few minutes. If something gets messed up, it is often useful to read the error messages and see if a specific package is at fault. If so, use the `remove.packages()` function to remove the problematic package and then install it again.
+If the download fails, try
+
+```{r}
+#| eval: false
+#| code-fold: false
+options("timeout" = 600)
+```
+
+This gives the download more time to complete. Try it again.
+
+Some other new packages will be installed as well, most importantly **primer.data**, which includes most of the data we use in the *Primer*. It may take a few minutes. If something gets messed up, it is often useful to read the error messages and see if a specific package is at fault. If so, use the `remove.packages()` function to remove the problematic package and then install it again.
 
 If **primer.tutorials** does not install correctly, don't worry about it. This package is much less important than **r4ds.tutorials**.
 
@@ -334,6 +332,8 @@ install.packages("tidyverse")
 remotes::install_github("PPBDS/r4ds.tutorials")
 remotes::install_github("PPBDS/primer.tutorials")
 ```
+
+  - Completed the Getting Started tutorial from the **tutorial.helpers** package.
 
 Let's get started.
 

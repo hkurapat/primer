@@ -28,7 +28,6 @@ Packages:
 #| message: false
 #| code-fold: false
 library(primer.data)
-library(tidyverse)
 library(brms)
 library(tidybayes)
 library(tidyverse)
@@ -36,7 +35,7 @@ library(tidyverse)
 
 The **primer.data** package includes the `trains` dataset. We use the **brms** package to build Bayesian models. ("brms" stands for **B**ayesian **r**egression **m**odel**s**.) The **tidybayes** packages makes working the fitted models easier. As usual, we use the **tidyverse** package.
 
-In this chapter, we are going to ask a series of questions involving train commuters' ages, party affiliations, incomes, and political ideology, as well as the causal effect of exposure to Spanish-speakers on their attitude toward immigration. These questions will pertain to all train commuters in the US today. For a refresher on this data, refer to @sec-rubin-causal-model.
+In this chapter, we are going to ask a series of questions about the causal effect of exposure to Spanish-speakers on the attitude of US commuters toward immigration. These questions will pertain to all train commuters in the US today. For a refresher on this data, refer to @sec-rubin-causal-model.
 
 Consider:
 
@@ -54,7 +53,7 @@ knitr::include_graphics("other/images/Wisdom.jpg")
 
 Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of "validity," as to whether or not we can (reasonably!) assume that the two come from the same population.
 
-###Preceptor Table
+### Preceptor Table
 
 *Causal or predictive model*: In this case, the model is clearly causal, so our Preceptor Table will have two columns for the potential outcomes. If all you need to know to answer the question is the outcome under one value of the treatment, then the model is predictive, even if there is a treatment.
 
@@ -113,7 +112,7 @@ trains |>
   summary()
 ```
 
-The data include information about each respondent's gender, political affiliations, age, income and so on. `treatment` indicates whether a subject was in the control or treatment group. The key outcomes are their attitudes toward immigration both before (`att_start`) and after (`att_end`) the experiment.
+The data include information about each respondent's sex, political affiliations, age, income and so on. `treatment` indicates whether a subject was in the control or treatment group. The key outcomes are their attitudes toward immigration both before (`att_start`) and after (`att_end`) the experiment.
 
 `summary()` shows us what the different values of `att_end` and `treatment` are because it is a factor. The range for `att_end` seems reasonable.
 
@@ -388,7 +387,7 @@ trains |>
 So the causal effect of hearing Spanish-speakers is about the same as 2/3s of the distance between Republicans and Democrats. This is not a small effect! To summarize our conclusion:
 
 
-*Using data from a 2012 survey of Boston-area commuters, we seek to understand the causal effect of a one-time exposure to Spanish-speakers on attitudes toward immigration in Chicago and similar cities today. The magnitude of the effect may have changes in the 10+ years since the data was collected. We modeled `att_end`, a summary measure of attitude toward immigration measured on a 3 to 15 integer scale, as a linear function of treatment. Treated individuals, those exposed to Spanish-speakers in a commuter rail platform, become more conservative on immigration issues. The average causal effect was about 1.5, with a 95% confidence interval of 0.5 to 2.5. That 1.5 effect is about 2/3s of the distance between the average attitudes of Republicans and Democrats.* 
+*Using data from a 2012 survey of Boston-area commuters, we seek to understand the causal effect of a one-time exposure to Spanish-speakers on attitudes toward immigration in Chicago and similar cities today. The magnitude of the effect may have changed in the 10+ years since the data was collected. We modeled `att_end`, a summary measure of attitude toward immigration measured on a 3 to 15 integer scale, as a linear function of treatment. Treated individuals, those exposed to Spanish-speakers in a commuter rail platform, become more conservative on immigration issues. The average causal effect was about 1.5, with a 95% confidence interval of 0.5 to 2.5. That 1.5 effect is about 2/3s of the distance between the average attitudes of Republicans and Democrats.* 
 
 
 

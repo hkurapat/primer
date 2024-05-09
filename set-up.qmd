@@ -8,6 +8,8 @@ This document provides a guide in setting up R/RStudio to work on *[The Primer](
 
 * The third part involves the daily workflow of merges and pull requests. You will do these steps many times each day.
 
+* **Never forget**: Do not put any work in Windows OneDrive or any other cloud-hosted directory. This can cause endless problems. Moreover, you don't need this sort of back-up service since your work will be saved on GitHub.
+
 The *test* which ensures that you have successfully completed this set up is to submit a PR for the TODO.txt file in the PPBDS package (which you are working on) which adds your name at the very top of the file. The PR should only change that file. If you are working on a tutorial package, you should also read about [how to write tutorials](https://ppbds.github.io/tutorial.helpers/articles/instructions.html), especially tutorials [based on books](https://ppbds.github.io/tutorial.helpers/articles/books.html).
 
 ## Computer Set Up

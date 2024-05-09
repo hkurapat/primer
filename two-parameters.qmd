@@ -121,12 +121,12 @@ library(skimr)
 glimpse(nhanes)
 ```
 
-`nhanes` includes `r ncol(nhanes)` variables, including physical attributes like weight and height. Let's restrict our attention to three variables: `age`, `gender` and `height`. 
+`nhanes` includes `r ncol(nhanes)` variables, including physical attributes like weight and height. Let's restrict our attention to three variables: `age`, `sex` and `height`. 
 
 ```{r}
 #| code-fold: false
 nhanes |> 
-  select(age, gender, height)
+  select(age, sex, height)
 ```
 
 Examine a random sample:
@@ -134,7 +134,7 @@ Examine a random sample:
 ```{r}
 #| code-fold: false
 nhanes |> 
-  select(age, gender, height) |> 
+  select(age, sex, height) |> 
   slice_sample(n = 5)
 ```
 
@@ -144,7 +144,7 @@ We think of both `age` and `height` as numbers. And they are numbers! But R dist
 ```{r}
 #| code-fold: false
 nhanes |> 
-  select(age, gender, height) |> 
+  select(age, sex, height) |> 
   glimpse()
 ```
 
@@ -157,7 +157,7 @@ In addition to `glimpse()`, we can run `skim()`, from the **skimr** package, to 
 ```{r}
 #| code-fold: false
 nhanes |> 
-  select(age, gender, height) |> 
+  select(age, sex, height) |> 
   skim()
 ```
 
@@ -166,7 +166,7 @@ Interesting! There are `r sum(is.na(nhanes$height))` missing values of height in
 ```{r}
 #| code-fold: false
 ch4 <- nhanes |> 
-  filter(gender == "Male", age >= 18) |> 
+  filter(sex == "Male", age >= 18) |> 
   select(height) |> 
   drop_na()
 ```
@@ -256,7 +256,7 @@ Our **other** rows contain no data. These are subjects which fall under our desi
 tibble(source = c("Preceptor Table", "Preceptor Table", "...",
                   "Actual Data", "Actual Data", "Actual Data", "...", 
                   "Other", "Other", "Other"),
-       gender = c("Male", "Male", "...",
+       sex = c("Male", "Male", "...",
                   "Male", "Male", "Male", "...",
                   "?", "?", "?"),
        year = c("2024", "2024", "...",
@@ -270,7 +270,7 @@ tibble(source = c("Preceptor Table", "Preceptor Table", "...",
   
   gt() |>
   cols_label(source = md("Source"),
-             gender = md("Sex"),
+             sex = md("Sex"),
              year = md("Year"),
              height = md("Height")) |>
   tab_style(cell_borders(sides = "right"),
