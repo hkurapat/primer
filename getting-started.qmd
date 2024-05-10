@@ -21,7 +21,7 @@ More precisely, R is a programming language that runs computations, while RStudi
 
 Download and install R and RStudio (Desktop version) on your computer.
 
-1.  [Download and install R](https://cloud.r-project.org/). If you are using a Mac, make sure to use the correct installation, depending on whether you are using newer "M1 and higher Macs" (first option) or older "Intel Macs" (second option). You can look up the chip used in your Mac by checking "About This Mac" under the Apple menu.
+1.  [Download and install R](https://cloud.r-project.org/). If you are using a Mac, make sure to use the correct installation, depending on whether you are using newer Apple silicon "M1-3 Macs" (first option) or older "Intel Macs" (second option). You can look up the chip used in your Mac by checking "About This Mac" under the Apple menu.
 
 2.  [Download and install RStudio Desktop](https://rstudio.com/products/rstudio/download/#download) (the free version).
 
@@ -65,9 +65,9 @@ This is your workspace. Start with the big pane on the left:
 knitr::include_graphics("getting-started/images/jobs.png")
 ```
 
-There are three tabs in the Console pane. We'll be focusing on the Console and Terminal tabs. When you first start R, the Console gives you some information about your version of R. The Console is where you can type and run R code. For example, if you type 1 + 1 and hit return, the Console returns 2.
+There are three tabs in the Console pane. We'll be focusing on the Console and Terminal tabs. When you first start R, the Console gives you some information about your version of R. The Console is where you can type and run R code. For example, if you type 1 + 1 and hit `Enter`, the Console returns 2.
 
-We often use the phrase "run the following code." This means that you should type or copy-and-paste the code into the Console and then hit the enter/return key.
+We often use the phrase "run the following code." This means that you should type or copy-and-paste the code into the Console and then hit the `Enter` key. (Note that `Return` is the name of a Mac key and `Enter` the name of the corresponding Windows key. We use `Enter` throughout the *Primer*.)
 
 <!-- DK: Redo this image by splitting it into two. First, show it as students see it, with nothing in the environment. Then, tell them to type x <- 5. Then, show them the image of what it looks like now. In neither case is there a data object. -->
 
@@ -78,23 +78,25 @@ Switch to the top right of your workspace:
 knitr::include_graphics("getting-started/images/top_right_window.png")
 ```
 
-The main two tabs we will be using are Environment and Git (which is not yet visible). The Environment tab shows you the datasets and variables you currently have loaded into R. In this case, we loaded in a dataset with 3407 rows and 5 columns and a variable `x` equal to 5. For you, the Environment should be empty. Let's change that. Go to your Console and type:
+In the Environment pane, the two main tabs we will be using are Environment and Git (which is not yet visible). The Environment tab shows you the datasets and variables you currently have loaded into R. In this case, we loaded in a dataset with 3407 rows and 5 columns and a variable `x` equal to 5. For you, the Environment should be empty. Let's change that. Go to your Console and type:
 
 ```{r}
 #| code-fold: false
 x <- 5
 ```
 
-This code assigns the value 5 to an object, `x`. `<-` is the operator used to assign values to objects in R. Now, hit return/enter and you should see a variable `x` equal to 5 in your Environment tab. You must always hit return/enter after typing a command, otherwise RStudio will not realize that you want R to execute the command.
+This code assigns the value 5 to an object, `x`. `<-` is the operator used to assign values to objects in R. Now, hit `Enter` and you should see a variable `x` equal to 5 in your Environment tab. You must always hit `Enter` after typing a command, otherwise RStudio will not realize that you want R to execute the command.
 
-Switch to the bottom right pane:
+Note that a "pane," like the Environment pane, refers to an entire window of RStudio while a "tab," like the Environment tab, refers to a single tab within the overall pane.
+
+Switch to the Files pane on the bottom right:
 
 ```{r}
 #| echo: false
 knitr::include_graphics("getting-started/images/bottom_right_window.png")
 ```
 
-The Files tab displays your computer's file system. When you create a project later, this tab will automatically show the contents of your project's folder. 
+The Files tab, within the Files pane, displays your computer's file system. When you create a project later, this tab will automatically show the contents of your project's folder. 
 
 <!-- DK: Perfect place for a More Details box. -->
 
@@ -145,7 +147,7 @@ Let's *install* a useful package. At the Console pane within RStudio, type:
 install.packages("remotes")
 ```
 
-And press return/enter on your keyboard. You must include the quotation marks around the name of the package. A package can depend on other packages, which will be automatically installed if needed.
+And press `Enter` on your keyboard. You must include the quotation marks around the name of the package. A package can depend on other packages, which will be automatically installed if needed.
 
 One tricky aspect of this process is that R will occasionally ask you:
 
