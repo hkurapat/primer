@@ -313,8 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- DK: Sure would be nice if this was not necessary. Maybe R-universe would make it so? -->
 <p>If you are using Windows, <a href="https://cran.r-project.org/bin/windows/Rtools">download and install R Tools</a>. Again, this is only for Windows users. The installer associated with “R-release” is what you want.</p>
 <p>If you are using a Chromebook, follow <a href="https://levente.littvay.hu/chromebook/">this advice</a>.</p>
-<p>If you are having trouble, just sign up for a free account on <a href="https://posit.cloud/">Posit Cloud</a>. This will give you 25 hours of usage, which should be enough to get started.</p>
-<!-- DK: Should set up a robust Posit Cloud option. Indeed, might even make it the default for Day 1. Need to make sure that the instructions work for a default account. -->
+<p>If you are having trouble, just sign up for a free account on <a href="https://posit.cloud/">Posit Cloud</a>. (See <a href="https://ppbds.github.io/tutorial.helpers/articles/cloud.html">here for our instructions</a>.) This will give you 25 hours of usage, which should be enough to get started.</p>
 <!-- DK: Could text like this be in a "More Detail" box which only appears when clicked?  If you want a slower introduction, check out the short (free) book, [*Getting Used to R, RStudio, and R Markdown*](https://rbasics.netlify.com/). @usedtor2016 include screencast recordings that you can follow along and pause as you learn. -->
 </section>
 <section id="using-r-and-rstudio" class="level3 unnumbered">
@@ -332,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <!-- DK: Can we make more use of the RStudio Guide here? Hate to have to maintain all this myself. -->
 <p>Much as we don’t drive a car by interacting directly with the engine but rather by interacting with elements on the car’s dashboard, we won’t be using R directly. Instead, we will use RStudio’s interface. After you install R and RStudio on your computer, you’ll have two new <em>programs</em> (also called <em>applications</em>) you can open. Always work in RStudio and not directly in the R application.</p>
-<p>Open up RStudio. You should see three <em>panes</em> dividing the screen: the <em>Console pane</em>, the <em>Environment pane</em>, and the <em>Files pane</em>.</p>
+<p>Open up RStudio. You should see three <em>panes</em> dividing the screen: the <em>Console pane</em>, the <em>Environment pane</em>, and the <em>Output pane</em>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -371,7 +370,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This code assigns the value 5 to an object, <code>x</code>. <code>&lt;-</code> is the operator used to assign values to objects in R. Now, hit <code>Enter</code> and you should see a variable <code>x</code> equal to 5 in your Environment tab. You must always hit <code>Enter</code> after typing a command, otherwise RStudio will not realize that you want R to execute the command.</p>
 <p>Note that a “pane,” like the Environment pane, refers to an entire window of RStudio while a “tab,” like the Environment tab, refers to a single tab within the overall pane.</p>
-<p>Switch to the Files pane on the bottom right:</p>
+<p>Switch to the Output pane on the bottom right:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -381,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The Files tab, within the Files pane, displays your computer’s file system. When you create a project later, this tab will automatically show the contents of your project’s folder.</p>
+<p>The Files tab, within the Output pane, displays your computer’s file system. When you create a project later, this tab will automatically show the contents of your project’s folder.</p>
 <!-- DK: Perfect place for a More Details box. -->
 </section>
 <section id="package-installation" class="level3 unnumbered">

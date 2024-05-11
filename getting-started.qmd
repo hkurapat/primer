@@ -31,9 +31,7 @@ If you are using Windows, [download and install R Tools](https://cran.r-project.
 
 If you are using a Chromebook, follow [this advice](https://levente.littvay.hu/chromebook/).
 
-If you are having trouble, just sign up for a free account on [Posit Cloud](https://posit.cloud/). This will give you 25 hours of usage, which should be enough to get started.
-
-<!-- DK: Should set up a robust Posit Cloud option. Indeed, might even make it the default for Day 1. Need to make sure that the instructions work for a default account. -->
+If you are having trouble, just sign up for a free account on [Posit Cloud](https://posit.cloud/). (See [here for our instructions](https://ppbds.github.io/tutorial.helpers/articles/cloud.html).) This will give you 25 hours of usage, which should be enough to get started. 
 
 <!-- DK: Could text like this be in a "More Detail" box which only appears when clicked?  If you want a slower introduction, check out the short (free) book, [*Getting Used to R, RStudio, and R Markdown*](https://rbasics.netlify.com/). @usedtor2016 include screencast recordings that you can follow along and pause as you learn. -->
 
@@ -51,7 +49,7 @@ knitr::include_graphics("getting-started/images/R_vs_RStudio.png")
 
 Much as we don't drive a car by interacting directly with the engine but rather by interacting with elements on the car's dashboard, we won't be using R directly. Instead, we will use RStudio's interface. After you install R and RStudio on your computer, you'll have two new *programs* (also called *applications*) you can open. Always work in RStudio and not directly in the R application.
 
-Open up RStudio. You should see three *panes* dividing the screen: the *Console pane*, the *Environment pane*, and the *Files pane*.
+Open up RStudio. You should see three *panes* dividing the screen: the *Console pane*, the *Environment pane*, and the *Output pane*.
 
 ```{r}
 #| echo: false
@@ -89,14 +87,14 @@ This code assigns the value 5 to an object, `x`. `<-` is the operator used to as
 
 Note that a "pane," like the Environment pane, refers to an entire window of RStudio while a "tab," like the Environment tab, refers to a single tab within the overall pane.
 
-Switch to the Files pane on the bottom right:
+Switch to the Output pane on the bottom right:
 
 ```{r}
 #| echo: false
 knitr::include_graphics("getting-started/images/bottom_right_window.png")
 ```
 
-The Files tab, within the Files pane, displays your computer's file system. When you create a project later, this tab will automatically show the contents of your project's folder. 
+The Files tab, within the Output pane, displays your computer's file system. When you create a project later, this tab will automatically show the contents of your project's folder. 
 
 <!-- DK: Perfect place for a More Details box. -->
 
