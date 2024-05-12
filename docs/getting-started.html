@@ -417,11 +417,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><em>Install the package</em>: This is like installing an app on your phone. Most packages are not installed by default when you put R and RStudio on your computer. Thus if you want to use a package for the first time, you need to install it. Once you’ve installed a package, you likely won’t install it again unless you want to update it to a newer version.</p></li>
 <li><p><em>Load the package</em>: “Loading” a package is like opening an app on your phone. Packages are not loaded by default when you start RStudio. You need to load each package you want to use every time you restart RStudio.</p></li>
 </ol>
-<p>Just for this chapter, execute this command in your R Console.</p>
+<p>Just for this chapter, execute this command in your R Console, unless you are working on Posit Cloud.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">"pkgType"</span> <span class="ot">=</span> <span class="st">"binary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This helps to ensure that package installation will go more smoothly.</p>
+<p>This helps to ensure that package installation will go more smoothly. Again, it is not necessary on Posit Cloud.</p>
 <p>Let’s <em>install</em> a useful package. At the Console pane within RStudio, type:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

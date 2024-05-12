@@ -127,7 +127,7 @@ knitr::include_graphics("getting-started/images/install_vs_load.jpg")
 
 2.  *Load the package*: "Loading" a package is like opening an app on your phone. Packages are not loaded by default when you start RStudio. You need to load each package you want to use every time you restart RStudio.
 
-Just for this chapter, execute this command in your R Console.
+Just for this chapter, execute this command in your R Console, unless you are working on Posit Cloud.
 
 ```{r}
 #| eval: false
@@ -135,7 +135,7 @@ Just for this chapter, execute this command in your R Console.
 options("pkgType" = "binary")
 ```
 
-This helps to ensure that package installation will go more smoothly.
+This helps to ensure that package installation will go more smoothly. Again, it is not necessary on Posit Cloud.
 
 Let's *install* a useful package. At the Console pane within RStudio, type:
 
