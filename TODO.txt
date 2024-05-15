@@ -2,6 +2,20 @@
 
 Change 2023 to 2024 everywhere.
 
+
+Using brms. But! Use it alone in the first 4 chapters of its use. Then, start using it with tidymodels, and then show more tidymodels.
+
+Had some annoying problems with cmath error in using brms. Seemed like Rcpp package was not installed in such a way that brms could find some of the necessary header files. Looks like the cause was renv, because the issue disappeared once I got rid of it. Since I don't expect to collaborate on the Primer anytime soon, there is no real cost.
+
+
+## Plan
+
+Given that the course is two weeks away, we need to start to make some choices. Here is my current thinking:
+
+The RCM and probability chapters are good. 
+
+
+
 We need at least one time series forecasting chapter: https://otexts.com/fpp3/. Looks like brms has some simple time series models which will work well. Goal is to do something simple enough that a student who picks a simple time series data set can do at least a basic arima or whatever. As long as the brms works the same, and allows making a forecast, we are OK. Univariate only, of course. Should add the example data set to primer.data.
 
 There are real issues with our chapter names. Do we mention the number of parameters? Whether causal or predictive? The distribution of the dependent variable?

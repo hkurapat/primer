@@ -11,9 +11,6 @@ library(gtsummary)
 library(patchwork)
 ```
 
-<!-- Basic plan is to first show the default brm. The model looks good for estimating $\rho$, and in fact matches what the PDF says. But when we try to use the model for prediction, it does poorly, because it things that biden is continuous rather than 0/1. pp_check shows this! So, we know to fix the model. Then we change the family to Bernoulli. Looks better! But how should we handle the link function. -->
-
-<!-- Should we have more than one question at the start, or just show all the cool questions we can answer at the end? -->
 
 <!-- Another paragraph or two of discussion about the final posterior. How do we use it? Within what range would you offer 50/50 odds that the true percentage lies? (use quantile(0.25, 0.75). Area under the curve? Explain clearly how that 26% is calculated. What is post_dist? What does it mean? How can I use it? Maybe show it sorted? Add some code comments. -->
 
@@ -211,6 +208,7 @@ Given that the polling problem is conceptually similar to the beads-in-an-urn pr
 <!-- DK: I tried to have this be a character variable named bead with values red and white. But I could not get brms to give me predictions which were red and white. So, I figure that, if we can only get 0/1 predictions, we should give it 0/1 input data. Still need to explore this. How does brms handle multinomial models? -->
 
 ```{r}
+#| code-fold: false
 poll_data <- tibble(biden = c(rep(1, 655), 
                               rep(0, 904)))
 
@@ -220,23 +218,26 @@ slice_sample(poll_data, n = 10)
 First, calculate the mean. This is our estimate of the center of the posterior distribution for $\rho$, the unknown proportion of the voters who support Biden.
 
 ```{r}
+#| code-fold: false
 mean(poll_data$biden)
 ```
 
 42% of the sample support Biden. Second, calculate the standard error of this estimate, by taking the standard deviation of the data and dividing it by the square root of the number of observations.
 
 ```{r}
+#| code-fold: false
 sd(poll_data$biden) / sqrt(length(poll_data$biden))
 ```
 
 The standard error is about 1.25%. This suggests that a 95% confidence interval for the true value of $\rho$ would be:
 
 ```{r}
+#| code-fold: false
 c(mean(poll_data$biden) - 2 * sd(poll_data$biden) / sqrt(length(poll_data$biden)),
   mean(poll_data$biden) + 2 * sd(poll_data$biden) / sqrt(length(poll_data$biden)))
 ```
 
-The margin of error, which is another term for two times the standard error, is about 2.5%. This is less than the value of 3.5% given in the pdf. The reason for the difference involves all the technical adjustments which YouGov needs to make to their estimate. We ignore those problems and so our value is too small. 
+The margin of error, which is another term for two times the standard error, is about 2.5%. This is less than the value of 3.5% given in the pdf. The reason for the difference involves all the technical adjustments which YouGov needs to make to their estimate. We ignore those problems and so our value is probably too small. 
 
 <!-- DK: Discuss how sloppy we are with language. -->
 
@@ -255,13 +256,14 @@ $$
 
 There are generally two parts for a statistical model: *family* and *link function*. The family is the probability distribution which generates the randomness in our data. The link function is the mathematical formula which *links* our data to the unknown parameters in the probability distribution. We will be reviewing these concepts over and over again in the rest of the *Primer*, so don't worry if things are a little unclear right now.
 
-<!-- DK: Is the above correct? Could we explain it better? Maybe use multiple link functions in this chapter? -->
+<!-- DK: Is the above correct? Could we explain it better? Maybe use multiple link functions in this chapter? Should we show the linear model math first? -->
 
 ### Models
 
 Load the [**brms**](https://paul-buerkner.github.io/brms/) package:
 
 ```{r}
+#| code-fold: false
 #| message: false
 library(brms)
 ```
@@ -272,16 +274,15 @@ The **brms** package provides a user-friendly interface to work with the statist
 
 The key function in the **brms** package is `brm()`. 
 
-<!-- DK: How do you get rid of all the output? Should we specify a seed? -->
-
 ```{r}
-fit_1 <- brm(formula = biden ~ 1,
-             data = poll_data)
+#| code-fold: false
+fit_gauss <- brm(formula = biden ~ 1,
+                data = poll_data)
 ```
 
 Notes:
 
-* `brm()` produces a great deal of output, as you can see above. This is useful if there is some sort of problem. But, most of the time, we don't care. So we suppress the output in the rest of the *Primer*.
+* `brm()` produces a great deal of output, as you can see above. This is useful if there is some sort of problem. But, most of the time, we don't care. So we suppress the output in the rest of the *Primer*, using `refresh = 0` and `silent = 2`.
 
 * We almost always assign the result of a `brm()` call to an object, as here. By convention, the name of that object begins with "fit" because it is a **fit**ted model object. This model was created quickly but larger models take longer. So, we assign the result to an object so we don't need to recreate it.
 
@@ -289,21 +290,33 @@ Notes:
 
 * The second argument to `brm()` is `data`, which is a tibble containing the data used to estimate the model parameters. The variables specified in the `formula` must match the variables in the tibble which is passed in, which is .
 
+* Because the fitting process is random, if we run this code again we will get a (very slightly) different answer. In most applications, the differences are too small to matter. But, they are annoying! So, we use the `seed` argument so that your result will match ours.
+
+
+```{r}
+#| code-fold: false
+fit_gauss <- brm(formula = biden ~ 1,
+                data = poll_data,
+                refresh = 0,
+                silent = 2,
+                seed = 9)
+```
+
 <!-- DK: Given the simple model we use first, maybe we can make the math above simpler first. -->
 
-<!-- * DK: This goes below. The third argument to `brm()` is `family`, which specifies the mathematical structure of the model we are estimating, often including a `link` function. In this case, the family is Bernoulli and the link is logistic, which is termed "logit."  -->
 
 <!-- DK: Need more details on the above! Maybe not use a family the first time, or a model?  -->
 
 Print out the model object.
 
 ```{r}
-fit_1
+#| code-fold: false
+fit_gauss
 ```
 
 There are many details. We will take a first pass here, leaving out elements which we will return to in later chapters. Highlights:
 
-* The "Family" is "gaussian," which is the default value for the `family` argument in `brms()`. In the next example, we will provide the `family` argument explicitly. Gaussian is another term for the normal distribution. This is almost certainly a mistake, but "discovering" this mistake and then fixing it is a useful exercise.
+* The "Family" is "gaussian," which is the default value for the `family` argument in `brms()`. In the next example, we will provide the `family` argument explicitly. Gaussian is another term for the normal distribution. Using "gaussian" is almost certainly a mistake on our part, but "discovering" this mistake and then fixing it is a useful exercise.
 
 * The "Links" are "identity" for both "mu" and "sigma." Recall the the gaussian/normal distribution is specified as $N(\mu, \sigma^2)$ in which $\mu$, or "mu," is the parameter for the mean or center of the distribution and $\sigma$, or "sigma," is the parameter for the standard deviation or spread of the distribution. 
 
@@ -321,7 +334,7 @@ $$ biden_i =  \mu + \epsilon_i $$
 
 with $\epsilon_i \sim N(0, \sigma^2)$. $y_i$ is the height of male $i$. $\mu$ is true proportion of Biden voters. $\epsilon_i$ is the "error term," the difference between the vote of person $i$ and the true proportion of Biden voters. The obvious problem with this is that $\mu$, also called the "Intercept," is about 0.42. The value of `biden` is either `0` or `1`. So, the value of $\epsilon$ is either -0.42 or + 0.58. No other value is possible. But that makes no sense if $\epsilon_i \sim N(0, \sigma^2)$! This will cause problems soon.
 
-* Ignore that Gaussian/Bernoulli issue, we have an "Intercept" (or $\mu$) value of 0.42. Note the complexity involved in even this simple model. We have multiple ways of describing the same concept: the true proportion of Biden voters. First, we have $\rho$, a mathematical symbol associated with Bernoulli models and to which we will return. Second, we have `1`, meaning the symbol in the formula: `biden ~ 1`. This is an "intercept only" model, one with no covariates. Third, we have $\mu$, the standard symbol for the intercept in a intercept-only linear or Gaussian model. Fourth, we have the word "Intercept," as in the printout from the fitted model object. In other words, $\rho$, $1$, $\mu$, and Intercept all refer to the same thing!
+* Ignoring that Gaussian/Bernoulli issue for now, we have an "Intercept" (or $\mu$) value of 0.42. Note the complexity involved in even this simple model. We have multiple ways of describing the same concept: the true proportion of Biden voters. First, we have $\rho$, a mathematical symbol associated with Bernoulli models and to which we will return. Second, we have `1`, meaning the symbol in the formula: `biden ~ 1`. This is an "intercept only" model, one with no covariates. Third, we have $\mu$, the standard symbol for the intercept in a intercept-only linear or Gaussian model. Fourth, we have the word "Intercept," as in the printout from the fitted model object. In other words, $\rho$, $1$, $\mu$, and Intercept all refer to the same thing!
 
 * The "Est.Error" is, more or less, the same thing as the standard error of our 0.42 estimate for the intercept. The full value is 0.0123, which is very close to the value we calculated by hand above.
 
@@ -345,7 +358,7 @@ We can generate a posterior distribution for $\rho$ with:
 ```{r}
 #| code-fold: false
 
-fit_1 |> 
+fit_gauss |> 
   add_epred_draws(newdata = tibble(.rows = 1))
 ```
 
@@ -363,7 +376,7 @@ The resulting tibble includes 4,000 rows, each of which is a draw from the poste
 ```{r}
 #| code-fold: false
 
-fit_1 |> 
+fit_gauss |> 
   add_epred_draws(newdata = tibble(.rows = 1)) |> 
   ggplot(aes(x = .epred)) + 
     geom_histogram(aes(y = after_stat(count/sum(count))),
@@ -378,13 +391,13 @@ fit_1 |>
     theme_classic()
 ```
 
-Even more useful than posteriors of the parameters in the model are predictions we can make with the model. The key function for exploring those predictions is `add_predicted_draws()`. This function behaves similarly to `add_epred_draws()`. In both cases, we need to provide the value for the `newdata` argument, generally a tibble with a column for all the variables used in the fitted model. Again, because this is an intercept-only model, there is no need for columns in the `newdata` tibble. No variables are used in `fit_1`.
+Even more useful than posteriors of the parameters in the model are predictions we can make with the model. The key function for exploring those predictions is `add_predicted_draws()`. This function behaves similarly to `add_epred_draws()`. In both cases, we need to provide the value for the `newdata` argument, generally a tibble with a column for all the variables used in the fitted model. Again, because this is an intercept-only model, there is no need for columns in the `newdata` tibble. No variables are used in `fit_gauss`.
 
 
 
 ```{r}
 #| code-fold: false
-fit_1 |> 
+fit_gauss |> 
   add_predicted_draws(newdata = tibble(.rows = 1))
 ```
 
@@ -395,12 +408,12 @@ A glance at the result shows the problem: `.prediction` takes on a variety of va
 ```{r}
 #| code-fold: false
 
-pp_check(fit_1)
+pp_check(fit_gauss)
 ```
 
-$y$ is the original data. $y_rep$ is a replication of the data, using the `fit_1` model. In other words, we "pretend" that `fit_1` is the true model. We then create 10 versions of the output data, as created by `add_predictive_draws()`, each the same size are our original data, which is 1,559 observations in this case. We then graph both $y$ and the 10 versions of $y_rep$.
+$y$ is the original data. $y_rep$ is a replication of the data, using the `fit_gauss` model. In other words, we "pretend" that `fit_gauss` is the true model. We then create 10 versions of the output data, as created by `add_predictive_draws()`, each the same size are our original data, which is 1,559 observations in this case. We then graph both $y$ and the 10 versions of $y_rep$.
 
-As the graphic makes clear, we have a serious problem. The data, meaning the variable `biden`, which is refered to as $y$ in the plot, is always either 0 or 1, hence the two spikes in the plot. $y_rep$, on the other hand, is a continuous variable with a range of -0.8 to about 1.8. That is a contradiction! If our model were true, then the replicated values --- the posterior predictions --- would look a lot like our original data.
+As the graphic makes clear, we have a serious problem. The data, meaning the variable `biden`, which is referred to as $y$ in the plot, is always either 0 or 1, hence the two spikes in the plot. $y_rep$, on the other hand, is a continuous variable with a range of -0.8 to about 1.8. That is a contradiction! If our model were true, then the replicated values --- the posterior predictions --- would look a lot like our original data.
 
 Sadly, most usage of `pp_check()` does not produce such a clear cut conclusion. We need to decide if $y$ and $y_rep$ are "close enough" that our model can be used as if it were true.
 
@@ -413,9 +426,12 @@ We have discovered that our initial assumption about the correct mathematical fo
 ```{r}
 #| code-fold: false
 #| message: false
-fit_2 <- brm(formula = biden ~ 1,
-             data = poll_data,
-             family = bernoulli())
+fit_bern <- brm(formula = biden ~ 1,
+                data = poll_data,
+                family = bernoulli(),
+                refresh = 0,
+                silent = 2,
+                seed = 12)
 ```
 
 This call to `brm()` is the same as the previous one, except that we have specified the value of the `family` argument as `bernoulli()`. (Note that we can give just the name of the family, which is itself a function, or include the parentheses as in `bernoulli()`. The results are the same.) Recall that the default value of `family` is `gaussian()` or, equivalently, `guassian`.  In a Bernoulli data generating mechanism, we have:
@@ -429,10 +445,10 @@ Consider the fitted object:
 ```{r}
 #| code-fold: false
 
-fit_2
+fit_bern
 ```
 
-The output is, of course, very similar to that for `fit_1`. The "Family" is "bernoulli" rather than "gaussian." The "Links" are "mu = logit" instead of "mu = identity." There is no link for "sigma" because a Bernoulli model has only one parameter. The "Formula," "Data," and "Draws" are the same as before. In order to interpret the Intercept value of -0.32, we need to revisit the concept of a link function.
+The output is, of course, very similar to that for `fit_gauss`. The "Family" is "bernoulli" rather than "gaussian." The "Links" are "mu = logit" instead of "mu = identity." There is no link for "sigma" because a Bernoulli model has only one parameter. The "Formula," "Data," and "Draws" are the same as before. In order to interpret the Intercept value of -0.32, we need to revisit the concept of a link function.
 
 Via my friend Claude, we have:
 
@@ -479,7 +495,7 @@ We can create the entire posterior distribution for $\rho$ using similar code as
 ```{r}
 #| code-fold: false
 
-fit_2 |> 
+fit_bern |> 
   add_epred_draws(newdata = tibble(.rows = 1)) |> 
   ggplot(aes(x = .epred)) + 
     geom_histogram(aes(y = after_stat(count/sum(count))),
@@ -493,12 +509,12 @@ fit_2 |>
     theme_classic()
 ```
 
-If both `fit_1` and `fit_2` produce the same posterior distribution for $\rho$, then who cares which one we use? The answer is that `fit_2` produces reasonable posterior predictions:
+If both `fit_gauss` and `fit_bern` produce the same posterior distribution for $\rho$, then who cares which one we use? The answer is that `fit_bern` produces reasonable posterior predictions:
 
 
 ```{r}
 #| code-fold: false
-fit_2 |> 
+fit_bern |> 
   add_predicted_draws(newdata = tibble(.rows = 1))
 ```
 
@@ -506,7 +522,7 @@ All the values of `.prediction` are either zero or one, as we expect. Consider:
 
 ```{r}
 #| code-fold: false
-pp_check(fit_2, type = "bars")
+pp_check(fit_bern, type = "bars")
 ```
 
 Using `type = "bars"` is a good choice for `pp_check()` when `family` is `bernoulli()`. Note how the 10 replications of $y_rep$ are indistinguishable from the true output values $y$. A good model produces replications, sometimes termed "fake data," which is indistinguishable for the actual data.
@@ -516,7 +532,7 @@ We now have our data generating mechansim:
 
 $$ biden_i  \sim Bernoulli(\rho = 0.42) $$
 
-<!-- broom.mixed::tidy(fit_2) produces ugly stuff here, so maybe don't introduce it now. -->
+<!-- broom.mixed::tidy(fit_bern) produces ugly stuff here, so maybe don't introduce it now. -->
 
 
 ## Temperance
@@ -528,22 +544,20 @@ knitr::include_graphics("other/images/Temperance.jpg")
 
 Courage produced the data generating mechanism. Temperance guides us in the use of the DGM --- or the "model" ---  we have created to answer the questions with which we began. We create posteriors for the quantities of interest. We should be modest in the claims we make. The posteriors we create are never the “truth.” The assumptions we made to create the model are never perfect. Yet decisions made with flawed posteriors are almost always better than decisions made without them.
 
-### The Question
+### Questions and Answers
 
 Recall the question with which we began:
 
 > What are the odds, if we just look at two voters, both will have voted for Biden?
 
-### The Answer
-
 Because the model is a simple Bernoulli, we can actually calculate this by hand. The probability of two Biden supporters is simply the probability that the first person supports Biden, which is 0.42, times the probability that the second person supports Biden, which is also 0.42. $0.42^2 \approx 0.176$. 
 
-Let's use `fit_2` to answer this question with the help of `add_predicted_draws()`. Instead of having just one row in `newdata`, we now have two rows, one for each person for whom we need a posterior.
+Let's use `fit_bern` to answer this question with the help of `add_predicted_draws()`. Instead of having just one row in `newdata`, we now have two rows, one for each person for whom we need a posterior.
 
 ```{r}
 #| code-fold: false
 
-fit_2 |> 
+fit_bern |> 
   add_predicted_draws(newdata = tibble(.rows = 2))
 ```
 
@@ -558,7 +572,7 @@ Let's make two changes to this code. First, we will add a `seed` argument to `ad
 ```{r}
 #| code-fold: false
 
-fit_2 |> 
+fit_bern |> 
   add_predicted_draws(newdata = tibble(.rows = 2), seed = 10) |> 
   select(.row, .draw, .prediction)
 ```
@@ -571,7 +585,7 @@ It is useful to reshape the resulting tibble so that, for each draw of the 4,000
 ```{r}
 #| code-fold: false
 
-fit_2 |> 
+fit_bern |> 
   add_predicted_draws(newdata = tibble(.rows = 2)) |> 
   select(.row, .draw, .prediction) |> 
   pivot_wider(values_from = .prediction, names_from = .row)
@@ -583,7 +597,7 @@ We are back to a tibble of 4,000 rows, meaning that each row is a draw from an u
 ```{r}
 #| code-fold: false
 
-fit_2 |> 
+fit_bern |> 
   add_predicted_draws(newdata = tibble(.rows = 2), seed = 10) |> 
   select(.row, .draw, .prediction) |> 
   pivot_wider(values_from = .prediction, names_from = .row) |> 
@@ -595,7 +609,7 @@ You should be familiar with both `mutate()` and `if_else()`. The code looks ugly
 ```{r}
 #| code-fold: false
 
-fit_2 |> 
+fit_bern |> 
   add_predicted_draws(newdata = tibble(.rows = 2), seed = 10) |> 
   select(.row, .draw, .prediction) |> 
   pivot_wider(values_from = .prediction, names_from = .row) |> 
@@ -624,29 +638,5 @@ Recall that `mean()` coerces `TRUE`/`FALSE` into `1`/`0`, thus allowing us to ea
 
 In this chapter we learned about the core packages for performing Bayesian analysis: **brms** and **tidybayes**. There are other packages for accomplishing these tasks, most famously **rstanarm**, but these are the two we will use in this *Primer*.
 
-There is a truth! There is a true value for $\rho$, the proportion of Biden voters, which we do not know. We want to create a posterior probability distribution which summarizes our knowledge. We care about the posterior probability distribution of $\rho$. The center of that distribution is around the mean (or median) proportion in your sample. The standard distribution of that posterior is, roughly, the standard deviation of the data divided by the square root of our sample size. 
-
-We journey from reality, to our predictions, to the standard error of our predictions, to the posterior probability distribution for $\rho$. This is our sequence:
-
-**$\rho$ (i.e., the truth) $\Rightarrow$ $\hat{\rho}$ (i.e., my estimate) $\Rightarrow$ the standard error of $\hat{\rho}$ (i.e., black box of math mumbo jumbo and computer simulation magic) $\Rightarrow$ our posterior probability distribution for $\rho$ (i.e., our beliefs about the truth).**
-
-This journey shows how our beliefs about the truth develop through our work. We begin with $\rho$; $\rho$ is the truth, the true but unknown value we are estimating. $\hat{\rho}$ is our estimate for $\rho$. There can be millions and millions of $\hat{\rho}$'s. Next, we must estimate the standard error of our estimates (our $\hat{\rho}$'s) to account for the uncertainty of our predictions. Finally, we create a posterior probability distribution for $\rho$. This distribution is used to answer any questions about $\rho$. 
-
-
-### Other highlights
-
-- Standard error is just a fancy term for your uncertainty about something you don't know. Standard error $\approx$ our (uncertain) beliefs.
-
-- Larger sample sizes $\implies$ lower standard errors $\implies$ more accurate estimates.   
-
-- If we could only know two pieces of information from our data, we would need a measure of the **center** of the distribution (like mean or median) and a measure of the **variability** of the distribution (like sd or MAD). 
-
-- The standard error refers to the standard deviation of a sample statistic (also known as a "point estimate"), such as the mean or median. Therefore, the "standard error of the mean" refers to the standard deviation of the distribution of sample means taken from a population. 
-
-- `stan_glm()` can create a joint distribution and then estimate the posterior probability distribution, conditional on the data which was passed in to the data argument. This is a much easier way to create the posterior distribution, and will be explored in more detail in @sec-two-parameters. 
-
-- We use the posterior distribution to answer our questions. 
-
-As we continue our journey, recall the case of Primrose Everdeen and what she represents: no matter how realistic our model is, our predictions are **never certain**.  
 
 

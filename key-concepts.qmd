@@ -125,6 +125,8 @@ Each chapter features all the same sections and sub-sections as we use below. Th
 
 Once we have our question, we can start with the Cardinal Virtues. Each section begins with a one sentence summary about the component steps of the relevant virtue. These will, obviously, be highly similar from chapter to chapter. But that is OK! We want to reinforce the steps in the path over and over again.
 
+No battle plan survives first contact with the enemy intact. The same applies to questions and the data we use to answer them. Our questions evolve as our analysis continues. Ultimately, we can only answer some questions with the data we have. Those questions may be close to the one that we started with, but they will rarely be identical.
+
 ### Wisdom
 
 > Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of validity, as to whether or not we can (reasonably!) assume that the two come from the same population.
