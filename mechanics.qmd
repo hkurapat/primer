@@ -24,9 +24,9 @@ It is often convenient to transform a predictor variable so that our model makes
 
 ### Centering
 
-Recall our model of `income` as a function of `age`.
+Consider a model of `income` as a function of `age`.
 
-$$ y_i = \beta_0  + \beta_1 age_i + \epsilon_i$$
+$$ income_i = \beta_0  + \beta_1 age_i + \epsilon_i$$
 
 <!-- DK: Drop broom.mixed? -->
 
@@ -51,7 +51,10 @@ library(broom.mixed)
 
 fit_1 <- brm(formula = income ~ age, 
              data = trains,
-             family = gaussian())
+             family = gaussian(),
+             silent = 2,
+             refresh = 0,
+             seed = 45)
 
 fixef(fit_1)
 ```
@@ -69,7 +72,10 @@ trains_2 <- trains |>
 
 fit_1_c <- brm(formula = income ~ c_age, 
                data = trains_2,
-               family = gaussian())
+               family = gaussian(),
+               silent = 2,
+               refresh = 0,
+               seed = 16)
 
 fixef(fit_1_c)
 ```
@@ -88,7 +94,10 @@ trains_3 <- trains |>
 
 fit_1_s <- brm(formula = income ~ s_age, 
                data = trains_3,
-               family = gaussian())
+               family = gaussian(),
+               silent = 2,
+               refresh = 0,
+               seed = 16)
 
 fixef(fit_1_s)
 ```
@@ -113,7 +122,10 @@ trains_4 <- trains |>
 
 fit_1_z <- brm(formula = income ~ z_age, 
                data = trains_4,
-               family = gaussian())
+               family = gaussian(),
+               silent = 2,
+               refresh = 0,
+               seed = 16)
 
 fixef(fit_1_z)
 
@@ -184,7 +196,10 @@ Fit and plot a simple linear model:
 #| code-fold: false
 nhanes_1 <- brm(height ~ age,
                 data = no_na_nhanes,
-                family = gaussian())
+                family = gaussian(),
+                silent = 2,
+                refresh = 0,
+                seed = 16)
 
 
 no_na_nhanes |> 
@@ -209,7 +224,10 @@ Adding a quadratic term makes it better. (Note the need for `I()` in creating th
 #| code-fold: false
 nhanes_2 <- brm(height ~ age + I(age^2),
                 data = no_na_nhanes,
-                family = gaussian())
+                family = gaussian(),
+                silent = 2,
+                refresh = 0,
+                seed = 27)
 
 no_na_nhanes |> 
   ggplot(aes(x = age, y = height)) +
@@ -229,7 +247,10 @@ Still, we have not made use of our background knowledge in creating these variab
 #| code-fold: false
 nhanes_3 <- brm(height ~ I(ifelse(age > 18, 18, age)),
                 data = no_na_nhanes,
-                family = gaussian())
+                family = gaussian(),
+                silent = 2,
+                refresh = 0,
+                seed = 87)
 
 
 no_na_nhanes |> 
@@ -318,7 +339,10 @@ set.seed(78)
 #| code-fold: false
 fit_1_model <- brm(att_end ~ treatment + att_start,
                    data = trains,
-                   family = gaussian())
+                   family = gaussian(),
+                   silent = 2,
+                   refresh = 0,
+                   seed = 16)
 
 fixef(fit_1_model)
 ```
@@ -353,7 +377,10 @@ Now, we will look at `income` as a function of `age` and `liberal`, a proxy for 
 #| code-fold: false
 fit_2_model <- brm(income ~ age + liberal,
                    data = trains,
-                   family = gaussian())
+                   family = gaussian(),
+                   silent = 2,
+                   refresh = 0,
+                   seed = 16)
 
 fixef(fit_2_model)
 ```
@@ -400,17 +427,23 @@ Consider two models which explain attitudes to immigration among Boston commuter
 #| code-fold: false
 fit_liberal <- brm(att_end ~ liberal,
                    data = trains,
-                   family = gaussian())
-
+                   family = gaussian(),
+                   silent = 2,
+                   refresh = 0,
+                   seed = 12)
+       
 fixef(fit_liberal)
 ```
 
 
 ```{r}
 #| code-fold: false
-fit_att_start <- brm( att_end ~ att_start,
-                   data = trains,
-                   family = gaussian())
+fit_att_start <- brm(att_end ~ att_start,
+                     data = trains,
+                     family = gaussian(),
+                     silent = 2,
+                     refresh = 0,
+                     seed = 37)
 
 fixef(fit_att_start)
 ```
@@ -429,18 +462,15 @@ trains |>
   mutate(pred_liberal = fitted(fit_liberal)[,"Estimate"]) |> 
   ggplot(aes(x = pred_liberal, y = att_end)) +
     geom_jitter(width = 0.05, height = 0.2, alpha = 0.5) +
+    
+    # Add a red circle where our predictions are most accurate (where the x and y
+    # values are the same, which is where our predictions = the true attitudes).
+    # pch = 1 makes the inside of the point translucent to show the number of
+    # correct predictions.
   
-  # Add a red circle where our predictions are most accurate (where the x and y
-  # values are the same, which is where our predictions = the true attitudes).
-  # pch = 1 makes the inside of the point translucent to show the number of
-  # correct predictions.
+    annotate("point", x = 8, y = 8, size = 20, pch = 1, color = "red") +
+    annotate("point", x = 10, y = 10, size = 20, pch = 1, color = "red") +
   
-  geom_point(aes(x = 8, y = 8), 
-             size = 20, pch = 1, 
-             color = "red") +
-  geom_point(aes(x = 10, y = 10), 
-             size = 20, pch = 1, 
-             color = "red") +
     labs(title = "Modeling Attitude Toward Immigration",
          subtitle = "Liberals are less conservative",
          x = "Predicted Attitude",
