@@ -384,6 +384,8 @@ window.Quarto = {
 <!-- Get rid of list-columns stuff? -->
 <!-- Kant quote is OK, but not great. Would be nicer to start and end with a video, as in Chapters 4 and 6. -->
 <!-- Consider how we might better connect the two model, three model, n model sections to the distribution sections. In all those cases, we are setting up a joint distribution and then marginalizing it (?) to create a conditional distribution, which looks a lot like a simple one dimensional distribution. -->
+<!-- This makes the *dual nature of distributions* more clear. A distribution is the "thing" you see in this plot. A mathematical object with several different parts, including a set of possible values (1 through 6, in this case) and a record of the number of times each value appears. A distribution is *also* the simple vector of numbers we used to create this plot. -->
+<!-- In general, we travel back-and-forth between *distribution as a thing* and *distribution as a vector of draws* from the thing, depending on what we are trying to accomplish. -->
 <blockquote class="blockquote">
 <p>The usual touchstone of whether what someone asserts is mere persuasion or at least a subjective conviction, i.e., firm belief, is betting. Often someone pronounces his propositions with such confident and inflexible defiance that he seems to have entirely laid aside all concern for error. A bet disconcerts him. Sometimes he reveals that he is persuaded enough for one ducat but not for ten. For he would happily bet one, but at ten he suddenly becomes aware of what he had not previously noticed, namely that it is quite possible that he has erred. -— Immanuel Kant, <em>Critique of Pure Reason</em></p>
 </blockquote>
@@ -430,23 +432,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="fcdgovefic" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fcdgovefic table {
+<div id="iglyshyetp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iglyshyetp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fcdgovefic thead, #fcdgovefic tbody, #fcdgovefic tfoot, #fcdgovefic tr, #fcdgovefic td, #fcdgovefic th {
+#iglyshyetp thead, #iglyshyetp tbody, #iglyshyetp tfoot, #iglyshyetp tr, #iglyshyetp td, #iglyshyetp th {
   border-style: none;
 }
 
-#fcdgovefic p {
+#iglyshyetp p {
   margin: 0;
   padding: 0;
 }
 
-#fcdgovefic .gt_table {
+#iglyshyetp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -472,12 +474,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#fcdgovefic .gt_caption {
+#iglyshyetp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fcdgovefic .gt_title {
+#iglyshyetp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -489,7 +491,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#fcdgovefic .gt_subtitle {
+#iglyshyetp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -501,7 +503,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#fcdgovefic .gt_heading {
+#iglyshyetp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -513,13 +515,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fcdgovefic .gt_bottom_border {
+#iglyshyetp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fcdgovefic .gt_col_headings {
+#iglyshyetp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -534,7 +536,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fcdgovefic .gt_col_heading {
+#iglyshyetp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -554,7 +556,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#fcdgovefic .gt_column_spanner_outer {
+#iglyshyetp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -566,15 +568,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#fcdgovefic .gt_column_spanner_outer:first-child {
+#iglyshyetp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fcdgovefic .gt_column_spanner_outer:last-child {
+#iglyshyetp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fcdgovefic .gt_column_spanner {
+#iglyshyetp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -586,11 +588,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#fcdgovefic .gt_spanner_row {
+#iglyshyetp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fcdgovefic .gt_group_heading {
+#iglyshyetp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -616,7 +618,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#fcdgovefic .gt_empty_group_heading {
+#iglyshyetp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -631,15 +633,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#fcdgovefic .gt_from_md > :first-child {
+#iglyshyetp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fcdgovefic .gt_from_md > :last-child {
+#iglyshyetp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fcdgovefic .gt_row {
+#iglyshyetp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -658,7 +660,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#fcdgovefic .gt_stub {
+#iglyshyetp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -671,7 +673,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fcdgovefic .gt_stub_row_group {
+#iglyshyetp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -685,15 +687,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#fcdgovefic .gt_row_group_first td {
+#iglyshyetp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fcdgovefic .gt_row_group_first th {
+#iglyshyetp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fcdgovefic .gt_summary_row {
+#iglyshyetp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -703,16 +705,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fcdgovefic .gt_first_summary_row {
+#iglyshyetp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fcdgovefic .gt_first_summary_row.thick {
+#iglyshyetp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fcdgovefic .gt_last_summary_row {
+#iglyshyetp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -722,7 +724,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fcdgovefic .gt_grand_summary_row {
+#iglyshyetp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -732,7 +734,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fcdgovefic .gt_first_grand_summary_row {
+#iglyshyetp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -742,7 +744,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#fcdgovefic .gt_last_grand_summary_row_top {
+#iglyshyetp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -752,11 +754,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fcdgovefic .gt_striped {
+#iglyshyetp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fcdgovefic .gt_table_body {
+#iglyshyetp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -765,7 +767,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#fcdgovefic .gt_footnotes {
+#iglyshyetp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -779,7 +781,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fcdgovefic .gt_footnote {
+#iglyshyetp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -788,7 +790,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fcdgovefic .gt_sourcenotes {
+#iglyshyetp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -802,7 +804,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#fcdgovefic .gt_sourcenote {
+#iglyshyetp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -810,63 +812,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#fcdgovefic .gt_left {
+#iglyshyetp .gt_left {
   text-align: left;
 }
 
-#fcdgovefic .gt_center {
+#iglyshyetp .gt_center {
   text-align: center;
 }
 
-#fcdgovefic .gt_right {
+#iglyshyetp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fcdgovefic .gt_font_normal {
+#iglyshyetp .gt_font_normal {
   font-weight: normal;
 }
 
-#fcdgovefic .gt_font_bold {
+#iglyshyetp .gt_font_bold {
   font-weight: bold;
 }
 
-#fcdgovefic .gt_font_italic {
+#iglyshyetp .gt_font_italic {
   font-style: italic;
 }
 
-#fcdgovefic .gt_super {
+#iglyshyetp .gt_super {
   font-size: 65%;
 }
 
-#fcdgovefic .gt_footnote_marks {
+#iglyshyetp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fcdgovefic .gt_asterisk {
+#iglyshyetp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fcdgovefic .gt_indent_1 {
+#iglyshyetp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fcdgovefic .gt_indent_2 {
+#iglyshyetp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fcdgovefic .gt_indent_3 {
+#iglyshyetp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fcdgovefic .gt_indent_4 {
+#iglyshyetp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fcdgovefic .gt_indent_5 {
+#iglyshyetp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

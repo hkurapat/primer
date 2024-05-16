@@ -57,11 +57,17 @@ Wisdom requires the creation of a Preceptor Table, an examination of our data, a
 
 *Causal or predictive model*: In this case, the model is clearly causal, so our Preceptor Table will have two columns for the potential outcomes. If all you need to know to answer the question is the outcome under one value of the treatment, then the model is predictive, even if there is a treatment.
 
-*Outcome*: A person's attitude toward immigration is the outcome. When we take a look at the questions we discover a flaw exists. The individual that asked this question did not tell us where or when we are looking at these questions. It is important to understand where and when that we are answering these questions because otherwise our data could be not accurately applied to the whole country, nation, or specific state. Therefore, by diving deeper within these questions we are able to accurately answer our question with the population that it refers to. For the questions that we have at hand we will be talking about all the adults in July 1, 2012 at the location of Chicago, Illinois which will allow us to answer the questions more accurately. 
+*Outcome*: A person's attitude toward immigration is the outcome. 
 
-*Units*: Our units for this scenario would be individuals because the questions are about the attributes of unique people at the station.
+For the questions that we have at hand we will be talking about all the adults in July 1, 2012 at the location of Chicago, Illinois which will allow us to answer the questions more accurately. 
+
+*Units*: Our units for this scenario would be individuals because the questions are about the attributes of unique people at the station. The question does not specify which individuals we are interested in, so assume it is adults in Chicago.
 
 *Treatment*: In any causal model, there is at least one covariate which is defined as the "treatment," something which we can manipulate so that some units receive one version and other units get a different version. A "treatment" is just a covariate which we *could* manipulate, at least in theory. In this case, the treatment is exposure to Spanish-speakers. Units can either be exposed, i.e., they receive the "treatment," or they can not be exposed, i.e., they receive the "control." 
+
+*Moment in Time*: We are interested in the causal effect today, in the year 2024.
+
+Again, some of these details were not indicated in the original question. We almost always have to enage in a dialogue with whomever asked that question.
 
 Our Preceptor Table:
 
@@ -91,28 +97,30 @@ tibble(ID = c("1", "2", "...", "10", "11", "...", "N"),
 
 <!-- DK: Make the explanation of the stars a footnote. -->
 
-Starred values were not observed in the experiment. That is, Person 10 received the treatment at, afterwards, had a value of 5 for her attitude toward immigration. We don't know, we can't know, what her attitude would have been if she had received control instead. But, with the tools of inference, we can estimate what that value *would have been* if she has, in fact, received control.
+Starred values were not observed in the experiment. That is, Person 10 received the treatment and, afterwards, had a value of 5 for her attitude toward immigration. We don't know --- we can't know --- what her attitude would have been if she had received control instead. But, with the tools of inference, we can estimate what that value *would have been* if she had, in fact, received control.
 
-A Preceptor Table is the smallest possible table with rows and columns such that, if there is no missing data, all our questions are easy to answer. To answer questions --- like "What is the average treatment effect, of exposing people to Spanish-speakers, on their attitudes toward immigration?" or "What is the largest causal effect which still has a 1 in 10 chance of occurring?" --- we need a row for every individual.
+A Preceptor Table is the smallest possible table with rows and columns such that, if there is no missing data, all our questions are easy to answer. To answer questions about the average treatment effect, of exposing people to Spanish-speakers, on their attitudes toward immigration, we need a row for every adult in Chicago in 2024.
 
-###Exploratory Data Analysis
+### Exploratory Data Analysis
 
 Recall the discussion from @sec-rubin-causal-model. @enos2014 randomly placed Spanish-speaking confederates on nine train platforms around Boston, Massachusetts. The data that we want to analyze consists of the attitude toward immigration after the experiment is complete (`att_end`) and the exposure to Spanish-speakers (`treatment`) of each individual on these train platforms. 
 
 ```{r}
+#| code-fold: false
 trains |>
   select(att_end, treatment)
 ```
 
-The `treatment` can either be "Treated" or "Control" which are the two factors that may influence `att_end`. Participants were asked three questions about immigration issues, each of which allowed for an answer indicated strength of agreement on a scale form 1 to 5, with higher values for `att_end` indicating more agreement with conservative viewpoints.
+The `treatment` can either be "Treated" or "Control" which are the two factors that may influence `att_end`. Participants were asked three questions about immigration issues, each of which allowed for an answer indicating strength of agreement on a scale form 1 to 5, with higher values for `att_end` indicating more agreement with conservative viewpoints.
 
 ```{r}
+#| code-fold: false
 trains |>
   select(att_end, treatment) |>
   summary()
 ```
 
-The data include information about each respondent's sex, political affiliations, age, income and so on. `treatment` indicates whether a subject was in the control or treatment group. The key outcomes are their attitudes toward immigration both before (`att_start`) and after (`att_end`) the experiment.
+The data include information about each respondent's sex, political affiliations, age, income and so on. `treatment` indicates whether a subject was in the control or treatment group. The key outcome is their attitude toward immigration after the experiment: `att_end`.
 
 `summary()` shows us what the different values of `att_end` and `treatment` are because it is a factor. The range for `att_end` seems reasonable.
 
@@ -130,15 +138,20 @@ trains |>
     theme_classic()
 ```
 
-We can never know the true average attitude of all treated in the population. But we can calculate a probability distribution for each parameter. As we can see with the plot above, the treated individuals tend to be more conservative. When compared with the controlled population, the treated individuals tend to show more signs of being conservative after having the treatment applied to them.
+When compared with individuals in the control group, the treated individuals seem more conservative.
 
-###Validity
+### Validity
 
-Now the *assumption of validity* may not hold due to the possibility of when our data was collected. For example if the data was collected in the morning for our Preceptor Table the people that are interviewed may be more grumpy when going to work. Compared to the possibility of our other data being collected at night when the people are more relaxed coming back from work to go home.
+Validity concerns the relationship between the columns in the Preceptor Table and the data. Are they similar enough that we can "stack" one on top of the other in order to create a Population Table?
 
-Another case where the *assumption of validity* may not hold because the variables may be too different from each other within the data and the Preceptor Table as the columns are not similar enough between each other. One possible reason we may consider is that the Preceptor Table is all the people in Chicago in 2024. However, the data we have involves train commuters in the Boston area in 2012.
+`att_end`, the outcome measure in our data is fairly clear measure of one's attitude toward immigration. But is that *exactly* what we care about in the Chicago of 2024? Probably not. Politics in America has changed a great deal, not least with the Trump presidency. The phrases used in the 2012 survey do not mean the same thing today as they meant then. The aspects of immigration policy which we are most interested in have changed. But in a conflict between the data and the Preceptor Table, the latter must adjust because we can't (easily) change the data.
 
-While the assumption can prove validity to be wrong, overall, the assumption of validity seems reasonable enough. `att_end` and `treatment` are similar enough between to the underlying concepts in the Preceptor Table and the data that we can "stack" them on top of each other. We can assume that both are drawn from the same population.
+`treatment`, the treatment variable in our data, involves Spanish-speakers on commuter train platforms. Is that what we are proposing to do in Chicago in 2024? Probably not! And, even if we actually attempted to use that treatment today, we would never be able to replicate it exactly, not just because we almost certainly could not get the same Spanish-speakers to come to Chicago. And, even if we did, they would be older, and different in other ways. Outside of scientific experiments, it is almost never the case that the treatment variable in the data will perfectly match the treatment variable in the Preceptor Table. 
+
+As always, we face a choice. We can either give up on the analysis --- and this is often the correct decision! --- or we can adjust the meaning of the columns in the Preceptor Table so that they are "close enough" to the data that validity holds. You won't be surprised to see that we choose the option behind Door #2!
+
+
+> *Using data from a 2012 survey of Boston-area commuters, we seek to measure the causal effect of exposure to Spanish-speakers on attitudes toward immigration among adults in Chicago and similar cities in 2024.*
 
 ## Justice
 
@@ -148,11 +161,11 @@ While the assumption can prove validity to be wrong, overall, the assumption of 
 knitr::include_graphics("other/images/Justice.jpg")
 ```
 
-The four concerns of Justice remain the same: Population Table, stability, representativeness, and unconfoundedness.
+The four concerns of Justice remain the same: the Population Table, stability, representativeness, and unconfoundedness.
 
 ### Population Table
 
-After assuming validity, we can now create our Population Table. Recall that every row from both the Preceptor Table and the data is included in the Population Table, along with all the rows from the underlying population from which we assume that both the Preceptor Table and the data were drawn. The Population Table includes rows from three sources: the **Preceptor Table**, the **actual data**, and all *other* members of the population.
+After assuming validity, we can now create our Population Table. Recall that every row from both the Preceptor Table and the data is included in the Population Table (at least at the start), along with all the rows from the underlying population from which we assume that both the Preceptor Table and the data were drawn. The Population Table includes rows from three sources: the **Preceptor Table**, the **actual data**, and all *other* members of the population.
 
 ```{r}
 #| echo: false
@@ -194,13 +207,42 @@ Our year within the Population table is an example of the moment in time.
 
 Our **actual data** rows contain the information that we *do* know. These rows contain entries for both our covariates *and* the outcomes. In this case, the actual data comes from a study conducted on train commuters around Boston, MA in 2012, so our city entries for these rows will read "Boston, MA" and our year entries of these rows will read "2012".
 
+Does the Population Table have to include all the rows in the data? No! For example, if our question is just about attitudes toward immigration among men, we might delete all the rows with female respondents from the data before constructing the Population Table. 
+
+Each row in the Population Table represents a unique ID/time combination. We rarely specify the Population Table exactly. For example, does the Population Table extend to 2010? Or 2050? Does it include Los Angeles? How about London? None of those questions have to be answered for us to make progress. As long as there is an underlying population from which we may assume that the rows in both the data and the Preceptor Table have been drawn, we can proceed.  
+
 ### Stability
 
-Consider the **stability** of our model for the relationship between `att_end` and `treatment` between 2012 and 2024. Is this relationship from 2012, four years before Donald Trump's election as president, still the same? While we might not know for sure, we have to consider this in order to continue and make assumptions with our data. For our purposes, we will consider the relationship to be stable. Even though we know that there may have been some changes, we will consider the model to be the same in both years.
+If the assumption of stability holds, then, first, the relationships between the columns in 2012 is the same as the relationships across the entire population and, second,  that the same applies to the relationships between the columns in 2024.  
+
+Recall the underlying logic of every data science analysis. We start wih data that was collected at a specific moment in time. We estimate a relationship between the variables, in this case between `treatment` and `att_end`. We then *assume* that this relationship holds *beyond* the time period of the data itself. First, we assume that the relationship holds across a larger time period than just the moment corresponding to our data gathering. Second, we then assume that this relationship also holds for the moment in time corresponding to our Preceptor Table.
+
+The problem is that there are lots of reasons for thinking that stability does not hold in this case because US politics has changed so much since 2012, especially in regard to immigration. Immigration is much more salient now then it was then, so it is likely that the effect of the treatment might be very different today. However, if we don't assume stability then we can't use data from 2012 to inform our inferences about 2024. So, we assume it.
+
 
 ### Representativeness
 
-**Representativeness** has to do with how well our sample represents the larger population we are interested in generalizing to. We might run into two potential problems: Is our data representative of the population? Is our Preceptor Table representative of the population? Let's say that even though Boston is different from Chicago, we considered Boston to be perfectly representative of Chicago. Great, but this 2012 data could still not be representative. This is because there could be bias within those who are chosen to give the survey, in that the commuters who are approached and receive the surveys may not be random or representative. When we deal with representativeness we deal with two primary concerns: the generic concern and the variable concern. In our previous section we talked about the generic concern which applies the same within this situation. Our second level of concern deals with the variable concern which in this case deals with an individual's attitude and treatment. In our data, we aren't able to consider all of the ages of individuals within the broader population. For example: there are no ages less than 20, meaning we do represent a large amount of our broader population. What if the individuals giving out the surveys were younger and also tended to choose people to approach with a survey that were similar in age to them?  A scenario like this could end up overestimating younger train commuters in the population, which could influence our answers to any of our questions. Specifically, when considering the relationship between `att_end` and `treatment`, this could influence the results of the model because younger individuals may have similar attitudes on immigration.
+**Representativeness**, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows from that moment in time. The second is between our data and the other rows from that moment. 
+
+Stability looks across time periods. Representativeness looks within time periods.
+
+Our Preceptor Table is not a random draw from the underlying population today. We only care about Chicago (and not any other city). If the Preceptor Table is a random draw, then, by definition, it should be representative of the underlying population, at least within a given time period. Just because something is true across all cities in 2024 does not guarantee that it is true in Chicago. In fact, it is only true if Chicago is representative of the other 2024 rows from the population.
+
+A similar set of issues apply to our data. Ideally, our data would be a random sample from the underlying population in 2012. But it isn't! We only have data from Boston, and not any other city. We need to assume that the rows we have from Boston are *representive* of the other rows in the population from 2012.  
+That assumption seems pretty extreme! For example, the survey respondents were all suburban commuters on train platforms. There are numerous ways in which such a sample is unrepresentative of both Boston adults as a whole, much less all the adults in other cities. 
+
+### Unconfoundedness
+
+Unconfoundedness means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. A model is *confounded* if this is not true.
+
+Since treatment was assigned at random, we can be fairly confident that treatment assignment is idependent of everything. This is the beauty of randomization and the key reason why randomized control trials are the gold standard in statistics for drawing conclusions about causal effects. 
+
+Putting these concerns together, we should add at least one sentence about these concerns to the analysis summary:
+
+> *Using data from a 2012 survey of Boston-area commuters, we seek to measure the causal effect of exposure to Spanish-speakers on attitudes toward immigration among adults in Chicago and similar cities in 2024. There is some concern that the relationship has changed since our data was collected.*
+
+Is that the only reasonable concern? No! There are always numerous problems with any data analysis because our assumptions are never true. Honesty compels us to highlight at least one such problem anytime we present our results. Which one to highlight and how to do so are matters of professional judgment. 
+
 
 ## Courage
 
@@ -220,9 +262,6 @@ with $\epsilon_i \sim N(0, \sigma^2)$. $y_i$ is the attitude toward immigration 
 
 
 
-<!-- . $\mu$ is the average height of all males in the population. $\epsilon_i$ is the "error term," the difference between the height of male $i$ and the average height of all males. -->
-
-
 
 ### Models
 
@@ -231,20 +270,21 @@ We create our fitted model in the usual way.
 
 ```{r}
 #| code-fold: false
-fit_1 <- brm(formula = att_end ~ treatment,
+fit_gauss <- brm(formula = att_end ~ treatment,
              data = trains,
              family = gaussian(),
+             silent = 2,
+             refresh = 0,
              seed = 9)
 ```
 
-Because the default value of `family` is `guassian()`, we could have left out this part of the function call and gotten the same result. We add the `seed` argument to ensure that the fitted object is identical whenever we (or you) run this code. Recall that there is randomness in the modeling fitting process. This rarely affects the substative results. But it is often convenient to be able to replicate a given model exactly. Using `seed` accomplishes this goal. The number 9 is arbitrary, other than being my lucky number.
+Because the default value of `family` is `guassian()`, we could have left out this part of the function call and gotten the same result. We add the `seed` argument to ensure that the fitted object is identical whenever we (or you) run this code. Recall that there is randomness in the modeling fitting process. This rarely affects the substantive results. But it is often convenient to be able to replicate a given model exactly. Using `seed` accomplishes this goal. The number 9 is arbitrary, other than being my lucky number. As usual, we use `silent = 2` and `refresh = 0` to turn off all the annoying messages. 
 
 
 ```{r}
 #| code-fold: false
-fit_1
+fit_gauss
 ```
-
 
 
 The math for this model is exactly the same as the math for the predictive model in the first part of this chapter, although we change the notation a bit for clarity.
@@ -255,11 +295,13 @@ where \n $$control_i \in \{0,1\}$$ \n $$\epsilon_i \sim N(0, \sigma^2)$$
 
 Nothing has changed, except for the meaning of the data items and the interpretations of the parameters. Let's take a look at the parameters of the situation which plays a role alongside the mathematics to create the fitted model.
 
-On the left-hand side we still have the outcome, $y$, however in this case, this is a person's attitude toward immigration after the experiment is complete. $y$ takes on integer values between 3 and 15 inclusive. On the right-hand side, the part contained in the model will consist of the terms $\beta_0$ and $\beta_1$. These two terms stand for the intercept and the control and as before, each term consists of a parameter and a data point. $\beta_0$ is the average attitude toward immigration for treated individuals. $\beta_1$ is the difference between the attitude toward immigration for treated individuals --- those exposed to Spanish-speakers --- and the average attitude toward immigration for control individuals --- those not exposed to Spanish-speakers. These are both our parameters. The $x$'s are our explanatory variables and take the values 1 or 0. In other words, these are binary variables and are mutually exclusive.The last part, $\epsilon$ ("epsilon"), represents the part that is not explained by our model and is called the error term. It is simply the difference between the outcome and our model predictions. In our particular case, this includes all factors that have an influence on someone's attitude toward immigration but are not explained by treatment status. We assume that this error follows a normal distribution with an expected value of 0.
+On the left-hand side we still have the outcome, $attitude_i$, however in this case, this is a person's attitude toward immigration after the experiment is complete. $attitude_i$ takes on integer values between 3 and 15 inclusive. On the right-hand side, the part contained in the model will consist of the terms $\beta_0$ and $\beta_1$. For the most part, we don't care about the values of parameters in our models. We care about the answers to our questions and the uncertainty associated therewith.
 
--   Note that the formula applies to everyone in the population, not just the 115 people for whom we have data. The index $i$ does not just go from 1 through 115. It goes from 1 through $N$, where $N$ is the number of individuals in the population. Conceptually, everyone has an `att_end` under treatment and under control.
+But in this simple model, the parameters also have a substantive interpretation. $\beta_0$ is also the average attitude toward immigration for treated individuals. $\beta_1$ is the difference between the attitude toward immigration for treated individuals --- those exposed to Spanish-speakers --- and the average attitude toward immigration for control individuals --- those not exposed to Spanish-speakers. These are both our parameters. $control_i$ is our explanatory variable and takes the value 0 or 1. In other words, this is a *binary* variable.The last part, $\epsilon$ ("epsilon"), represents the part that is not explained by our model and is called the error term. It is simply the difference between the outcome and our model predictions. In our particular case, this includes all factors that have an influence on someone's attitude toward immigration but are not accounted for by treatment status. We assume that this error follows a normal distribution with an expected value of 0.
 
--   The small $i$'s are an index for the data set. It is equivalent to the "ID" column in our Preceptor Table and simply states that the outcome for person $i$ is explained by the predictor variables ($treatment$ and $control$) for person $i$, along with an error term.
+-   Note that the formula applies to everyone in the population, not just the 115 people for whom we have data. This is what the stability assumption buys us. The index $i$ does not just go from 1 through 115. It goes from 1 through $N$, where $N$ is the number of individuals in the population. Conceptually, everyone has an `att_end` under both treatment and under control, even we can only ever observe one of these.
+
+-   The small $i$'s are an index for the data set. It is equivalent to the "ID" column in our Preceptor Table and simply states that the outcome for person $i$ is explained by the predictor variables ($treatment_i$ and $control_i$) for person $i$, along with an error term.
 
 
 ### Data Generating Mechanism
@@ -267,32 +309,85 @@ On the left-hand side we still have the outcome, $y$, however in this case, this
 Recall the Preceptor Table and the units from the beginning. We are concerned with three main ideas from the Preceptor Table: our units (individuals at the train station), our outcome (individual's attitude toward immigration) covariates (the treatment that each individual received). 
 
 
-With the help of the data generating mechanism that we have created from our fitted model we can fill in the missing values to the Preceptor Tables. We use the data generating mechanism as the last step of **courage** as it allows us to analyze and view our fitted model's data.
+With the help of the data generating mechanism that we have created from our fitted model we can fill in the missing values to the Preceptor Tables. We use the data generating mechanism as the last step of *Courage* as it allows us to analyze and view our fitted model's data.
 
-Now that we have tested our fitted model through the model checks we can view all of our data with the table that we have below:
+Although we can review the posteriors of the parameters by looking at `fit_gauss`, it can bse useful to present the numbers in a formatted table. 
 
 ```{r}
 #| echo: false
-gtsummary::tbl_regression(fit_1, intercept = TRUE) 
+gtsummary::tbl_regression(fit_gauss, intercept = TRUE) 
 ```
 
-`(Intercept)` corresponds to 10.0 which is $\beta_0$. As always, R has, behind the scenes, estimated the entire posterior probability distribution for $\beta_0$. But the basic print method for these objects can't show the entire distribution, so it gives us summary numbers: the median and the MAD SD. Speaking roughly, we would expect about 95% of the values in the posterior to be within two MAD SD's of the median. In other words, we are 95% confident that the true, but unknowable, average attitude toward immigration among the Treated in the population to be between 9.2 and 10.8. `treatmentControl` corresponds to $\beta_1$. The `treatmentControl` estimate is -1.5 attitudes younger as the difference between "control" and "treated" has been shown to be younger regarding attitudes for the median values.
+`(Intercept)` corresponds to 10.0 which is $\beta_0$. As always, R has, behind the scenes, estimated the entire posterior probability distribution for $\beta_0$. We are 95% confident that the true, but unknowable, average attitude toward immigration among the Treated in the population to be between 9.2 and 11. The posterior of $b_1$, which is the coefficient of $control_i$, is centered around -1.5 with a 95% confidence interval between -2.5 and -0,5.
 
 Up until now, we have used the Bayesian interpretation of "confidence interval." This is also the intuitive meaning which, outside of academia, is almost universal. There is a truth out there. We don't know, and sometimes can't know, the truth. A confidence interval, and its associated confidence level, tells us how likely the truth is to lie within a specific range. If your boss asks you for a confidence interval, she almost certainly is using this interpretation.
 
-But, in contemporary academic research, the phrase "confidence interval" is usually given a "Frequentist" interpretation. (The biggest divide in statistics is between Bayesians and Frequentist interpretations. The Frequentist approach, also known as "Classical" statistics, has been dominant for 100 years. Its power is fading, which is why this textbook uses the Bayesian approach.) For a Frequentist, a 95% confidence interval means that, if we were to apply the procedure we used in an infinite number of future situations like this, we would expect the true value to fall within the calculated confidence intervals 95% of the time. In academia, a distinction is sometimes made between *confidence intervals* (which use the Frequentist interpretation) and *credible intervals* (which use the Bayesian interpretation). We won't worry about that difference in this *Primer*.
+But, in contemporary academic research, the phrase "confidence interval" is usually given a "Frequentist" interpretation. (The biggest divide in statistics is between Bayesians and Frequentists. The Frequentist approach, also known as "Classical" statistics, has been dominant for 100 years. Its power is fading, which is why this textbook is Bayesian.) For a Frequentist, a 95% confidence interval means that, if we were to apply the procedure we used in an infinite number of future situations like this, we would expect the true value to fall within the calculated confidence intervals 95% of the time. In academia, a distinction is sometimes made between *confidence intervals* (which use the Frequentist interpretation) and *credible intervals* (which use the Bayesian interpretation). We won't worry about that difference in this *Primer*.
 
-In summary: we model the attitude of individuals at a train station as a linear function of the treatment each individual receives. We find that the individuals that receive any Spanish speaking treatment are about half a standard deviation more in attitude than the attitude for individuals that did not receive Spanish speaking treatment meaning that the individuals that received Spanish speaking treatment ended up being more conservative.
+
 
 ### Testing
 
 ```{r}
 #| code-fold: false
 #| message: false
-pp_check(fit_1)
+pp_check(fit_gauss)
 ```
 
-Our graph in the darker blue represents our actual data. As we can see with the lighter blue graph, our fitted model is able to generate a distribution of the data that is similar when compared to the actual data. However, the "fake-data" produces some values for `att_end` which are *impossible.* We know from the survey details that the lowest possible value for `att_end` is 3 and the highest is 15. But, with our "fake-data" simulations, we see several values that are less than 3 and great than 15. This is a flaw in our model. Is it a serious flaw? That is tough to decide. But, for now, we lack the necessary skills to improve the model enough to remove it. In later sections, we will be able to understand new techniques to improve our fitted models that tackles these kinds of flaws.
+Our graph in the darker blue represents the actual data. As we can see with the lighter blue graph, our fitted model is able to generate a distribution of the data that is similar when compared to the actual data. However, the "fake-data" produces some values for `att_end` which are *impossible.* We know from the survey details that the lowest possible value for `att_end` is 3 and the highest is 15. But, with our "fake-data" simulations, we see several values that are less than 3 and great than 15. Consider:
+
+```{r}
+#| code-fold: false
+#| message: false
+pp_check(fit_gauss, type = "hist", bins = 12)
+```
+
+Again, we see the problem. The true data is always within the range of 3 to 15. Our simulated (or "fake") data sometimes strays outside this range, even if not very far and not very often. Is it a serious flaw? That is tough to decide. 
+
+Let's explore the issue by first changing `treat_end` from a continuous to an integer variable, which is probably more correct, and then re-estimate the model. Besides changing `att_end` to an integer, we also change the family to `poisson()` since this is the recommended model for dealing with "count" data 
+
+```{r}
+#| code-fold: false
+
+trains2 <- trains |> 
+  mutate(att_end = as.integer(att_end))
+
+fit_poisson <- brm(formula = att_end ~ treatment,
+                   data = trains2,
+                   family = poisson(),
+                   silent = 2,
+                   refresh = 0,
+                   seed = 9)
+```
+
+Because the poisson mode has a very different structure, the parameter estimates do not have a simple interpretation.
+
+```{r}
+#| code-fold: false
+
+fit_poisson
+```
+
+The posterior predictive check looks better:
+
+```{r}
+pp_check(fit_poisson, type = "hist", bins = 19)
+```
+
+The check is better but not perfect. We still have predicted values that are below three or above 15, even though that is impossible. A common approach at this point would be to use the negative binomial family. We save that exercise for another day.
+
+The purpose of the virtue of *Courage* is to create a data generating mechanism which is consistent with our understanding of how the world works and not-contradicted by he data which we have. Although there are some problems with `fit_gauss`, it is good enough for our purposes. So, the DGM looks like:
+
+$$ attitude_i = 10 - 1.5  * control_i + \epsilon_i$$
+
+where \n $$control_i \in \{0,1\}$$ and $$\epsilon_i \sim N(0, 2.8^2)$$.
+
+We can now add a sentence which describes our model to our summary of the entire project.
+
+> *Using data from a 2012 survey of Boston-area commuters, we seek to measure the causal effect of exposure to Spanish-speakers on attitudes toward immigration among adults in Chicago and similar cities in 2024. There is some concern that the relationship has changed since our data was collected. We modeled `att_end`, a summary measure of attitude toward immigration measured on a 3 to 15 integer scale, as a linear function of treatment.*
+
+Obviously, a single extra sentence can only tell the reader so much. The important thing to note is that we are showing you a recipe for doing data science and for communicating your results. That communication will always include at least one sentence about the form of your model, the outcome variable and the covariates and/or treatments. 
+
 
 ## Temperance
 
@@ -302,31 +397,33 @@ Our graph in the darker blue represents our actual data. As we can see with the 
 knitr::include_graphics("other/images/Temperance.jpg")
 ```
 
-**Courage** gave us the fitted model. With **Temperance** we can create posteriors of the quantities of interest. We should be modest in the claims we make.
+**Courage** gave us the data generating mechanism. With **Temperance** we can create posteriors of the quantities of interest. We should be modest in the claims we make.
 
 ### Questions and Answers
 
-Recall the question:
+Recall the original question:
 
 > *What is the average treatment effect, of exposing people to Spanish-speakers, on their attitudes toward immigration?*
+
+We have already clarified that the question refers to residents of Chicago (and similar cities) in 2024. 
 
 Use `add_epred_draws()` as usual. Creating the value for the `newdata` argument is tricky since we need to construct the `treatment` variable by hand. Even though `treatment` is a factor variable within `trains`, we can get away with using a simple character variable since either version would be transformed into a 0/1 variable by `add_epred_draws()`.
 
 ```{r}
 #| code-fold: false
 
-fit_1 |> 
+fit_gauss |> 
   add_epred_draws(
     newdata = tibble(treatment = c("Treated", "Control")))
 ```
 
-We have 8,000 rows. The first four thousand rows are draws from the first row of `newdata`, meaning `treatment` equals `"Treated"`. The next four thousand rows are draws for `treatment = "Treated"`. Mapping this tibble is easy because of its tidy structure.
+We have 8,000 rows. The first four thousand rows are draws from the first row of `newdata`, meaning `treatment` equals `"Treated"`. The next four thousand rows are draws for `treatment = "Control"`. Mapping this tibble is easy because of its tidy structure.
 
 
 ```{r}
 #| code-fold: false
 
-fit_1 |> 
+fit_gauss |> 
   add_epred_draws(
     newdata = tibble(treatment = c("Treated", "Control"))) |> 
   ggplot(aes(x = .epred, fill = treatment)) +
@@ -347,7 +444,7 @@ Even better, we can do the calculation on the individual rows of the posterior d
 ```{r}
 #| code-fold: false
 
-fit_1 |> 
+fit_gauss |> 
   add_epred_draws(
     newdata = tibble(treatment = c("Treated", "Control"))) |> 
   pivot_wider(id_cols = .draw, names_from = treatment, values_from = .epred)
@@ -359,7 +456,7 @@ The resulting table has only 4,000 rows because we have put the posteriors for T
 ```{r}
 #| code-fold: false
 
-fit_1 |> 
+fit_gauss |> 
   add_epred_draws(
     newdata = tibble(treatment = c("Treated", "Control"))) |> 
   pivot_wider(id_cols = .draw, names_from = treatment, values_from = .epred) |> 
@@ -384,11 +481,9 @@ trains |>
   summarize(mean(att_start), .by = party)
 ```
 
-So the causal effect of hearing Spanish-speakers is about the same as 2/3s of the distance between Republicans and Democrats. This is not a small effect! To summarize our conclusion:
+So the causal effect of hearing Spanish-speakers is about the same as 2/3s of the distance between Republicans and Democrats. This is not a small effect! To summarize our analysis:
 
-
-*Using data from a 2012 survey of Boston-area commuters, we seek to understand the causal effect of a one-time exposure to Spanish-speakers on attitudes toward immigration in Chicago and similar cities today. The magnitude of the effect may have changed in the 10+ years since the data was collected. We modeled `att_end`, a summary measure of attitude toward immigration measured on a 3 to 15 integer scale, as a linear function of treatment. Treated individuals, those exposed to Spanish-speakers in a commuter rail platform, become more conservative on immigration issues. The average causal effect was about 1.5, with a 95% confidence interval of 0.5 to 2.5. That 1.5 effect is about 2/3s of the distance between the average attitudes of Republicans and Democrats.* 
-
+> *Using data from a 2012 survey of Boston-area commuters, we seek to measure the causal effect of exposure to Spanish-speakers on attitudes toward immigration among adults in Chicago and similar cities in 2024. There is some concern that the relationship has changed since our data was collected. We modeled `att_end`, a summary measure of attitude toward immigration measured on a 3 to 15 integer scale, as a linear function of treatment. The average causal effect of treatment was about 1.5, with a 95% confidence interval of 0.5 to 2.5. Hearing Spanish-speakers made people more conservative with regard to immigration. That 1.5 effect is about 2/3s of the distance between the average attitudes toward immigration of Republicans versus Democrats.* 
 
 
 ### Humility

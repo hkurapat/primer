@@ -262,19 +262,25 @@ tibble(source = c("...", "Data", "Data", "...",
 
 #### Stability
 
-If the assumption of stability holds, then the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn. Each Stability section begins with a version of this definition. We then discuss at least two examples of why stability might *not* hold in this case. These examples are almost always connected to the passage of time. Whatever the relationship between political ideology and income that might have held in 2012, when we gathered our data, might not be true either before or afterwards. Provide specific speculations about what might have changed in the world. 
+If the assumption of stability holds, then the relationships between the columns in the Population Table is the same *across time*. First, the relationship among columns from the same moment in time as the data is the same as the relationship among columns for the entire table. Second, the relationship among columns from the same moment in time as the Preceptor Table is the same as the relationship among columns for the entire table. 
+
+Stability, if true, allows is us to go from the data to the population, and from the population to the Preceptor Table.
+
+We discuss at one example of why stability might *not* hold in this case. These examples are almost always connected to the passage of time. Whatever the relationship between political ideology and income that might have held in 2012, when we gathered our data, might not be true either before or afterwards. Provide specific speculations about what might have changed in the world. 
 
 Regardless of those concerns, we always conclude that, although the assumption of stability might not hold perfectly, the world is probably stable enough over this time period to make inference possible.
 
 #### Representativeness
 
-As with all our assumptions, we always begin by restating the definition. **Representativeness**, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows.
+As with all our assumptions, we always begin by restating the definition. **Representativeness**, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows from the same moment in time. The second is between our data and the other rows of equivalent vintage.
 
-We mention specific examples of two potential problems. First, is our data representative of the population? Never! Not least because it is virtually impossible to do random sampling across time. Second, are the rows associated with the Preceptor Table representative of the population? Again, No! 
+Stability looks across time periods. Reprentativeness looks within time periods.
+
+We mention specific examples of two potential problems. First, is our data representative of the population? Rarely! Second, are the rows associated with the Preceptor Table representative of the population? Again, almost never! 
 
 Provide specific examples of how a lack of representativeness might be a problem, one large enough to affect your ability to answer the question.
 
-But, to continue the analysis, we always assume/pretend that the rows from both the data and the Preceptor Table are representative *enough* of the larger population from which both are drawn.
+But, to continue the analysis, we always assume/pretend that the rows from both the data and the Preceptor Table are representative *enough* of the relevant time period from within the larger population from which both are drawn.
 
 #### Unconfoundedness
 

@@ -80,6 +80,11 @@ library(primer.data)
 
 <!-- Consider how we might better connect the two model, three model, n model sections to the distribution sections. In all those cases, we are setting up a joint distribution and then marginalizing it (?) to create a conditional distribution, which looks a lot like a simple one dimensional distribution. -->
 
+<!-- This makes the *dual nature of distributions* more clear. A distribution is the "thing" you see in this plot. A mathematical object with several different parts, including a set of possible values (1 through 6, in this case) and a record of the number of times each value appears. A distribution is *also* the simple vector of numbers we used to create this plot. -->
+
+<!-- In general, we travel back-and-forth between *distribution as a thing* and *distribution as a vector of draws* from the thing, depending on what we are trying to accomplish. -->
+
+
 
 > The usual touchstone of whether what someone asserts is mere persuasion or at least a subjective conviction, i.e., firm belief, is betting. Often someone pronounces his propositions with such confident and inflexible defiance that he seems to have entirely laid aside all concern for error. A bet disconcerts him. Sometimes he reveals that he is persuaded enough for one ducat but not for ten. For he would happily bet one, but at ten he suddenly becomes aware of what he had not previously noticed, namely that it is quite possible that he has erred. -— Immanuel Kant, *Critique of Pure Reason*
 

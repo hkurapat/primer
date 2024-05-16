@@ -16,7 +16,7 @@ library(gtsummary)
 
 In @sec-probability, we learned how to do inference. We created a joint distribution of the models under consideration and the data which might be observed. Once we observed the data, we went from the joint distribution to the conditional distribution of possible models given the data which we did, in fact, observe. That conditional distribution, suitably normalized, was our posterior probability distribution over the space of possible models. With that distribution, we can answer any question we might (reasonably) ask.
 
-<!-- Need a gif here. Like Hunger Games in Chapter 6. -->
+<!-- Need a gif here. Like Hunger Games in Sampling chapter. -->
 
 *But what a pain in the ass that whole process was!* Do professionals actually go through all those steps every time they work on a data science problem? No! That would be absurd. Instead, professionals use standard tools which, in an automated fashion, take care of those steps, taking us directly from assumptions and data to the posterior:
 
@@ -351,7 +351,10 @@ Because we are estimating a linear model, we begin with:
 
 fit_1 <- brm(formula = height ~ 1,
              data = ch4,
-             family = gaussian())
+             family = gaussian(),
+             silent = 2,
+             refresh = 0,
+             seed = 12)
 ```
 
 Note:
