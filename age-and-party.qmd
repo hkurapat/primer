@@ -31,7 +31,7 @@ library(brms)
 library(tidybayes)
 ```
 
-We are concerned with these three packages because we are exploring the `trains` dataset which exists within the **primer.data** package. We use the **brms** package to build Bayesian models. ("brms" stands for **B**ayesian **r**egression **m**odel**s**.) The **tidybayes** packages makes working the fitted models easierr. As usual, we use the **tidyverse** package.
+We are concerned with these three packages because we are exploring the `trains` data set which exists within the **primer.data** package. We use the **brms** package to build Bayesian models. ("brms" stands for **B**ayesian **r**egression **m**odel**s**.) The **tidybayes** packages makes working the fitted models easierr. As usual, we use the **tidyverse** package.
 
 In this chapter, we are going to ask a series of questions involving train commuters' ages, party affiliations, incomes, and political ideology, as well as the causal effect of exposure to Spanish-speakers on their attitude toward immigration. These questions will pertain to all train commuters in the US today. For a refresher on this data, refer to @sec-rubin-causal-model.
 
@@ -312,13 +312,13 @@ trains |>
              fitted = md("**Fitted**"),
              residual = md("**Residual**")) |>
   fmt_number(columns = c(fitted), decimals = 2) |> 
-  tab_header("8 Observations from Trains Dataset") |>
+  tab_header("8 Observations from Trains Data Set") |>
   cols_align(align = "center", columns = everything())
 ```
 
  
 
-If we take a look at the the observations above we see that the model only produces one fitted value for each condition. This table just takes a sample of the 8 individuals from the entire dataset to capture the wide range of residuals. When we take a look at the residuals to the right hand side, we can view the error at hand. When we have the negative values that means that the age should be younger, and positive values means that the age should be higher. For the most part, the median age seems to be somewhat accurate as most of the values are within a reasonable range of the median age for both the Democrats and the Republicans. We can get a better picture of the unmodeled variation in our sample if we plot these three variables for all the individuals in our data.
+If we take a look at the the observations above we see that the model only produces one fitted value for each condition. This table just takes a sample of the 8 individuals from the entire data set to capture the wide range of residuals. When we take a look at the residuals to the right hand side, we can view the error at hand. When we have the negative values that means that the age should be younger, and positive values means that the age should be higher. For the most part, the median age seems to be somewhat accurate as most of the values are within a reasonable range of the median age for both the Democrats and the Republicans. We can get a better picture of the unmodeled variation in our sample if we plot these three variables for all the individuals in our data.
 
 The following three histograms show the actual outcomes, fitted values, and residuals of all people in `trains`:
 
@@ -441,7 +441,7 @@ pp <- posterior_predict(fit_1, newdata = new_obs) |>
 head(pp, 10)
 ```
 
-The result are draws from the posterior distribution of the age of a Democrat. It is important to understand that this is not a concrete person from the `trains` dataset - the algorithm in `posterior_predict()` simply uses the existing data from `trains` to create the DGM, which is then used to sample from the posterior distribution of $D_age$.
+The result are draws from the posterior distribution of the age of a Democrat. It is important to understand that this is not a concrete person from the `trains` data set - the algorithm in `posterior_predict()` simply uses the existing data from `trains` to create the DGM, which is then used to sample from the posterior distribution of $D_age$.
 
 ```{r}
 pp |> 

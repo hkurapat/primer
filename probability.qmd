@@ -771,7 +771,7 @@ The *empirical distribution* involves using data from the National Health and Nu
 
 ```{r}
 #| echo: false
-# Use nhanes dataset for this exercise, filter for adult and male.
+# Use nhanes data set for this exercise, filter for adult and male.
 
 nhanes |>
   filter(sex == "Male", age >= 18) |>

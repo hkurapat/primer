@@ -262,7 +262,7 @@ Congrats! You've linked your `productivity` repo to RStudio. Note that Github wi
 
 ### Updating `.gitignore` {-}
 
-The first thing you should always do when working with a new repo is updating the `.gitignore` file. You can open this file from the bottom right window under the Files tab. This file includes all the files that you don't want to be uploaded to GitHub. This can come in handy when you are working with big datasets or files with private information. In our case, we want to add the `productivityl.Rproj` file to the `.gitignore` list. 
+The first thing you should always do when working with a new repo is updating the `.gitignore` file. You can open this file from the bottom right window under the Files tab. This file includes all the files that you don't want to be uploaded to GitHub. This can come in handy when you are working with big data sets or files with private information. In our case, we want to add the `productivityl.Rproj` file to the `.gitignore` list. 
 
 ```{r, echo = FALSE}
 knitr::include_graphics("other/images/rproj_git.png")

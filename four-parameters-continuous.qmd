@@ -56,7 +56,7 @@ To create the Preceptor Table we first determine its components.
 
 *Treatment*: Because this is not a causal model, there is no reason to refer to any of the specific covariates as a "treatment." Again, a treatment is simply a covariate that we could, at least in theory, vary in order to answer the question. In this case, we don't care about the effect of the treatment. We are simply building a predictive model for the subset of the population who have been exposed to Spanish-speakers. 
 
-*Covariates*: Besides exposure to Spanish-speakers, it is not clear what other covariates might be useful in answering the question. We need to explore our dataset to see what we have available. (Hint: We have a variable about political orientation, `liberal`,  which will prove useful.)
+*Covariates*: Besides exposure to Spanish-speakers, it is not clear what other covariates might be useful in answering the question. We need to explore our data set to see what we have available. (Hint: We have a variable about political orientation, `liberal`,  which will prove useful.)
 
 *Moment in Time*: The question does not indicate *when* these attitudes will be measured. Time for more conversation. Assume that the client is interested in the present day, 2024.
 
@@ -182,7 +182,7 @@ Is that data believable? Maybe? One could imagine that `att_end` would be predic
 
 ### Validity
 
-*Validity* is the consistency, or lack thereof, in the columns of your dataset and the corresponding columns in your Preceptor Table. In order to consider the two datasets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*, which is the first step in Justice.
+*Validity* is the consistency, or lack thereof, in the columns of your data set and the corresponding columns in your Preceptor Table. In order to consider the two data sets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*, which is the first step in Justice.
 
 The original question refers to "conservative attitude toward immigration" without any clear discussion about what that phrase means. There are many ways to measure a person's attitude toward immigration. There are many possible definitions of "conservative" which might be applied to these measures. For the assumption of *validity* to hold, the relevant variable in our data must be close enough to the variable descripion implicit in our question.
 
@@ -213,7 +213,7 @@ knitr::include_graphics("other/images/Justice.jpg")
 
 ### Population Table
 
-*The population is not the set of units for which we have data.* That is the dataset. The population is the larger --- potentially much larger --- set of units about whom we want to make inferences. *The parameters in our models refer to the population, not to the dataset.*
+*The population is not the set of units for which we have data.* That is the data set. The population is the larger --- potentially much larger --- set of units about whom we want to make inferences. *The parameters in our models refer to the population, not to the data set.*
 
 
 
@@ -327,7 +327,7 @@ liberal_true_att_slope <- att_start
 All we've done here is extracted the values for our intercepts and slopes, and named them to be separated into two groups. This allows us to create a `geom_abline` object that takes a unique slope and intercept value, so we can separate the `liberalTRUE` and `liberalFALSE` observations. 
 
 ```{r}
-# From the dataset trains, use att_start for the x-axis and att_end for
+# From the data set trains, use att_start for the x-axis and att_end for
 # the y-axis with color as liberal. This will split our data into two color
 # coordinates (one for liberal = TRUE and one for liberal = FALSE)
 

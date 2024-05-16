@@ -173,7 +173,7 @@ Most experienced data scientists would use the log of `rv13` rather than the raw
 
 * Follow the conventions in your field. If everyone does X, then you should probably do X, unless you have a good reason not to. If you do have such a reason, explain it prominently.
 
-* Most professionals, when presented with data distributed like `rv13`, would take the log. Professionals hate (irrationally?) outliers. Any transformation which makes a distribution look more normal is generally considered a good idea.
+* Most professionals, when presented with data distributed like `rv13`, would take the log. Professionals (irrationally?) hate outliers. Any transformation which makes a distribution look more normal is generally considered a good idea.
 
 Many of these suggestions apply to every aspect of the modeling process.
 
@@ -319,11 +319,11 @@ When deciding which variables to keep or discard in our models, our advice is to
 
 * Your boss/client/reviewer/supervisor wants to include X.
 
-Let's use the `trains` dataset to evaluate how helpful certain variables are to creating an effective model, based on the guidelines above.
+Let's use the `trains` data set to evaluate how helpful certain variables are to creating an effective model, based on the guidelines above.
 
-### Variables in the `trains` dataset
+### Variables in the `trains` data set
 
-To look at our recommendations in practice, let's focus on the `trains` dataset. The variables in `trains` include `gender`, `liberal`, `party`, `age`, `income`, `att_start`, `treatment`, and `att_end`. Which variables would be best to include in a model? 
+To look at our recommendations in practice, let's focus on the `trains` data set. The variables in `trains` include `gender`, `liberal`, `party`, `age`, `income`, `att_start`, `treatment`, and `att_end`. Which variables would be best to include in a model? 
 
 ### att_end ~ treatment + att_start
 
@@ -398,7 +398,7 @@ First, let's interpret our coefficients.
 
 It is important to note that we are not looking at a causal relationship for either of these explanatory variables. We are noting the differences between two groups, without considering causality. This is known as an *across unit* comparison. When we compare *across unit* we are not looking at a causal relationship. 
 
-When comparing `liberalTRUE` with our `(Intercept)`, recall that the `Intercept` is calculating income for the case where `liberal == FALSE`. As we can see, then, the coefficient for `liberalTRUE`, `r scales::comma(round(fixef(fit_2_model)["liberalTRUE", "Estimate"], 1))`, shows that the  liberals in our dataset make less on average than non-liberals. The coefficient is large relative to the `Intercept` and, with rough mental math, we see that the 95% confidence interval excludes 0. Therefore, `liberal` is a helpful variable.
+When comparing `liberalTRUE` with our `(Intercept)`, recall that the `Intercept` is calculating income for the case where `liberal == FALSE`. As we can see, then, the coefficient for `liberalTRUE`, `r scales::comma(round(fixef(fit_2_model)["liberalTRUE", "Estimate"], 1))`, shows that the  liberals in our data set make less on average than non-liberals. The coefficient is large relative to the `Intercept` and, with rough mental math, we see that the 95% confidence interval excludes 0. Therefore, `liberal` is a helpful variable.
 
 The variable `age`, however, does not appear to have a meaningful impact on our `Intercept`. The coefficient of `age` is low and the 95% confidence interval *does not* exclude 0. 
 
@@ -633,7 +633,7 @@ The most sensible way to test a model is to use the model to make predictions an
 
 When thinking of generalization to new data, it is important to consider what is relevant new data in the context of the modeling problem. Some models are used to predict the future and, in those cases, we can wait and eventually observe the future and check how good our model is for making predictions. Often models are used to obtain insight to some phenomenon without immediate plan for predictions. This is the case with our Boston commuters example. In such cases, we are also interested whether learned insights from on part of the data generalizes to other parts of the data. For example, if we  know how political attitudes informed future immigration stances in *Boston commuters*, we may want to know if those same conclusions could generalize to train commuters in different locations. 
 
-Even if we had detected clear problems with our predictions, this would not necessarily mean that there is anything wrong with the model as fit to the original dataset. However, we would need to understand it further before generalizing to other commuters. 
+Even if we had detected clear problems with our predictions, this would not necessarily mean that there is anything wrong with the model as fit to the original data set. However, we would need to understand it further before generalizing to other commuters. 
 
 Often, we would like to evaluate and compare models without waiting for new data. One can simply evaluate predictions on the observed data. But since these data have already been used to fit the model parameters, these predictions are optimistic.
 
@@ -658,7 +658,7 @@ For our purposes, we will be performing cross validation using leave-one-out (LO
 
 <!-- This is a rough draft. Everything needs to be expanded, but the basics are here. --> 
 
-To compare models using leave-one-out (LOO) cross validation, one piece of data is excluded from our model. The model is then re-fit and makes a prediction for the missing piece of data. The difference between the predicted value and the real value is calculated. This process is repeated for every row of data in the dataset. 
+To compare models using leave-one-out (LOO) cross validation, one piece of data is excluded from our model. The model is then re-fit and makes a prediction for the missing piece of data. The difference between the predicted value and the real value is calculated. This process is repeated for every row of data in the data set. 
 
 In essence: *One piece of data is excluded from our model, the model is re-fit, the model attempts to predict the value of the missing piece, we compare the true value to the predicted value, and we assess the accuracy of our model's prediction.* This process occurs for each piece of data, allowing us to assess the model's accuracy in making predictions.
 
@@ -686,7 +686,7 @@ What does any of this mean?
 
 For our purposes, we mostly need to focus on `elpd_loo`. Let's explain, in more depth, what this information means. 
 
-Basically, when we run `loo()`, we are telling R to take a piece of data out of our dataset, re-estimate all parameters, and then predict the value for the missing piece of data. The value for `elpd_loo()` is based off of how *close* our estimate was to the truth. Therefore, `elpd_loo()` values inform us of the effectiveness of our model in predicting data it has not seen before. 
+Basically, when we run `loo()`, we are telling R to take a piece of data out of our data set, re-estimate all parameters, and then predict the value for the missing piece of data. The value for `elpd_loo()` is based off of how *close* our estimate was to the truth. Therefore, `elpd_loo()` values inform us of the effectiveness of our model in predicting data it has not seen before. 
 
 <!-- DK: Is this true? I don't think so! The ideal value for `elpd_loo()` is 0, meaning that our predictions are perfect. This is, of course, not going to be the case. We say this to point out that, the closer our value of `elpd_loo` is to 0, the more effective our model performs. -->
 

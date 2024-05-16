@@ -137,7 +137,7 @@ ch7_a |>
 
 For now, we leave in multiple observations for a single person.
 
-First, let's sample from our dataset. 
+First, let's sample from our data set. 
 
 ```{r}
 #| echo: false
@@ -151,7 +151,7 @@ ch7_a |>
   slice_sample(n = 5)
 ```
 
-As we might expect, `sex` is most often "Male". To be more precise in inspecting our data, let's `skim()` the dataset. 
+As we might expect, `sex` is most often "Male". To be more precise in inspecting our data, let's `skim()` the data set. 
 
 ```{r}
 skim(ch7_a)
@@ -215,7 +215,7 @@ Younger candidates tend to live much longer than older candidates after election
 
 ### Validity
 
-Is the meaning of the columns consistent, i.e., can we assume validity? That is the heart of validity. To put it simply, does the column for lifespan in our Preceptor Table equate to the column for lifespan from our dataset. Again, we look to the source of our data: @barfort2020. 
+Is the meaning of the columns consistent, i.e., can we assume validity? That is the heart of validity. To put it simply, does the column for lifespan in our Preceptor Table equate to the column for lifespan from our data set. Again, we look to the source of our data: @barfort2020. 
 
 The collection of birth and death dates for *winning* candidates is well documented. The birth and death dates for losing candidates, however, is not as easily gathered. In fact, @barfort2020 had to perform independent research for this information:
 
@@ -297,7 +297,7 @@ Alternatively, if we believe that it is unlikely that our columns are stable, we
 
 ### Representativeness
 
-Is our data representative of the population? *The population is not the set of candidates for which we have data.* That is the dataset. The population is the larger --- potentially much larger --- set of individuals about whom we want to make inferences. *The parameters in our models refer to the population, not to the dataset.*
+Is our data representative of the population? *The population is not the set of candidates for which we have data.* That is the data set. The population is the larger --- potentially much larger --- set of individuals about whom we want to make inferences. *The parameters in our models refer to the population, not to the data set.*
 
 Consider a simple example. Define $\mu$ as the average number of years lived by candidates for governor after Election Day. Can we calculate $\mu$ from our data? No! There are many candidates for governor who are still alive, who are not included in our data even though they are part of the "population" we want to study. $\mu$ can not be *calculated.* It can only be *estimated.*
 
@@ -311,11 +311,11 @@ The truth is: in the social sciences, there is never a perfect relationship betw
 
 Of course, this is not always true. If we wanted to predict lifespans of gubernatorial candidates in the U.S., and our data was from lifespans of presidential candidates in France... we would be better off not making any predictions at all. If the data won't help, don't use the data.
 
-After looking at @barfort2020, the source for our dataset, we see that:
+After looking at @barfort2020, the source for our data set, we see that:
 
 > "We collect data... for all candidates running in a gubernatorial election from 1945 to 2012. We limit attention to the two candidates who received the highest number of votes."
 
-This data is, then, **highly** representative of gubernatorial candidates, as it includes every candidate from 1945 to 2012. However, there is one large caveat: only the two candidates with the most votes are included in the dataset. This is unfortunate, as we would ideally look at all gubernatorial candidates (regardless of votes). Regardless, we still deem the dataset to be representative enough of our larger population. 
+This data is, then, **highly** representative of gubernatorial candidates, as it includes every candidate from 1945 to 2012. However, there is one large caveat: only the two candidates with the most votes are included in the data set. This is unfortunate, as we would ideally look at all gubernatorial candidates (regardless of votes). Regardless, we still deem the data set to be representative enough of our larger population. 
 
 Generally: *if there was no chance that a certain type of person would have been in this experiment, we cannot make an assumption for that person*.
 
@@ -1020,7 +1020,7 @@ Consider the following question:
 
 *Does winning the election affect a candidate's longevity?*
 
-What (imagined) dataset would make all of these questions easy to solve with a little bit of math? Well, we obviously need data on all gubernatorial candidate elections in the United States. We also need to know their dates of birth, age at time of election, age at time of death, and data for age at time of death minus age at time of election. With these pieces of information, we could answer all of our questions with simple math. 
+What (imagined) data set would make all of these questions easy to solve with a little bit of math? Well, we obviously need data on all gubernatorial candidate elections in the United States. We also need to know their dates of birth, age at time of election, age at time of death, and data for age at time of death minus age at time of election. With these pieces of information, we could answer all of our questions with simple math. 
 
 Also, because this is an idealized table, we would know age at time of death assuming victory and age at time of death assuming loss. This would not be possible in the real world due to the Fundamental Problem of Causal Inference --- we cannot observe a unit under two different conditions (both victory and loss).
 
@@ -1150,11 +1150,11 @@ Male candidates who win the election seem to live sightly longer than male candi
 
 ### Validity
 
-A issue that we want to address is the assumption of validity. Do our columns within the Preceptor Table and dataset stay consistent for us to assume validity? To put it simply, do the columns in our Preceptor Table equate to the columns from our dataset. Again, we look to the source of our data: @barfort2020. 
+A issue that we want to address is the assumption of validity. Do our columns within the Preceptor Table and data set stay consistent for us to assume validity? To put it simply, do the columns in our Preceptor Table equate to the columns from our data set. Again, we look to the source of our data: @barfort2020. 
 
-The collection for close races have been calculated by us for all of the candidates. The actual definition of close races for candidates, however, is not gathered. For example, a close race could be different in each state that we are relating to. The close race in our Preceptor Table could be any election that is within 7%, while that may differ within our dataset. 
+The collection for close races have been calculated by us for all of the candidates. The actual definition of close races for candidates, however, is not gathered. For example, a close race could be different in each state that we are relating to. The close race in our Preceptor Table could be any election that is within 7%, while that may differ within our data set. 
 
-This is not nearly as reliable as the data collection for candidates. As the assumption of validity that we have been applying the definition of close race across the board will hold true. Will the same constraints that we applied for close races apply to the dataset's definition? Or the entire population's definition?
+This is not nearly as reliable as the data collection for candidates. As the assumption of validity that we have been applying the definition of close race across the board will hold true. Will the same constraints that we applied for close races apply to the data set's definition? Or the entire population's definition?
 
 The mission of this exploration is to ensure validity as much as possible --- that is, to equate our columns when they are not equated themselves. In this case, because we cannot fix the issues with data collection, we accept that our estimates may be slightly skewed. 
 

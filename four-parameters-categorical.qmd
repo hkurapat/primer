@@ -74,7 +74,7 @@ There were 104,425,014 total votes cast in the 1992 Presidential election. But o
 
 ### EDA
 
-Our data comes from [American National Election Studies](https://electionstudies.org/). The **primer.data** package includes a version of the main dataset with a selection of variables. The full ANES data is much richer than this relatively simple tibble.
+Our data comes from [American National Election Studies](https://electionstudies.org/). The **primer.data** package includes a version of the main data set with a selection of variables. The full ANES data is much richer than this relatively simple tibble.
 
 
 ```{r}

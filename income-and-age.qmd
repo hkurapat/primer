@@ -37,7 +37,7 @@ library(brms)
 library(tidybayes)
 ```
 
-We are concerned with these three packages because we are exploring the `trains` dataset which exists within the **primer.data** package. We use the **brms** package to build Bayesian models. ("brms" stands for **B**ayesian **r**egression **m**odel**s**.) The **tidybayes** packages makes working the fitted models easierr. As usual, we use the **tidyverse** package.
+We are concerned with these three packages because we are exploring the `trains` data set which exists within the **primer.data** package. We use the **brms** package to build Bayesian models. ("brms" stands for **B**ayesian **r**egression **m**odel**s**.) The **tidybayes** packages makes working the fitted models easierr. As usual, we use the **tidyverse** package.
 
 In this chapter, we are going to ask a series of questions involving train commuters' ages, party affiliations, incomes, and political ideology, as well as the causal effect of exposure to Spanish-speakers on their attitude toward immigration. These questions will pertain to all train commuters in the US today. For a refresher on this data, refer to @sec-rubin-causal-model.
 
@@ -239,7 +239,7 @@ The algebra demonstrates that $\beta_1$ is the same for all ages. The difference
 
 Note how careful we are not to imply that increasing age by one year "causes" an increase in income. That is nonsense! *No causation without manipulation.* Since it is impossible to change someone's age, there is only one potential outcome. With only one potential outcome, a causal effect is not defined.
 
-As important as our mathematics is, we need to take a look at the parameters at hand. Looking at our parameters allows us to create fitted model by combining the mathematics and interpretations of the parameters. $\beta_0$ is the difference in expected income between individuals. $\beta_1$ is the average age within all of the people in the dataset. As shown in our model, $\beta_0$ and $\beta_1$ are two terms that allow us to make our model. The second part in the right-hand side, $\epsilon$ ("epsilon"), represents the unexplained part of the outcome and is called the error term. In other words, $\sigma$ is what plays a role with age that is not factored into our model. We assume that this error follows a normal distribution with an expected value of 0 (meaning it is 0 on average) and it is simply the difference between the outcome and our model predictions. Therefore, we have three main parameters: $\beta_0$, $\beta_1$, and $\sigma$ that we will use within this section. 
+As important as our mathematics is, we need to take a look at the parameters at hand. Looking at our parameters allows us to create fitted model by combining the mathematics and interpretations of the parameters. $\beta_0$ is the difference in expected income between individuals. $\beta_1$ is the average age within all of the people in the data set. As shown in our model, $\beta_0$ and $\beta_1$ are two terms that allow us to make our model. The second part in the right-hand side, $\epsilon$ ("epsilon"), represents the unexplained part of the outcome and is called the error term. In other words, $\sigma$ is what plays a role with age that is not factored into our model. We assume that this error follows a normal distribution with an expected value of 0 (meaning it is 0 on average) and it is simply the difference between the outcome and our model predictions. Therefore, we have three main parameters: $\beta_0$, $\beta_1$, and $\sigma$ that we will use within this section. 
 
 #### Fitted Model
 

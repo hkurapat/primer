@@ -169,7 +169,7 @@ This graphic does not tell us as much as we might like. Most residents did not r
 
 ### Validity
 
-Validity is the consistency, or lack there of, in the columns of your dataset and the corresponding columns in your Preceptor Table. In order to consider the two datasets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*, which is the first step in Justice. Consider two counter-arguments to the assumption of validity in this case.
+Validity is the consistency, or lack there of, in the columns of your data set and the corresponding columns in your Preceptor Table. In order to consider the two data sets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*, which is the first step in Justice. Consider two counter-arguments to the assumption of validity in this case.
 
 First, voting in a primary election in 2006 in Michigan is not the same thing as voting in a general election in Texas in 2026. Primary elections are less newsworthy and, usually, less competitive. Our client, the gubernatorial candidate, has already won his primary. The outcome he cares about is voting in a general elections. Treatments which might, or might not, affect participation in a primary are irrelevant. Moreover, the political culture of Texas and Michigan are very different. The meaning and importance of voting is not identical across states, nor over time.
 
@@ -225,9 +225,9 @@ shaming |>
 
 One of the most important components of Wisdom is the concept of the "population". Recall the questions we asked earlier:
 
-As we have discussed before, the population *is not* the set of people, or voters, for which we have data. This is the dataset. Nor is it the set of voters about whom we would like to have data. Those are the rows in the ideal Preceptor Table. The population is the larger --- potentially much larger --- set of individuals which include both the data we have and the data we want. Generally, the population will be much larger than either the data we have and the data we want.  
+As we have discussed before, the population *is not* the set of people, or voters, for which we have data. This is the data set. Nor is it the set of voters about whom we would like to have data. Those are the rows in the ideal Preceptor Table. The population is the larger --- potentially much larger --- set of individuals which include both the data we have and the data we want. Generally, the population will be much larger than either the data we have and the data we want.  
 
-In this case, we are viewing the data from the perspective of someone running for Governor this year that wants to increase voter turnout. We want to increase turnout **now**, not for people voting in 2006! We also may want to increase turnout in those citizens who are not registered to vote, a group that is excluded from our dataset. Is it reasonable to generate conclusions for this group? Most likely, no. However, we have limited data to work with and we have to determine how far we are willing to generalize to other groups. 
+In this case, we are viewing the data from the perspective of someone running for Governor this year that wants to increase voter turnout. We want to increase turnout **now**, not for people voting in 2006! We also may want to increase turnout in those citizens who are not registered to vote, a group that is excluded from our data set. Is it reasonable to generate conclusions for this group? Most likely, no. However, we have limited data to work with and we have to determine how far we are willing to generalize to other groups. 
 
 It is a judgment call, a matter of Wisdom, as to whether or not we may *assume* that the data we have and the data we want to have (i.e., the ideal Preceptor Table) are drawn from the same population.
 
@@ -335,7 +335,7 @@ This is a good time to consider what it really means to accept that our data is 
 
 * We are running for governor in Texas in the year 2026. In this year and in the United States, we consider sending out a voting reminder postcard to citizens of voting age. Will this reminder encourage voting, and by how much?
 
-Now, let's break down our data from the `shaming` dataset:
+Now, let's break down our data from the `shaming` data set:
 
 * The data was gathered in Michigan prior to the August 2006 primary election. The population for the experiment was 180,002 households in the state of Michigan. The data only included those who *had* voted in the 2004 general election. Therefore, it did not include non-voters. The reminders were mailed to households at random. 
 
@@ -346,7 +346,7 @@ So, how similar are these groups? Let's start with some differences.
 
 Generally: *if there was no chance that a certain type of person would have been in this experiment, we cannot make an assumption for that person*. 
 
-The purpose of this section is to make us think critically about the assumptions we are making and whether those assumptions can be reasonably made. Though we will continue using this dataset in the remainder of the chapter, it is clear that we must make our predictions with caution.  
+The purpose of this section is to make us think critically about the assumptions we are making and whether those assumptions can be reasonably made. Though we will continue using this data set in the remainder of the chapter, it is clear that we must make our predictions with caution.  
 
 ### Functional form
 

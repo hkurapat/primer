@@ -568,7 +568,7 @@ The rows from our data have covariates and two potential outcomes. (By definitio
 
 <!-- Need a gif of three data sources be stacked together, but only if validity is true. -->
 
-**Validity** is the consistency, or lack there of, in the columns of your dataset and the corresponding columns in your Preceptor Table. In order to consider the two datasets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*.
+**Validity** is the consistency, or lack there of, in the columns of your data set and the corresponding columns in your Preceptor Table. In order to consider the two data sets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*.
 
 Consider the potential outcomes: attitude toward immigration under treatment and control. How is this measured? In this case, we use answers to survey questions. Our we going to use the *exact* same questions in 2024 as were used in our data from 2012? Probably not. Even if we used the same wording, will the *meaning* of the words be constant. Almost certainly not! The word "undocumented" could mean something very different in the America before the election of Donald Trump in 2016. Consider the treatment: exposure to Spanish speakers on a train platform. The speakers used in 2012 will not be available in 2024 if we were to redo the experiment. 
 
@@ -1022,7 +1022,7 @@ In this example, there is indeed a constant treatment effect for everyone: $+3$.
 
 -   A **Preceptor Table** is a table that includes all rows and columns such that, if no data is missing, it is easy to calculate our quantity of interest. Unfortunately, there is always data missing.
 
--   A **Population Table** has three sources of data: the Preceptor Table, the dataset, and the greater population from which both are drawn.
+-   A **Population Table** has three sources of data: the Preceptor Table, the data set, and the greater population from which both are drawn.
 
 -   A **Potential Outcome** is the outcome for an individual depending on if they receive the treatment or not.
 
@@ -1044,7 +1044,7 @@ A causal effect is the difference between one potential outcome and another. How
 
 A Preceptor Table includes all rows and columns such that, if no data is missing, it is easy to calculate our quantity of interest. Unfortunately, data is always missing in causal models because, at most, we can only observe one *potential outcome* for each unit. The causal effect of a treatment on a single unit at a point in time is the difference between the value of the outcome variable with the treatment and without the treatment. The *Fundamental Problem of Causal Inference* is that it is impossible to observe the causal effect on a single unit. We must make assumptions --- i.e, we must make models --- in order to estimate causal effects.
 
-The Population Table has three sources of data: the Preceptor Table, the dataset, and the greater population from which both are drawn.
+The Population Table has three sources of data: the Preceptor Table, the data set, and the greater population from which both are drawn.
 
 The assumption of *validity*, if met, allows us to create the Population Table because it ensures that the columns of data from the different sources can be put into a single table. If the relationships among the data are the same (or at least same'ish), over time, then we can assume *stability.* A model estimated on our data will also apply to our Preceptor Table. *Representativeness* examines the rows we have relative to the rows in the Population Table which we might have had. *Unconfoundedness*, which only matters in causal settings, means that either the treatment was randomly assigned or that we can act *as if* it was.
 

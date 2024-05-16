@@ -53,12 +53,6 @@ Need to find a student to test out brms on Windows as soon as possible.
 We need a new structure to the entire book, sadly. The Probability and Rubin Causal Model chapters are good and should stay where they are. But the affectation of having the rest of the chapters be one parameter, two parameters and so on does not really work. Instead, we should just have 6 chapters, each of which takes us down the same path of the four Cardinal Virtues, each time with increasing complexity on all possible dimensions. It is true that the number of parameters will increase as we go along, but it is highly unlikely that this the best rate of increase is one parameter per chapter. In fact, we need to go much more quickly, adding much more complex models, much earlier. We might find it useful to use the TidyModels framework from the very start.
 
 
-## Melissa
-
-Working on 5 Parameter Chapter. Read Key Concepts twice. Start to apply the steps to Five Parameters. Submit a PR.
-
-*MB: YAY I'm here*
-
 ## Quotes
 
 Ought to have a cool new quote about the virtues, starting off each section in each chapter. Here is one for Temperance, or Wisdom.
@@ -347,4 +341,17 @@ https://rstudio-education.github.io/tidyverse-cookbook/. I love this image: http
 
 * https://github.com/yonicd/carbonate -- perhaps useful for some nicer formatting of source code.
 
+## Rcpp and cmath
+
+I had recurring problems with this error, associated with a brms::brm() call.
+
+```
+/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/src/Core/util/Macros.h:679:10: fatal error: 'cmath' file not found
+#include <cmath>
+         ^~~~~~~
+1 error generated.
+make: *** [foo.o] Error 1
+```
+
+Issue seems associated with Rcpp installation. It got so annoying that I stopped use renv. But even that was not enough. I had to fina all the `_cache` directories in the project that at Rcpp installed and delete them. No idea why this was necessary since .libpaths() did not include them. But, after deleting them, the error went away. Maybe I just had one bad version of Rcpp, or Rcpp itself was bad for a little wile. With luck, now that it works, this won't happen again.
 
