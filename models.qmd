@@ -423,7 +423,7 @@ Sadly, most usage of `pp_check()` does not produce such a clear cut conclusion. 
 We have discovered that our initial assumption about the correct mathematical formula for the data generating mechanism was mistaken. Instead of a gaussion (or Normal) probability model, we should use a Bernoulli model. We must modify our call to `brm()` as follows:
 
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 #| message: false
 fit_bern <- brm(formula = biden ~ 1,

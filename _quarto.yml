@@ -39,7 +39,7 @@ book:
     - three-parameters-causal.qmd
     - mechanics.qmd
     # - four-parameters-continuous.qmd
-    # - four-parameters-categorical.qmd
+    - four-parameters-categorical.qmd
     # - five-parameters.qmd
     # - n-parameters.qmd
     - key-concepts.qmd

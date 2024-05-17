@@ -253,6 +253,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./four-parameters-categorical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./key-concepts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Key Concepts</span></a>
   </div>
@@ -343,7 +349,7 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mjskay.github.io/tidybayes/">tidybayes</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The <strong>primer.data</strong> package includes the <code>trains</code> dataset. We use the <strong>brms</strong> package to build Bayesian models. (“brms” stands for <strong>B</strong>ayesian <strong>r</strong>egression <strong>m</strong>odel<strong>s</strong>.) The <strong>tidybayes</strong> packages makes working the fitted models easier. As usual, we use the <strong>tidyverse</strong> package.</p>
+<p>The <strong>primer.data</strong> package includes the <code>trains</code> data set. We use the <strong>brms</strong> package to build Bayesian models. (“brms” stands for <strong>B</strong>ayesian <strong>r</strong>egression <strong>m</strong>odel<strong>s</strong>.) The <strong>tidybayes</strong> packages makes working the fitted models easier. As usual, we use the <strong>tidyverse</strong> package.</p>
 <p>In this chapter, we are going to ask a series of questions about the causal effect of exposure to Spanish-speakers on the attitude of US commuters toward immigration. These questions will pertain to all train commuters in the US today. For a refresher on this data, refer to <a href="rubin-causal-model.html" class="quarto-xref"><span>Chapter 1</span></a>.</p>
 <p>Consider:</p>
 <blockquote class="blockquote">
@@ -374,23 +380,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="aitcmthrkw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aitcmthrkw table {
+<div id="iojkyymtue" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iojkyymtue table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aitcmthrkw thead, #aitcmthrkw tbody, #aitcmthrkw tfoot, #aitcmthrkw tr, #aitcmthrkw td, #aitcmthrkw th {
+#iojkyymtue thead, #iojkyymtue tbody, #iojkyymtue tfoot, #iojkyymtue tr, #iojkyymtue td, #iojkyymtue th {
   border-style: none;
 }
 
-#aitcmthrkw p {
+#iojkyymtue p {
   margin: 0;
   padding: 0;
 }
 
-#aitcmthrkw .gt_table {
+#iojkyymtue .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -416,12 +422,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#aitcmthrkw .gt_caption {
+#iojkyymtue .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aitcmthrkw .gt_title {
+#iojkyymtue .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -433,7 +439,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#aitcmthrkw .gt_subtitle {
+#iojkyymtue .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -445,7 +451,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#aitcmthrkw .gt_heading {
+#iojkyymtue .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -457,13 +463,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#aitcmthrkw .gt_bottom_border {
+#iojkyymtue .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aitcmthrkw .gt_col_headings {
+#iojkyymtue .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -478,7 +484,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#aitcmthrkw .gt_col_heading {
+#iojkyymtue .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -498,7 +504,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#aitcmthrkw .gt_column_spanner_outer {
+#iojkyymtue .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -510,15 +516,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#aitcmthrkw .gt_column_spanner_outer:first-child {
+#iojkyymtue .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aitcmthrkw .gt_column_spanner_outer:last-child {
+#iojkyymtue .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aitcmthrkw .gt_column_spanner {
+#iojkyymtue .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -530,11 +536,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#aitcmthrkw .gt_spanner_row {
+#iojkyymtue .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aitcmthrkw .gt_group_heading {
+#iojkyymtue .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -560,7 +566,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#aitcmthrkw .gt_empty_group_heading {
+#iojkyymtue .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -575,15 +581,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#aitcmthrkw .gt_from_md > :first-child {
+#iojkyymtue .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aitcmthrkw .gt_from_md > :last-child {
+#iojkyymtue .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aitcmthrkw .gt_row {
+#iojkyymtue .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -602,7 +608,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#aitcmthrkw .gt_stub {
+#iojkyymtue .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -615,7 +621,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#aitcmthrkw .gt_stub_row_group {
+#iojkyymtue .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -629,15 +635,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#aitcmthrkw .gt_row_group_first td {
+#iojkyymtue .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aitcmthrkw .gt_row_group_first th {
+#iojkyymtue .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aitcmthrkw .gt_summary_row {
+#iojkyymtue .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -647,16 +653,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#aitcmthrkw .gt_first_summary_row {
+#iojkyymtue .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aitcmthrkw .gt_first_summary_row.thick {
+#iojkyymtue .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aitcmthrkw .gt_last_summary_row {
+#iojkyymtue .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -666,7 +672,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#aitcmthrkw .gt_grand_summary_row {
+#iojkyymtue .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -676,7 +682,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#aitcmthrkw .gt_first_grand_summary_row {
+#iojkyymtue .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -686,7 +692,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#aitcmthrkw .gt_last_grand_summary_row_top {
+#iojkyymtue .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -696,11 +702,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#aitcmthrkw .gt_striped {
+#iojkyymtue .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aitcmthrkw .gt_table_body {
+#iojkyymtue .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -709,7 +715,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#aitcmthrkw .gt_footnotes {
+#iojkyymtue .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -723,7 +729,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#aitcmthrkw .gt_footnote {
+#iojkyymtue .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -732,7 +738,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#aitcmthrkw .gt_sourcenotes {
+#iojkyymtue .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -746,7 +752,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#aitcmthrkw .gt_sourcenote {
+#iojkyymtue .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -754,63 +760,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#aitcmthrkw .gt_left {
+#iojkyymtue .gt_left {
   text-align: left;
 }
 
-#aitcmthrkw .gt_center {
+#iojkyymtue .gt_center {
   text-align: center;
 }
 
-#aitcmthrkw .gt_right {
+#iojkyymtue .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aitcmthrkw .gt_font_normal {
+#iojkyymtue .gt_font_normal {
   font-weight: normal;
 }
 
-#aitcmthrkw .gt_font_bold {
+#iojkyymtue .gt_font_bold {
   font-weight: bold;
 }
 
-#aitcmthrkw .gt_font_italic {
+#iojkyymtue .gt_font_italic {
   font-style: italic;
 }
 
-#aitcmthrkw .gt_super {
+#iojkyymtue .gt_super {
   font-size: 65%;
 }
 
-#aitcmthrkw .gt_footnote_marks {
+#iojkyymtue .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aitcmthrkw .gt_asterisk {
+#iojkyymtue .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aitcmthrkw .gt_indent_1 {
+#iojkyymtue .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aitcmthrkw .gt_indent_2 {
+#iojkyymtue .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aitcmthrkw .gt_indent_3 {
+#iojkyymtue .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aitcmthrkw .gt_indent_4 {
+#iojkyymtue .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aitcmthrkw .gt_indent_5 {
+#iojkyymtue .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -974,23 +980,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="iahkwgzszi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#iahkwgzszi table {
+<div id="swddsqswun" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#swddsqswun table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#iahkwgzszi thead, #iahkwgzszi tbody, #iahkwgzszi tfoot, #iahkwgzszi tr, #iahkwgzszi td, #iahkwgzszi th {
+#swddsqswun thead, #swddsqswun tbody, #swddsqswun tfoot, #swddsqswun tr, #swddsqswun td, #swddsqswun th {
   border-style: none;
 }
 
-#iahkwgzszi p {
+#swddsqswun p {
   margin: 0;
   padding: 0;
 }
 
-#iahkwgzszi .gt_table {
+#swddsqswun .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1016,12 +1022,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#iahkwgzszi .gt_caption {
+#swddsqswun .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#iahkwgzszi .gt_title {
+#swddsqswun .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1033,7 +1039,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#iahkwgzszi .gt_subtitle {
+#swddsqswun .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1045,7 +1051,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#iahkwgzszi .gt_heading {
+#swddsqswun .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1057,13 +1063,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#iahkwgzszi .gt_bottom_border {
+#swddsqswun .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iahkwgzszi .gt_col_headings {
+#swddsqswun .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1078,7 +1084,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#iahkwgzszi .gt_col_heading {
+#swddsqswun .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1098,7 +1104,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#iahkwgzszi .gt_column_spanner_outer {
+#swddsqswun .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1110,15 +1116,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#iahkwgzszi .gt_column_spanner_outer:first-child {
+#swddsqswun .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iahkwgzszi .gt_column_spanner_outer:last-child {
+#swddsqswun .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iahkwgzszi .gt_column_spanner {
+#swddsqswun .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1130,11 +1136,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#iahkwgzszi .gt_spanner_row {
+#swddsqswun .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#iahkwgzszi .gt_group_heading {
+#swddsqswun .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1160,7 +1166,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#iahkwgzszi .gt_empty_group_heading {
+#swddsqswun .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1175,15 +1181,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#iahkwgzszi .gt_from_md > :first-child {
+#swddsqswun .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iahkwgzszi .gt_from_md > :last-child {
+#swddsqswun .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iahkwgzszi .gt_row {
+#swddsqswun .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1202,7 +1208,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#iahkwgzszi .gt_stub {
+#swddsqswun .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1215,7 +1221,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#iahkwgzszi .gt_stub_row_group {
+#swddsqswun .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1229,15 +1235,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#iahkwgzszi .gt_row_group_first td {
+#swddsqswun .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#iahkwgzszi .gt_row_group_first th {
+#swddsqswun .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#iahkwgzszi .gt_summary_row {
+#swddsqswun .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1247,16 +1253,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#iahkwgzszi .gt_first_summary_row {
+#swddsqswun .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#iahkwgzszi .gt_first_summary_row.thick {
+#swddsqswun .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#iahkwgzszi .gt_last_summary_row {
+#swddsqswun .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1266,7 +1272,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#iahkwgzszi .gt_grand_summary_row {
+#swddsqswun .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1276,7 +1282,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#iahkwgzszi .gt_first_grand_summary_row {
+#swddsqswun .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1286,7 +1292,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#iahkwgzszi .gt_last_grand_summary_row_top {
+#swddsqswun .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1296,11 +1302,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#iahkwgzszi .gt_striped {
+#swddsqswun .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iahkwgzszi .gt_table_body {
+#swddsqswun .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1309,7 +1315,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#iahkwgzszi .gt_footnotes {
+#swddsqswun .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1323,7 +1329,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#iahkwgzszi .gt_footnote {
+#swddsqswun .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1332,7 +1338,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#iahkwgzszi .gt_sourcenotes {
+#swddsqswun .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1346,7 +1352,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#iahkwgzszi .gt_sourcenote {
+#swddsqswun .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1354,63 +1360,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#iahkwgzszi .gt_left {
+#swddsqswun .gt_left {
   text-align: left;
 }
 
-#iahkwgzszi .gt_center {
+#swddsqswun .gt_center {
   text-align: center;
 }
 
-#iahkwgzszi .gt_right {
+#swddsqswun .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iahkwgzszi .gt_font_normal {
+#swddsqswun .gt_font_normal {
   font-weight: normal;
 }
 
-#iahkwgzszi .gt_font_bold {
+#swddsqswun .gt_font_bold {
   font-weight: bold;
 }
 
-#iahkwgzszi .gt_font_italic {
+#swddsqswun .gt_font_italic {
   font-style: italic;
 }
 
-#iahkwgzszi .gt_super {
+#swddsqswun .gt_super {
   font-size: 65%;
 }
 
-#iahkwgzszi .gt_footnote_marks {
+#swddsqswun .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#iahkwgzszi .gt_asterisk {
+#swddsqswun .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#iahkwgzszi .gt_indent_1 {
+#swddsqswun .gt_indent_1 {
   text-indent: 5px;
 }
 
-#iahkwgzszi .gt_indent_2 {
+#swddsqswun .gt_indent_2 {
   text-indent: 10px;
 }
 
-#iahkwgzszi .gt_indent_3 {
+#swddsqswun .gt_indent_3 {
   text-indent: 15px;
 }
 
-#iahkwgzszi .gt_indent_4 {
+#swddsqswun .gt_indent_4 {
   text-indent: 20px;
 }
 
-#iahkwgzszi .gt_indent_5 {
+#swddsqswun .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1561,28 +1567,10 @@ That assumption seems pretty extreme! For example, the survey respondents were a
 <span>             silent <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>             refresh <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>             seed <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Trying to compile a simple C file</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Running /Library/Frameworks/R.framework/Resources/bin/R CMD SHLIB foo.c
-using C compiler: ‘Apple clang version 15.0.0 (clang-1500.3.9.4)’
-using SDK: ‘’
-clang -arch arm64 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/unsupported"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/BH/include" -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/src/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppParallel/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/rstan/include" -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DUSE_STANC3 -DSTRICT_R_HEADERS  -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION  -D_HAS_AUTO_PTR_ETC=0  -include '/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp'  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c foo.c -o foo.o
-In file included from &lt;built-in&gt;:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/Dense:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/Core:19:
-/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/src/Core/util/Macros.h:679:10: fatal error: 'cmath' file not found
-#include &lt;cmath&gt;
-         ^~~~~~~
-1 error generated.
-make: *** [foo.o] Error 1</code></pre>
-</div>
 </div>
 <p>Because the default value of <code>family</code> is <code>guassian()</code>, we could have left out this part of the function call and gotten the same result. We add the <code>seed</code> argument to ensure that the fitted object is identical whenever we (or you) run this code. Recall that there is randomness in the modeling fitting process. This rarely affects the substantive results. But it is often convenient to be able to replicate a given model exactly. Using <code>seed</code> accomplishes this goal. The number 9 is arbitrary, other than being my lucky number. As usual, we use <code>silent = 2</code> and <code>refresh = 0</code> to turn off all the annoying messages.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: gaussian 
   Links: mu = identity; sigma = identity 
@@ -1622,23 +1610,23 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="gbwcbjuvet" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gbwcbjuvet table {
+<div id="uqbjuagccj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#uqbjuagccj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gbwcbjuvet thead, #gbwcbjuvet tbody, #gbwcbjuvet tfoot, #gbwcbjuvet tr, #gbwcbjuvet td, #gbwcbjuvet th {
+#uqbjuagccj thead, #uqbjuagccj tbody, #uqbjuagccj tfoot, #uqbjuagccj tr, #uqbjuagccj td, #uqbjuagccj th {
   border-style: none;
 }
 
-#gbwcbjuvet p {
+#uqbjuagccj p {
   margin: 0;
   padding: 0;
 }
 
-#gbwcbjuvet .gt_table {
+#uqbjuagccj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1664,12 +1652,12 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#gbwcbjuvet .gt_caption {
+#uqbjuagccj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gbwcbjuvet .gt_title {
+#uqbjuagccj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1681,7 +1669,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-width: 0;
 }
 
-#gbwcbjuvet .gt_subtitle {
+#uqbjuagccj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1693,7 +1681,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-top-width: 0;
 }
 
-#gbwcbjuvet .gt_heading {
+#uqbjuagccj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1705,13 +1693,13 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gbwcbjuvet .gt_bottom_border {
+#uqbjuagccj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gbwcbjuvet .gt_col_headings {
+#uqbjuagccj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1726,7 +1714,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gbwcbjuvet .gt_col_heading {
+#uqbjuagccj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1746,7 +1734,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   overflow-x: hidden;
 }
 
-#gbwcbjuvet .gt_column_spanner_outer {
+#uqbjuagccj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1758,15 +1746,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 4px;
 }
 
-#gbwcbjuvet .gt_column_spanner_outer:first-child {
+#uqbjuagccj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gbwcbjuvet .gt_column_spanner_outer:last-child {
+#uqbjuagccj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gbwcbjuvet .gt_column_spanner {
+#uqbjuagccj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1778,11 +1766,11 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   width: 100%;
 }
 
-#gbwcbjuvet .gt_spanner_row {
+#uqbjuagccj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gbwcbjuvet .gt_group_heading {
+#uqbjuagccj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1808,7 +1796,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   text-align: left;
 }
 
-#gbwcbjuvet .gt_empty_group_heading {
+#uqbjuagccj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1823,15 +1811,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   vertical-align: middle;
 }
 
-#gbwcbjuvet .gt_from_md > :first-child {
+#uqbjuagccj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gbwcbjuvet .gt_from_md > :last-child {
+#uqbjuagccj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gbwcbjuvet .gt_row {
+#uqbjuagccj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1850,7 +1838,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   overflow-x: hidden;
 }
 
-#gbwcbjuvet .gt_stub {
+#uqbjuagccj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1863,7 +1851,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#gbwcbjuvet .gt_stub_row_group {
+#uqbjuagccj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1877,15 +1865,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   vertical-align: top;
 }
 
-#gbwcbjuvet .gt_row_group_first td {
+#uqbjuagccj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gbwcbjuvet .gt_row_group_first th {
+#uqbjuagccj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gbwcbjuvet .gt_summary_row {
+#uqbjuagccj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1895,16 +1883,16 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#gbwcbjuvet .gt_first_summary_row {
+#uqbjuagccj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gbwcbjuvet .gt_first_summary_row.thick {
+#uqbjuagccj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gbwcbjuvet .gt_last_summary_row {
+#uqbjuagccj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1914,7 +1902,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#gbwcbjuvet .gt_grand_summary_row {
+#uqbjuagccj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1924,7 +1912,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#gbwcbjuvet .gt_first_grand_summary_row {
+#uqbjuagccj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1934,7 +1922,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#gbwcbjuvet .gt_last_grand_summary_row_top {
+#uqbjuagccj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1944,11 +1932,11 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#gbwcbjuvet .gt_striped {
+#uqbjuagccj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gbwcbjuvet .gt_table_body {
+#uqbjuagccj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1957,7 +1945,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#gbwcbjuvet .gt_footnotes {
+#uqbjuagccj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1971,7 +1959,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gbwcbjuvet .gt_footnote {
+#uqbjuagccj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1980,7 +1968,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#gbwcbjuvet .gt_sourcenotes {
+#uqbjuagccj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1994,7 +1982,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#gbwcbjuvet .gt_sourcenote {
+#uqbjuagccj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2002,63 +1990,63 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#gbwcbjuvet .gt_left {
+#uqbjuagccj .gt_left {
   text-align: left;
 }
 
-#gbwcbjuvet .gt_center {
+#uqbjuagccj .gt_center {
   text-align: center;
 }
 
-#gbwcbjuvet .gt_right {
+#uqbjuagccj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gbwcbjuvet .gt_font_normal {
+#uqbjuagccj .gt_font_normal {
   font-weight: normal;
 }
 
-#gbwcbjuvet .gt_font_bold {
+#uqbjuagccj .gt_font_bold {
   font-weight: bold;
 }
 
-#gbwcbjuvet .gt_font_italic {
+#uqbjuagccj .gt_font_italic {
   font-style: italic;
 }
 
-#gbwcbjuvet .gt_super {
+#uqbjuagccj .gt_super {
   font-size: 65%;
 }
 
-#gbwcbjuvet .gt_footnote_marks {
+#uqbjuagccj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gbwcbjuvet .gt_asterisk {
+#uqbjuagccj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gbwcbjuvet .gt_indent_1 {
+#uqbjuagccj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gbwcbjuvet .gt_indent_2 {
+#uqbjuagccj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gbwcbjuvet .gt_indent_3 {
+#uqbjuagccj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gbwcbjuvet .gt_indent_4 {
+#uqbjuagccj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gbwcbjuvet .gt_indent_5 {
+#uqbjuagccj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2112,7 +2100,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </section><section id="testing" class="level3" data-number="6.3.3"><h3 data-number="6.3.3" class="anchored" data-anchor-id="testing">
 <span class="header-section-number">6.3.3</span> Testing</h3>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_gauss</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_gauss</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="three-parameters-causal_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
@@ -2122,7 +2110,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>Our graph in the darker blue represents the actual data. As we can see with the lighter blue graph, our fitted model is able to generate a distribution of the data that is similar when compared to the actual data. However, the “fake-data” produces some values for <code>att_end</code> which are <em>impossible.</em> We know from the survey details that the lowest possible value for <code>att_end</code> is 3 and the highest is 15. But, with our “fake-data” simulations, we see several values that are less than 3 and great than 15. Consider:</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_gauss</span>, type <span class="op">=</span> <span class="st">"hist"</span>, bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_gauss</span>, type <span class="op">=</span> <span class="st">"hist"</span>, bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="three-parameters-causal_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
@@ -2133,7 +2121,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>Again, we see the problem. The true data is always within the range of 3 to 15. Our simulated (or “fake”) data sometimes strays outside this range, even if not very far and not very often. Is it a serious flaw? That is tough to decide.</p>
 <p>Let’s explore the issue by first changing <code>treat_end</code> from a continuous to an integer variable, which is probably more correct, and then re-estimate the model. Besides changing <code>att_end</code> to an integer, we also change the family to <code><a href="https://rdrr.io/r/stats/family.html">poisson()</a></code> since this is the recommended model for dealing with “count” data</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trains2</span> <span class="op">&lt;-</span> <span class="va">trains</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trains2</span> <span class="op">&lt;-</span> <span class="va">trains</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>att_end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">att_end</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">fit_poisson</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">att_end</span> <span class="op">~</span> <span class="va">treatment</span>,</span>
@@ -2142,28 +2130,10 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>                   silent <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>                   refresh <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>                   seed <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Trying to compile a simple C file</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Running /Library/Frameworks/R.framework/Resources/bin/R CMD SHLIB foo.c
-using C compiler: ‘Apple clang version 15.0.0 (clang-1500.3.9.4)’
-using SDK: ‘’
-clang -arch arm64 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/Rcpp/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/unsupported"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/BH/include" -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/src/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppParallel/include/"  -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/rstan/include" -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DUSE_STANC3 -DSTRICT_R_HEADERS  -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION  -D_HAS_AUTO_PTR_ETC=0  -include '/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp'  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c foo.c -o foo.o
-In file included from &lt;built-in&gt;:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/Dense:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/Core:19:
-/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/RcppEigen/include/Eigen/src/Core/util/Macros.h:679:10: fatal error: 'cmath' file not found
-#include &lt;cmath&gt;
-         ^~~~~~~
-1 error generated.
-make: *** [foo.o] Error 1</code></pre>
-</div>
 </div>
 <p>Because the poisson mode has a very different structure, the parameter estimates do not have a simple interpretation.</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_poisson</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_poisson</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: poisson 
   Links: mu = log 
@@ -2184,7 +2154,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>The posterior predictive check looks better:</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_poisson</span>, type <span class="op">=</span> <span class="st">"hist"</span>, bins <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_poisson</span>, type <span class="op">=</span> <span class="st">"hist"</span>, bins <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stderr">
 <pre><code>Using 10 posterior draws for ppc type 'hist' by default.</code></pre>
 </div>
@@ -2224,7 +2194,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>We have already clarified that the question refers to residents of Chicago (and similar cities) in 2024.</p>
 <p>Use <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code> as usual. Creating the value for the <code>newdata</code> argument is tricky since we need to construct the <code>treatment</code> variable by hand. Even though <code>treatment</code> is a factor variable within <code>trains</code>, we can get away with using a simple character variable since either version would be transformed into a 0/1 variable by <code><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span></span>
 <span>    newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>treatment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Treated"</span>, <span class="st">"Control"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2247,7 +2217,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>We have 8,000 rows. The first four thousand rows are draws from the first row of <code>newdata</code>, meaning <code>treatment</code> equals <code>"Treated"</code>. The next four thousand rows are draws for <code>treatment = "Control"</code>. Mapping this tibble is easy because of its tidy structure.</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span></span>
 <span>    newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>treatment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Treated"</span>, <span class="st">"Control"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.epred</span>, fill <span class="op">=</span> <span class="va">treatment</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -2269,7 +2239,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>Just eyeballing the graph, we can see that the posterior <code>att_end</code> for Control is centered around 8.5. For Treated, the center is around 10. Since the causal effect is the difference between two outcomes, we can simply subtract and estimate that the causal effect is about <span class="math inline">\(10 - 8.5 = 1.5\)</span>.</p>
 <p>Even better, we can do the calculation on the individual rows of the posterior draws. But, first, we need to “widen” the tibble.</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span></span>
 <span>    newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>treatment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Treated"</span>, <span class="st">"Control"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="va">.draw</span>, names_from <span class="op">=</span> <span class="va">treatment</span>, values_from <span class="op">=</span> <span class="va">.epred</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2292,7 +2262,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>The resulting table has only 4,000 rows because we have put the posteriors for Treated and Control next to each other. Recall that we can perform algebra on posteriors just as we do with numbers. That is, the easiest way to calculate the causal effect is to subtract the posterior for the outcome under Control from the posterior of the outcome under Treatment.</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_gauss</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span></span>
 <span>    newdata <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>treatment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Treated"</span>, <span class="st">"Control"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="va">.draw</span>, names_from <span class="op">=</span> <span class="va">treatment</span>, values_from <span class="op">=</span> <span class="va">.epred</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -2315,7 +2285,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>The posterior of the average causal effect is centered around 1.5, with a 95% confidence from about 0.5 to 2.5. How big an effect is 1.5? The difference between Republican and Democratic attitudes toward immigration, before the experiment, was about 2.3.</p>
 <div class="cell">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trains</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trains</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">att_start</span><span class="op">)</span>, .by <span class="op">=</span> <span class="va">party</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2

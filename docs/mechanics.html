@@ -80,7 +80,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./key-concepts.html" rel="next">
+<link href="./four-parameters-categorical.html" rel="next">
 <link href="./three-parameters-causal.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -253,6 +253,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./four-parameters-categorical.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./key-concepts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Key Concepts</span></a>
   </div>
@@ -299,7 +305,7 @@ window.Quarto = {
 <a href="#selecting-variables" id="toc-selecting-variables" class="nav-link" data-scroll-target="#selecting-variables"><span class="header-section-number">7.2</span> Selecting variables</a>
   <ul class="collapse">
 <li><a href="#general-guidelines-for-selecting-variables" id="toc-general-guidelines-for-selecting-variables" class="nav-link" data-scroll-target="#general-guidelines-for-selecting-variables"><span class="header-section-number">7.2.1</span> General guidelines for selecting variables</a></li>
-  <li><a href="#variables-in-the-trains-dataset" id="toc-variables-in-the-trains-dataset" class="nav-link" data-scroll-target="#variables-in-the-trains-dataset"><span class="header-section-number">7.2.2</span> Variables in the <code>trains</code> dataset</a></li>
+  <li><a href="#variables-in-the-trains-data-set" id="toc-variables-in-the-trains-data-set" class="nav-link" data-scroll-target="#variables-in-the-trains-data-set"><span class="header-section-number">7.2.2</span> Variables in the <code>trains</code> data set</a></li>
   <li><a href="#att_end-treatment-att_start" id="toc-att_end-treatment-att_start" class="nav-link" data-scroll-target="#att_end-treatment-att_start"><span class="header-section-number">7.2.3</span> att_end ~ treatment + att_start</a></li>
   <li><a href="#income-age-liberal" id="toc-income-age-liberal" class="nav-link" data-scroll-target="#income-age-liberal"><span class="header-section-number">7.2.4</span> income ~ age + liberal</a></li>
   <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">7.2.5</span> Final thoughts</a></li>
@@ -482,7 +488,7 @@ z_age      10998.74  7093.726  -2920.582  25277.06</code></pre>
 <li><p>We do not know the “true” model. Who is to say that a model using the raw value is right or wrong?</p></li>
 <li><p>Check whether or not this choice meaningfully affects the answer to your question. Much of the time, it won’t. That is, our inferences are often fairly “robust” to small changes in the model. If you get the same answer with <code>rv13</code> as from <code>log_rv13</code>, then no one cares which you use.</p></li>
 <li><p>Follow the conventions in your field. If everyone does X, then you should probably do X, unless you have a good reason not to. If you do have such a reason, explain it prominently.</p></li>
-<li><p>Most professionals, when presented with data distributed like <code>rv13</code>, would take the log. Professionals hate (irrationally?) outliers. Any transformation which makes a distribution look more normal is generally considered a good idea.</p></li>
+<li><p>Most professionals, when presented with data distributed like <code>rv13</code>, would take the log. Professionals (irrationally?) hate outliers. Any transformation which makes a distribution look more normal is generally considered a good idea.</p></li>
 </ul>
 <p>Many of these suggestions apply to every aspect of the modeling process.</p>
 <!-- Split out general advice to elsewhere. -->
@@ -610,10 +616,10 @@ z_age      10998.74  7093.726  -2920.582  25277.06</code></pre>
 <li><p>It is standard in your field to include X in such regressions.</p></li>
 <li><p>Your boss/client/reviewer/supervisor wants to include X.</p></li>
 </ul>
-<p>Let’s use the <code>trains</code> dataset to evaluate how helpful certain variables are to creating an effective model, based on the guidelines above.</p>
-</section><section id="variables-in-the-trains-dataset" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="variables-in-the-trains-dataset">
-<span class="header-section-number">7.2.2</span> Variables in the <code>trains</code> dataset</h3>
-<p>To look at our recommendations in practice, let’s focus on the <code>trains</code> dataset. The variables in <code>trains</code> include <code>gender</code>, <code>liberal</code>, <code>party</code>, <code>age</code>, <code>income</code>, <code>att_start</code>, <code>treatment</code>, and <code>att_end</code>. Which variables would be best to include in a model?</p>
+<p>Let’s use the <code>trains</code> data set to evaluate how helpful certain variables are to creating an effective model, based on the guidelines above.</p>
+</section><section id="variables-in-the-trains-data-set" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="variables-in-the-trains-data-set">
+<span class="header-section-number">7.2.2</span> Variables in the <code>trains</code> data set</h3>
+<p>To look at our recommendations in practice, let’s focus on the <code>trains</code> data set. The variables in <code>trains</code> include <code>gender</code>, <code>liberal</code>, <code>party</code>, <code>age</code>, <code>income</code>, <code>att_start</code>, <code>treatment</code>, and <code>att_end</code>. Which variables would be best to include in a model?</p>
 </section><section id="att_end-treatment-att_start" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="att_end-treatment-att_start">
 <span class="header-section-number">7.2.3</span> att_end ~ treatment + att_start</h3>
 <p>First, let’s look at a model with a left hand variable, <code>att_end</code>, and two right side variables, <code>treatment</code> and <code>att_start</code>.</p>
@@ -673,7 +679,7 @@ liberalTRUE -32434.045 13909.045 -59756.44978  -5266.503</code></pre>
 <li><p>The estimate for <code>liberalTRUE</code> represents the offset in predicted income for commuters who <em>are</em> liberal. To find the estimate, we must add the coefficient to our <code>(Intercept)</code> value. We see that, on average, liberal commuters make less money.</p></li>
 </ul>
 <p>It is important to note that we are not looking at a causal relationship for either of these explanatory variables. We are noting the differences between two groups, without considering causality. This is known as an <em>across unit</em> comparison. When we compare <em>across unit</em> we are not looking at a causal relationship.</p>
-<p>When comparing <code>liberalTRUE</code> with our <code>(Intercept)</code>, recall that the <code>Intercept</code> is calculating income for the case where <code>liberal == FALSE</code>. As we can see, then, the coefficient for <code>liberalTRUE</code>, -32,434, shows that the liberals in our dataset make less on average than non-liberals. The coefficient is large relative to the <code>Intercept</code> and, with rough mental math, we see that the 95% confidence interval excludes 0. Therefore, <code>liberal</code> is a helpful variable.</p>
+<p>When comparing <code>liberalTRUE</code> with our <code>(Intercept)</code>, recall that the <code>Intercept</code> is calculating income for the case where <code>liberal == FALSE</code>. As we can see, then, the coefficient for <code>liberalTRUE</code>, -32,434, shows that the liberals in our data set make less on average than non-liberals. The coefficient is large relative to the <code>Intercept</code> and, with rough mental math, we see that the 95% confidence interval excludes 0. Therefore, <code>liberal</code> is a helpful variable.</p>
 <p>The variable <code>age</code>, however, does not appear to have a meaningful impact on our <code>Intercept</code>. The coefficient of <code>age</code> is low and the 95% confidence interval <em>does not</em> exclude 0.</p>
 <p><strong>Conclusion</strong>: definitely keep <code>liberal</code>! <code>age</code> is less clear. It is really a matter of preference at this point.</p>
 <!-- DK: Add another example?  -->
@@ -878,7 +884,7 @@ att_start 0.8146102 0.04254966 0.7299836 0.8971717</code></pre>
 <span class="header-section-number">7.3.3</span> Better models make better predictions on new data</h3>
 <p>The most sensible way to test a model is to use the model to make predictions and compare those predictions to new data. After fitting the model using <code>stan_glm</code>, we would use <code>posterior_predict</code> to obtain simulations representing the predictive distribution for new cases. For instance, if we were to predict how someone’s attitude changes toward immigration among Boston commuters based on political affiliation, we would want to go out and test our theories on new Boston commuters.</p>
 <p>When thinking of generalization to new data, it is important to consider what is relevant new data in the context of the modeling problem. Some models are used to predict the future and, in those cases, we can wait and eventually observe the future and check how good our model is for making predictions. Often models are used to obtain insight to some phenomenon without immediate plan for predictions. This is the case with our Boston commuters example. In such cases, we are also interested whether learned insights from on part of the data generalizes to other parts of the data. For example, if we know how political attitudes informed future immigration stances in <em>Boston commuters</em>, we may want to know if those same conclusions could generalize to train commuters in different locations.</p>
-<p>Even if we had detected clear problems with our predictions, this would not necessarily mean that there is anything wrong with the model as fit to the original dataset. However, we would need to understand it further before generalizing to other commuters.</p>
+<p>Even if we had detected clear problems with our predictions, this would not necessarily mean that there is anything wrong with the model as fit to the original data set. However, we would need to understand it further before generalizing to other commuters.</p>
 <p>Often, we would like to evaluate and compare models without waiting for new data. One can simply evaluate predictions on the observed data. But since these data have already been used to fit the model parameters, these predictions are optimistic.</p>
 <p>In cross validation, part of the data is used to fit the model and the rest of the data—the hold-out set—is used as a proxy for future data. When there is no natural prediction task for future data, we can think of cross validation as a way to assess generalization from one part of the data to another part.</p>
 <p>In any form of cross validation, the model is re-fit leaving out one part of the data and then the prediction for the held-out part is evaluated. In the next section, we will look at a type of cross validation called leave-one-out (LOO) cross validation.</p>
@@ -893,7 +899,7 @@ att_start 0.8146102 0.04254966 0.7299836 0.8971717</code></pre>
 <span class="header-section-number">7.4.1</span> Cross validation using <code>loo()</code>
 </h3>
 <!-- This is a rough draft. Everything needs to be expanded, but the basics are here. -->
-<p>To compare models using leave-one-out (LOO) cross validation, one piece of data is excluded from our model. The model is then re-fit and makes a prediction for the missing piece of data. The difference between the predicted value and the real value is calculated. This process is repeated for every row of data in the dataset.</p>
+<p>To compare models using leave-one-out (LOO) cross validation, one piece of data is excluded from our model. The model is then re-fit and makes a prediction for the missing piece of data. The difference between the predicted value and the real value is calculated. This process is repeated for every row of data in the data set.</p>
 <p>In essence: <em>One piece of data is excluded from our model, the model is re-fit, the model attempts to predict the value of the missing piece, we compare the true value to the predicted value, and we assess the accuracy of our model’s prediction.</em> This process occurs for each piece of data, allowing us to assess the model’s accuracy in making predictions.</p>
 <p>To perform leave-one-out(LOO) cross validation, we will be using the function <code><a href="https://mc-stan.org/loo/reference/loo.html">loo()</a></code> from an R package. This is how we will determine which model is superior for our purposes.</p>
 <p>First, we will refamiliarize ourselves with our first model, <code>fit_liberal</code>.</p>
@@ -936,7 +942,7 @@ See help('pareto-k-diagnostic') for details.</code></pre>
 <code>looic</code> is the LOO information criterion, −2 elpd_loo, which we compute for comparability to deviance.</li>
 </ul>
 <p>For our purposes, we mostly need to focus on <code>elpd_loo</code>. Let’s explain, in more depth, what this information means.</p>
-<p>Basically, when we run <code><a href="https://mc-stan.org/loo/reference/loo.html">loo()</a></code>, we are telling R to take a piece of data out of our dataset, re-estimate all parameters, and then predict the value for the missing piece of data. The value for <code>elpd_loo()</code> is based off of how <em>close</em> our estimate was to the truth. Therefore, <code>elpd_loo()</code> values inform us of the effectiveness of our model in predicting data it has not seen before.</p>
+<p>Basically, when we run <code><a href="https://mc-stan.org/loo/reference/loo.html">loo()</a></code>, we are telling R to take a piece of data out of our data set, re-estimate all parameters, and then predict the value for the missing piece of data. The value for <code>elpd_loo()</code> is based off of how <em>close</em> our estimate was to the truth. Therefore, <code>elpd_loo()</code> values inform us of the effectiveness of our model in predicting data it has not seen before.</p>
 <!-- DK: Is this true? I don't think so! The ideal value for `elpd_loo()` is 0, meaning that our predictions are perfect. This is, of course, not going to be the case. We say this to point out that, the closer our value of `elpd_loo` is to 0, the more effective our model performs. -->
 <p><strong>The higher our value for <code>elpd_loo</code>, the better our model performs.</strong> This means that, when comparing models, we want to select the model with the higher value for <code>elpd_loo</code>.</p>
 <!-- DK: Untrue! Hint: the higher value will be the the value closest to 0, as the results for `elpd_loo()` are negative.  -->
@@ -1432,8 +1438,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./key-concepts.html" class="pagination-link" aria-label="Key Concepts">
-        <span class="nav-page-text">Key Concepts</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./four-parameters-categorical.html" class="pagination-link" aria-label="Four Parameters: Categorical">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

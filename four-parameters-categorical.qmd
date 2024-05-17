@@ -239,7 +239,7 @@ There is no longer just one $\beta_0$ and one $\beta_1$. Instead, there is $\bet
 
 Fitting a categorical model with **brms** is very similar to fitting the other models we have learned.
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 fit_nes <- brm(formula = pres_vote ~ sex,
                data = nes_92,

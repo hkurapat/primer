@@ -46,7 +46,7 @@ library(broom.mixed)
 
 <!-- DK: Have we taught what fixef() means does? -->
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 
 fit_1 <- brm(formula = income ~ age, 
@@ -64,7 +64,7 @@ There is nothing wrong with this model. Yet the interpretation of $\beta_0$, the
 It is easy, however, to *transform* `age` into a variable which makes the intercept more meaningful. Consider a new variable, `c_age`, which is `age` minus the average age in the sample. Using this **c**entered version of age does not change the predictions or residuals in the model, but it does make the intercept easier to interpret.
 
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 
 trains_2 <- trains |> 
@@ -86,7 +86,7 @@ The intercept, `r scales::comma(round(fixef(fit_1_c)["Intercept", "Estimate"], 0
 
 Centering --- changing a variable via addition/subtraction --- often makes the intercept easier to interpret. Scaling --- changing a variable via multiplication/division --- often makes it easier to interpret coefficients. The most common scaling method is to divide the variable by its standard deviation.
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 
 trains_3 <- trains |> 
@@ -113,7 +113,7 @@ But, because we scaled without centering, the intercept is now back to the (nons
 
 The most common transformation applies both centering and scaling. The base R function `scale()` subtracts the mean and divides by the standard deviation. A variable so transformed is a "*z*-score," meaning a variable with a mean of zero and a standard deviation of one. Using *z*-scores makes interpretation easier, especially when we seek to compare the importance of different predictors.
 
-```{r}
+```{r , cache = TRUE}
 #| code-fold: false
 
 trains_4 <- trains |> 
@@ -192,7 +192,7 @@ no_na_nhanes <- nhanes |>
 
 Fit and plot a simple linear model:
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 nhanes_1 <- brm(height ~ age,
                 data = no_na_nhanes,
@@ -220,7 +220,7 @@ That is not a very good model, obviously.
 Adding a quadratic term makes it better. (Note the need for `I()` in creating the squared term within the `formula` argument.)
 
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 nhanes_2 <- brm(height ~ age + I(age^2),
                 data = no_na_nhanes,
@@ -243,7 +243,7 @@ no_na_nhanes |>
 
 Still, we have not made use of our background knowledge in creating these variables. We know that people don't get any taller after age 18 or so. Let's create variables which capture that break.
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 nhanes_3 <- brm(height ~ I(ifelse(age > 18, 18, age)),
                 data = no_na_nhanes,
@@ -335,7 +335,7 @@ set.seed(78)
 ```
 
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 fit_1_model <- brm(att_end ~ treatment + att_start,
                    data = trains,
@@ -373,7 +373,7 @@ The variable `att_start`, with a coefficient of `r round(fixef(fit_1_model)["att
 
 Now, we will look at `income` as a function of `age` and `liberal`, a proxy for political party. 
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 fit_2_model <- brm(income ~ age + liberal,
                    data = trains,
