@@ -27,7 +27,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./set-up.html" rel="next">
-<link href="./four-parameters-categorical.html" rel="prev">
+<link href="./n-parameters.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -205,6 +205,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./n-parameters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">N Parameters</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./key-concepts.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Key Concepts</span></a>
   </div>
@@ -263,7 +269,7 @@ window.Quarto = {
   
 
 
-</header><!-- Given that, it is important to monitor our language. We do not believe that changes in `election_age` "cause" changes in `lived_after`. That is obvious. But there are some words and phrases --- like "associated with" and "change by" --- which are too close to causal. Be wary of their use. *Always think in terms of comparisons when using a predictive model.* We can't change `election_age` for an individual candidate. We can only compare two candidates (or two groups of candidates). --><!-- Key issue is the connection between the Preceptor Table and the DGM (either true or estimate). The connection is tricky! Not even sure I understand it. The DGM can be used to "fill in" all the missing elements of the Preceptor Table, but there will always be some associated randomness. Even with the true DGM, we don't know what `att_end` Joe would have had under treatment, we just have a posterior for that variable, a way to make draws. --><!-- Idea: Use the DGM to create one complete Preceptor Table. In that draw, Joe is a 6 for `att_end`. Then, do another draw. Joe is a 5. Do a thousand draws. You then have a thousand Preceptor Tables. Calculate the Quantity of Interest for each Preceptor Table. The 1,000 values are the posterior for your QoI.  --><!-- Would be great to make a cool animation of this, perhaps with a simple example. Would be fun to have a similar animation for each chapter. Great summer project! --><!-- When starting a new chapter, copy/paste this: --><!-- ## Wisdom --><!-- ### Preceptor Table --><!-- *Causal or predictive model*: --><!-- *Units*: --><!-- *Outcome*: --><!-- *Treatment*: --><!-- *Covariates*: --><!-- *Moment in Time*:  --><!-- ### EDA --><!-- ### Validity --><!-- ## Justice --><!-- ### Population Table --><!-- ### Stability --><!-- ### Representativeness --><!-- ### Unconfoundedness --><!-- ## Courage --><!-- ### Models --><!-- ### Tests --><!-- ### Data Generating Mechanism --><!-- ## Temperance --><!-- ### Questions and Answers --><!-- ### Humility --><!-- ## Summary --><p>These are the key concepts from the <em>Primer</em>. You should apply them whenever you face a choice, and some data to help you make it. The world confronts us. Make decisions we must.</p>
+</header><!-- Given that, it is important to monitor our language. We do not believe that changes in `election_age` "cause" changes in `lived_after`. That is obvious. But there are some words and phrases --- like "associated with" and "change by" --- which are too close to causal. Be wary of their use. *Always think in terms of comparisons when using a predictive model.* We can't change `election_age` for an individual candidate. We can only compare two candidates (or two groups of candidates). --><!-- Key issue is the connection between the Preceptor Table and the DGM (either true or estimate). The connection is tricky! Not even sure I understand it. The DGM can be used to "fill in" all the missing elements of the Preceptor Table, but there will always be some associated randomness. Even with the true DGM, we don't know what `att_end` Joe would have had under treatment, we just have a posterior for that variable, a way to make draws. --><!-- Idea: Use the DGM to create one complete Preceptor Table. In that draw, Joe is a 6 for `att_end`. Then, do another draw. Joe is a 5. Do a thousand draws. You then have a thousand Preceptor Tables. Calculate the Quantity of Interest for each Preceptor Table. The 1,000 values are the posterior for your QoI.  --><!-- Would be great to make a cool animation of this, perhaps with a simple example. Would be fun to have a similar animation for each chapter. Great summer project! --><!-- When starting a new chapter, copy/paste this: --><!-- ## Wisdom --><!-- ### Preceptor Table --><!-- *Causal or predictive model*: --><!-- *Units*: --><!-- *Outcome*: --><!-- *Treatment*: --><!-- *Covariates*: --><!-- *Moment in Time*: --><!-- ### EDA --><!-- ### Validity --><!-- ## Justice --><!-- ### Population Table --><!-- ### Stability --><!-- ### Representativeness --><!-- ### Unconfoundedness --><!-- ## Courage --><!-- ### Models --><!-- ### Tests --><!-- ### Data Generating Mechanism --><!-- ## Temperance --><!-- ### Questions and Answers --><!-- ### Humility --><!-- ## Summary --><p>These are the key concepts from the <em>Primer</em>. You should apply them whenever you face a choice, and some data to help you make it. The world confronts us. Make decisions we must.</p>
 <p><strong>Quantity of Interest</strong> is the number which you want to estimate. You will almost always calculate a posterior probability distribution for your Quantity of Interest since, in the real world, you will never know your QoI precisely. Most problems involve more than one QoI.</p>
 <p><strong>Predictive Models and Causal Models</strong> are different because predictive models have only one outcome column. Causal models have more than one (potential) outcome column because we need more than one potential outcome in order to estimate a <em>causal effect</em>. The first step in a data science problem is to determine if your QoI requires a causal or a predictive model.</p>
 <p><strong>Units</strong>, <strong>outcomes</strong> and <strong>covariates</strong> are important parts of every data science model. Causal, but not predictive, models also include <strong>treatments</strong>, which are just covariates which we can, at least in theory, manipulate. The QoI determines the units and outcomes for your model.</p>
@@ -285,9 +291,11 @@ window.Quarto = {
 <section id="steps-to-take-in-every-data-science-problem" class="level2"><h2 class="anchored" data-anchor-id="steps-to-take-in-every-data-science-problem">Steps to Take in Every Data Science Problem</h2>
 <p>In the spirit of transparency, here are the guidelines which we provide to colleagues updating chapters in the <em>Primer</em>. This is how we think data science ought to be taught. It is also, perhaps unsurprisingly, how we think data science ought to be done, at least at this introductory level.</p>
 <section id="question" class="level3"><h3 class="anchored" data-anchor-id="question">Question</h3>
-<p>Start with the question. This will generally be something simple, easily expressed in just a sentence, using colloquial language. Every data science problem starts with a question. Your goal is to provide an answer to the question, along with your uncertainty about that answer. The most common form for the answer is a posterior probability distribution. This PPD is either the answer itself, or the tool we use to answer the question. Example:</p>
-<p>“What proportion of people who make $100,000 are liberal?”</p>
-<p>The question should be indented and italicized.</p>
+<p>Start with the question. At the start, this will generally be something simple, easily expressed in just a sentence, using colloquial language. Every data science problem starts with a question. Your goal is to provide an answer to the question, along with your uncertainty about that answer. The most common form for the answer is a posterior probability distribution. This PPD is either the answer itself, or the tool we use to answer the question. Example:</p>
+<blockquote class="blockquote">
+<p><em>What proportion of people who make $100,000 are liberal?</em></p>
+</blockquote>
+<p>The question should be indented and italicized. As we progress, questions become less precise and more general. We don’t know what to focus on when we start. We narrow as we proceed.</p>
 <p>Of course, every data science problem does not start with a question. It actually starts with a <em>decision</em>. The world confronts us. Make decisions we must. Yet, in this introductory textbook, starting with a decision to make is too hard. So, we simplify and start with a question. But we should always at least mention the sort of decision which the answer to the question might help us to make.</p>
 <p>Note that the sophistication of these discussions increases as we go further into the book. Your discussion should be more sophisticated than the one found in the previous chapter and less sophisticated than what comes later.</p>
 <p>Each chapter features all the same sections and sub-sections as we use below. That is, there are three sub-sections to Wisdom, four sub-sections for Justice, and so on.</p>
@@ -325,23 +333,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="jfdznqmsgm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jfdznqmsgm table {
+<div id="vsvjtkvyxk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vsvjtkvyxk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jfdznqmsgm thead, #jfdznqmsgm tbody, #jfdznqmsgm tfoot, #jfdznqmsgm tr, #jfdznqmsgm td, #jfdznqmsgm th {
+#vsvjtkvyxk thead, #vsvjtkvyxk tbody, #vsvjtkvyxk tfoot, #vsvjtkvyxk tr, #vsvjtkvyxk td, #vsvjtkvyxk th {
   border-style: none;
 }
 
-#jfdznqmsgm p {
+#vsvjtkvyxk p {
   margin: 0;
   padding: 0;
 }
 
-#jfdznqmsgm .gt_table {
+#vsvjtkvyxk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -367,12 +375,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#jfdznqmsgm .gt_caption {
+#vsvjtkvyxk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jfdznqmsgm .gt_title {
+#vsvjtkvyxk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -384,7 +392,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#jfdznqmsgm .gt_subtitle {
+#vsvjtkvyxk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -396,7 +404,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#jfdznqmsgm .gt_heading {
+#vsvjtkvyxk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -408,13 +416,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#jfdznqmsgm .gt_bottom_border {
+#vsvjtkvyxk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jfdznqmsgm .gt_col_headings {
+#vsvjtkvyxk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -429,7 +437,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#jfdznqmsgm .gt_col_heading {
+#vsvjtkvyxk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -449,7 +457,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#jfdznqmsgm .gt_column_spanner_outer {
+#vsvjtkvyxk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -461,15 +469,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#jfdznqmsgm .gt_column_spanner_outer:first-child {
+#vsvjtkvyxk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jfdznqmsgm .gt_column_spanner_outer:last-child {
+#vsvjtkvyxk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jfdznqmsgm .gt_column_spanner {
+#vsvjtkvyxk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -481,11 +489,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#jfdznqmsgm .gt_spanner_row {
+#vsvjtkvyxk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jfdznqmsgm .gt_group_heading {
+#vsvjtkvyxk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -511,7 +519,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#jfdznqmsgm .gt_empty_group_heading {
+#vsvjtkvyxk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -526,15 +534,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#jfdznqmsgm .gt_from_md > :first-child {
+#vsvjtkvyxk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jfdznqmsgm .gt_from_md > :last-child {
+#vsvjtkvyxk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jfdznqmsgm .gt_row {
+#vsvjtkvyxk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -553,7 +561,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#jfdznqmsgm .gt_stub {
+#vsvjtkvyxk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -566,7 +574,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#jfdznqmsgm .gt_stub_row_group {
+#vsvjtkvyxk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -580,15 +588,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#jfdznqmsgm .gt_row_group_first td {
+#vsvjtkvyxk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jfdznqmsgm .gt_row_group_first th {
+#vsvjtkvyxk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jfdznqmsgm .gt_summary_row {
+#vsvjtkvyxk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -598,16 +606,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#jfdznqmsgm .gt_first_summary_row {
+#vsvjtkvyxk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jfdznqmsgm .gt_first_summary_row.thick {
+#vsvjtkvyxk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jfdznqmsgm .gt_last_summary_row {
+#vsvjtkvyxk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -617,7 +625,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#jfdznqmsgm .gt_grand_summary_row {
+#vsvjtkvyxk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -627,7 +635,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#jfdznqmsgm .gt_first_grand_summary_row {
+#vsvjtkvyxk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -637,7 +645,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#jfdznqmsgm .gt_last_grand_summary_row_top {
+#vsvjtkvyxk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -647,11 +655,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#jfdznqmsgm .gt_striped {
+#vsvjtkvyxk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jfdznqmsgm .gt_table_body {
+#vsvjtkvyxk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -660,7 +668,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#jfdznqmsgm .gt_footnotes {
+#vsvjtkvyxk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -674,7 +682,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#jfdznqmsgm .gt_footnote {
+#vsvjtkvyxk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -683,7 +691,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#jfdznqmsgm .gt_sourcenotes {
+#vsvjtkvyxk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -697,7 +705,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#jfdznqmsgm .gt_sourcenote {
+#vsvjtkvyxk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -705,63 +713,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#jfdznqmsgm .gt_left {
+#vsvjtkvyxk .gt_left {
   text-align: left;
 }
 
-#jfdznqmsgm .gt_center {
+#vsvjtkvyxk .gt_center {
   text-align: center;
 }
 
-#jfdznqmsgm .gt_right {
+#vsvjtkvyxk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jfdznqmsgm .gt_font_normal {
+#vsvjtkvyxk .gt_font_normal {
   font-weight: normal;
 }
 
-#jfdznqmsgm .gt_font_bold {
+#vsvjtkvyxk .gt_font_bold {
   font-weight: bold;
 }
 
-#jfdznqmsgm .gt_font_italic {
+#vsvjtkvyxk .gt_font_italic {
   font-style: italic;
 }
 
-#jfdznqmsgm .gt_super {
+#vsvjtkvyxk .gt_super {
   font-size: 65%;
 }
 
-#jfdznqmsgm .gt_footnote_marks {
+#vsvjtkvyxk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jfdznqmsgm .gt_asterisk {
+#vsvjtkvyxk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jfdznqmsgm .gt_indent_1 {
+#vsvjtkvyxk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jfdznqmsgm .gt_indent_2 {
+#vsvjtkvyxk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jfdznqmsgm .gt_indent_3 {
+#vsvjtkvyxk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jfdznqmsgm .gt_indent_4 {
+#vsvjtkvyxk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jfdznqmsgm .gt_indent_5 {
+#vsvjtkvyxk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -849,23 +857,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="isxgegwcei" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#isxgegwcei table {
+<div id="zdqeohlqjx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zdqeohlqjx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#isxgegwcei thead, #isxgegwcei tbody, #isxgegwcei tfoot, #isxgegwcei tr, #isxgegwcei td, #isxgegwcei th {
+#zdqeohlqjx thead, #zdqeohlqjx tbody, #zdqeohlqjx tfoot, #zdqeohlqjx tr, #zdqeohlqjx td, #zdqeohlqjx th {
   border-style: none;
 }
 
-#isxgegwcei p {
+#zdqeohlqjx p {
   margin: 0;
   padding: 0;
 }
 
-#isxgegwcei .gt_table {
+#zdqeohlqjx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -891,12 +899,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#isxgegwcei .gt_caption {
+#zdqeohlqjx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#isxgegwcei .gt_title {
+#zdqeohlqjx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -908,7 +916,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#isxgegwcei .gt_subtitle {
+#zdqeohlqjx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -920,7 +928,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#isxgegwcei .gt_heading {
+#zdqeohlqjx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -932,13 +940,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#isxgegwcei .gt_bottom_border {
+#zdqeohlqjx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#isxgegwcei .gt_col_headings {
+#zdqeohlqjx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -953,7 +961,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#isxgegwcei .gt_col_heading {
+#zdqeohlqjx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -973,7 +981,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#isxgegwcei .gt_column_spanner_outer {
+#zdqeohlqjx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -985,15 +993,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#isxgegwcei .gt_column_spanner_outer:first-child {
+#zdqeohlqjx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#isxgegwcei .gt_column_spanner_outer:last-child {
+#zdqeohlqjx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#isxgegwcei .gt_column_spanner {
+#zdqeohlqjx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1005,11 +1013,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#isxgegwcei .gt_spanner_row {
+#zdqeohlqjx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#isxgegwcei .gt_group_heading {
+#zdqeohlqjx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1035,7 +1043,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#isxgegwcei .gt_empty_group_heading {
+#zdqeohlqjx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1050,15 +1058,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#isxgegwcei .gt_from_md > :first-child {
+#zdqeohlqjx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#isxgegwcei .gt_from_md > :last-child {
+#zdqeohlqjx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#isxgegwcei .gt_row {
+#zdqeohlqjx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1077,7 +1085,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#isxgegwcei .gt_stub {
+#zdqeohlqjx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1090,7 +1098,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#isxgegwcei .gt_stub_row_group {
+#zdqeohlqjx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1104,15 +1112,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#isxgegwcei .gt_row_group_first td {
+#zdqeohlqjx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#isxgegwcei .gt_row_group_first th {
+#zdqeohlqjx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#isxgegwcei .gt_summary_row {
+#zdqeohlqjx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1122,16 +1130,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#isxgegwcei .gt_first_summary_row {
+#zdqeohlqjx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#isxgegwcei .gt_first_summary_row.thick {
+#zdqeohlqjx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#isxgegwcei .gt_last_summary_row {
+#zdqeohlqjx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1141,7 +1149,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#isxgegwcei .gt_grand_summary_row {
+#zdqeohlqjx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1151,7 +1159,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#isxgegwcei .gt_first_grand_summary_row {
+#zdqeohlqjx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1161,7 +1169,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#isxgegwcei .gt_last_grand_summary_row_top {
+#zdqeohlqjx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1171,11 +1179,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#isxgegwcei .gt_striped {
+#zdqeohlqjx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#isxgegwcei .gt_table_body {
+#zdqeohlqjx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1184,7 +1192,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#isxgegwcei .gt_footnotes {
+#zdqeohlqjx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1198,7 +1206,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#isxgegwcei .gt_footnote {
+#zdqeohlqjx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1207,7 +1215,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#isxgegwcei .gt_sourcenotes {
+#zdqeohlqjx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1221,7 +1229,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#isxgegwcei .gt_sourcenote {
+#zdqeohlqjx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1229,63 +1237,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#isxgegwcei .gt_left {
+#zdqeohlqjx .gt_left {
   text-align: left;
 }
 
-#isxgegwcei .gt_center {
+#zdqeohlqjx .gt_center {
   text-align: center;
 }
 
-#isxgegwcei .gt_right {
+#zdqeohlqjx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#isxgegwcei .gt_font_normal {
+#zdqeohlqjx .gt_font_normal {
   font-weight: normal;
 }
 
-#isxgegwcei .gt_font_bold {
+#zdqeohlqjx .gt_font_bold {
   font-weight: bold;
 }
 
-#isxgegwcei .gt_font_italic {
+#zdqeohlqjx .gt_font_italic {
   font-style: italic;
 }
 
-#isxgegwcei .gt_super {
+#zdqeohlqjx .gt_super {
   font-size: 65%;
 }
 
-#isxgegwcei .gt_footnote_marks {
+#zdqeohlqjx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#isxgegwcei .gt_asterisk {
+#zdqeohlqjx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#isxgegwcei .gt_indent_1 {
+#zdqeohlqjx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#isxgegwcei .gt_indent_2 {
+#zdqeohlqjx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#isxgegwcei .gt_indent_3 {
+#zdqeohlqjx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#isxgegwcei .gt_indent_4 {
+#zdqeohlqjx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#isxgegwcei .gt_indent_5 {
+#zdqeohlqjx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1891,8 +1899,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./four-parameters-categorical.html" class="pagination-link" aria-label="Four Parameters: Categorical">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></span>
+      <a href="./n-parameters.html" class="pagination-link" aria-label="N Parameters">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">N Parameters</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
