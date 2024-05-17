@@ -15,13 +15,13 @@ library(gtsummary)
 
 > It may be time to move from assuming that research has been honestly conducted and reported to assuming it to be untrustworthy until there is some evidence to the contrary. -- [Richard Smith](https://blogs.bmj.com/bmj/2021/07/05/time-to-assume-that-health-research-is-fraudulent-until-proved-otherwise/), former editor of the *British Medical Journal*.
 
-Having created models with one parameter in @sec-models, two parameters in @sec-two-parameters, three parameters in several earlier chapters, four parameters in @sec-four-parameters and five parameters in @sec-five-parameters, you are now ready to make the jump to $N$ parameters. 
+You are now ready to make the jump to $N$ parameters. 
 
 In this chapter, we will consider models with many parameters and the complexities that arise therefrom. As our models grow in complexity, we need to pay extra attention to basic assumptions like validity, stability, representativeness, and unconfoundedness. It is (too!) easy to jump right in and start interpreting. It is harder, but necessary, to ensure that our models are really answering our questions. 
 
 Imagine you are a Republican running for Governor in Texas. You need to allocate your campaign spending intelligently. For example, you want to do a better job of getting your voters to vote. 
 
-*How can you encourage politically engaged voters to go out to the polls on election day?* 
+> *How can you encourage politically engaged voters to go out to the polls on election day?* 
 
 
 ## Wisdom
@@ -34,17 +34,29 @@ knitr::include_graphics("other/images/Wisdom.jpg")
 
 As you research ways to increase voting, you come across a large-scale experiment showing the effect of sending out a voting reminder that "shames" citizens who do not vote. Perhaps you should pay to send out a shaming voting postcard. 
 
-We will be looking at the `shaming` tibble from the **primer.data** package, sourced from "Social Pressure and Voter Turnout: Evidence from a Large-Scale Field Experiment" ([pdf](/github.com/PPBDS/primer.data/blob/master/inst/papers/shaming.pdf)) by Gerber, Green, and Larimer (2008). You can, and should, familiarize yourself with the data by typing `?shaming`. 
+We will be looking at the `shaming` tibble from the **primer.data** package, sourced from "Social Pressure and Voter Turnout: Evidence from a Large-Scale Field Experiment" ([pdf](/github.com/PPBDS/primer.data/blob/master/inst/papers/shaming.pdf)) by Gerber, Green, and Larimer (2008). Familiarize yourself with the data by typing `?shaming`. 
 
 Recall our initial question: how can we encourage voters to go out to the polls on election day? We now need to translate this into a more precise question, one that we can answer with data. 
 
-*What is the causal effect of postcards on voting?*
+> *What is the causal effect of postcards on voting?*
+
+Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of validity, as to whether or not we can (reasonably!) assume that the two come from the same population.
 
 ### Preceptor Table
 
-The phrasing of the question --- especially the phrase "causal effect" --- makes it obvious that we need a causal, rather than a predictive, model. The *units* of our Preceptor Table are individual voters in Texas around the time of the next election. (Already we can see that the question is still not precise enough.) The *outcome* is voting or not voting. The *covariates* include, at least, measures of political engagement. The *treatments* are postcards of various types. The *potential outcomes* involve whether or not the person voted, depending on the treatment received.
+*Causal or predictive model*: The phrasing of the question --- especially the phrase "causal effect" --- makes it obvious that we need a causal, rather than a predictive, model. There will be at least two potential outcomes for every unit.
 
-Recall the definition of a Preceptor Table. It is the smallest possible table such that, if no data were missing, the calculation of all quantities of interest would be trivial. The **causal effect**, for each individual, is the difference in voting behavior under treatment versus control. Consider:
+*Units*: The units of our Preceptor Table are individual voters in Texas around the time of the next election. 
+
+*Outcome*: The outcome is voting or not voting. That is, we are researching the question of how to convince people to vote, not how to convince them to vote for a specific candidate. This project is about getting our voters to the polls, not about convincing their voters to switch to our side.
+
+*Treatment*: The treatments are postcards of various types.
+
+*Covariates*: The covariates include, at least, measures of political engagement, since that attribute was mentioned in the initial question. There may be other covariates as well. We can't get too detailed until we look at the data.
+
+*Moment in Time*: We care about the upcoming Texas election. 
+
+The Preceptor Table is the smallest possible table such that, if no data were missing, the calculation of all quantities of interest would be trivial. The **causal effect**, for each individual, is the difference in voting behavior under treatment versus control. Consider:
 
 
 ```{r}
@@ -86,20 +98,18 @@ Comments:
 
 * Why is there only one covariate (in addition to the treatment)? Because the question only specifies that one. Any covariates mentioned in the question must be included in the Preceptor Table because, without that information for all units, we can't answer the question. In any real example, we will have other covariates which we might, or might not, include in the model. 
 
-* The outcomes in a Preceptor Table refer to a moment in time. In this case, the outcome occurs on Election Day in 2026. The covariates and treatments must be measured before the outcome, otherwise they can't be modeled as correlated with the outcome.
+* The outcomes in a Preceptor Table refer to a moment in time. In this case, the outcome occurs on Election Day in 2026. The covariates and treatments must be measured before the outcome, otherwise they can't be modeled as connected with the outcome.
 
 * We can update our question:
 
-*What is the causal effect of postcards on voting in the 2026 Texas gubernatorial election? Do those effects vary by political engagement?*
+> *What is the causal effect of postcards on voting in the 2026 Texas gubernatorial election? Do those effects vary by political engagement?*
 
-As usual, our question becomes most more and less precise simultaneously. It is more precise in that we only care about a very specific moment in space and time: the election for governor in Texas in 2026. It is less precise in that we are almost always interested in different aspects of the problem, mainly because of the decisions we must make. 
+As usual, our question becomes both more and less precise simultaneously. It is more precise in that we only care about a very specific moment in space and time: the election for governor in Texas in 2026. It is less precise in that we are almost always interested in different aspects of the problem, mainly because of the decisions we must make. 
 
 In this case, we might not have enough money to send postcards to every voter. Maybe we should focus in politically engaged voters. Maybe we should focus on other subsets. We should probably only send postcards to voters who are Republican or are likely to vote Republican, unless, that is, some postcards actually decrease someone's proposensity to vote. The real world is full of complexity.
 
 
 ### EDA of `shaming`
-
-<!-- DK: Maybe load and explain the packages in the Introduction, except perhaps for the package we need for the EDA? Or maybe only load libraries, like rstanarm, when we actually need them? Should do this the same way throughout the Primer. -->
 
 After loading the packages we need, let's perform an EDA, starting off by running `glimpse()` on the `shaming` tibble from the **primer.data** package. 
 
@@ -108,11 +118,8 @@ After loading the packages we need, let's perform an EDA, starting off by runnin
 #| warning: false
 library(tidyverse)
 library(primer.data)
-library(rstanarm)
 library(ggthemes)
 library(ggdist)
-library(gt)
-library(janitor)
 library(broom.mixed)
 library(gtsummary)
 ```
@@ -128,7 +135,7 @@ Variables of particular interest to us are `sex`, `hh_size`, and `primary_06`. T
 
 There are a few things to note while exploring this data set. You may -- or may not -- have noticed that the only response to the `general_04` variable is "Yes". In their published article, the authors note that "Only registered voters who voted in November 2004 were selected for our sample."  After this, the authors found their history then sent out the mailings. Thus, anyone who did not vote in the 2004 general election is excluded, by definition. Keep that fact in mind when we discuss representativeness below.
 
-The dependent variable is `primary_06`, which is coded either 0 or 1 for whether or not the respondent voted in the 2006 primary election. This is the dependent variable because the authors are trying to measure the **effect** that the treatments have on voting behavior in the 2006 general election. It is also the dependent variable from our point of view since our question also deals with voting behavior.
+The dependent variable is `primary_06`, which is coded either 1 or 0 for whether or not the respondent voted in the 2006 primary election. This is the dependent variable because the authors are trying to measure the **effect** that the treatments have on voting behavior in the 2006 general election. It is also the dependent variable from our point of view since our question also deals with voting behavior.
 
 The `treatment` variable is a factor variable with 5 levels, including the control. Our focus is on those treatments, and on their causal effects, if any. Consider:
 
@@ -149,7 +156,7 @@ In the third treatment, Self, the mailing includes the recent voting record of e
 The fourth treatment, Neighbors, provides the household members' voting records, as well as the voting records of those who live nearby. This mailing also told recipients, "we intend to mail an updated chart" of who voted in the 2006 election to the entire neighborhood. Consider:
 
 
-```{r, echo=FALSE}
+```{r}
 shaming |> 
   sample_frac(0.05) |> 
   ggplot(aes(x = treatment, y = primary_06)) +
@@ -163,29 +170,20 @@ shaming |>
         
 ```
 
-This graphic does not tell us as much as we might like. Most residents did not receive a postcard. Those who did get a postcard had about the same chance of receiving any of the four types of postcard. Since the lower bars are darker, more people in the sample did not vote in the election than did vote. However, we can't really see, much less estimate, a causal effect with just this information.
+This graphic does not tell us as much as we might like. Most residents did not receive a postcard. Those who did get a postcard had about the same chance of receiving any of the four types of postcard. Since the lower bars are darker, more people in the sample did not vote in the election than did vote. However, we can't really see, much less estimate, a causal effect from this graphic.
 
+<!-- DK: Explore and graph measures of social engagement. -->
 
-
-### Validity
-
-Validity is the consistency, or lack there of, in the columns of your data set and the corresponding columns in your Preceptor Table. In order to consider the two data sets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*, which is the first step in Justice. Consider two counter-arguments to the assumption of validity in this case.
-
-First, voting in a primary election in 2006 in Michigan is not the same thing as voting in a general election in Texas in 2026. Primary elections are less newsworthy and, usually, less competitive. Our client, the gubernatorial candidate, has already won his primary. The outcome he cares about is voting in a general elections. Treatments which might, or might not, affect participation in a primary are irrelevant. Moreover, the political culture of Texas and Michigan are very different. The meaning and importance of voting is not identical across states, nor over time.
-
-Second, our client is interested in using a measure of 
-
-Fortunately, at least for our continued use of this example, there are good reasons for making the assumption of validity.
-
-We can also construct our own measure of political engagement. Consider:
-
+The original question mentions "civic engagement." Although `shaming` does not include any variable exactly like this, it does include voting history. Consider:
 
 ```{r}
-shaming <- shaming |> 
-  
+#| code-fold: false
+
+x <- shaming |> 
+    
   # Converting the Y/N columns to binaries with the function we made 
   # note that primary_06 is already binary and also that we don't 
-  # need it to construct a civic engagement variable.
+  # need it to construct a variable based on previous voting behavior.
   
   mutate(p_00 = (primary_00 == "Yes"),
          p_02 = (primary_02 == "Yes"),
@@ -195,19 +193,52 @@ shaming <- shaming |>
          g_04 = (general_04 == "Yes")) |> 
   
   # A sum of the voting action records across the election cycle columns gives
-  # us an idea (though not weighted for when across the elections) of the voters
-  # general level of civic engagement
+  # us an idea of the voters general level of civic involvement.
   
   mutate(civ_engage = p_00 + p_02 + p_04 + 
-                      g_00 + g_02 + g_04)
+                      g_00 + g_02 + g_04) |> 
+  
+  # If you look closely at the data, you will note that g_04 is always Yes, so
+  # the lowest possible value of civ_engage is 1. The reason for this is that
+  # the sample was created by starting with a list of everyone who voted in the
+  # 2004 general election. Note how that fact makes the interpretation of the
+  # relevant population somewhat subtle.
+  
+  mutate(voter_class = case_when(civ_engage %in% c(5, 6) ~ "Always Vote",
+                                 civ_engage %in% c(3, 4) ~ "Sometimes Vote",
+                                 civ_engage %in% c(1, 2) ~ "Rarely Vote"),
+         voter_class = factor(voter_class, levels = c("Rarely Vote", 
+                                                      "Sometimes Vote", 
+                                                      "Always Vote"))) |> 
+  
+  # Centering and scaling the age variable. Note that it would be smart to have
+  # some stopifnot() error checks at this point. For example, if civ_engage < 1
+  # or > 6, then something has gone very wrong.
+  
+  mutate(age_z = as.numeric(scale(age))) |> 
+  
+  # voted in a more natural name for our outcome variable
+  
+  rename(voted = primary_06) |> 
+  
+  # Just keep the variables that we will be using later.
+  
+  select(voted, treatment, sex, age_z, civ_engage, voter_class) |> 
+  
+  # There are only a handful of rows with missing data, so it can't matter much
+  # if we drop them.
+  
+  drop_na()
 ```
 
+Read all those comments! Your code should be commented just as thoroughly. Rough guideline: Have as many lines of comments as you have lines of code.
 
+Of course, when doing the analysis, you don't know when you start what you will be using at the end. Data analysis is a circular process. We mess with the data. We do some modeling. We mess with the data on the basis of what we learned from the models. With this new data, we do some more modeling. And so on. Consider:
 
 ```{r}
-shaming |>
+x |>
   sample_frac(0.05) |> 
-  ggplot(aes(x = civ_engage, y = primary_06)) +
+  ggplot(aes(x = civ_engage, y = voted)) +
     geom_jitter(alpha = 0.03, height = 0.1) +
     scale_x_continuous(breaks = 1:6) + 
     scale_y_continuous(breaks = c(0, 1), labels = c("No", "Yes")) +
@@ -218,22 +249,20 @@ shaming |>
          caption = "Random sample of 5% of the data from Gerber, Green, and Larimer (2008)")
 ```
 
+Although this plot is pleasing, we need to create an actual model with this data in order to answer our questions. 
 
 
+### Validity
 
-### Population
+Validity is the consistency, or lack there of, in the columns of your data set and the corresponding columns in your Preceptor Table. In order to consider the two data sets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*, which is the first step in Justice. Consider two counter-arguments to the assumption of validity in this case.
 
-One of the most important components of Wisdom is the concept of the "population". Recall the questions we asked earlier:
+First, voting in a primary election in 2006 in Michigan is not the same thing as voting in a general election in Texas in 2026. Primary elections are less newsworthy and, usually, less competitive. Our client, the gubernatorial candidate, has already won his primary. The outcome he cares about is voting in a general elections. Treatments which might, or might not, affect participation in a primary are irrelevant. Moreover, the political culture of Texas and Michigan are very different. The meaning and importance of voting is not identical across states, nor over time.
 
-As we have discussed before, the population *is not* the set of people, or voters, for which we have data. This is the data set. Nor is it the set of voters about whom we would like to have data. Those are the rows in the ideal Preceptor Table. The population is the larger --- potentially much larger --- set of individuals which include both the data we have and the data we want. Generally, the population will be much larger than either the data we have and the data we want.  
+Second, our client is interested in using a measure of civic engagement. We build that measure out of past voting behavior. Right now, we aren't even sure that we can access this data in Texas. And, even if we can, the salience of those elections in the years before 2026 will differ from those in Michigan in the years before 2006.
 
-In this case, we are viewing the data from the perspective of someone running for Governor this year that wants to increase voter turnout. We want to increase turnout **now**, not for people voting in 2006! We also may want to increase turnout in those citizens who are not registered to vote, a group that is excluded from our data set. Is it reasonable to generate conclusions for this group? Most likely, no. However, we have limited data to work with and we have to determine how far we are willing to generalize to other groups. 
+Fortunately, at least for our continued use of this example, we will assume that validity holds. The outcome variable in our data and in our Preceptor Table are close enough --- even though one is for a *primary* election while the other is for a *general* election --- that we can just stack them.
 
-It is a judgment call, a matter of Wisdom, as to whether or not we may *assume* that the data we have and the data we want to have (i.e., the ideal Preceptor Table) are drawn from the same population.
-
-<!-- DK: Add table with both our data and ideal Preceptor table and other data (other states, other years). That is our population. In this case, our population is all voters in all states in Gubernatorial elections from 2000 through 2030. Or whatever? Not the only possible population! Could do different years. Could do only a subset of states (big states, competitive states, continental states). Could do other election types. MF: Done, in justice. -->
-
-Even though the original question is about “voters” in general, and does not specifically refer to specific states in which we might be interested, we will assume that the data we have for random voters is, uh, representative enough of the population we are interested in. If we did not believe that, then we should stop right now. *The major part of Wisdom is deciding what questions you can’t answer because of the data you just don’t have.*
+> *Using the results of a voting experiment in Michigan in 2006, we seek to forecast the causal effect on voter participation of sending postcards in the Texas gubernatorial general election of 2026.* 
 
 
 ## Justice 
@@ -246,16 +275,14 @@ Even though the original question is about “voters” in general, and does not
 knitr::include_graphics("other/images/Justice.jpg")
 ```
 
-Justice includes the creation of the Population Table, followed by a discussion about the assumptions of stability, representativeness and unconfoundedness. It concludes by determining the mathematical structure of the data generating mechanism.
+Justice includes the creation of the Population Table, followed by a discussion about the assumptions of stability, representativeness and unconfoundedness. 
 
 
 ### The Population Table
 
 The Population Table  shows rows from three sources: the Preceptor Table, the data, and the population from which the rows in both the Preceptor Table and the data were drawn. 
 
-The rows from our data have everything: the covariates and the outcomes. The covariates here will be Michigan for state and 2006 for year, since these are the pieces of information that are included in our data. Of course, we still do not have values for Treatment minus Control, since we cannot observe one subject under two conditions. 
-
-The rows from the population have no data. These are subjects which fall under our desired population, but for which we have no data. As such, all rows are missing. 
+The better we get at data science, the less that we sweat the details of the Population Table. 
 
 ```{r}
 #| echo: false
@@ -311,46 +338,38 @@ tibble(source = c("...", "...", "...",
   tab_spanner(label = "Outcomes", c(ytreat, ycontrol)) 
 ```
 
-### Validity
+Does the underlying population go back to 1990, or only 1995? Does it include elections in 2040? How about 2050? Are states other than Texas and Michigan included? How about town or municipal elections? Other countries?
 
-To understand validity in regards to the Population Table, we must first recognize an inherent flaw in any experiment design: *no two units receive exactly the same treatment*.
+The reason that we don't worry about those details is that they don't matter to the problem we are trying to solve. Whether or not the population includes voters in 2040 and/or in Toronto does not really matter to our attempts to draw inferences about Texas in 2026. 
 
-We might be thinking: well, surely two postcards are the same? But, they aren't! The postcards sent from our data were sent with information relevant to 2006 --- a different candidate, different language, different syntax. A postcard sent in 2026, even if we used the exact same language, would be encouraging a new candidate with new reform and differing policies. 
+We also don't worry about getting other details correct. For example, we know that this experiment includes four post cards, plus the control. That is five potential outcomes, and 10 possible causal effects, since the definition of a causal effect in the difference between any two potential outcomes. We don't bother to include all those details in the Population Table.
 
-Thus, despite the fact that two units are in the same treatment --- that is, receiving a postcard --- they have very different versions of that treatment. Indeed, there are an infinite number of possible treatments. This is why it is so important to define our estimand clearly.
+Recall that the purpose of the Preceptor Table is to force us to answer the key questions. Is the model predictive or causal? What are the units, outcomes and covariates/treatments?
+
+Similarly, the purpose of the Population Table is to force us to think hard about the key assumptions of validity, stability, representativeness, and unconfoundedness.
+
 
 ### Stability
 
-Stability means that the relationship between the columns is the same for three categories of rows: the data, the Preceptor table, and the larger population from which both are drawn. 
+Stability means that the relationship between the columns is the same for three categories of rows: the data, the Preceptor table, and the larger population from which both are drawn. Of course, what we most need is for the relationship between the columns to be the same between the data and the Preceptor Table. If it isn't, then we can't use models estimated on the former to make inferences about the latter. But it is weird to just assume a connection between in Michigan in 2006 and Texas in 2026. Any such assumption is really a broader claim about many years and many jurisdictions. Our description of the underlying population is the *glue* which connects the data and the Preceptor Table.
 
-With something like height, it is much easier to assume stability over a greater period of time. Changes in global height occur extremely slowly, so height being stable across a span of 20 years is reasonable to assume. Can we say the same for this example, where we are looking at voting behavior?
+Is data collected in 2006 on voting behavior likely to be the same in 2026? Frankly, we don't know! We aren't sure what would impact someone's response to a postcard encouraging them to vote. It is possible, for instance, that a postcard informing neighbors of voting status has a bigger effect in a world with more social media. 
 
-Is data collected in 2006 on voting behavior likely to be the same in 2026? Frankly, we don't know! We aren't sure what would impact someone's response to a postcard encouraging them to vote. It is possible, for instance, that a postcard informing neighbors of voting status *would have more of an effect on voting behavior during a pandemic, when you are more closely interacting with neighbors*. 
-
-When we are confronted with this uncertainty, we can consider making our timeframe smaller. However, we would still need to assume stability from 2006 (time of data collection) to today. Stability allows us to ignore the issue of time. 
+When we are confronted with this uncertainty, we can consider making our timeframe smaller. However, we would still need to assume stability from 2006 (time of data collection) to 2026. Stability allows us to ignore the issue of time. 
 
 ### Representativeness 
 
-This is a good time to consider what it really means to accept that our data is representative of our population. With that in mind, let's break down our real, current question: 
+Even if the stability assumption holds, we still have problems with representativeness because Michigan and Texas are (very?) different states. In one sense, neither the data nor the Preceptor Table is a sample. Both include, more or less, the entire electorates in their respective states. But, from the point of view of the Population Table, they are both samples from the underling population. Even if we, with the help of the stability assumption, don't think that anything has changes between 2006 and 2026, we are still trying to use data from Michigan to make an inference about Texas. The obvious problem is that voters in Michigan are (very?) different from voters in Texas, in all sorts of ways which might matter to our analysis.
 
-* We are running for governor in Texas in the year 2026. In this year and in the United States, we consider sending out a voting reminder postcard to citizens of voting age. Will this reminder encourage voting, and by how much?
 
-Now, let's break down our data from the `shaming` data set:
+### Unconfoundedness
 
-* The data was gathered in Michigan prior to the August 2006 primary election. The population for the experiment was 180,002 households in the state of Michigan. The data only included those who *had* voted in the 2004 general election. Therefore, it did not include non-voters. The reminders were mailed to households at random. 
+The great advantage of randomized assignment of treatment is that it guarantees unconfoundedness. There is no way for treatment assignment to be correlated with anything, including potential outcomes, if treatment assignment is random. 
 
-So, how similar are these groups? Let's start with some differences.
-* The data is from 2006. Our question is asking for answers from 2026. This is not a small gap in time. A lot changes in a decade and a half!
-* The data excludes all non-voters in the last election. Our question, which seeks to increase voting turnout *in all citizens*, would want for non-voters to be included. So, can we make any claims about those citizens? Probably not.
-* The data only includes voters from Michigan. We want to make inferences about Texas, or perhaps the United States as a whole. Is it within reason to do that?
 
-Generally: *if there was no chance that a certain type of person would have been in this experiment, we cannot make an assumption for that person*. 
+> *Using the results of a voting experiment in Michigan in 2006 primary election, we seek to forecast the causal effect on voter participation of sending postcards in the Texas gubernatorial general election of 2026. There is concern that data from a primary election might not generalize to a general election and that political culture in the two states differ too much to allow for data from one to enable useful forecasts in the other.* 
 
-The purpose of this section is to make us think critically about the assumptions we are making and whether those assumptions can be reasonably made. Though we will continue using this data set in the remainder of the chapter, it is clear that we must make our predictions with caution.  
 
-### Functional form
-
-<!-- DK: Discuss functional form. --> 
 
 ## Courage
 ```{r}
@@ -361,69 +380,27 @@ The purpose of this section is to make us think critically about the assumptions
 knitr::include_graphics("other/images/Courage.jpg")
 ```
 
-### Set-up
 
-Now, we will create an object named `object_1` that includes a 3-level factor classifying voters by level of civic engagement. 
+### Models
 
-* Convert all primary and general election variables *that are not already 1/0 binary* to binary format. 
+Justice gave us the Population Table. Courage selects the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have. We explore different models. We need to decide which variables to include and to estimate the values of unknown parameters. We check our models for consistency with the data we have. We avoid hypothesis tests. We select one model, the data generating mechanism or DGM.
 
-* Create a new column named `civ_engage` that sums up each person's voting behavior up to, but not including, the 2006 primary. 
+<!-- DK: Should either do logistic or discuss more why not. Seem to recall that logistic took a long time with so much data. -->
 
-* Create a column named `voter_class` that classifies voters into 3 bins: "Always Vote" for those who voted at least 5 times, "Sometimes Vote" for those who voted between 3 or 4 times, and "Rarely Vote" for those who voted 2 or fewer times. This variable should be classified as a factor.  
+Given that the outcome variable is 0/1, a logistic model is the obvious choice. However, in this case, a linear model with a normal error term provides more or less the same answer.
 
-* Create a column called `z_age` which is the z-score for `age`. 
-
-```{r}
-object_1 <- shaming |> 
-  
-  # Converting the Y/N columns to binaries with the function we made 
-  # note that primary_06 is already binary and also that we don't 
-  # need it to predict construct previous voter behavior status variable.
-  
-  mutate(p_00 = (primary_00 == "Yes"),
-         p_02 = (primary_02 == "Yes"),
-         p_04 = (primary_04 == "Yes"),
-         g_00 = (general_00 == "Yes"),
-         g_02 = (general_02 == "Yes"),
-         g_04 = (general_04 == "Yes")) |> 
-  
-  # A sum of the voting action records across the election cycle columns gives
-  # us an idea (though not weighted for when across the elections) of the voters
-  # general level of civic involvement.
-  
-  mutate(civ_engage = p_00 + p_02 + p_04 + 
-                      g_00 + g_02 + g_04) |> 
-  
-  # If you look closely at the data, you will note that g_04 is always Yes, so
-  # the lowest possible value of civ_engage is 1. The reason for this is that
-  # the sample was created by starting with a list of everyone who voted in the
-  # 2004 general election. Note how that fact makes the interpretation of the
-  # relevant population somewhat subtle.
-  
-  mutate(voter_class = case_when(civ_engage %in% c(5, 6) ~ "Always Vote",
-                                 civ_engage %in% c(3, 4) ~ "Sometimes Vote",
-                                 civ_engage %in% c(1, 2) ~ "Rarely Vote"),
-         voter_class = factor(voter_class, levels = c("Rarely Vote", 
-                                                      "Sometimes Vote", 
-                                                      "Always Vote"))) |> 
-  
-  # Centering and scaling the age variable. Note that it would be smart to have
-  # some stopifnot() error checks at this point. For example, if civ_engage < 1
-  # or > 6, then something has gone very wrong.
-  
-  mutate(z_age = as.numeric(scale(age))) |> 
-  select(primary_06, treatment, sex, civ_engage, voter_class, z_age)
-```
-
-Let's inspect our object: 
+We will need our usual modeling packages:
 
 ```{r}
-object_1 |> 
-  slice(1:3)
-```
-Great! Now, we will create our first model: the relationship between `primary_06`, which represents whether a citizen voted or not, against sex and treatment. 
+#| message: false
+#| code-fold: false
 
-### primary_06 ~ treatment + sex
+library(brms)
+library(tidybayes)
+```
+
+
+#### voted ~ treatment + sex
 
 
 In this section, we will look at the relationship between primary voting and treatment + sex. 
@@ -435,7 +412,7 @@ Without variable names:
 $$ y_{i} = \beta_{0} + \beta_{1}x_{i, 1} + \beta_{2}x_{i,2} ... + \beta_{n}x_{i,n} + \epsilon_{i} $$
 With variable names: 
 
-$$ y_{i} = \beta_{0} + \beta_{1}civic\_duty_i + \beta_{2}hawthorne_i + \beta_{3}self_i + \beta_{4}neighbors_i + \beta_{5}male_i + \epsilon_{i} $$
+$$ voted_{i} = \beta_{0} + \beta_{1}civic\_duty_i + \beta_{2}hawthorne_i + \beta_{3}self_i + \beta_{4}neighbors_i + \beta_{5}male_i + \epsilon_{i} $$
 
 There are two ways to formalize the model used in `fit_1`: with and without the variable names. The former is related to the concept of Justice as we acknowledge that the model is constructed via the linear sum of `n` parameters times the value for `n` variables, along  with an error term. In other words, it is a linear model. The only other model we have learned this semester is a logistic model, but there are other kinds of models, each defined by the mathematics and the assumptions about the error term. 
 
@@ -446,10 +423,15 @@ Let's translate the model into code.
 
 ```{r}
 #| cache: true
-fit_1 <- stan_glm(data = object_1,
-                  formula = primary_06 ~ treatment + sex,
-                  refresh = 0,
-                  seed = 987)
+#| code-fold: false
+
+fit_1 <- brm(formula = voted ~ treatment + sex,
+             data = x,
+             family = gaussian(),
+             refresh = 0,
+             silent = 2,
+             seed = 99)
+
 ```
 
 ```{r}
@@ -475,32 +457,33 @@ tbl_regression(fit_1,
 
 Interpretation: 
 
-* The intercept of this model is the expected value of the probability of someone voting in the 2006 primary given that they are part of the control group and are female. In this case, we estimate that women in the control group will vote ~`r round((coef(fit_1)["(Intercept)"] * 100), 1)`% of the time. 
+* The intercept of this model is the expected value of the probability of someone voting in the 2006 primary given that they are part of the control group and are female. In this case, we estimate that women in the control group will vote ~`r round(fixef(fit_1)["Intercept", 1]* 100, 0)`% of the time. 
 
-* The coefficient for `sexMale` indicates the difference in likelihood of voting between a male and female. In other words, when comparing men and women, the `r round(coef(fit_1)["sexMale"], 3)` implies that men are ~`r round((coef(fit_1)["sexMale"] * 100), 1)`%  more likely to vote than women. Note that, because this is a linear model with no interactions between sex and other variables, this difference applies to any male, regardless of the treatment he received. Because sex can not be manipulated (by assumption), we should not use a causal interpretation of the coefficient. 
+* The coefficient for `sexMale` indicates the difference in likelihood of voting between a male and female. In other words, when comparing men and women, the `r round(fixef(fit_1)["sexMale", 1], 3)` implies that men are ~`r round(fixef(fit_1)["sexMale", 1] * 100, 1)`%  more likely to vote than women. Note that, because this is a linear model with no interactions between sex and other variables, this difference applies to any male, regardless of the treatment he received. Because sex can not be manipulated (by assumption), we should not use a causal interpretation of the coefficient. 
 
-* The coefficients of the treatments, on the other hand, do have a causal interpretation. For a single individual, of either sex, being sent the Self postcard increases your probability of voting by `r round((coef(fit_1)["treatmentSelf"] * 100), 1)`%. It appears that the `Neighbors` treatment is the most effective at ~`r round((coef(fit_1)["treatmentNeighbors"] * 100), 1)`% and `Civic Duty` is the least effective at ~`r round((coef(fit_1)["treatmentCivic Duty"] * 100), 1)`%. 
+* The coefficients of the treatments, on the other hand, do have a causal interpretation. For a single individual, of either sex, being sent the Self postcard increases your probability of voting by `r round(fixef(fit_1)["treatmentSelf", 1] * 100, 1)`%. It appears that the `Neighbors` treatment is the most effective at ~`r round(fixef(fit_1)["treatmentNeighbors", 1] * 100, 1)`% and `Civic Duty` is the least effective at ~`r round(fixef(fit_1)["treatmentCivicDuty", 1] * 100, 1)`%. 
 
 
-### primary_06 ~ z_age + sex + treatment + voter_class + voter_class*treatment
+#### voted ~ age_z + sex + treatment + voter_class + voter_class*treatment
 
-It is time to look at interactions! Create another model named `fit_2` that estimates `primary_06` as a function of `z_age`, `sex`, `treatment`, `voter_class`, and the interaction between treatment and voter classification. 
+It is time to look at interactions! Create another model named `fit_2` that estimates `voted` as a function of `age_z`, `sex`, `treatment`, `voter_class`, and the interaction between treatment and voter classification. 
 
 The math: 
 
-$$y_{i} = \beta_{0} + \beta_{1}z\_age + \beta_{2}male_i + \beta_{3}civic\_duty_i + \\ \beta_{4}hawthorne_i + \beta_{5}self_i + \beta_{6}neighbors_i + \\ \beta_{7}Sometimes\ vote_i + \beta_{8}Always\ vote_i + \\ \beta_{9}civic\_duty_i Sometimes\ vote_i + \beta_{10}hawthorne_i Sometimes\ vote_i + \\ \beta_{11}self_i Sometimes\ vote_i + \beta_{11}neighbors_i Sometimes\ vote_i + \\ \beta_{12}civic\_duty_i Always\ vote_i + \beta_{13}hawthorne_i Always\ vote_i + \\ \beta_{14}self_i Always\ vote_i + \beta_{15}neighbors_i Always\ vote_i + \epsilon_{i}$$
+$$y_{i} = \beta_{0} + \beta_{1} age\_z + \beta_{2}male_i + \beta_{3}civic\_duty_i + \\ \beta_{4}hawthorne_i + \beta_{5}self_i + \beta_{6}neighbors_i + \\ \beta_{7}Sometimes\ vote_i + \beta_{8}Always\ vote_i + \\ \beta_{9}civic\_duty_i Sometimes\ vote_i + \beta_{10}hawthorne_i Sometimes\ vote_i + \\ \beta_{11}self_i Sometimes\ vote_i + \beta_{11}neighbors_i Sometimes\ vote_i + \\ \beta_{12}civic\_duty_i Always\ vote_i + \beta_{13}hawthorne_i Always\ vote_i + \\ \beta_{14}self_i Always\ vote_i + \beta_{15}neighbors_i Always\ vote_i + \epsilon_{i}$$
 Translate into code: 
 
 ```{r}
 #| cache: true
+#| code-fold: false
 
-fit_2 <- stan_glm(data = object_1,
-                  formula = primary_06 ~ z_age + sex + treatment + voter_class + 
+fit_2 <- brm(formula = voted ~ age_z + sex + treatment + voter_class + 
                             treatment*voter_class,
-                  family = gaussian,
-                  refresh = 0,
-                  seed = 789)
-
+             data = x,
+             family = gaussian(),
+             refresh = 0,
+             silent = 2,
+             seed = 19)
 ```
 
 ```{r}
@@ -510,6 +493,8 @@ print(fit_2, digits = 3)
 As we did with our first model, create a regression table to observe our findings: 
 
 ```{r}
+#| warning: false
+
 tbl_regression(fit_2, 
                intercept = TRUE, 
                estimate_fun = function(x) style_sigfig(x, digits = 3)) |>
@@ -523,14 +508,21 @@ tbl_regression(fit_2,
 Now that we have a summarized visual for our data, let's interpret the findings: 
 
 * The intercept of `fit_2` is the expected probability of voting in the upcoming election for a woman of average age  (~ 50 years old in this data), who is assigned to the No Postcard group, and is a Rarely Voter. The
-estimate is `r round((coef(fit_2)["(Intercept)"] * 100), 1)`%. 
+estimate is `r round(fixef(fit_2)["Intercept", 1] * 100, 1)`%. 
 
-* The coefficient of z_age, `r round(coef(fit_2)["z_age"], 1)`, implies a change of ~`r round((coef(fit_2)["z_age"] * 100), 1)`% in likelihood of voting for each increment of one standard deviation (~ 14.45 years). For example: when comparing someone 50 years old with someone 65, the latter is about `r round((coef(fit_2)["z_age"] * 100), 1)`% more likely to vote.
+* The coefficient of age_z, `r round(fixef(fit_2)["age_z", 1], 3)`, implies a change of ~`r round(fixef(fit_2)["age_z", 1] * 100, 1)`% in likelihood of voting for each increment of one standard deviation (~ 14.45 years). For example: when comparing someone 50 years old with someone 65, the latter is about `r round(fixef(fit_2)["age_z", 1] * 100, 1)`% more likely to vote.
 
-* Exposure to the Neighbors treatment shows a ~`r round((coef(fit_2)["treatmentNeighbors"] * 100), 1)`% increase in voting likelihood for someone in the Rarely Vote category. Because of random assignment of treatment, we can interpret that coefficient as an estimate
+* Exposure to the Neighbors treatment shows a ~`r round(fixef(fit_2)["treatmentNeighbors", 1] * 100, 1)`% increase in voting likelihood for someone in the Rarely Vote category. Because of random assignment of treatment, we can interpret that coefficient as an estimate
 of the average treatment effect. 
 
-* If someone were from a different voter classification, the calculation is more complex because we need to account for the interaction term. For example, for individuals who Sometimes Vote, the treatment effect of Neighbors is `r round(coef(fit_2)["treatmentNeighbors"] + coef(fit_2)["treatmentNeighbors:voter_classSometimes Vote"], 1)`%. For Always Vote Neighbors, it is `r round(coef(fit_2)["treatmentNeighbors"] + coef(fit_2)["treatmentNeighbors:voter_classAlways Vote"], 1)`%. 
+* If someone were from a different voter classification, the calculation is more complex because we need to account for the interaction term. For example, for individuals who Sometimes Vote, the treatment effect of Neighbors is `r round((fixef(fit_2)["treatmentNeighbors", 1]  + fixef(fit_2)["treatmentNeighbors:voter_classSometimesVote", 1]) * 100, 1)`%. For Always Vote Neighbors, it is `r round((fixef(fit_2)["treatmentNeighbors", 1]  + fixef(fit_2)["treatmentNeighbors:voter_classAlwaysVote", 1]) * 100, 1)`%. 
+
+### Tests
+
+### Data Generating Mechanism
+
+Should we use `fit_1` or `fit_2`? Reasonable people will differ.
+
 
 ## Temperance
 
@@ -548,19 +540,20 @@ To answer the question, we want to look at different average treatment effects f
 
 In this section, we will create a plot that displays the posterior probability distributions of the average treatment effects for men of average age across all combinations of 4 treatments and 3 voter classifications. This means that we are making a total of *12* inferences. 
 
-*Important note*: We could look at lots of ages and both Male and Female subjects. However, that would not change our estimates of the treatment effects. The model is linear, so terms associated with `z_age` and `sex` disappear when we do the subtraction. This is one of the great advantages of linear models. 
+*Important note*: We could look at lots of ages and both Male and Female subjects. However, that would not change our estimates of the treatment effects. The model is linear, so terms associated with `age_z` and `sex` disappear when we do the subtraction. This is one of the great advantages of linear models. 
 
 To begin, we will need to create our `newobs` object. 
 
 ```{r}
-# Because our model is linear, the terms associated with z_age and sex disappear
+#| code-fold: false
+
+# Because our model is linear, the terms associated with age_z and sex disappear
 # when we perform subtraction. The treatment effects calculated thereafter will
 # not only apply to males of the z-scored age of ~ 50 years. The treatment
 # effects apply to all participants, despite calling these inputs.
 
-
 sex <- "Male"
-z_age <- 0
+age_z <- 0
 treatment <- c("No Postcard",
                "Civic Duty",
                "Hawthorne",
@@ -572,13 +565,12 @@ voter_class <- c("Always Vote",
 
 # This question requires quite the complicated tibble! Speaking both
 # hypothetically and from experience, keeping track of loads of nondescript
-# column names after running posterior_epred() while doing ATE calculations
-# leaves you prone to simple, but critical, errors. expand_grid() was created
-# for cases just like this - we want all combinations of treatments and voter
-# classifications in the same way that our model displays the interaction term
-# parameters.
+# column names while doing ATE calculations leaves you prone to simple, but
+# critical, errors. expand_grid() was created for cases just like this - we want
+# all combinations of treatments and voter classifications in the same way that
+# our model displays the interaction term parameters.
 
-newobs <- expand_grid(sex, z_age, treatment, voter_class) |> 
+newobs <- expand_grid(sex, age_z, treatment, voter_class) |> 
   
   # This is a handy setup for the following piece of code that allows us to
   # mutate the ATE columns with self-contained variable names. This is what
@@ -586,44 +578,69 @@ newobs <- expand_grid(sex, z_age, treatment, voter_class) |>
   # aren't familiar, check out the help page for paste() at `?paste`.
   
   mutate(names = paste(treatment, voter_class, sep = "_"))
-
-pe <- posterior_epred(fit_2,
-                        newdata = newobs) |> 
-  as_tibble() |> 
-  
-  # Here we can stick the names that we created in newobs onto the otherwise
-  # unfortunately named posterior_epred() output. 
-  
-  set_names(newobs$names)
 ```
 
+Take a look the `newobs` object before trying to use it.
 
-Now that we have our `newobs` to work with, we will need to create an object named `plot_data` that collects the treatment effect calculations. 
+```{r}
+#| code-fold: false
 
-Recall that, when calculating a treatment effect, we need to subtract the estimate for each category from the control group for that category. For example, if we wanted to find the treatment effect for the Always Vote Neighbors group, we would need: Always Vote Neighbors - Always Vote No Postcard. 
+newobs
+```
+
+Now that we have `newobs`, we just use the same call to `add_epred_draws()` as usual.
+
+```{r}
+#| code-fold: false
+fit_2 |> 
+  add_epred_draws(newdata = newobs)
+```
+
+<!-- DK: Discuss how these are continuous, not 0/1. What does it mean? Why can we use it? -->
+
+This data is not in a format which is easy to work with. We want to calculate causal effects, which are the difference between two potential outcomes. This is easiest to do when all potential outcomes are on the same line. Consider:
+
+```{r}
+#| code-fold: false
+draws <- fit_2 |> 
+  add_epred_draws(newdata = newobs) |> 
+  ungroup() |> 
+  select(names, .epred) |>  
+  pivot_wider(names_from = names, 
+              values_from = .epred, 
+              values_fn = list) |>
+  unnest(cols = everything()) |> 
+  janitor::clean_names()
+
+draws
+```
+
+Each column has 4,000 rows, representing 4,000 draws from the posterior probability distribution of average voting likelihood for a person with that level of civic engagement and subject to that treatment. So, `no_postcard_always_vote` is the posterior for the average (or predicted) likelihood of voting for someone who did not receive a postcard, i.e., they were a control, and who "always votes."
+
+Recall that, when calculating a treatment effect, we need to subtract the estimate for each category from the control group for that category. For example, if we wanted to find the treatment effect for the `neighbors_always_vote` group, we would need: `neighbors_always_vote` minus `no_postcard_always_vote`. 
 
 Therefore, we will use `mutate()` twelve times, for each of the treatments and voting frequencies. After, we will `pivot_longer` in order for the treatment effects to be sensibly categorized for plotting. If any of this sounds confusing, read the code comments carefully. 
 
 
 ```{r}
-plot_data <- pe |> 
+plot_data <- draws |> 
   
   # Using our cleaned naming system, ATE calculations are simple enough. Note
   # how much easier the code reads because we have taken the trouble to line up
   # the columns.
   
-  mutate(`Always Civic-Duty`    = `Civic Duty_Always Vote`     - `No Postcard_Always Vote`,
-         `Always Hawthorne`     = `Hawthorne_Always Vote`      - `No Postcard_Always Vote`,
-         `Always Self`          = `Self_Always Vote`           - `No Postcard_Always Vote`,
-         `Always Neighbors`     = `Neighbors_Always Vote`      - `No Postcard_Always Vote`,
-         `Sometimes Civic-Duty` = `Civic Duty_Sometimes Vote`  - `No Postcard_Sometimes Vote`,
-         `Sometimes Hawthorne`  = `Hawthorne_Sometimes Vote`   - `No Postcard_Sometimes Vote`,
-         `Sometimes Self`       = `Self_Sometimes Vote`        - `No Postcard_Sometimes Vote`,
-         `Sometimes Neighbors`  = `Neighbors_Sometimes Vote`   - `No Postcard_Sometimes Vote`,
-         `Rarely Civic-Duty`    = `Civic Duty_Rarely Vote`     - `No Postcard_Rarely Vote`,
-         `Rarely Hawthorne`     = `Hawthorne_Rarely Vote`      - `No Postcard_Rarely Vote`,
-         `Rarely Self`          = `Self_Rarely Vote`           - `No Postcard_Rarely Vote`,
-         `Rarely Neighbors`     = `Neighbors_Rarely Vote`      - `No Postcard_Rarely Vote`) |> 
+  mutate(`Always Civic-Duty`    = civic_duty_always_vote     - no_postcard_always_vote,
+         `Always Hawthorne`     = hawthorne_always_vote      - no_postcard_always_vote,
+         `Always Self`          = self_always_vote           - no_postcard_always_vote,
+         `Always Neighbors`     = neighbors_always_vote      - no_postcard_always_vote,
+         `Sometimes Civic-Duty` = civic_duty_sometimes_vote  - no_postcard_sometimes_vote,
+         `Sometimes Hawthorne`  = hawthorne_sometimes_vote   - no_postcard_sometimes_vote,
+         `Sometimes Self`       = self_sometimes_vote        - no_postcard_sometimes_vote,
+         `Sometimes Neighbors`  = neighbors_sometimes_vote   - no_postcard_sometimes_vote,
+         `Rarely Civic-Duty`    = civic_duty_rarely_vote     - no_postcard_rarely_vote,
+         `Rarely Hawthorne`     = hawthorne_rarely_vote      - no_postcard_rarely_vote,
+         `Rarely Self`          = self_rarely_vote           - no_postcard_rarely_vote,
+         `Rarely Neighbors`     = neighbors_rarely_vote      - no_postcard_rarely_vote) |> 
   
   # This is a critical step, we need to be able to reference voter
   # classification separately from the treatment assignment, so pivoting in the
@@ -668,7 +685,7 @@ plot_data  |>
     
     scale_x_continuous(labels = scales::percent_format(accuracy = 1),
                        breaks = seq(-0.05, 0.11, 0.01)) +
-    labs(title = "Treatment Effects on The Probability of Voting",
+    labs(title = "Treatment Effects on the Probability of Voting",
          subtitle = "Postcards work less well on those who rarely vote",
          y = "Postcard Type",
          x = "Average Treatment Effect",
@@ -730,33 +747,11 @@ For instance, would we be shocked if the treatment effect of the Neighbors postc
 
 But, what amounts to a large enough difference to be a cause for concern? In other words, how wrong do we have to be in a one-off for our boss to be suspicious? When is "bad luck" a sign of stupidity? We will delve into this question in the next section of our chapter. 
 
-#### Bad luck or bad work? 
 
-In any *one* problem, it is hard to know if we were "right," if our posterior was similar to the DGM posterior. After all, 5% of the time the answer is outside the 95% confidence interval. But if the truth ends up very, very far away from the median of our posterior, our boss will be rightly suspicious. How many MAD SDs or standard errors away do we have to be from the truth before we are obviously a fool?  
-
-There are many ways to judge a forecast. Here, we’re looking at two main things: the calibration of a forecast — that is, whether events that we said would happen 30 percent of the time actually happened about 30 percent of the time — and how our forecast compared with an unskilled estimate that relies solely on historical averages. We can answer those questions using calibration plots and skill scores, respectively. These concepts are a bit too advanced for this course, but their foundations are important to understand. 
-
-Calibration plots compare what we predicted with what actually happened. Single predictions can be difficult to judge on their own, so we often want to group many predictions together in bins and plot the averages of each bin's forecasted increase in voting against the actual increase in voting. If our forecasts are well-calibrated, then all of the bins on the calibration plot will be close to the 45 degree line; if our forecast was poorly calibrated, the bins will be further away. Our second tool, skill scores, lets us evaluate our forecasts even further, combining accuracy and an appetite for risk into a single number. 
-
-Brier skill scores tell us how much more valuable our forecasts are than an unskilled estimate, one that is informed by historical averages — e.g., a guess that a postcard will increase voting by 5%. 
-
-These are the *technical* ways that we can judge our own work's accuracy. Our boss will likely judge using other methods. 
-
-For instance, if we answer many questions (by creating many posteriors for different problems) then, over time, our boss will get a sense of our actual skill, both because our median should be above and below the truth about the same proportion and because our confidence intervals should be correctly calibrated.
-
-We know, from experience, that our posteriors are often too narrow. They assume that we know the DGM when, in fact, we know that we do not. What do we do with that knowledge? First, we prepare our boss for this fact. This is the humility in Temperance. Second, we estimate *dozens* of different models and combine their posteriors. The result might very well have the same median as your correct posterior, but the confidence intervals would be much wider. These concepts are more advanced than the Primer, but they are important to consider when making predictions. 
 
 ## Summary
 
-* Use the `tidy()` function from the **broom.mixed** package to make models with $N$ parameters easier to interpret. 
 
-* A function we are familiar with, `stan_glm()`, is used to create models with $N$ parameters. 
-
-* It is important to remember that the data does not equal the truth. 
-
-* The population we would like to make inferences about *is not the population for which we have data*. It is a matter of wisdom whether the data we do have maps closely enough to the population we are studying.
-
-* When dealing with models with many parameters, double check that you know how to find the true slope and intercepts --- often, this requires adding numerous values to the coefficient you are studying. 
 
 ```{r}
 #| echo: false
