@@ -5,7 +5,7 @@ Change 2023 to 2024 everywhere.
 
 Using brms. But! Use it alone in the first 4 chapters of its use. Then, start using it with tidymodels, and then show more tidymodels.
 
-I suspect that the reason we see segfaults in probability and sampling, but only after each has knitted to html, has something to do with the graphics in both, and how those graphics interact with XQuartz. library(rgl) seems to be the cuplrit, or maybe library(rayshader).
+I suspect that the reason we see segfaults in probability and sampling, but only after each has knitted to html, has something to do with the graphics in both, and how those graphics interact with XQuartz. library(rgl) seems to be the cuplrit, or maybe library(rayshader). That might explain the problems in probability, but we get the exact same error in sampling, even after removing those libraries. Need to create a reprex package which shows this error.
 
 
 ## Plan

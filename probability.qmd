@@ -1096,7 +1096,7 @@ set.seed(9)
 
 
 
-```{r}
+```{r, cache = TRUE}
 # Pipes generally start with tibbles, so we start with a tibble which just
 # includes an ID variable. We don't really use ID. It is just handy for getting
 # organized. We call this object `jd_disease`, where the `jd` stands for
@@ -1143,7 +1143,7 @@ jd_disease |>
 Below is a joint distribution displayed in 3D. Instead of using the "jitter" feature in R to unstack the dots, we are using a 3D plot to visualize the number of dots in each box. The number of people who correctly test negative is far greater than of the other categories. The 3D plot shows the total number of cases for each section (True positive, True negative, False positive, False negative),the 3D bar coming from those combinations. Now,pay attention to the two rows of the 3D graph, if you trying to add up the length of the 3D bar for the top two sections and the bottom two sections, they should be equal to each other, where each have 10,000 case. This is because we simulate the experience in two independent and separate world one in the have-disease world and one in the no-disease world.
 
 
-```{r}
+```{r, cache = TRUE}
 #| echo: false
 #| eval: false
 
@@ -1503,7 +1503,7 @@ Question: *What is the probability of getting exactly 8 heads out of 20 tosses?*
 
 To start, it is useful to consider all the things which might happen if, for example, $\rho_h = 0.4$. Fortunately, the R functions for simulating random variables makes this easy.
 
-```{r}
+```{r, cache = TRUE}
 #| echo: false
 set.seed(9)
 
@@ -1571,7 +1571,7 @@ jd_coin |>
 
 Here is the 3D version of the same plot.
 
-```{r}
+```{r, cache = TRUE}
 #| echo: false
 #| eval: false
 
@@ -1673,7 +1673,7 @@ There are three main ways you could go about solving this problem with simulatio
 
 The first *wrong* way to do this is assuming that $\rho_h$ is certain because we observed 8 heads after 20 tosses. We would conclude that 8/20 gives us 0.4. The big problem with this is that you are ignoring your uncertainty when estimating $\rho_h$. This would lead us to the following code.
 
-```{r}
+```{r, cache = TRUE}
 #| cache: true
 
 sims <- 10000000
