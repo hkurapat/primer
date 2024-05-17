@@ -5,9 +5,6 @@
 #| message: false
 #| echo: false
 #| warning: false
-options(rgl.useNULL = TRUE)
-library(rgl)
-library(rayshader)
 library(gt)
 library(gtsummary)
 library(patchwork)

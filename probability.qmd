@@ -20,7 +20,6 @@
 # 3-D image that students could manipulate, turning and twisting it . But no
 # need to spend more time on it now!
 
-options(rgl.useNULL = TRUE)
 library(rayshader)
 library(tidyverse)
 library(magick)

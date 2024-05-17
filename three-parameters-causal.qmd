@@ -268,7 +268,7 @@ with $\epsilon_i \sim N(0, \sigma^2)$. $y_i$ is the attitude toward immigration 
 We create our fitted model in the usual way.
 
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 fit_gauss <- brm(formula = att_end ~ treatment,
              data = trains,
@@ -346,7 +346,7 @@ Again, we see the problem. The true data is always within the range of 3 to 15. 
 
 Let's explore the issue by first changing `treat_end` from a continuous to an integer variable, which is probably more correct, and then re-estimate the model. Besides changing `att_end` to an integer, we also change the family to `poisson()` since this is the recommended model for dealing with "count" data 
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 
 trains2 <- trains |> 
