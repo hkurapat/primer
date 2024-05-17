@@ -423,7 +423,7 @@ Deciding which variables to include in a model is a subset of the larger questio
 
 Consider two models which explain attitudes to immigration among Boston commuters.
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 fit_liberal <- brm(att_end ~ liberal,
                    data = trains,
@@ -436,7 +436,7 @@ fixef(fit_liberal)
 ```
 
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 fit_att_start <- brm(att_end ~ att_start,
                      data = trains,

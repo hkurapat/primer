@@ -1270,7 +1270,7 @@ By looking at the posterior graph we just create, we can answer this question ea
 Now let's consider the manipulation of this posterior, here is another question.
 Question : *10 people walks up to testing center, 5 of them tested negative, 5 of them tested positive, what is the probability of at least 6 people are actually healthy? *
 
-```{r}
+```{r, cache = TRUE}
 tibble(test = 1:100000) |>
   mutate(person1 =  map_int(test, ~ rbinom(n = 1, size = 1, p = 0.3))) |>
   mutate(person2 =  map_int(test, ~ rbinom(n = 1, size = 1, p = 0.3))) |>
@@ -1325,7 +1325,7 @@ Step 1: Simulate the data into an tibble
 
 Let's say you take a marble out of the bag, record whether it's black or white, then return it to the bag. You repeat this three times, observing the number of white marbles you see out of three trials. You could get three whites, two whites, one white, or zero whites as a result of this trial. We have three models (three different proportions of white marbles in the bag) and four possible experimental results. Let's create 3,000 draws from this joint distribution:
 
-```{r}
+```{r, cache = TRUE}
 # Create the joint distribution of the number of white marbles in the bag
 # (in_bag) and the number of white marbles pulled out in the sample (in_sample),
 # one-by-one. in_bag takes three possible values: 0, 1 and 2, corresponding to
@@ -1378,7 +1378,7 @@ jd_marbles |>
 
 Here is the 3D visualization:
 
-```{r}
+```{r, cache = TRUE}
 #| echo: false
 #| eval: false
 

@@ -345,7 +345,7 @@ library(tidybayes)
 Because we are estimating a linear model, we begin with:
 
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 #| message: false
 

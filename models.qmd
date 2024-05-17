@@ -274,7 +274,7 @@ The **brms** package provides a user-friendly interface to work with the statist
 
 The key function in the **brms** package is `brm()`. 
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 fit_gauss <- brm(formula = biden ~ 1,
                 data = poll_data)
@@ -293,7 +293,7 @@ Notes:
 * Because the fitting process is random, if we run this code again we will get a (very slightly) different answer. In most applications, the differences are too small to matter. But, they are annoying! So, we use the `seed` argument so that your result will match ours.
 
 
-```{r}
+```{r, cache = TRUE}
 #| code-fold: false
 fit_gauss <- brm(formula = biden ~ 1,
                 data = poll_data,
