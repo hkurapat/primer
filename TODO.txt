@@ -1,7 +1,12 @@
 # Priorities
 
-Change 2023 to 2024 everywhere.
 
+Need to standardize definitions of all assumptions and restate those definitions at the start of the relevant section. 
+
+Need to standardize the display of the mathematical structure of the model (which uses y's and x's) and which goes at the beginning of courage.
+
+
+Change 2023 to 2024 everywhere.
 
 Using brms. But! Use it alone in the first 4 chapters of its use. Then, start using it with tidymodels, and then show more tidymodels.
 

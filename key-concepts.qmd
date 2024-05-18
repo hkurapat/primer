@@ -17,6 +17,8 @@ library(gt)
 
 <!-- Would be great to make a cool animation of this, perhaps with a simple example. Would be fun to have a similar animation for each chapter. Great summer project! -->
 
+<!-- Need a good definition for each assumption, and then begin each section devoted to that assumption with this definition. -->
+
 <!-- When starting a new chapter, copy/paste this: -->
 
 <!-- ## Wisdom -->
@@ -270,6 +272,8 @@ We discuss at one example of why stability might *not* hold in this case. These 
 
 Regardless of those concerns, we always conclude that, although the assumption of stability might not hold perfectly, the world is probably stable enough over this time period to make inference possible.
 
+*The longer the time period covered by the Preceptor Table (and the data), the more suspect the assumption of stability becomes.* 
+
 #### Representativeness
 
 As with all our assumptions, we always begin by restating the definition. **Representativeness**, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows from the same moment in time. The second is between our data and the other rows of equivalent vintage.
@@ -281,6 +285,8 @@ We mention specific examples of two potential problems. First, is our data repre
 Provide specific examples of how a lack of representativeness might be a problem, one large enough to affect your ability to answer the question.
 
 But, to continue the analysis, we always assume/pretend that the rows from both the data and the Preceptor Table are representative *enough* of the relevant time period from within the larger population from which both are drawn.
+
+*The more expansive your Preceptor Table, the more important the assumption of representativeness becomes.*
 
 #### Unconfoundedness
 
