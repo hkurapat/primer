@@ -40,7 +40,7 @@ book:
     - mechanics.qmd
     # - four-parameters-continuous.qmd
     - four-parameters-categorical.qmd
-    # - five-parameters.qmd
+    - five-parameters.qmd
     - n-parameters.qmd
     - key-concepts.qmd
     - set-up.qmd

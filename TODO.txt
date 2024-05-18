@@ -1,5 +1,6 @@
 # Priorities
 
+Rethink the book's structure. 
 
 Need to standardize definitions of all assumptions and restate those definitions at the start of the relevant section. 
 
