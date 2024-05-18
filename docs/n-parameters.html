@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.554">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference - 9&nbsp; N Parameters</title>
+<title>Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference - 10&nbsp; N Parameters</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./key-concepts.html" rel="next">
-<link href="./four-parameters-categorical.html" rel="prev">
+<link href="./five-parameters.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +130,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./n-parameters.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">N Parameters</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./n-parameters.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">N Parameters</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -239,8 +239,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./five-parameters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Five Parameters</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./n-parameters.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">N Parameters</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">N Parameters</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -276,42 +282,42 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#wisdom" id="toc-wisdom" class="nav-link active" data-scroll-target="#wisdom"><span class="header-section-number">9.1</span> Wisdom</a>
+<a href="#wisdom" id="toc-wisdom" class="nav-link active" data-scroll-target="#wisdom"><span class="header-section-number">10.1</span> Wisdom</a>
   <ul class="collapse">
-<li><a href="#preceptor-table" id="toc-preceptor-table" class="nav-link" data-scroll-target="#preceptor-table"><span class="header-section-number">9.1.1</span> Preceptor Table</a></li>
-  <li><a href="#eda-of-shaming" id="toc-eda-of-shaming" class="nav-link" data-scroll-target="#eda-of-shaming"><span class="header-section-number">9.1.2</span> EDA of <code>shaming</code></a></li>
-  <li><a href="#validity" id="toc-validity" class="nav-link" data-scroll-target="#validity"><span class="header-section-number">9.1.3</span> Validity</a></li>
+<li><a href="#preceptor-table" id="toc-preceptor-table" class="nav-link" data-scroll-target="#preceptor-table"><span class="header-section-number">10.1.1</span> Preceptor Table</a></li>
+  <li><a href="#eda-of-shaming" id="toc-eda-of-shaming" class="nav-link" data-scroll-target="#eda-of-shaming"><span class="header-section-number">10.1.2</span> EDA of <code>shaming</code></a></li>
+  <li><a href="#validity" id="toc-validity" class="nav-link" data-scroll-target="#validity"><span class="header-section-number">10.1.3</span> Validity</a></li>
   </ul>
 </li>
   <li>
-<a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="header-section-number">9.2</span> Justice</a>
+<a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="header-section-number">10.2</span> Justice</a>
   <ul class="collapse">
-<li><a href="#the-population-table" id="toc-the-population-table" class="nav-link" data-scroll-target="#the-population-table"><span class="header-section-number">9.2.1</span> The Population Table</a></li>
-  <li><a href="#stability" id="toc-stability" class="nav-link" data-scroll-target="#stability"><span class="header-section-number">9.2.2</span> Stability</a></li>
-  <li><a href="#representativeness" id="toc-representativeness" class="nav-link" data-scroll-target="#representativeness"><span class="header-section-number">9.2.3</span> Representativeness</a></li>
-  <li><a href="#unconfoundedness" id="toc-unconfoundedness" class="nav-link" data-scroll-target="#unconfoundedness"><span class="header-section-number">9.2.4</span> Unconfoundedness</a></li>
+<li><a href="#the-population-table" id="toc-the-population-table" class="nav-link" data-scroll-target="#the-population-table"><span class="header-section-number">10.2.1</span> The Population Table</a></li>
+  <li><a href="#stability" id="toc-stability" class="nav-link" data-scroll-target="#stability"><span class="header-section-number">10.2.2</span> Stability</a></li>
+  <li><a href="#representativeness" id="toc-representativeness" class="nav-link" data-scroll-target="#representativeness"><span class="header-section-number">10.2.3</span> Representativeness</a></li>
+  <li><a href="#unconfoundedness" id="toc-unconfoundedness" class="nav-link" data-scroll-target="#unconfoundedness"><span class="header-section-number">10.2.4</span> Unconfoundedness</a></li>
   </ul>
 </li>
   <li>
-<a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">9.3</span> Courage</a>
+<a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">10.3</span> Courage</a>
   <ul class="collapse">
-<li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">9.3.1</span> Models</a></li>
-  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests"><span class="header-section-number">9.3.2</span> Tests</a></li>
-  <li><a href="#data-generating-mechanism" id="toc-data-generating-mechanism" class="nav-link" data-scroll-target="#data-generating-mechanism"><span class="header-section-number">9.3.3</span> Data Generating Mechanism</a></li>
+<li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">10.3.1</span> Models</a></li>
+  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests"><span class="header-section-number">10.3.2</span> Tests</a></li>
+  <li><a href="#data-generating-mechanism" id="toc-data-generating-mechanism" class="nav-link" data-scroll-target="#data-generating-mechanism"><span class="header-section-number">10.3.3</span> Data Generating Mechanism</a></li>
   </ul>
 </li>
   <li>
-<a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">9.4</span> Temperance</a>
+<a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">10.4</span> Temperance</a>
   <ul class="collapse">
-<li><a href="#the-three-levels-of-knowledge" id="toc-the-three-levels-of-knowledge" class="nav-link" data-scroll-target="#the-three-levels-of-knowledge"><span class="header-section-number">9.4.1</span> The Three Levels of Knowledge</a></li>
+<li><a href="#the-three-levels-of-knowledge" id="toc-the-three-levels-of-knowledge" class="nav-link" data-scroll-target="#the-three-levels-of-knowledge"><span class="header-section-number">10.4.1</span> The Three Levels of Knowledge</a></li>
   </ul>
 </li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">9.5</span> Summary</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">10.5</span> Summary</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/PPBDS/primer/edit/main/n-parameters.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-n-parameters" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">N Parameters</span></span></h1>
+<h1 class="title"><span id="sec-n-parameters" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">N Parameters</span></span></h1>
 </div>
 
 
@@ -335,8 +341,8 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><em>How can you encourage politically engaged voters to go out to the polls on election day?</em></p>
 </blockquote>
-<section id="wisdom" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="wisdom">
-<span class="header-section-number">9.1</span> Wisdom</h2>
+<section id="wisdom" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="wisdom">
+<span class="header-section-number">10.1</span> Wisdom</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -352,8 +358,8 @@ window.Quarto = {
 <p><em>What is the causal effect of postcards on voting?</em></p>
 </blockquote>
 <p>Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of validity, as to whether or not we can (reasonably!) assume that the two come from the same population.</p>
-<section id="preceptor-table" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="preceptor-table">
-<span class="header-section-number">9.1.1</span> Preceptor Table</h3>
+<section id="preceptor-table" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="preceptor-table">
+<span class="header-section-number">10.1.1</span> Preceptor Table</h3>
 <p><em>Causal or predictive model</em>: The phrasing of the question — especially the phrase “causal effect” — makes it obvious that we need a causal, rather than a predictive, model. There will be at least two potential outcomes for every unit.</p>
 <p><em>Units</em>: The units of our Preceptor Table are individual voters in Texas around the time of the next election.</p>
 <p><em>Outcome</em>: The outcome is voting or not voting. That is, we are researching the question of how to convince people to vote, not how to convince them to vote for a specific candidate. This project is about getting our voters to the polls, not about convincing their voters to switch to our side.</p>
@@ -364,23 +370,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="ynhabgmpwj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ynhabgmpwj table {
+<div id="lzqabqvtfu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lzqabqvtfu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ynhabgmpwj thead, #ynhabgmpwj tbody, #ynhabgmpwj tfoot, #ynhabgmpwj tr, #ynhabgmpwj td, #ynhabgmpwj th {
+#lzqabqvtfu thead, #lzqabqvtfu tbody, #lzqabqvtfu tfoot, #lzqabqvtfu tr, #lzqabqvtfu td, #lzqabqvtfu th {
   border-style: none;
 }
 
-#ynhabgmpwj p {
+#lzqabqvtfu p {
   margin: 0;
   padding: 0;
 }
 
-#ynhabgmpwj .gt_table {
+#lzqabqvtfu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -406,12 +412,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ynhabgmpwj .gt_caption {
+#lzqabqvtfu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ynhabgmpwj .gt_title {
+#lzqabqvtfu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -423,7 +429,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ynhabgmpwj .gt_subtitle {
+#lzqabqvtfu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -435,7 +441,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ynhabgmpwj .gt_heading {
+#lzqabqvtfu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -447,13 +453,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ynhabgmpwj .gt_bottom_border {
+#lzqabqvtfu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ynhabgmpwj .gt_col_headings {
+#lzqabqvtfu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -468,7 +474,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ynhabgmpwj .gt_col_heading {
+#lzqabqvtfu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -488,7 +494,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ynhabgmpwj .gt_column_spanner_outer {
+#lzqabqvtfu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -500,15 +506,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ynhabgmpwj .gt_column_spanner_outer:first-child {
+#lzqabqvtfu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ynhabgmpwj .gt_column_spanner_outer:last-child {
+#lzqabqvtfu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ynhabgmpwj .gt_column_spanner {
+#lzqabqvtfu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -520,11 +526,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ynhabgmpwj .gt_spanner_row {
+#lzqabqvtfu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ynhabgmpwj .gt_group_heading {
+#lzqabqvtfu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -550,7 +556,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ynhabgmpwj .gt_empty_group_heading {
+#lzqabqvtfu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -565,15 +571,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ynhabgmpwj .gt_from_md > :first-child {
+#lzqabqvtfu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ynhabgmpwj .gt_from_md > :last-child {
+#lzqabqvtfu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ynhabgmpwj .gt_row {
+#lzqabqvtfu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -592,7 +598,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ynhabgmpwj .gt_stub {
+#lzqabqvtfu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -605,7 +611,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ynhabgmpwj .gt_stub_row_group {
+#lzqabqvtfu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -619,15 +625,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ynhabgmpwj .gt_row_group_first td {
+#lzqabqvtfu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ynhabgmpwj .gt_row_group_first th {
+#lzqabqvtfu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ynhabgmpwj .gt_summary_row {
+#lzqabqvtfu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -637,16 +643,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ynhabgmpwj .gt_first_summary_row {
+#lzqabqvtfu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ynhabgmpwj .gt_first_summary_row.thick {
+#lzqabqvtfu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ynhabgmpwj .gt_last_summary_row {
+#lzqabqvtfu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -656,7 +662,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ynhabgmpwj .gt_grand_summary_row {
+#lzqabqvtfu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -666,7 +672,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ynhabgmpwj .gt_first_grand_summary_row {
+#lzqabqvtfu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -676,7 +682,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ynhabgmpwj .gt_last_grand_summary_row_top {
+#lzqabqvtfu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -686,11 +692,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ynhabgmpwj .gt_striped {
+#lzqabqvtfu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ynhabgmpwj .gt_table_body {
+#lzqabqvtfu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -699,7 +705,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ynhabgmpwj .gt_footnotes {
+#lzqabqvtfu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -713,7 +719,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ynhabgmpwj .gt_footnote {
+#lzqabqvtfu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -722,7 +728,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ynhabgmpwj .gt_sourcenotes {
+#lzqabqvtfu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -736,7 +742,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ynhabgmpwj .gt_sourcenote {
+#lzqabqvtfu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -744,63 +750,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ynhabgmpwj .gt_left {
+#lzqabqvtfu .gt_left {
   text-align: left;
 }
 
-#ynhabgmpwj .gt_center {
+#lzqabqvtfu .gt_center {
   text-align: center;
 }
 
-#ynhabgmpwj .gt_right {
+#lzqabqvtfu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ynhabgmpwj .gt_font_normal {
+#lzqabqvtfu .gt_font_normal {
   font-weight: normal;
 }
 
-#ynhabgmpwj .gt_font_bold {
+#lzqabqvtfu .gt_font_bold {
   font-weight: bold;
 }
 
-#ynhabgmpwj .gt_font_italic {
+#lzqabqvtfu .gt_font_italic {
   font-style: italic;
 }
 
-#ynhabgmpwj .gt_super {
+#lzqabqvtfu .gt_super {
   font-size: 65%;
 }
 
-#ynhabgmpwj .gt_footnote_marks {
+#lzqabqvtfu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ynhabgmpwj .gt_asterisk {
+#lzqabqvtfu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ynhabgmpwj .gt_indent_1 {
+#lzqabqvtfu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ynhabgmpwj .gt_indent_2 {
+#lzqabqvtfu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ynhabgmpwj .gt_indent_3 {
+#lzqabqvtfu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ynhabgmpwj .gt_indent_4 {
+#lzqabqvtfu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ynhabgmpwj .gt_indent_5 {
+#lzqabqvtfu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -899,8 +905,8 @@ window.Quarto = {
 </blockquote>
 <p>As usual, our question becomes both more and less precise simultaneously. It is more precise in that we only care about a very specific moment in space and time: the election for governor in Texas in 2026. It is less precise in that we are almost always interested in different aspects of the problem, mainly because of the decisions we must make.</p>
 <p>In this case, we might not have enough money to send postcards to every voter. Maybe we should focus in politically engaged voters. Maybe we should focus on other subsets. We should probably only send postcards to voters who are Republican or are likely to vote Republican, unless, that is, some postcards actually decrease someone’s proposensity to vote. The real world is full of complexity.</p>
-</section><section id="eda-of-shaming" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="eda-of-shaming">
-<span class="header-section-number">9.1.2</span> EDA of <code>shaming</code>
+</section><section id="eda-of-shaming" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="eda-of-shaming">
+<span class="header-section-number">10.1.2</span> EDA of <code>shaming</code>
 </h3>
 <p>After loading the packages we need, let’s perform an EDA, starting off by running <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> on the <code>shaming</code> tibble from the <strong>primer.data</strong> package.</p>
 <div class="cell">
@@ -1053,8 +1059,8 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
 </div>
 </div>
 <p>Although this plot is pleasing, we need to create an actual model with this data in order to answer our questions.</p>
-</section><section id="validity" class="level3" data-number="9.1.3"><h3 data-number="9.1.3" class="anchored" data-anchor-id="validity">
-<span class="header-section-number">9.1.3</span> Validity</h3>
+</section><section id="validity" class="level3" data-number="10.1.3"><h3 data-number="10.1.3" class="anchored" data-anchor-id="validity">
+<span class="header-section-number">10.1.3</span> Validity</h3>
 <p>Validity is the consistency, or lack there of, in the columns of your data set and the corresponding columns in your Preceptor Table. In order to consider the two data sets to be drawn from the same population, the columns from one must have a <em>valid correspondence</em> with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the <em>Population Table</em>, which is the first step in Justice. Consider two counter-arguments to the assumption of validity in this case.</p>
 <p>First, voting in a primary election in 2006 in Michigan is not the same thing as voting in a general election in Texas in 2026. Primary elections are less newsworthy and, usually, less competitive. Our client, the gubernatorial candidate, has already won his primary. The outcome he cares about is voting in a general elections. Treatments which might, or might not, affect participation in a primary are irrelevant. Moreover, the political culture of Texas and Michigan are very different. The meaning and importance of voting is not identical across states, nor over time.</p>
 <p>Second, our client is interested in using a measure of civic engagement. We build that measure out of past voting behavior. Right now, we aren’t even sure that we can access this data in Texas. And, even if we can, the salience of those elections in the years before 2026 will differ from those in Michigan in the years before 2006.</p>
@@ -1062,8 +1068,8 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
 <blockquote class="blockquote">
 <p><em>Using the results of a voting experiment in Michigan in 2006, we seek to forecast the causal effect on voter participation of sending postcards in the Texas gubernatorial general election of 2026.</em></p>
 </blockquote>
-</section></section><section id="justice" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="justice">
-<span class="header-section-number">9.2</span> Justice</h2>
+</section></section><section id="justice" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="justice">
+<span class="header-section-number">10.2</span> Justice</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1073,30 +1079,30 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
 </div>
 </div>
 <p>Justice includes the creation of the Population Table, followed by a discussion about the assumptions of stability, representativeness and unconfoundedness.</p>
-<section id="the-population-table" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="the-population-table">
-<span class="header-section-number">9.2.1</span> The Population Table</h3>
+<section id="the-population-table" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="the-population-table">
+<span class="header-section-number">10.2.1</span> The Population Table</h3>
 <p>The Population Table shows rows from three sources: the Preceptor Table, the data, and the population from which the rows in both the Preceptor Table and the data were drawn.</p>
 <p>The better we get at data science, the less that we sweat the details of the Population Table.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="krsxfgghyy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#krsxfgghyy table {
+<div id="lttpqmtkpm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lttpqmtkpm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#krsxfgghyy thead, #krsxfgghyy tbody, #krsxfgghyy tfoot, #krsxfgghyy tr, #krsxfgghyy td, #krsxfgghyy th {
+#lttpqmtkpm thead, #lttpqmtkpm tbody, #lttpqmtkpm tfoot, #lttpqmtkpm tr, #lttpqmtkpm td, #lttpqmtkpm th {
   border-style: none;
 }
 
-#krsxfgghyy p {
+#lttpqmtkpm p {
   margin: 0;
   padding: 0;
 }
 
-#krsxfgghyy .gt_table {
+#lttpqmtkpm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1122,12 +1128,12 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   border-left-color: #D3D3D3;
 }
 
-#krsxfgghyy .gt_caption {
+#lttpqmtkpm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#krsxfgghyy .gt_title {
+#lttpqmtkpm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1139,7 +1145,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   border-bottom-width: 0;
 }
 
-#krsxfgghyy .gt_subtitle {
+#lttpqmtkpm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1151,7 +1157,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   border-top-width: 0;
 }
 
-#krsxfgghyy .gt_heading {
+#lttpqmtkpm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1163,13 +1169,13 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   border-right-color: #D3D3D3;
 }
 
-#krsxfgghyy .gt_bottom_border {
+#lttpqmtkpm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#krsxfgghyy .gt_col_headings {
+#lttpqmtkpm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1184,7 +1190,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   border-right-color: #D3D3D3;
 }
 
-#krsxfgghyy .gt_col_heading {
+#lttpqmtkpm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1204,7 +1210,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   overflow-x: hidden;
 }
 
-#krsxfgghyy .gt_column_spanner_outer {
+#lttpqmtkpm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1216,15 +1222,15 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   padding-right: 4px;
 }
 
-#krsxfgghyy .gt_column_spanner_outer:first-child {
+#lttpqmtkpm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#krsxfgghyy .gt_column_spanner_outer:last-child {
+#lttpqmtkpm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#krsxfgghyy .gt_column_spanner {
+#lttpqmtkpm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1236,11 +1242,11 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   width: 100%;
 }
 
-#krsxfgghyy .gt_spanner_row {
+#lttpqmtkpm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#krsxfgghyy .gt_group_heading {
+#lttpqmtkpm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1266,7 +1272,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   text-align: left;
 }
 
-#krsxfgghyy .gt_empty_group_heading {
+#lttpqmtkpm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1281,15 +1287,15 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   vertical-align: middle;
 }
 
-#krsxfgghyy .gt_from_md > :first-child {
+#lttpqmtkpm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#krsxfgghyy .gt_from_md > :last-child {
+#lttpqmtkpm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#krsxfgghyy .gt_row {
+#lttpqmtkpm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1308,7 +1314,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   overflow-x: hidden;
 }
 
-#krsxfgghyy .gt_stub {
+#lttpqmtkpm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1321,7 +1327,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   padding-right: 5px;
 }
 
-#krsxfgghyy .gt_stub_row_group {
+#lttpqmtkpm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1335,15 +1341,15 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   vertical-align: top;
 }
 
-#krsxfgghyy .gt_row_group_first td {
+#lttpqmtkpm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#krsxfgghyy .gt_row_group_first th {
+#lttpqmtkpm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#krsxfgghyy .gt_summary_row {
+#lttpqmtkpm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1353,16 +1359,16 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   padding-right: 5px;
 }
 
-#krsxfgghyy .gt_first_summary_row {
+#lttpqmtkpm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#krsxfgghyy .gt_first_summary_row.thick {
+#lttpqmtkpm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#krsxfgghyy .gt_last_summary_row {
+#lttpqmtkpm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1372,7 +1378,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   border-bottom-color: #D3D3D3;
 }
 
-#krsxfgghyy .gt_grand_summary_row {
+#lttpqmtkpm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1382,7 +1388,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   padding-right: 5px;
 }
 
-#krsxfgghyy .gt_first_grand_summary_row {
+#lttpqmtkpm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1392,7 +1398,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   border-top-color: #D3D3D3;
 }
 
-#krsxfgghyy .gt_last_grand_summary_row_top {
+#lttpqmtkpm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1402,11 +1408,11 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   border-bottom-color: #D3D3D3;
 }
 
-#krsxfgghyy .gt_striped {
+#lttpqmtkpm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#krsxfgghyy .gt_table_body {
+#lttpqmtkpm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1415,7 +1421,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   border-bottom-color: #D3D3D3;
 }
 
-#krsxfgghyy .gt_footnotes {
+#lttpqmtkpm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1429,7 +1435,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   border-right-color: #D3D3D3;
 }
 
-#krsxfgghyy .gt_footnote {
+#lttpqmtkpm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1438,7 +1444,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   padding-right: 5px;
 }
 
-#krsxfgghyy .gt_sourcenotes {
+#lttpqmtkpm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1452,7 +1458,7 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   border-right-color: #D3D3D3;
 }
 
-#krsxfgghyy .gt_sourcenote {
+#lttpqmtkpm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1460,63 +1466,63 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
   padding-right: 5px;
 }
 
-#krsxfgghyy .gt_left {
+#lttpqmtkpm .gt_left {
   text-align: left;
 }
 
-#krsxfgghyy .gt_center {
+#lttpqmtkpm .gt_center {
   text-align: center;
 }
 
-#krsxfgghyy .gt_right {
+#lttpqmtkpm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#krsxfgghyy .gt_font_normal {
+#lttpqmtkpm .gt_font_normal {
   font-weight: normal;
 }
 
-#krsxfgghyy .gt_font_bold {
+#lttpqmtkpm .gt_font_bold {
   font-weight: bold;
 }
 
-#krsxfgghyy .gt_font_italic {
+#lttpqmtkpm .gt_font_italic {
   font-style: italic;
 }
 
-#krsxfgghyy .gt_super {
+#lttpqmtkpm .gt_super {
   font-size: 65%;
 }
 
-#krsxfgghyy .gt_footnote_marks {
+#lttpqmtkpm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#krsxfgghyy .gt_asterisk {
+#lttpqmtkpm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#krsxfgghyy .gt_indent_1 {
+#lttpqmtkpm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#krsxfgghyy .gt_indent_2 {
+#lttpqmtkpm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#krsxfgghyy .gt_indent_3 {
+#lttpqmtkpm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#krsxfgghyy .gt_indent_4 {
+#lttpqmtkpm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#krsxfgghyy .gt_indent_5 {
+#lttpqmtkpm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1666,22 +1672,22 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
 <p>We also don’t worry about getting other details correct. For example, we know that this experiment includes four post cards, plus the control. That is five potential outcomes, and 10 possible causal effects, since the definition of a causal effect in the difference between any two potential outcomes. We don’t bother to include all those details in the Population Table.</p>
 <p>Recall that the purpose of the Preceptor Table is to force us to answer the key questions. Is the model predictive or causal? What are the units, outcomes and covariates/treatments?</p>
 <p>Similarly, the purpose of the Population Table is to force us to think hard about the key assumptions of validity, stability, representativeness, and unconfoundedness.</p>
-</section><section id="stability" class="level3" data-number="9.2.2"><h3 data-number="9.2.2" class="anchored" data-anchor-id="stability">
-<span class="header-section-number">9.2.2</span> Stability</h3>
+</section><section id="stability" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="stability">
+<span class="header-section-number">10.2.2</span> Stability</h3>
 <p>Stability means that the relationship between the columns is the same for three categories of rows: the data, the Preceptor table, and the larger population from which both are drawn. Of course, what we most need is for the relationship between the columns to be the same between the data and the Preceptor Table. If it isn’t, then we can’t use models estimated on the former to make inferences about the latter. But it is weird to just assume a connection between in Michigan in 2006 and Texas in 2026. Any such assumption is really a broader claim about many years and many jurisdictions. Our description of the underlying population is the <em>glue</em> which connects the data and the Preceptor Table.</p>
 <p>Is data collected in 2006 on voting behavior likely to be the same in 2026? Frankly, we don’t know! We aren’t sure what would impact someone’s response to a postcard encouraging them to vote. It is possible, for instance, that a postcard informing neighbors of voting status has a bigger effect in a world with more social media.</p>
 <p>When we are confronted with this uncertainty, we can consider making our timeframe smaller. However, we would still need to assume stability from 2006 (time of data collection) to 2026. Stability allows us to ignore the issue of time.</p>
-</section><section id="representativeness" class="level3" data-number="9.2.3"><h3 data-number="9.2.3" class="anchored" data-anchor-id="representativeness">
-<span class="header-section-number">9.2.3</span> Representativeness</h3>
+</section><section id="representativeness" class="level3" data-number="10.2.3"><h3 data-number="10.2.3" class="anchored" data-anchor-id="representativeness">
+<span class="header-section-number">10.2.3</span> Representativeness</h3>
 <p>Even if the stability assumption holds, we still have problems with representativeness because Michigan and Texas are (very?) different states. In one sense, neither the data nor the Preceptor Table is a sample. Both include, more or less, the entire electorates in their respective states. But, from the point of view of the Population Table, they are both samples from the underling population. Even if we, with the help of the stability assumption, don’t think that anything has changes between 2006 and 2026, we are still trying to use data from Michigan to make an inference about Texas. The obvious problem is that voters in Michigan are (very?) different from voters in Texas, in all sorts of ways which might matter to our analysis.</p>
-</section><section id="unconfoundedness" class="level3" data-number="9.2.4"><h3 data-number="9.2.4" class="anchored" data-anchor-id="unconfoundedness">
-<span class="header-section-number">9.2.4</span> Unconfoundedness</h3>
+</section><section id="unconfoundedness" class="level3" data-number="10.2.4"><h3 data-number="10.2.4" class="anchored" data-anchor-id="unconfoundedness">
+<span class="header-section-number">10.2.4</span> Unconfoundedness</h3>
 <p>The great advantage of randomized assignment of treatment is that it guarantees unconfoundedness. There is no way for treatment assignment to be correlated with anything, including potential outcomes, if treatment assignment is random.</p>
 <blockquote class="blockquote">
 <p><em>Using the results of a voting experiment in Michigan in 2006 primary election, we seek to forecast the causal effect on voter participation of sending postcards in the Texas gubernatorial general election of 2026. There is concern that data from a primary election might not generalize to a general election and that political culture in the two states differ too much to allow for data from one to enable useful forecasts in the other.</em></p>
 </blockquote>
-</section></section><section id="courage" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="courage">
-<span class="header-section-number">9.3</span> Courage</h2>
+</section></section><section id="courage" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="courage">
+<span class="header-section-number">10.3</span> Courage</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1690,8 +1696,8 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
 </div>
 </div>
 </div>
-<section id="models" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="models">
-<span class="header-section-number">9.3.1</span> Models</h3>
+<section id="models" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="models">
+<span class="header-section-number">10.3.1</span> Models</h3>
 <p>Justice gave us the Population Table. Courage selects the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have. We explore different models. We need to decide which variables to include and to estimate the values of unknown parameters. We check our models for consistency with the data we have. We avoid hypothesis tests. We select one model, the data generating mechanism or DGM.</p>
 <!-- DK: Should either do logistic or discuss more why not. Seem to recall that logistic took a long time with so much data. -->
 <p>Given that the outcome variable is 0/1, a logistic model is the obvious choice. However, in this case, a linear model with a normal error term provides more or less the same answer.</p>
@@ -1700,8 +1706,8 @@ $ neighbors     &lt;int&gt; 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paul-buerkner/brms">brms</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mjskay.github.io/tidybayes/">tidybayes</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="voted-treatment-sex" class="level4" data-number="9.3.1.1"><h4 data-number="9.3.1.1" class="anchored" data-anchor-id="voted-treatment-sex">
-<span class="header-section-number">9.3.1.1</span> voted ~ treatment + sex</h4>
+<section id="voted-treatment-sex" class="level4" data-number="10.3.1.1"><h4 data-number="10.3.1.1" class="anchored" data-anchor-id="voted-treatment-sex">
+<span class="header-section-number">10.3.1.1</span> voted ~ treatment + sex</h4>
 <p>In this section, we will look at the relationship between primary voting and treatment + sex.</p>
 <p><em>The math:</em></p>
 <p>Without variable names:</p>
@@ -2297,8 +2303,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><p>The intercept of this model is the expected value of the probability of someone voting in the 2006 primary given that they are part of the control group and are female. In this case, we estimate that women in the control group will vote ~29% of the time.</p></li>
 <li><p>The coefficient for <code>sexMale</code> indicates the difference in likelihood of voting between a male and female. In other words, when comparing men and women, the 0.012 implies that men are ~1.2% more likely to vote than women. Note that, because this is a linear model with no interactions between sex and other variables, this difference applies to any male, regardless of the treatment he received. Because sex can not be manipulated (by assumption), we should not use a causal interpretation of the coefficient.</p></li>
 <li><p>The coefficients of the treatments, on the other hand, do have a causal interpretation. For a single individual, of either sex, being sent the Self postcard increases your probability of voting by 4.9%. It appears that the <code>Neighbors</code> treatment is the most effective at ~8.1% and <code>Civic Duty</code> is the least effective at ~1.8%.</p></li>
-</ul></section><section id="voted-age_z-sex-treatment-voter_class-voter_classtreatment" class="level4" data-number="9.3.1.2"><h4 data-number="9.3.1.2" class="anchored" data-anchor-id="voted-age_z-sex-treatment-voter_class-voter_classtreatment">
-<span class="header-section-number">9.3.1.2</span> voted ~ age_z + sex + treatment + voter_class + voter_class*treatment</h4>
+</ul></section><section id="voted-age_z-sex-treatment-voter_class-voter_classtreatment" class="level4" data-number="10.3.1.2"><h4 data-number="10.3.1.2" class="anchored" data-anchor-id="voted-age_z-sex-treatment-voter_class-voter_classtreatment">
+<span class="header-section-number">10.3.1.2</span> voted ~ age_z + sex + treatment + voter_class + voter_class*treatment</h4>
 <p>It is time to look at interactions! Create another model named <code>fit_2</code> that estimates <code>voted</code> as a function of <code>age_z</code>, <code>sex</code>, <code>treatment</code>, <code>voter_class</code>, and the interaction between treatment and voter classification.</p>
 <p>The math:</p>
 <p><span class="math display">\[y_{i} = \beta_{0} + \beta_{1} age\_z + \beta_{2}male_i + \beta_{3}civic\_duty_i + \\ \beta_{4}hawthorne_i + \beta_{5}self_i + \beta_{6}neighbors_i + \\ \beta_{7}Sometimes\ vote_i + \beta_{8}Always\ vote_i + \\ \beta_{9}civic\_duty_i Sometimes\ vote_i + \beta_{10}hawthorne_i Sometimes\ vote_i + \\ \beta_{11}self_i Sometimes\ vote_i + \beta_{11}neighbors_i Sometimes\ vote_i + \\ \beta_{12}civic\_duty_i Always\ vote_i + \beta_{13}hawthorne_i Always\ vote_i + \\ \beta_{14}self_i Always\ vote_i + \beta_{15}neighbors_i Always\ vote_i + \epsilon_{i}\]</span> Translate into code:</p>
@@ -2987,13 +2993,13 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><p>The coefficient of age_z, 0.035, implies a change of ~3.5% in likelihood of voting for each increment of one standard deviation (~ 14.45 years). For example: when comparing someone 50 years old with someone 65, the latter is about 3.5% more likely to vote.</p></li>
 <li><p>Exposure to the Neighbors treatment shows a ~4.4% increase in voting likelihood for someone in the Rarely Vote category. Because of random assignment of treatment, we can interpret that coefficient as an estimate of the average treatment effect.</p></li>
 <li><p>If someone were from a different voter classification, the calculation is more complex because we need to account for the interaction term. For example, for individuals who Sometimes Vote, the treatment effect of Neighbors is 8.6%. For Always Vote Neighbors, it is 9%.</p></li>
-</ul></section></section><section id="tests" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="tests">
-<span class="header-section-number">9.3.2</span> Tests</h3>
-</section><section id="data-generating-mechanism" class="level3" data-number="9.3.3"><h3 data-number="9.3.3" class="anchored" data-anchor-id="data-generating-mechanism">
-<span class="header-section-number">9.3.3</span> Data Generating Mechanism</h3>
+</ul></section></section><section id="tests" class="level3" data-number="10.3.2"><h3 data-number="10.3.2" class="anchored" data-anchor-id="tests">
+<span class="header-section-number">10.3.2</span> Tests</h3>
+</section><section id="data-generating-mechanism" class="level3" data-number="10.3.3"><h3 data-number="10.3.3" class="anchored" data-anchor-id="data-generating-mechanism">
+<span class="header-section-number">10.3.3</span> Data Generating Mechanism</h3>
 <p>Should we use <code>fit_1</code> or <code>fit_2</code>? Reasonable people will differ.</p>
-</section></section><section id="temperance" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="temperance">
-<span class="header-section-number">9.4</span> Temperance</h2>
+</section></section><section id="temperance" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="temperance">
+<span class="header-section-number">10.4</span> Temperance</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -3210,30 +3216,30 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>What does this mean for us, as we consider which postcards to send? * Consider the highest yellow distribution, which is the posterior distribution for the average treatment effect of receiving the Neighbors postcard (compared to not getting a postcard) for Always Voters. The posterior is centered around 9% with a 95% confidence interval of, roughly, 8% to 10%. * Overall, the Civic Duty and Hawthorne postcards had small average treatment effects, across all three categories of voter. The causal effect on Rarely Voters was much smaller, regardless of treatment. It was also much less precisely estimated because there were many fewer Rarely Voters in the data. *The best way to increase turnover, assuming there are limits to how many postcards you can send, is to focus on Sometimes/Always voters and to use the Neighbors postcard.</p>
 <p><em>Conclusion</em>: If we had a limited number of postcards, we would send the Neighbors postcard to citizens who already demonstrate a tendency to vote.</p>
 <p>How confident are we in these findings? If we needed to convince our boss that this is the right strategy, we need to explain how confident we are in our assumptions. To do that, we must understand the three levels of knowledge in the world of posteriors.</p>
-<section id="the-three-levels-of-knowledge" class="level3" data-number="9.4.1"><h3 data-number="9.4.1" class="anchored" data-anchor-id="the-three-levels-of-knowledge">
-<span class="header-section-number">9.4.1</span> The Three Levels of Knowledge</h3>
+<section id="the-three-levels-of-knowledge" class="level3" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="the-three-levels-of-knowledge">
+<span class="header-section-number">10.4.1</span> The Three Levels of Knowledge</h3>
 <p>There exist three primary levels of knowledge possible knowledge in our scenario: the Truth (the ideal Preceptor Table), the DGM Posterior, and Our Posterior.</p>
-<section id="the-truth" class="level4" data-number="9.4.1.1"><h4 data-number="9.4.1.1" class="anchored" data-anchor-id="the-truth">
-<span class="header-section-number">9.4.1.1</span> The Truth</h4>
+<section id="the-truth" class="level4" data-number="10.4.1.1"><h4 data-number="10.4.1.1" class="anchored" data-anchor-id="the-truth">
+<span class="header-section-number">10.4.1.1</span> The Truth</h4>
 <p>If we know the Truth (with a capital “T”), then we know the ideal Preceptor Table. With that knowledge, we can <em>directly</em> answer our question precisely. We can calculate each individual’s treatment effect, and any summary measure we might be interested in, like the average treatment effect.</p>
 <p>This level of knowledge is possible only under an omniscient power, one who can see every outcome in every individual under every treatment. The Truth would show, for any given individual, their actions under control, their actions under treatment, and each little factor that impacted those decisions.</p>
 <p>The Truth represents the highest level of knowledge one can have — with it, our questions merely require algebra. There is no need to estimate a treatment effect, or the different treatment effects for different groups of people. We would not need to predict at all — we would <strong>know</strong>.</p>
-</section><section id="dgm-posterior" class="level4" data-number="9.4.1.2"><h4 data-number="9.4.1.2" class="anchored" data-anchor-id="dgm-posterior">
-<span class="header-section-number">9.4.1.2</span> DGM posterior</h4>
+</section><section id="dgm-posterior" class="level4" data-number="10.4.1.2"><h4 data-number="10.4.1.2" class="anchored" data-anchor-id="dgm-posterior">
+<span class="header-section-number">10.4.1.2</span> DGM posterior</h4>
 <p>The DGM posterior is the next level of knowledge, which lacks the omniscient quality of The Truth. This posterior is the posterior we would calculate if we had perfect knowledge of the data generating mechanism, meaning we have the correct model structure and exact parameter values. This is often falsely conflated with “Our posterior”, which is subject to error in model structure and parameter value estimations.</p>
 <p>With the DGM posterior, we could not be certain about any individual’s causal effect, because of the Fundamental Problem of Causal Inference. In other words, we can never measure any one person’s causal effect because we are unable to see a person’s resulting behavior under treatment <em>and</em> control; we only have data on one of the two conditions.</p>
 <p>What we do with the DGM posterior is the same as Our posterior — we estimate parameters based on data and predict the future with the latest and most relevant information possible. The difference is that, when we calculate posteriors for an unknown value in the DGM posterior, we expect those posteriors to be perfect.</p>
 <p>If we go to our boss with our estimates from this posterior, we would expect our 95% confidence interval to be perfectly calibrated. That is, we would expect the true value to lie within the 95% confidence interval 95% of the time. In this world, we would be surprised to see values outside of the confidence interval more than 5% of the time.</p>
-</section><section id="our-posterior" class="level4" data-number="9.4.1.3"><h4 data-number="9.4.1.3" class="anchored" data-anchor-id="our-posterior">
-<span class="header-section-number">9.4.1.3</span> Our posterior</h4>
+</section><section id="our-posterior" class="level4" data-number="10.4.1.3"><h4 data-number="10.4.1.3" class="anchored" data-anchor-id="our-posterior">
+<span class="header-section-number">10.4.1.3</span> Our posterior</h4>
 <p>Unfortunately, Our posterior possesses even less certainty! In the real world, we <em>don’t</em> have perfect knowledge of the DGM: the model structure and the exact parameter values. What does this mean?</p>
 <p>When we go to our boss, we tell them that this is our <em>best guess</em>. It is an informed estimate based on the most relevant data possible. From that data, we have created a 95% confidence interval for the treatment effect of various postcards. We estimate that the treatment effect of the Neighbors postcard to be between 8% to 10%.</p>
 <p>Does this mean we are certain that the treatment effect of Neighbors is between these values? Of course not! As we would tell our boss, it would not be shocking to find out that the actual treatment effect was less or more than our estimate.</p>
 <p>This is because a lot of the assumptions we make during the process of building a model, the processes in Wisdom, are subject to error. Perhaps our data did not match the future as well as we had hoped. Ultimately, we try to account for our uncertainty in our estimates. Even with this safeguard, we aren’t surprised if we are a bit off.</p>
 <p>For instance, would we be shocked if the treatment effect of the Neighbors postcard to be 7%? 12%? Of course not! That is only slightly off, and we know that Our posterior is subject to error. Would we be surprised if the treatment effect was found to be 20%? Yes. That is a large enough difference to suggest a real problem with our model, or some real world change that we forgot to factor into our predictions.</p>
 <p>But, what amounts to a large enough difference to be a cause for concern? In other words, how wrong do we have to be in a one-off for our boss to be suspicious? When is “bad luck” a sign of stupidity? We will delve into this question in the next section of our chapter.</p>
-</section></section></section><section id="summary" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">9.5</span> Summary</h2>
+</section></section></section><section id="summary" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">10.5</span> Summary</h2>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -3645,8 +3651,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./four-parameters-categorical.html" class="pagination-link" aria-label="Four Parameters: Categorical">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Four Parameters: Categorical</span></span>
+      <a href="./five-parameters.html" class="pagination-link" aria-label="Five Parameters">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Five Parameters</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
