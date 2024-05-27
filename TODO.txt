@@ -1,13 +1,30 @@
 # Priorities
 
+Should predictive/causal question come at the end of the Preceptor Table reasoning?
+
+We have run out of time to introduce tidymodels. I still think that this is an interesting idea, especially with the bayesian package. But not this time.
+
+We have enough chapters. There isn't time to do more than 10 chapters, and all this material is good stuff.
+
+I need to clean up the chapters. There is a lot of sloppiness.
+
+I need to clean up the tutorials we have: rcm, probability, sampling.
+
+I need to add tutorials for the remaining 7 chapters.
+
+
+
+
+# Other Stuff
+
 Rethink the book's structure. 
+
+Get rid of Summary at the end of each chapter. Or not? Maybe it just includes the key concepts which are first introduced in that chapter? If students remember everything in all the summaries, then we have been successful.
 
 Need to standardize definitions of all assumptions and restate those definitions at the start of the relevant section. 
 
 Need to standardize the display of the mathematical structure of the model (which uses y's and x's) and which goes at the beginning of courage.
 
-
-Change 2023 to 2024 everywhere.
 
 Using brms. But! Use it alone in the first 4 chapters of its use. Then, start using it with tidymodels, and then show more tidymodels.
 
