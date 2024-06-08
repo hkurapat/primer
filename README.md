@@ -1,3 +1,3 @@
-# Preceptor's Primer for Bayesian Big Data Science
+# Preceptor's Primer for Bayesian Data Science
 
 Repo for the primer
