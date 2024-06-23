@@ -7,24 +7,14 @@
 #| warning: false
 library(gt)
 library(gtsummary)
+library(tidyverse)
 ```
 
 
 <!-- Two parameter chapter is missing the math. -->
 
-<!-- Make a 15 second video, put it on YouTube. "We don't estimate parameters because we care about parameters. Parameters are imaginary! Like unicorns! [Put finger on forehead and imitate unicorn.] We estimate parameters to build Data Generating Mechanisms. And with a DGM, you can move the world!" -->
 
-In @sec-probability, we learned how to do inference. We created a joint distribution of the models under consideration and the data which might be observed. Once we observed the data, we went from the joint distribution to the conditional distribution of possible models given the data which we did, in fact, observe. That conditional distribution, suitably normalized, was our posterior probability distribution over the space of possible models. With that distribution, we can answer any question we might (reasonably) ask.
-
-<!-- Need a gif here. Like Hunger Games in Sampling chapter. -->
-
-*But what a pain in the ass that whole process was!* Do professionals actually go through all those steps every time they work on a data science problem? No! That would be absurd. Instead, professionals use standard tools which, in an automated fashion, take care of those steps, taking us directly from assumptions and data to the posterior:
-
-$$\text{Prob}(\text{models} | \text{data} = \text{data we observed})$$
-
-Even then, however, the relative likelihood of different models is not that important. Models are invisible, mental entities with no more physical presence than unicorns or leprechauns. In the world itself, we make and test predictions. *People with better models make better predictions. That is what matters.*
-
-@sec-sampling used models with just one parameter: $\rho$, the number of red beads divided by the total number of beads in the bowl. The model in @sec-sampling was binomial, and there was only one unknown parameter, $\rho$. @sec-models did the same thing, but in the more realistic setting in a poll. In this chapter, we have two unknown parameters: the mean $\mu$ height in the US and the standard deviation, $\sigma$, of the normally distributed error term.
+@sec-models used models with just one parameter: $\rho$, the votes for Biden divided by total votes. The model was binomial, and there was only one unknown parameter, $\rho$. In this chapter, we have two unknown parameters: the mean $\mu$ height in the US and the standard deviation, $\sigma$, of the normally distributed error term.
 
 The reason for making models is not, primarily, that making models is fun -- although it is! The reason is that the world confronts us. Make decisions we must. We must decide between options X or Y. We must choose from actions A, B and C. Confronted by a choice, we need to make a model of the world to help us choose wisely.
 
@@ -56,39 +46,30 @@ Data science is ultimately a moral act, so we will use the four [Cardinal Virtue
 knitr::include_graphics("other/images/Wisdom.jpg")
 ```
 
-Wisdom begins with the Preceptor Table. What data would we, ideally, require to answer our questions? We then explore the data that we actually have. We apply the concept of *validity* to ensure that the data we *want* and the data we *have* are similar enough to allow the latter to inform us about the former. If so, we describe the *population* from which both the Preceptor Table and our data are drawn.
+Wisdom begins with the Preceptor Table. What data would we, ideally, require to answer our questions? We then explore the data that we actually have. We apply the concept of *validity* to ensure that the data we *want* and the data we *have* are similar enough to allow the latter to inform us about the former. 
 
 ### Preceptor Table
 
-What rows and columns of data do you need such that, if you had them all, the calculation of the quantity of interest would be trivial? The steps we usually take to construct the Preceptor Table include:
+Which rows and columns of data do you need such that, if you had them all, the calculation of the quantity of interest would be trivial? The steps we usually take to construct the Preceptor Table include:
 
-* Is the question *causal* or *predictive*? If it is causal, then the Preceptor Table will have (at least) two potential outcome columns. If it is predictive, there will just be one outcome column. All our questions are predictive, so there is only one outcome column.
+*Units*: All the men in the world, one row per man.
 
-* What is the *outcome*? This is the variable which we are trying to explain/understand/predict. This is *not* the same thing as the answer to the question we have been asked. The question might, as above, be about the height of the 3rd tallest man we meet out of the next 100. But the concepts of 3rd or 100 do not appear in the Preceptor Table. Instead, height is our outcome variable. But, if we can build a model which explains/understands/predicts height, we can use that model to answer our questions.
+*Outcome*: This is the variable which we are trying to explain/understand/predict. This is *not* the same thing as the answer to the question we have been asked. The question might, as above, be about the height of the 3rd tallest man we meet out of the next 100. But the concepts of 3rd or 100 do not appear in the Preceptor Table. Instead, height is our outcome variable. But, if we can build a model which explains/understands/predicts height, we can use that model to answer our questions.
 
-* What are the *units*? These are the rows in the Preceptor Table. Sometimes, as here, the units will be fairly obvious: all the men in the world, one row per man. Othertimes, however, we will need to think more deeply about the units to use so that we can most easily answer our question. 
+*Treatment*: There are not treatment variables.
 
-* What are the *covariates*? These are the variables, other than the outcome, about which we have information. In the case of causal models, one of the covariates is the *treatment*, the variable which we can, at least in theory, *manipulate* in order to observe the different potential outcomes. Predictive models, on the other hand, have no treatments, only covariates.
+*Causal or predictive model*: We have only one outcome, so the model is predictive.
 
-* When is the moment in *time* to which the Preceptor Table refers? This is often implicit in the question itself. One of our key roles as data scientists is to clarify the questions which we are asked. In this case, it seems clear that the questions refer to *now* but that won't always be the case.
+*Covariates*: There are no (explicit) covariates in this model, although we will need to make use of variables like `age` and `sex` to construct our sample data. 
 
-In considering the appropriate *outcomes*, *units*, *covariates* and *time* for the Preceptor Table, we should keep in mind the data that we actually have to answer our questions. We must satisify the assumption of *validity* if we are to combine the Preceptor Table and our data into a Population Table.
-
-If you want to know the average height of an adult in India, then the Preceptor Table would include a row for each adult in India and a column for their height. Our actual questions above imply that we want to know the average height for men, where "men" includes all males on Earth that are at least 18 years old. 
-
-One key aspect of this Preceptor Table is whether or not we need more than one potential outcome in order to calculate our estimand. Mainly: are we are modeling (just) for prediction or are we (also) modeling for causation? Do we need a causal model, one which estimates the outcome under both treatment and control? In a causal model, the Preceptor Table would require two columns for the outcome. In this case, we are not modeling for causation; thus, we do not need two outcome columns. 
+*Moment in Time*: This is often implicit in the question itself. One of our key roles as data scientists is to clarify the questions which we are asked. In this case, it seems clear that the questions
 
 Predictive models care nothing about causation. Causal models are often also concerned with prediction, if only as a means of measuring the quality of the model. Here, we are looking at *prediction*. 
 
-So, what does our Preceptor Table look like? Assuming we are predicting height for every adult male on planet Earth at this moment in time, we would have height data for every male at least 18 years of age. This means that we would have about 4 billion rows, one for each male, along with a column for each individual's height.
+So, what does our Preceptor Table look like? Assuming we are predicting height for every adult male on Earth at this moment in time, we would have height data for every male at least 18 years of age. This means that we would have about 4 billion rows, one for each male, along with a column for each individual's height.
 
 Here are some rows from our Preceptor Table: 
 
-
-```{r}
-#| include: false
-library(tidyverse)
-```
 
 
 ```{r}
@@ -106,11 +87,11 @@ tibble(ID = c("Person 1", "Person 2", "...", "Person 45,000", "Person 45,001", "
                 height = "Height (cm)") 
 ```
 
-This table would extend all the way until person 4 billion-and-something. If we had this table, all of our questions could be answered with simple math and/or simulations. No inference necessary if we have a Preceptor Table. But what does our actual data look like? 
+This table would extend all the way until person 4 billion-and-something. If we had this table, all of our questions could be answered with simple math and/or simulations. No inference is necessary if we have a Preceptor Table. But what does our actual data look like? 
 
-### EDA for `nhanes`
+### EDA
 
-In our quest to find suitable data, consider the `nhanes` data set from the National Health and Nutrition Examination Survey conducted from 2009 to 2011 by the Centers for Disease Control and Prevention. 
+Consider the `nhanes` data set from the National Health and Nutrition Examination Survey conducted from 2009 to 2011 by the Centers for Disease Control and Prevention. 
 
 ```{r}
 #| code-fold: false
@@ -165,7 +146,7 @@ Interesting! There are `r sum(is.na(nhanes$height))` missing values of height in
 
 ```{r}
 #| code-fold: false
-ch4 <- nhanes |> 
+ch5 <- nhanes |> 
   filter(sex == "Male", age >= 18) |> 
   select(height) |> 
   drop_na()
@@ -178,7 +159,7 @@ Let's plot this data using `geom_histogram()`.
 
 
 ```{r}
-ch4 |>
+ch5 |>
   ggplot(aes(x = height)) + 
     geom_histogram(bins = 50) +
     labs(title = "Male Adult Height in the US in 2010",
@@ -327,7 +308,7 @@ This is the simplest model we can construct. Note:
 
 * The parameter we most care about is $\mu$. That is the parameter with a substantively meaningful interpretation. Not only is the meaning of $\sigma$ difficult to describe, we also don't particular care about its value. Parameters like $\sigma$ in this context are *nuisance* or *auxiliary* parameters. We still estimate their posterior distributions, but we don't really care what those posteriors look like.
 
-* $\mu$ is not the average height of the men in the sample. We can calculate that directly. It is `r mean(ch4$height)`. No estimation required! Instead, $\mu$ is the average height of men in the *population*. Recall from the discussions in @sec-models that the population is the universe of people/units/whatever about which we seek to draw conclusions. On some level, this seems simple. On a deeper level, it is very subtle. For example, if we are walking around Copenhagen, then the population we really care about, in order to answer our three questions, is the set of adult men which we might meet today. This is not the same as the population of adult men in the US in 2010. But is it close enough? Is it better than nothing? We want to assume that both men from `nhanes` (the data we have) and men we meet in Copenhagen today (the data we want to have) are drawn from the same *population*. Each case is a different and the details matter.
+* $\mu$ is not the average height of the men in the sample. We can calculate that directly. It is `r mean(ch5$height)`. No estimation required! Instead, $\mu$ is the average height of men in the *population*. Recall from the discussions in @sec-models that the population is the universe of people/units/whatever about which we seek to draw conclusions. On some level, this seems simple. On a deeper level, it is very subtle. For example, if we are walking around Copenhagen, then the population we really care about, in order to answer our three questions, is the set of adult men which we might meet today. This is not the same as the population of adult men in the US in 2010. But is it close enough? Is it better than nothing? We want to assume that both men from `nhanes` (the data we have) and men we meet in Copenhagen today (the data we want to have) are drawn from the same *population*. Each case is a different and the details matter.
 
 * $\sigma$ is an estimate for the standard deviation of the errors,  i.e., variability in height after accounting for the mean.
 
@@ -350,7 +331,7 @@ Because we are estimating a linear model, we begin with:
 #| message: false
 
 fit_1 <- brm(formula = height ~ 1,
-             data = ch4,
+             data = ch5,
              family = gaussian(),
              silent = 2,
              refresh = 0,
@@ -380,14 +361,14 @@ Note:
 
 ```{r}
 #| code-fold: false
-mean(ch4$height)
+mean(ch5$height)
 ```
 
 * The estimated error ("Est.Error") also makes sense. This is the standard error and can be calculated by hand as the standard deviation of the data divided by the squart root of the number of observations:
 
 ```{r}
 #| code-fold: false
-sd(ch4$height) / sqrt(3658)
+sd(ch5$height) / sqrt(3658)
 ```
 
 * The end points of the confidence intervals are simply the estimate $\pm$ two times the standard error. 
@@ -573,7 +554,7 @@ sum(draws$diff > 10) / length(draws$diff)
 
 <!-- DK: I am concerned that we are not providing uncertainty estimates when we answer these questions. The best answer is 77%. Fine. But how much uncertainty is there in this estimate? This strikes me as a hard question! -->
 
-### Question 4
+### Question 3
 
 * What is our posterior probability distribution of the height of the 3rd tallest man out of the next 100 we meet?
 

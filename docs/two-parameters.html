@@ -285,7 +285,7 @@ window.Quarto = {
 <a href="#wisdom" id="toc-wisdom" class="nav-link active" data-scroll-target="#wisdom"><span class="header-section-number">5.1</span> Wisdom</a>
   <ul class="collapse">
 <li><a href="#preceptor-table" id="toc-preceptor-table" class="nav-link" data-scroll-target="#preceptor-table"><span class="header-section-number">5.1.1</span> Preceptor Table</a></li>
-  <li><a href="#eda-for-nhanes" id="toc-eda-for-nhanes" class="nav-link" data-scroll-target="#eda-for-nhanes"><span class="header-section-number">5.1.2</span> EDA for <code>nhanes</code></a></li>
+  <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda"><span class="header-section-number">5.1.2</span> EDA</a></li>
   <li><a href="#validity" id="toc-validity" class="nav-link" data-scroll-target="#validity"><span class="header-section-number">5.1.3</span> Validity</a></li>
   <li><a href="#population" id="toc-population" class="nav-link" data-scroll-target="#population"><span class="header-section-number">5.1.4</span> Population</a></li>
   </ul>
@@ -310,7 +310,7 @@ window.Quarto = {
   <ul class="collapse">
 <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">5.4.1</span> Question 1</a></li>
   <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><span class="header-section-number">5.4.2</span> Question 2</a></li>
-  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4"><span class="header-section-number">5.4.3</span> Question 4</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3"><span class="header-section-number">5.4.3</span> Question 3</a></li>
   <li><a href="#three-levels-of-knowledge" id="toc-three-levels-of-knowledge" class="nav-link" data-scroll-target="#three-levels-of-knowledge"><span class="header-section-number">5.4.4</span> Three Levels of Knowledge</a></li>
   </ul>
 </li>
@@ -333,12 +333,7 @@ window.Quarto = {
   
 
 
-</header><!-- Two parameter chapter is missing the math. --><!-- Make a 15 second video, put it on YouTube. "We don't estimate parameters because we care about parameters. Parameters are imaginary! Like unicorns! [Put finger on forehead and imitate unicorn.] We estimate parameters to build Data Generating Mechanisms. And with a DGM, you can move the world!" --><p>In <a href="probability.html" class="quarto-xref"><span>Chapter 2</span></a>, we learned how to do inference. We created a joint distribution of the models under consideration and the data which might be observed. Once we observed the data, we went from the joint distribution to the conditional distribution of possible models given the data which we did, in fact, observe. That conditional distribution, suitably normalized, was our posterior probability distribution over the space of possible models. With that distribution, we can answer any question we might (reasonably) ask.</p>
-<!-- Need a gif here. Like Hunger Games in Sampling chapter. -->
-<p><em>But what a pain in the ass that whole process was!</em> Do professionals actually go through all those steps every time they work on a data science problem? No! That would be absurd. Instead, professionals use standard tools which, in an automated fashion, take care of those steps, taking us directly from assumptions and data to the posterior:</p>
-<p><span class="math display">\[\text{Prob}(\text{models} | \text{data} = \text{data we observed})\]</span></p>
-<p>Even then, however, the relative likelihood of different models is not that important. Models are invisible, mental entities with no more physical presence than unicorns or leprechauns. In the world itself, we make and test predictions. <em>People with better models make better predictions. That is what matters.</em></p>
-<p><a href="sampling.html" class="quarto-xref"><span>Chapter 3</span></a> used models with just one parameter: <span class="math inline">\(\rho\)</span>, the number of red beads divided by the total number of beads in the bowl. The model in <a href="sampling.html" class="quarto-xref"><span>Chapter 3</span></a> was binomial, and there was only one unknown parameter, <span class="math inline">\(\rho\)</span>. <a href="models.html" class="quarto-xref"><span>Chapter 4</span></a> did the same thing, but in the more realistic setting in a poll. In this chapter, we have two unknown parameters: the mean <span class="math inline">\(\mu\)</span> height in the US and the standard deviation, <span class="math inline">\(\sigma\)</span>, of the normally distributed error term.</p>
+</header><!-- Two parameter chapter is missing the math. --><p><a href="models.html" class="quarto-xref"><span>Chapter 4</span></a> used models with just one parameter: <span class="math inline">\(\rho\)</span>, the votes for Biden divided by total votes. The model was binomial, and there was only one unknown parameter, <span class="math inline">\(\rho\)</span>. In this chapter, we have two unknown parameters: the mean <span class="math inline">\(\mu\)</span> height in the US and the standard deviation, <span class="math inline">\(\sigma\)</span>, of the normally distributed error term.</p>
 <p>The reason for making models is not, primarily, that making models is fun – although it is! The reason is that the world confronts us. Make decisions we must. We must decide between options X or Y. We must choose from actions A, B and C. Confronted by a choice, we need to make a model of the world to help us choose wisely.</p>
 <p>The real world is complex. Any substantive decision problem includes a great deal of complexity and requires even more context. We do not have the time to get into that level of detail now. So, we simplify. We are going to create a model of height for adult men. We will then use that model to answer three questions:</p>
 <!-- * What is the average height of men? -->
@@ -368,43 +363,39 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Wisdom begins with the Preceptor Table. What data would we, ideally, require to answer our questions? We then explore the data that we actually have. We apply the concept of <em>validity</em> to ensure that the data we <em>want</em> and the data we <em>have</em> are similar enough to allow the latter to inform us about the former. If so, we describe the <em>population</em> from which both the Preceptor Table and our data are drawn.</p>
+<p>Wisdom begins with the Preceptor Table. What data would we, ideally, require to answer our questions? We then explore the data that we actually have. We apply the concept of <em>validity</em> to ensure that the data we <em>want</em> and the data we <em>have</em> are similar enough to allow the latter to inform us about the former.</p>
 <section id="preceptor-table" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="preceptor-table">
 <span class="header-section-number">5.1.1</span> Preceptor Table</h3>
-<p>What rows and columns of data do you need such that, if you had them all, the calculation of the quantity of interest would be trivial? The steps we usually take to construct the Preceptor Table include:</p>
-<ul>
-<li><p>Is the question <em>causal</em> or <em>predictive</em>? If it is causal, then the Preceptor Table will have (at least) two potential outcome columns. If it is predictive, there will just be one outcome column. All our questions are predictive, so there is only one outcome column.</p></li>
-<li><p>What is the <em>outcome</em>? This is the variable which we are trying to explain/understand/predict. This is <em>not</em> the same thing as the answer to the question we have been asked. The question might, as above, be about the height of the 3rd tallest man we meet out of the next 100. But the concepts of 3rd or 100 do not appear in the Preceptor Table. Instead, height is our outcome variable. But, if we can build a model which explains/understands/predicts height, we can use that model to answer our questions.</p></li>
-<li><p>What are the <em>units</em>? These are the rows in the Preceptor Table. Sometimes, as here, the units will be fairly obvious: all the men in the world, one row per man. Othertimes, however, we will need to think more deeply about the units to use so that we can most easily answer our question.</p></li>
-<li><p>What are the <em>covariates</em>? These are the variables, other than the outcome, about which we have information. In the case of causal models, one of the covariates is the <em>treatment</em>, the variable which we can, at least in theory, <em>manipulate</em> in order to observe the different potential outcomes. Predictive models, on the other hand, have no treatments, only covariates.</p></li>
-<li><p>When is the moment in <em>time</em> to which the Preceptor Table refers? This is often implicit in the question itself. One of our key roles as data scientists is to clarify the questions which we are asked. In this case, it seems clear that the questions refer to <em>now</em> but that won’t always be the case.</p></li>
-</ul>
-<p>In considering the appropriate <em>outcomes</em>, <em>units</em>, <em>covariates</em> and <em>time</em> for the Preceptor Table, we should keep in mind the data that we actually have to answer our questions. We must satisify the assumption of <em>validity</em> if we are to combine the Preceptor Table and our data into a Population Table.</p>
-<p>If you want to know the average height of an adult in India, then the Preceptor Table would include a row for each adult in India and a column for their height. Our actual questions above imply that we want to know the average height for men, where “men” includes all males on Earth that are at least 18 years old.</p>
-<p>One key aspect of this Preceptor Table is whether or not we need more than one potential outcome in order to calculate our estimand. Mainly: are we are modeling (just) for prediction or are we (also) modeling for causation? Do we need a causal model, one which estimates the outcome under both treatment and control? In a causal model, the Preceptor Table would require two columns for the outcome. In this case, we are not modeling for causation; thus, we do not need two outcome columns.</p>
+<p>Which rows and columns of data do you need such that, if you had them all, the calculation of the quantity of interest would be trivial? The steps we usually take to construct the Preceptor Table include:</p>
+<p><em>Units</em>: All the men in the world, one row per man.</p>
+<p><em>Outcome</em>: This is the variable which we are trying to explain/understand/predict. This is <em>not</em> the same thing as the answer to the question we have been asked. The question might, as above, be about the height of the 3rd tallest man we meet out of the next 100. But the concepts of 3rd or 100 do not appear in the Preceptor Table. Instead, height is our outcome variable. But, if we can build a model which explains/understands/predicts height, we can use that model to answer our questions.</p>
+<p><em>Treatment</em>: There are not treatment variables.</p>
+<p><em>Causal or predictive model</em>: We have only one outcome, so the model is predictive.</p>
+<p><em>Covariates</em>: There are no (explicit) covariates in this model, although we will need to make use of variables like <code>age</code> and <code>sex</code> to construct our sample data.</p>
+<p><em>Moment in Time</em>: This is often implicit in the question itself. One of our key roles as data scientists is to clarify the questions which we are asked. In this case, it seems clear that the questions</p>
 <p>Predictive models care nothing about causation. Causal models are often also concerned with prediction, if only as a means of measuring the quality of the model. Here, we are looking at <em>prediction</em>.</p>
-<p>So, what does our Preceptor Table look like? Assuming we are predicting height for every adult male on planet Earth at this moment in time, we would have height data for every male at least 18 years of age. This means that we would have about 4 billion rows, one for each male, along with a column for each individual’s height.</p>
+<p>So, what does our Preceptor Table look like? Assuming we are predicting height for every adult male on Earth at this moment in time, we would have height data for every male at least 18 years of age. This means that we would have about 4 billion rows, one for each male, along with a column for each individual’s height.</p>
 <p>Here are some rows from our Preceptor Table:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="rietpcduik" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rietpcduik table {
+<div id="ohudyeqajx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ohudyeqajx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rietpcduik thead, #rietpcduik tbody, #rietpcduik tfoot, #rietpcduik tr, #rietpcduik td, #rietpcduik th {
+#ohudyeqajx thead, #ohudyeqajx tbody, #ohudyeqajx tfoot, #ohudyeqajx tr, #ohudyeqajx td, #ohudyeqajx th {
   border-style: none;
 }
 
-#rietpcduik p {
+#ohudyeqajx p {
   margin: 0;
   padding: 0;
 }
 
-#rietpcduik .gt_table {
+#ohudyeqajx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -430,12 +421,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#rietpcduik .gt_caption {
+#ohudyeqajx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rietpcduik .gt_title {
+#ohudyeqajx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -447,7 +438,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#rietpcduik .gt_subtitle {
+#ohudyeqajx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -459,7 +450,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#rietpcduik .gt_heading {
+#ohudyeqajx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -471,13 +462,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rietpcduik .gt_bottom_border {
+#ohudyeqajx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rietpcduik .gt_col_headings {
+#ohudyeqajx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -492,7 +483,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rietpcduik .gt_col_heading {
+#ohudyeqajx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -512,7 +503,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rietpcduik .gt_column_spanner_outer {
+#ohudyeqajx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -524,15 +515,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#rietpcduik .gt_column_spanner_outer:first-child {
+#ohudyeqajx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rietpcduik .gt_column_spanner_outer:last-child {
+#ohudyeqajx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rietpcduik .gt_column_spanner {
+#ohudyeqajx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -544,11 +535,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#rietpcduik .gt_spanner_row {
+#ohudyeqajx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rietpcduik .gt_group_heading {
+#ohudyeqajx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -574,7 +565,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#rietpcduik .gt_empty_group_heading {
+#ohudyeqajx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -589,15 +580,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#rietpcduik .gt_from_md > :first-child {
+#ohudyeqajx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rietpcduik .gt_from_md > :last-child {
+#ohudyeqajx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rietpcduik .gt_row {
+#ohudyeqajx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -616,7 +607,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rietpcduik .gt_stub {
+#ohudyeqajx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -629,7 +620,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rietpcduik .gt_stub_row_group {
+#ohudyeqajx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -643,15 +634,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#rietpcduik .gt_row_group_first td {
+#ohudyeqajx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rietpcduik .gt_row_group_first th {
+#ohudyeqajx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rietpcduik .gt_summary_row {
+#ohudyeqajx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -661,16 +652,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rietpcduik .gt_first_summary_row {
+#ohudyeqajx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rietpcduik .gt_first_summary_row.thick {
+#ohudyeqajx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rietpcduik .gt_last_summary_row {
+#ohudyeqajx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -680,7 +671,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rietpcduik .gt_grand_summary_row {
+#ohudyeqajx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -690,7 +681,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rietpcduik .gt_first_grand_summary_row {
+#ohudyeqajx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -700,7 +691,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#rietpcduik .gt_last_grand_summary_row_top {
+#ohudyeqajx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -710,11 +701,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rietpcduik .gt_striped {
+#ohudyeqajx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rietpcduik .gt_table_body {
+#ohudyeqajx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -723,7 +714,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rietpcduik .gt_footnotes {
+#ohudyeqajx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -737,7 +728,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rietpcduik .gt_footnote {
+#ohudyeqajx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -746,7 +737,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rietpcduik .gt_sourcenotes {
+#ohudyeqajx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -760,7 +751,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rietpcduik .gt_sourcenote {
+#ohudyeqajx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -768,63 +759,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rietpcduik .gt_left {
+#ohudyeqajx .gt_left {
   text-align: left;
 }
 
-#rietpcduik .gt_center {
+#ohudyeqajx .gt_center {
   text-align: center;
 }
 
-#rietpcduik .gt_right {
+#ohudyeqajx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rietpcduik .gt_font_normal {
+#ohudyeqajx .gt_font_normal {
   font-weight: normal;
 }
 
-#rietpcduik .gt_font_bold {
+#ohudyeqajx .gt_font_bold {
   font-weight: bold;
 }
 
-#rietpcduik .gt_font_italic {
+#ohudyeqajx .gt_font_italic {
   font-style: italic;
 }
 
-#rietpcduik .gt_super {
+#ohudyeqajx .gt_super {
   font-size: 65%;
 }
 
-#rietpcduik .gt_footnote_marks {
+#ohudyeqajx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rietpcduik .gt_asterisk {
+#ohudyeqajx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rietpcduik .gt_indent_1 {
+#ohudyeqajx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rietpcduik .gt_indent_2 {
+#ohudyeqajx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rietpcduik .gt_indent_3 {
+#ohudyeqajx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rietpcduik .gt_indent_4 {
+#ohudyeqajx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rietpcduik .gt_indent_5 {
+#ohudyeqajx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -864,11 +855,10 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>This table would extend all the way until person 4 billion-and-something. If we had this table, all of our questions could be answered with simple math and/or simulations. No inference necessary if we have a Preceptor Table. But what does our actual data look like?</p>
-</section><section id="eda-for-nhanes" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="eda-for-nhanes">
-<span class="header-section-number">5.1.2</span> EDA for <code>nhanes</code>
-</h3>
-<p>In our quest to find suitable data, consider the <code>nhanes</code> data set from the National Health and Nutrition Examination Survey conducted from 2009 to 2011 by the Centers for Disease Control and Prevention.</p>
+<p>This table would extend all the way until person 4 billion-and-something. If we had this table, all of our questions could be answered with simple math and/or simulations. No inference is necessary if we have a Preceptor Table. But what does our actual data look like?</p>
+</section><section id="eda" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="eda">
+<span class="header-section-number">5.1.2</span> EDA</h3>
+<p>Consider the <code>nhanes</code> data set from the National Health and Nutrition Examination Survey conducted from 2009 to 2011 by the Centers for Disease Control and Prevention.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">primer.data</span><span class="op">)</span></span>
@@ -924,11 +914,11 @@ $ sleep          &lt;int&gt; 4, 4, 4, NA, 8, NA, NA, 8, 8, 8, 7, 5, 4, NA, 5, 7,
 <pre><code># A tibble: 5 × 3
     age sex    height
   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
-1    71 Male    162. 
-2    39 Female  156. 
-3    49 Female  146. 
-4     2 Female   87.8
-5    14 Female  166. </code></pre>
+1    42 Female   154.
+2    23 Female   165.
+3    62 Female   165.
+4    11 Male     142.
+5    21 Male     184.</code></pre>
 </div>
 </div>
 <p>We think of both <code>age</code> and <code>height</code> as numbers. And they are numbers! But R distinguishes between “integers” and “doubles,” only the second of which allow for decimal values. In the <code>nhanes</code> data, <code>age</code> is an integer and <code>height</code> is a double.</p>
@@ -1087,7 +1077,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 </div>
 <p>Interesting! There are 353 missing values of height in our subset of data. Just using <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> does not show us that. Let’s filter out the NA’s using <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code>. This will delete the rows in which the value of any variable is missing. Because we want to examine height in men (not boys, nor females), let’s limit our data to only include adult males.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ch4</span> <span class="op">&lt;-</span> <span class="va">nhanes</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ch5</span> <span class="op">&lt;-</span> <span class="va">nhanes</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Male"</span>, <span class="va">age</span> <span class="op">&gt;=</span> <span class="fl">18</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1095,7 +1085,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 <p>Let’s plot this data using <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>.</p>
 <!-- The original version of this plot used to have a geom_density() overlay, but that stopped working for some reason. We could leave this plot as simple. After all, this is a section about EDA and we usually use simple plots on EDA. Or, we could make this plot more complex, by including a density plot. That might serve two purposes. First, we should make plots in these chapters more complex so that we have occasion to teach more plotting tricks. Second, we could use a density to teach/discuss things like 95% confidence intervals and posterior predictions. For now, I keep it simple. -->
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ch4</span> <span class="op">|&gt;</span></span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ch5</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Male Adult Height in the US in 2010"</span>,</span>
@@ -1106,7 +1096,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1155,23 +1145,23 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="cctewebibv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cctewebibv table {
+<div id="dttnwuxvvt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dttnwuxvvt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cctewebibv thead, #cctewebibv tbody, #cctewebibv tfoot, #cctewebibv tr, #cctewebibv td, #cctewebibv th {
+#dttnwuxvvt thead, #dttnwuxvvt tbody, #dttnwuxvvt tfoot, #dttnwuxvvt tr, #dttnwuxvvt td, #dttnwuxvvt th {
   border-style: none;
 }
 
-#cctewebibv p {
+#dttnwuxvvt p {
   margin: 0;
   padding: 0;
 }
 
-#cctewebibv .gt_table {
+#dttnwuxvvt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1197,12 +1187,12 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-left-color: #D3D3D3;
 }
 
-#cctewebibv .gt_caption {
+#dttnwuxvvt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cctewebibv .gt_title {
+#dttnwuxvvt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1214,7 +1204,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-width: 0;
 }
 
-#cctewebibv .gt_subtitle {
+#dttnwuxvvt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1226,7 +1216,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-top-width: 0;
 }
 
-#cctewebibv .gt_heading {
+#dttnwuxvvt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1238,13 +1228,13 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#cctewebibv .gt_bottom_border {
+#dttnwuxvvt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cctewebibv .gt_col_headings {
+#dttnwuxvvt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1259,7 +1249,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#cctewebibv .gt_col_heading {
+#dttnwuxvvt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1279,7 +1269,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   overflow-x: hidden;
 }
 
-#cctewebibv .gt_column_spanner_outer {
+#dttnwuxvvt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1291,15 +1281,15 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 4px;
 }
 
-#cctewebibv .gt_column_spanner_outer:first-child {
+#dttnwuxvvt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cctewebibv .gt_column_spanner_outer:last-child {
+#dttnwuxvvt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cctewebibv .gt_column_spanner {
+#dttnwuxvvt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1311,11 +1301,11 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   width: 100%;
 }
 
-#cctewebibv .gt_spanner_row {
+#dttnwuxvvt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cctewebibv .gt_group_heading {
+#dttnwuxvvt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1341,7 +1331,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   text-align: left;
 }
 
-#cctewebibv .gt_empty_group_heading {
+#dttnwuxvvt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1356,15 +1346,15 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   vertical-align: middle;
 }
 
-#cctewebibv .gt_from_md > :first-child {
+#dttnwuxvvt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cctewebibv .gt_from_md > :last-child {
+#dttnwuxvvt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cctewebibv .gt_row {
+#dttnwuxvvt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1383,7 +1373,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   overflow-x: hidden;
 }
 
-#cctewebibv .gt_stub {
+#dttnwuxvvt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1396,7 +1386,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#cctewebibv .gt_stub_row_group {
+#dttnwuxvvt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1410,15 +1400,15 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   vertical-align: top;
 }
 
-#cctewebibv .gt_row_group_first td {
+#dttnwuxvvt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cctewebibv .gt_row_group_first th {
+#dttnwuxvvt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cctewebibv .gt_summary_row {
+#dttnwuxvvt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1428,16 +1418,16 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#cctewebibv .gt_first_summary_row {
+#dttnwuxvvt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cctewebibv .gt_first_summary_row.thick {
+#dttnwuxvvt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cctewebibv .gt_last_summary_row {
+#dttnwuxvvt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1447,7 +1437,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-color: #D3D3D3;
 }
 
-#cctewebibv .gt_grand_summary_row {
+#dttnwuxvvt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1457,7 +1447,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#cctewebibv .gt_first_grand_summary_row {
+#dttnwuxvvt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1467,7 +1457,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-top-color: #D3D3D3;
 }
 
-#cctewebibv .gt_last_grand_summary_row_top {
+#dttnwuxvvt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1477,11 +1467,11 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-color: #D3D3D3;
 }
 
-#cctewebibv .gt_striped {
+#dttnwuxvvt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cctewebibv .gt_table_body {
+#dttnwuxvvt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1490,7 +1480,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-color: #D3D3D3;
 }
 
-#cctewebibv .gt_footnotes {
+#dttnwuxvvt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1504,7 +1494,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#cctewebibv .gt_footnote {
+#dttnwuxvvt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1513,7 +1503,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#cctewebibv .gt_sourcenotes {
+#dttnwuxvvt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1527,7 +1517,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#cctewebibv .gt_sourcenote {
+#dttnwuxvvt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1535,63 +1525,63 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#cctewebibv .gt_left {
+#dttnwuxvvt .gt_left {
   text-align: left;
 }
 
-#cctewebibv .gt_center {
+#dttnwuxvvt .gt_center {
   text-align: center;
 }
 
-#cctewebibv .gt_right {
+#dttnwuxvvt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cctewebibv .gt_font_normal {
+#dttnwuxvvt .gt_font_normal {
   font-weight: normal;
 }
 
-#cctewebibv .gt_font_bold {
+#dttnwuxvvt .gt_font_bold {
   font-weight: bold;
 }
 
-#cctewebibv .gt_font_italic {
+#dttnwuxvvt .gt_font_italic {
   font-style: italic;
 }
 
-#cctewebibv .gt_super {
+#dttnwuxvvt .gt_super {
   font-size: 65%;
 }
 
-#cctewebibv .gt_footnote_marks {
+#dttnwuxvvt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cctewebibv .gt_asterisk {
+#dttnwuxvvt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cctewebibv .gt_indent_1 {
+#dttnwuxvvt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cctewebibv .gt_indent_2 {
+#dttnwuxvvt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cctewebibv .gt_indent_3 {
+#dttnwuxvvt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cctewebibv .gt_indent_4 {
+#dttnwuxvvt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cctewebibv .gt_indent_5 {
+#dttnwuxvvt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1718,7 +1708,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 <p>Because we are estimating a linear model, we begin with:</p>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">height</span> <span class="op">~</span> <span class="fl">1</span>,</span>
-<span>             data <span class="op">=</span> <span class="va">ch4</span>,</span>
+<span>             data <span class="op">=</span> <span class="va">ch5</span>,</span>
 <span>             family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">gaussian</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>             silent <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>             refresh <span class="op">=</span> <span class="fl">0</span>,</span>
@@ -1736,7 +1726,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 <pre><code> Family: gaussian 
   Links: mu = identity; sigma = identity 
 Formula: height ~ 1 
-   Data: ch4 (Number of observations: 3658) 
+   Data: ch5 (Number of observations: 3658) 
   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
          total post-warmup draws = 4000
 
@@ -1760,7 +1750,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><p>The “Estimate” of 175.87 makes sense. After all, the simple mean of the <code>height</code> in the data is:</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ch4</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ch5</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 175.8707</code></pre>
 </div>
@@ -1769,7 +1759,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li>The estimated error (“Est.Error”) also makes sense. This is the standard error and can be calculated by hand as the standard deviation of the data divided by the squart root of the number of observations:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">ch4</span><span class="op">$</span><span class="va">height</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">3658</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">ch5</span><span class="op">$</span><span class="va">height</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">3658</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.1237131</code></pre>
 </div>
@@ -1795,7 +1785,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1816,7 +1806,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1850,16 +1840,16 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 # Groups:   .row [1]
     .row .chain .iteration .draw .prediction
    &lt;int&gt;  &lt;int&gt;      &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;
- 1     1     NA         NA     1        177.
- 2     1     NA         NA     2        175.
- 3     1     NA         NA     3        181.
- 4     1     NA         NA     4        182.
- 5     1     NA         NA     5        165.
- 6     1     NA         NA     6        188.
- 7     1     NA         NA     7        168.
- 8     1     NA         NA     8        172.
- 9     1     NA         NA     9        169.
-10     1     NA         NA    10        183.
+ 1     1     NA         NA     1        170.
+ 2     1     NA         NA     2        180.
+ 3     1     NA         NA     3        185.
+ 4     1     NA         NA     4        177.
+ 5     1     NA         NA     5        190.
+ 6     1     NA         NA     6        168.
+ 7     1     NA         NA     7        179.
+ 8     1     NA         NA     8        177.
+ 9     1     NA         NA     9        176.
+10     1     NA         NA    10        182.
 # ℹ 3,990 more rows</code></pre>
 </div>
 </div>
@@ -1880,7 +1870,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1900,7 +1890,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <pre><code># A tibble: 1 × 2
    .row  odds
   &lt;int&gt; &lt;dbl&gt;
-1     1 0.294</code></pre>
+1     1 0.283</code></pre>
 </div>
 </div>
 <p>If 30% or so of the draws from the posterior probability distribution are greater than 180 cm, then there is about a 30% chance that the next individual will be taller than 180 cm.</p>
@@ -1920,16 +1910,16 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <pre><code># A tibble: 4,000 × 5
    .draw   `1`   `2`   `3`   `4`
    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1     1  173.  178.  177.  174.
- 2     2  173.  177.  168.  175.
- 3     3  173.  180.  175.  187.
- 4     4  176.  176.  174.  176.
- 5     5  179.  179.  163.  183.
- 6     6  170.  176.  178.  174.
- 7     7  177.  177.  178.  166.
- 8     8  185.  172.  169.  174.
- 9     9  170.  187.  166.  177.
-10    10  184.  183.  175.  160.
+ 1     1  176.  177.  176.  176.
+ 2     2  177.  186.  180.  187.
+ 3     3  186.  181.  165.  187.
+ 4     4  180.  177.  168.  175.
+ 5     5  185.  186.  175.  180.
+ 6     6  160.  177.  162.  189.
+ 7     7  189.  176.  177.  187.
+ 8     8  175.  178.  161.  153.
+ 9     9  177.  168.  177.  178.
+10    10  170.  169.  167.  172.
 # ℹ 3,990 more rows</code></pre>
 </div>
 </div>
@@ -1948,16 +1938,16 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 # Rowwise: 
    .draw   `1`   `2`   `3`   `4`  diff
    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1     1  173.  179.  167.  185. 17.8 
- 2     2  165.  168.  178.  172. 13.4 
- 3     3  175.  186.  178.  164. 21.8 
- 4     4  179.  184.  192.  173. 19.8 
- 5     5  172.  164.  191.  186. 27.2 
- 6     6  176.  180.  168.  174. 12.5 
- 7     7  173.  169.  169.  174.  5.21
- 8     8  174.  181.  176.  169. 11.4 
- 9     9  178.  173.  161.  183. 21.5 
-10    10  183.  166.  173.  180. 17.4 
+ 1     1  183.  174.  171.  178. 12.4 
+ 2     2  179.  186.  174.  173. 12.3 
+ 3     3  177.  184.  177.  179.  6.59
+ 4     4  180.  173.  170.  179. 10.8 
+ 5     5  173.  177.  176.  166. 11.6 
+ 6     6  170.  173.  182.  181. 11.9 
+ 7     7  176.  182.  183.  179.  6.37
+ 8     8  173.  176.  159.  164. 16.4 
+ 9     9  179.  180.  174.  189. 15.4 
+10    10  185.  172.  164.  194. 29.8 
 # ℹ 3,990 more rows</code></pre>
 </div>
 </div>
@@ -1982,7 +1972,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1991,12 +1981,12 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div class="cell">
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">draws</span><span class="op">$</span><span class="va">diff</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">draws</span><span class="op">$</span><span class="va">diff</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.78475</code></pre>
+<pre><code>[1] 0.77725</code></pre>
 </div>
 </div>
 <!-- DK: I am concerned that we are not providing uncertainty estimates when we answer these questions. The best answer is 77%. Fine. But how much uncertainty is there in this estimate? This strikes me as a hard question! -->
-</section><section id="question-4" class="level3" data-number="5.4.3"><h3 data-number="5.4.3" class="anchored" data-anchor-id="question-4">
-<span class="header-section-number">5.4.3</span> Question 4</h3>
+</section><section id="question-3" class="level3" data-number="5.4.3"><h3 data-number="5.4.3" class="anchored" data-anchor-id="question-3">
+<span class="header-section-number">5.4.3</span> Question 3</h3>
 <ul>
 <li>What is our posterior probability distribution of the height of the 3rd tallest man out of the next 100 we meet?</li>
 </ul>
@@ -2010,16 +2000,16 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <pre><code># A tibble: 4,000 × 101
    .draw   `1`   `2`   `3`   `4`   `5`   `6`   `7`   `8`   `9`  `10`  `11`  `12`
    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1     1  177.  172.  173.  177.  172.  180.  177.  180.  170.  178.  172.  176.
- 2     2  177.  181.  189.  173.  178.  192.  177.  173.  170.  162.  167.  167.
- 3     3  177.  163.  180.  175.  175.  180.  172.  178.  176.  177.  172.  182.
- 4     4  174.  163.  171.  176.  174.  189.  185.  180.  157.  174.  180.  185.
- 5     5  175.  178.  182.  171.  188.  184.  173.  176.  176.  175.  174.  184.
- 6     6  177.  176.  174.  170.  174.  179.  181.  189.  176.  170.  175.  176.
- 7     7  162.  172.  186.  182.  173.  186.  175.  165.  179.  167.  171.  181.
- 8     8  185.  169.  179.  182.  182.  179.  190.  167.  182.  190.  176.  178.
- 9     9  173.  176.  174.  180.  185.  176.  186.  185.  177.  179.  177.  167.
-10    10  176.  163.  176.  169.  178.  194.  183.  171.  182.  171.  165.  172.
+ 1     1  178.  176.  176.  179.  176.  179.  184.  175.  185.  179.  185.  163.
+ 2     2  172.  171.  176.  175.  163.  175.  177.  173.  182.  175.  163.  176.
+ 3     3  177.  184.  175.  182.  176.  180.  175.  174.  162.  165.  175.  162.
+ 4     4  183.  178.  190.  165.  173.  185.  177.  179.  174.  179.  187.  178.
+ 5     5  168.  173.  187.  171.  177.  179.  190.  186.  187.  155.  185.  190.
+ 6     6  184.  169.  162.  186.  160.  169.  172.  171.  163.  171.  175.  178.
+ 7     7  170.  178.  166.  172.  170.  185.  167.  180.  189.  173.  186.  187.
+ 8     8  171.  171.  174.  172.  171.  175.  186.  164.  183.  174.  175.  176.
+ 9     9  173.  182.  172.  182.  181.  168.  175.  197.  168.  168.  187.  173.
+10    10  185.  173.  184.  181.  166.  178.  173.  167.  184.  171.  176.  178.
 # ℹ 3,990 more rows
 # ℹ 88 more variables: `13` &lt;dbl&gt;, `14` &lt;dbl&gt;, `15` &lt;dbl&gt;, `16` &lt;dbl&gt;,
 #   `17` &lt;dbl&gt;, `18` &lt;dbl&gt;, `19` &lt;dbl&gt;, `20` &lt;dbl&gt;, `21` &lt;dbl&gt;, `22` &lt;dbl&gt;,
@@ -2052,7 +2042,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="two-parameters_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

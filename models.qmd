@@ -9,10 +9,22 @@ library(tidyverse)
 library(gt)
 library(gtsummary)
 library(patchwork)
+library(equatiomatic)
 ```
 
 
-<!-- Another paragraph or two of discussion about the final posterior. How do we use it? Within what range would you offer 50/50 odds that the true percentage lies? (use quantile(0.25, 0.75). Area under the curve? Explain clearly how that 26% is calculated. What is post_dist? What does it mean? How can I use it? Maybe show it sorted? Add some code comments. -->
+<!-- What should the Question for this chapter be? And, if we start by keeping the simple \rho of Biden support, should we add another question, like the odds of two people both being Biden supporters. One problem with using (just) \rho is that we already did that the last chapter with the beads. This is too repetitive. Counter-argument is that all of this material is so new that it can only help students to go through it all again, especially in a case with much more substantive issues to deal with in evaluating the assumptions. Also, it is not obvious how to calculate the uncertainty associated with the two voters odds problem?  -->
+
+
+In @sec-probability, we learned how to do inference. We created a joint distribution of the models under consideration and the data which might be observed. Once we observed the data, we went from the joint distribution to the conditional distribution of possible models given the data which we did, in fact, observe. That conditional distribution, suitably normalized, was our posterior probability distribution over the space of possible models. With that distribution, we can answer any question we might (reasonably) ask.
+
+<!-- Need a gif here. Like Hunger Games in Sampling chapter. -->
+
+*But what a pain in the ass that whole process was!* Do professionals actually go through all those steps every time they work on a data science problem? No! That would be absurd. Instead, professionals use standard tools which, in an automated fashion, take care of those steps, taking us directly from assumptions and data to the posterior:
+
+$$\text{Prob}(\text{models} | \text{data} = \text{data we observed})$$
+
+Even then, however, the relative likelihood of different models is not that important. Models are invisible, mental entities with no more physical presence than unicorns or leprechauns. In the world itself, we make and test predictions. *People with better models make better predictions. That is what matters.*
 
 In @sec-sampling, we learned about sampling, the process of gathering data to answer our questions. In this chapter, we will learn about constructing *models*, creating the data generating mechanism (DGM) which we will use to answer our questions.
 
@@ -42,7 +54,9 @@ knitr::include_graphics("other/images/Wisdom.jpg")
 
 Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of "validity," as to whether or not we can (reasonably!) assume that the two come from the same *population*. We begin with a question:
 
-> *What are the odds that, if we meet two voters, both will have voted for Biden?*
+> *What proportion of all votes will be cast for Joe Biden in the 2024 election?*
+
+For the purpose of this question, assume that it is April, 7 months before the election.
 
 ### Preceptor Table
 
@@ -79,7 +93,11 @@ tibble(voter_ID = c("1", "2",
 &nbsp;
 
 
-Once we have all the information in the Preceptor Table, it is easy to create a computer simulation which, for example, draws 1,000 pairs of voters at random from the table, checks to see if they both voted for Biden, and then report the percentage of the 1,000 which meet this criteria. Of course, we will need to construct such a simulation carefully. People don't walk around at random! They walk with friends, and friends share the same politics more often than strangers do.
+Once we have all the information in the Preceptor Table, it is easy to calculate the proportion of all votes which were cast for Biden. 
+
+Moreover, we could use the Preceptor Table to answer other related questions. For example, assume we wanted to know the odds that the next two people we meet, just after the election, both voted for Biden.
+
+With the data in the Preceptor Table, we could create a computer simulation which, for example, draws 1,000 pairs of voters at random from the table, checks to see if they both voted for Biden, and then report the percentage of the 1,000 which meet this criteria. Of course, we will need to construct such a simulation carefully. People don't walk around at random! They walk with friends, and friends share the same politics more often than strangers do.
 
 The important point is that the Preceptor Table has the fewest rows and columns such that, if no data is missing, we can answer our question.
 
@@ -126,7 +144,7 @@ When we "stack" our data on top of our Preceptor Table, we are assuming that int
 
 We conclude the Wisdom section by summarizing how we hope to use the data we have to answer the question we started with: 
 
-> *Using data from a YouGov poll of 1,559 US adult citizens, conducted March 10 - 12, 2024, we seek to understand what proportion of voters will support Biden in the 2024 election. In particular, we want to estimate the odds that, if we meet two voters, both will have voted for Biden?*
+> *Using data from a YouGov poll of 1,559 US adult citizens, conducted March 10 - 12, 2024, we seek to understand what proportion of voters will support Biden in the 2024 election.*
 
 ## Justice
 
@@ -214,6 +232,9 @@ The assumption of representativeness is *never* completely true. We can only hop
 
 Since this is a predictive model, we do not have to worry about unconfoundedness. There is no "treatment" which might be confounded with anything.
 
+> *Using data from a YouGov poll of 1,559 US adult citizens, conducted March 10 - 12, 2024, we seek to understand what proportion of voters will support Biden in the 2024 election. Biden's popularity might change significantly over the course of the election campaign.*
+
+
 
 ## Courage
 
@@ -225,8 +246,6 @@ knitr::include_graphics("other/images/Courage.jpg")
 Justice verifies the Population Table. Courage creates a mathematical model which connects the outcome variable to the covariates, if any. Then, using code, we create a fitted model, including posterior probability distributions for all the unknown parameters.
 
 Given that the polling problem is conceptually similar to the beads-in-an-urn problem, it is useful to perform the same back-of-the-envelope calculation we did in @sec-sampling. To do that, we first need to create the tibble:
-
-<!-- DK: I tried to have this be a character variable named bead with values red and white. But I could not get brms to give me predictions which were red and white. So, I figure that, if we can only get 0/1 predictions, we should give it 0/1 input data. Still need to explore this. How does brms handle multinomial models? -->
 
 ```{r}
 #| code-fold: false
@@ -298,6 +317,7 @@ The key function in the **brms** package is `brm()`.
 ```{r}
 #| cache: true
 #| code-fold: false
+#| error: false
 fit_gauss <- brm(formula = biden ~ 1,
                 data = poll_data)
 ```
@@ -318,6 +338,7 @@ Notes:
 ```{r}
 #| cache: true
 #| code-fold: false
+#| error: false
 fit_gauss <- brm(formula = biden ~ 1,
                 data = poll_data,
                 refresh = 0,
@@ -409,7 +430,7 @@ fit_gauss |>
          x = expression(paste("Proportion, ", rho, ", of Biden Voters")),
          y = "Probability") + 
   
-    scale_x_continuous(labels = scales::number_format()) +
+    scale_x_continuous(labels = scales::percent_format()) +
     scale_y_continuous(labels = scales::percent_format()) +
     theme_classic()
 ```
@@ -451,7 +472,7 @@ We have discovered that our initial assumption about the correct mathematical fo
 ```{r}
 #| cache: true
 #| code-fold: false
-#| message: false
+#| error: false
 fit_bern <- brm(formula = biden ~ 1,
                 data = poll_data,
                 family = bernoulli(),
@@ -560,6 +581,9 @@ $$ biden_i  \sim Bernoulli(\rho = 0.42) $$
 
 <!-- broom.mixed::tidy(fit_bern) produces ugly stuff here, so maybe don't introduce it now. -->
 
+> *Using data from a YouGov poll of 1,559 US adult citizens, conducted March 10 - 12, 2024, we seek to understand what proportion of voters will support Biden in the 2024 election. Biden's popularity might change significantly over the course of the election campaign. In the poll, Biden's support was much less than 50%.*
+
+We have not yet used our DGM to answer our question. But, the DGM itself, prior to us asking any specific question, includes all sorts of interesting information. It is sensible for us to add one aspect of that information to our summary of the work done so far.
 
 ## Temperance
 
@@ -574,95 +598,58 @@ Courage produced the data generating mechanism. Temperance guides us in the use 
 
 Recall the question with which we began:
 
-> What are the odds, if we just look at two voters, both will have voted for Biden?
+> *What proportion of all votes will be cast for Joe Biden in the 2024 election?*
 
-Because the model is a simple Bernoulli, we can actually calculate this by hand. The probability of two Biden supporters is simply the probability that the first person supports Biden, which is 0.42, times the probability that the second person supports Biden, which is also 0.42. $0.42^2 \approx 0.176$. 
 
-Let's use `fit_bern` to answer this question with the help of `add_predicted_draws()`. Instead of having just one row in `newdata`, we now have two rows, one for each person for whom we need a posterior.
-
-```{r}
-#| code-fold: false
-
-fit_bern |> 
-  add_predicted_draws(newdata = tibble(.rows = 2))
-```
-
-Note that there are 8,000 rows in the resulting tibble, not 4,000 as we saw before. There will be 4,000 rows for each row in `newdata` because the default for **brms** functions is to provide 4,000 draws from each posterior requested and then to "stack" them on top of each other. Here, we are asking for two posteriors, one for each person, so there are 8,000 rows.
-
-<!-- DK: Is there an argument which will cause add_predicted_draws() to return the wide tibble? Maybe spread draws? Show that also? -->
-
-Let's make two changes to this code. First, we will add a `seed` argument to `add_predicted_draws()`. One problem with any sample of random draws from a posterior distribution is that it is, by definition, *random*. We get different values each time we run it. This is sometimes annoying, as when you are writing a textbook with discussions of the exact output. Give the `seed` argument any value and any function in **brms** will produce the same answers each time. Second, let's just keep the variables we actually need. 
-
-<!-- DK: ?add_predicted_draws suggests that seed does nothing when ndraws is NULL, as it is by default. But testing shows it does matter! -->
+Let's use `fit_bern` to answer this question with the help of `add_epred_draws()`. 
 
 ```{r}
 #| code-fold: false
 
 fit_bern |> 
-  add_predicted_draws(newdata = tibble(.rows = 2), seed = 10) |> 
-  select(.row, .draw, .prediction)
+  add_epred_draws(newdata = tibble(.rows = 1)) |> 
+  summarise(
+    lower_95 = quantile(.epred, 0.025),
+    median = quantile(.epred, 0.5),
+    upper_95 = quantile(.epred, 0.975)
+  )
 ```
 
-
-It is useful to reshape the resulting tibble so that, for each draw of the 4,000, the results from both people are on the same row.
-
-<!-- DK: It seems that it would be such a common need, to add_x and then pivot_wider() that there should be some built in way to do so? -->
-
-```{r}
-#| code-fold: false
-
-fit_bern |> 
-  add_predicted_draws(newdata = tibble(.rows = 2)) |> 
-  select(.row, .draw, .prediction) |> 
-  pivot_wider(values_from = .prediction, names_from = .row)
-```
-
-We are back to a tibble of 4,000 rows, meaning that each row is a draw from an underlying posterior. But, in this case, we have the draws from two posteriors, one for each person, placed side-by-side. In the first "draw," person 1 and person 2 both do not support Biden. In the third draw, person 1 does not support Biden but person 2 does. Only in draw 4 do we see the case we are looking for, with both people supporting Biden. Let's identify all the rows where this is `TRUE`.
+We can also refer to the figure we created above of the posterior probability distribution for $\rho$. Of course, if we want (mostly) precise numbers, we need to do more than just stare at a graphic. We should calculate precise quantiles from the posterior distribution.
 
 
-```{r}
-#| code-fold: false
-
-fit_bern |> 
-  add_predicted_draws(newdata = tibble(.rows = 2), seed = 10) |> 
-  select(.row, .draw, .prediction) |> 
-  pivot_wider(values_from = .prediction, names_from = .row) |> 
-  mutate(both = if_else(`1` & `2`, TRUE, FALSE)) 
-```
-
-You should be familiar with both `mutate()` and `if_else()`. The code looks ugly because the two key columns of the tibble are named `1` and `2`. Variable names which begin with numbers are "non-standard" in a tibble. In order to refer to them in `if_else()`, we need to surround them with backticks, as we have above. Calculating the percentage is now just a single call to `summarize()`.
-
-```{r}
-#| code-fold: false
-
-fit_bern |> 
-  add_predicted_draws(newdata = tibble(.rows = 2), seed = 10) |> 
-  select(.row, .draw, .prediction) |> 
-  pivot_wider(values_from = .prediction, names_from = .row) |> 
-  mutate(both = if_else(`1` & `2`, TRUE, FALSE)) |> 
-  summarize(odds = mean(both))
-```
-
-Recall that `mean()` coerces `TRUE`/`FALSE` into `1`/`0`, thus allowing us to easily confirm that the percentage of groups of two people who both voted for Biden is about 17%. The result does not match our by hand calculation exactly because of the intrinsically random nature of sampling. 
-
-
-<!-- DK: Is that right? How could we get more draws? Looks like you need to change the iter argument to 20,000 in the call to brm(). But, just by chance (! I think), when I did this, the answer produced with seed = 10 was still 0.173. Investigate this some other time. -->
-
-
-*Using data from a March 2024 YouGov survey of adult US citizens, we sought understand President Biden's popularity. In particular, what are the chances that two random voters who we meet in November 2024 will both have voted for Biden? Biden's popularity might change significantly over the course of the election. Based on the survey, we modeled the probability of someone voting for Biden as 42%, conditional on them voting. Given that, there is a 17% chance that any two voters both voted for Biden. However, this conclusion assumes that the two voters were chosen at random from the entire population, an assumption which is almost certainly false in practice.*
-
-<!-- DK: Isn't there some elegant way of getting some uncertainty around that 17% number? Presumably, you take a draw from a draw form rho and then take 4,000 samples, calculate the percentage, and then do the same again. Or is this already what happens behind the scenes? That is, the 17% figure is averaged over the posterior for rho? -->
+> *Using data from a YouGov poll of 1,559 US adult citizens, conducted March 10 - 12, 2024, we seek to understand what proportion of voters will support Biden in the 2024 election. Biden's popularity might change significantly over the course of the election campaign. In the poll, Biden's support was much less than 50%. We estimate that Biden's percentage of the vote in Election Day will be about 42%, plus or minus 2.5%.*
 
 
 ### Humility
 
 *We can never know the truth.*
 
+Recall all the ways in which are DGM is a poor description of reality. We assume *representativeness*. But that is false! We know that our sample is not perfectly representative of the people who will be voting in the election. No poll is ever perfect. The sort of people who answer polling questions are systematically different from those who do not. Professionals will do their best to "control" for those differences, a topic beyond the scope of this *Primer*, but those controls will never be perfect.
+
+We also assume *stability* in constructing our DGM. This is certainly false. The 0.42 estimate is highly unlikely to stay stable throughout the election campaign.
+
+Life is not a textbook. We first calculate the textbook answer, with all of its absurd assumptions. We then use that answer, along with our other knowledge, to produce the best possible estimate for our quantity of interest along with our uncertainty about that estimate.
+
+Our initial answer to the question has two major problems. First, it does not use information about other US presidential elections. Second, it is over-confident because it assumes that the model's assumptions are correct.
+
+A better answer would be:
+
+> *Using data from a YouGov poll of 1,559 US adult citizens, conducted March 10 - 12, 2024, we seek to understand what proportion of voters will support Biden in the 2024 election. Biden's popularity might change significantly over the course of the election campaign. In the poll, Biden's support was much less than 50%. We estimate that Biden's percentage of the vote in Election Day will be about 44%, plus or minus 5%.*
+
+Wait!?! This is not what the model reported!
+
+Where did that 44% come from? The model estimated 42%. But, the problem, as always, is that our models are always flawed. They always assume things that are false. They always leave out lots of information. For example, no Democrat has won less than 43% of the votes for president since Walter Mondale in 1980. Is Biden really a worse candidate then every other Democrat in almost 50 years? Probably not. 
+
+Does that history "prove" anything? No! History suggests. It does not construct proofs. Your job as a data scientist is not simply to **read** the numbers from your R Console. Your job is to **combine** those numbers with other sources of information and then offer your best estimate for the quantity of interest.
 
 
-## Summary
+Where did that "plus or minus 5%" come from? The 95% confidence (or uncertainty or whatever) intervals provided by **brms** run from about 39.7% to 44.5%. That would suggest a plus/minus range of somewhere between 2.3% and 2.5%. 
 
-In this chapter we learned about the core packages for performing Bayesian analysis: **brms** and **tidybayes**. There are other packages for accomplishing these tasks, most famously **rstanarm**, but these are the two we will use in this *Primer*.
+You always need to be prepared to give two ranges of uncertainty related to your quantity of interest. First, is the range provided by the model, the one which assumes that every aspect of the model is perfectly true. For this range to be correct, every assumption must be true. 
 
+But, in addition to the computer output, you bring your experience to bear. You know that polls are volatile. You know that polling is hard. In general, the uncertainty interval provided by the model is a **floor** for the true uncertainty.
+
+*The world is always more uncertain than our models would have us believe.*
 
 

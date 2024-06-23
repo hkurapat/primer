@@ -6,6 +6,8 @@ The world confronts us. Make decisions we must.
 
 ### Installing R and RStudio {.unnumbered}
 
+<!-- Be careful! If you install tutorial.helpers from CRAN, and then, when you install r4ds.tutorials, don't update all packages, you won't get the PPBDS version of tutorial.helpers, which we need because of show_file(). -->
+
 <!-- Update all the images. -->
 
 <!-- Change the graphic so that the words are the top are: "R is like a car's engine." and "RStudio is like a car's dashboard." -->

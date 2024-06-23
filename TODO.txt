@@ -12,7 +12,9 @@ I need to clean up the tutorials we have: rcm, probability, sampling.
 
 I need to add tutorials for the remaining 7 chapters.
 
+Sadly, https://datalorax.github.io/equatiomatic/ does not support objects of brmsfit.
 
+Try to use gtsummary() and make it standard.
 
 
 # Other Stuff
@@ -383,3 +385,5 @@ make: *** [foo.o] Error 1
 
 Issue seems associated with Rcpp installation. It got so annoying that I stopped use renv. But even that was not enough. I had to fina all the `_cache` directories in the project that at Rcpp installed and delete them. No idea why this was necessary since .libpaths() did not include them. But, after deleting them, the error went away. Maybe I just had one bad version of Rcpp, or Rcpp itself was bad for a little wile. With luck, now that it works, this won't happen again.
 
+
+Make a 15 second video, put it on YouTube. "We don't estimate parameters because we care about parameters. Parameters are imaginary! Like unicorns! [Put finger on forehead and imitate unicorn.] We estimate parameters to build Data Generating Mechanisms. And with a DGM, you can move the world!"
