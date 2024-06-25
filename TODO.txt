@@ -16,6 +16,11 @@ Sadly, https://datalorax.github.io/equatiomatic/ does not support objects of brm
 
 Try to use gtsummary() and make it standard.
 
+## Students
+
+
+
+
 
 # Other Stuff
 

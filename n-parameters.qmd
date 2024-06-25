@@ -11,8 +11,6 @@ library(gtsummary)
 ```
 
 
-*This chapter is still a DRAFT.*
-
 > It may be time to move from assuming that research has been honestly conducted and reported to assuming it to be untrustworthy until there is some evidence to the contrary. -- [Richard Smith](https://blogs.bmj.com/bmj/2021/07/05/time-to-assume-that-health-research-is-fraudulent-until-proved-otherwise/), former editor of the *British Medical Journal*.
 
 You are now ready to make the jump to $N$ parameters. 
@@ -532,7 +530,9 @@ Should we use `fit_1` or `fit_2`? Reasonable people will differ.
 knitr::include_graphics("other/images/Temperance.jpg")
 ```
 
-Finally, let's remember the virtue of Temperance. The gist of temperance is: be humble with our inferences, as our inferences are always, certainly, and unfortunately not going to match the real world. How does this apply to our shaming scenario?
+Courage produced the data generating mechanism. Temperance guides us in the use of the DGM — or the “model” — we have created to answer the questions with which we began. We create posteriors for the quantities of interest. We should be modest in the claims we make. The posteriors we create are never the “truth.” The assumptions we made to create the model are never perfect. Yet decisions made with flawed posteriors are almost always better than decisions made without them.
+
+### Questions and Answers
 
 Recall our initial question: *What is the causal effect, on the likelihood of voting, of different postcards on voters of different levels of political engagement?*
 
@@ -711,19 +711,19 @@ What does this mean for us, as we consider which postcards to send?
 
 How confident are we in these findings? If we needed to convince our boss that this is the right strategy, we need to explain how confident we are in our assumptions. To do that, we must understand the three levels of knowledge in the world of posteriors. 
 
-### The Three Levels of Knowledge 
+### Humility
+
+*We can never know the truth.*
+
 
 There exist three primary levels of knowledge possible knowledge in our scenario: the Truth (the ideal Preceptor Table), the DGM Posterior, and Our Posterior. 
 
-#### The Truth
 
 If we know the Truth (with a capital "T"), then we know the ideal Preceptor Table. With that knowledge, we can *directly* answer our question precisely. We can calculate each individual's treatment effect, and any summary measure we might be interested in, like the average treatment effect. 
 
 This level of knowledge is possible only under an omniscient power, one who can see every outcome in every individual under every treatment. The Truth would show, for any given individual, their actions under control, their actions under treatment, and each little factor that impacted those decisions. 
 
 The Truth represents the highest level of knowledge one can have --- with it, our questions merely require algebra. There is no need to estimate a treatment effect, or the different treatment effects for different groups of people. We would not need to predict at all --- we would **know**. 
-
-#### DGM posterior
 
 The DGM posterior is the next level of knowledge, which lacks the omniscient quality of The Truth. This posterior is the posterior we would calculate if we had perfect knowledge of the data generating mechanism, meaning we have the correct model structure and exact parameter values. This is often falsely conflated with "Our posterior", which is subject to error in model structure and parameter value estimations.  
 
@@ -733,7 +733,6 @@ What we do with the DGM posterior is the same as Our posterior --- we estimate p
 
 If we go to our boss with our estimates from this posterior, we would expect our 95% confidence interval to be perfectly calibrated. That is, we would expect the true value to lie within the 95% confidence interval 95% of the time. In this world, we would be surprised to see values outside of the confidence interval more than 5% of the time.
 
-#### Our posterior
 
 Unfortunately, Our posterior possesses even less certainty! In the real world, we *don't* have perfect knowledge of the DGM: the model structure and the exact parameter values. What does this mean? 
 
@@ -747,11 +746,7 @@ For instance, would we be shocked if the treatment effect of the Neighbors postc
 
 But, what amounts to a large enough difference to be a cause for concern? In other words, how wrong do we have to be in a one-off for our boss to be suspicious? When is "bad luck" a sign of stupidity? We will delve into this question in the next section of our chapter. 
 
-The world is always more uncertain than our models would have us believe.
-
-## Summary
-
-
+> *The world is always more uncertain than our models would have us believe.*
 
 ```{r}
 #| echo: false
