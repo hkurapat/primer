@@ -10,6 +10,8 @@ library(gtsummary)
 library(patchwork)
 ```
 
+<!-- Check the order of paragrapgs in Courage section. I moved things around wily-nily. -->
+
 <!-- Remove sampling & assignment mechanism -->
 
 <!-- Important point: *Predictive models and causal models use the same math and the same code.* The differences, and they are very important, lie in the interpretation of the results, not in their creation. -->
@@ -304,25 +306,6 @@ But in this simple model, the parameters also have a substantive interpretation.
 -   The small $i$'s are an index for the data set. It is equivalent to the "ID" column in our Preceptor Table and simply states that the outcome for person $i$ is explained by the predictor variables ($treatment_i$ and $control_i$) for person $i$, along with an error term.
 
 
-### Data Generating Mechanism
-
-Recall the Preceptor Table and the units from the beginning. We are concerned with three main ideas from the Preceptor Table: our units (individuals at the train station), our outcome (individual's attitude toward immigration) covariates (the treatment that each individual received). 
-
-
-With the help of the data generating mechanism that we have created from our fitted model we can fill in the missing values to the Preceptor Tables. We use the data generating mechanism as the last step of *Courage* as it allows us to analyze and view our fitted model's data.
-
-Although we can review the posteriors of the parameters by looking at `fit_gauss`, it can bse useful to present the numbers in a formatted table. 
-
-```{r}
-#| echo: false
-gtsummary::tbl_regression(fit_gauss, intercept = TRUE) 
-```
-
-`(Intercept)` corresponds to 10.0 which is $\beta_0$. As always, R has, behind the scenes, estimated the entire posterior probability distribution for $\beta_0$. We are 95% confident that the true, but unknowable, average attitude toward immigration among the Treated in the population to be between 9.2 and 11. The posterior of $b_1$, which is the coefficient of $control_i$, is centered around -1.5 with a 95% confidence interval between -2.5 and -0,5.
-
-Up until now, we have used the Bayesian interpretation of "confidence interval." This is also the intuitive meaning which, outside of academia, is almost universal. There is a truth out there. We don't know, and sometimes can't know, the truth. A confidence interval, and its associated confidence level, tells us how likely the truth is to lie within a specific range. If your boss asks you for a confidence interval, she almost certainly is using this interpretation.
-
-But, in contemporary academic research, the phrase "confidence interval" is usually given a "Frequentist" interpretation. (The biggest divide in statistics is between Bayesians and Frequentists. The Frequentist approach, also known as "Classical" statistics, has been dominant for 100 years. Its power is fading, which is why this textbook is Bayesian.) For a Frequentist, a 95% confidence interval means that, if we were to apply the procedure we used in an infinite number of future situations like this, we would expect the true value to fall within the calculated confidence intervals 95% of the time. In academia, a distinction is sometimes made between *confidence intervals* (which use the Frequentist interpretation) and *credible intervals* (which use the Bayesian interpretation). We won't worry about that difference in this *Primer*.
 
 
 
@@ -381,6 +364,27 @@ The purpose of the virtue of *Courage* is to create a data generating mechanism 
 $$ attitude_i = 10 - 1.5  * control_i + \epsilon_i$$
 
 where \n $$control_i \in \{0,1\}$$ and $$\epsilon_i \sim N(0, 2.8^2)$$.
+
+### Data Generating Mechanism
+
+Recall the Preceptor Table and the units from the beginning. We are concerned with three main ideas from the Preceptor Table: our units (individuals at the train station), our outcome (individual's attitude toward immigration) covariates (the treatment that each individual received). 
+
+
+With the help of the data generating mechanism that we have created from our fitted model we can fill in the missing values to the Preceptor Tables. We use the data generating mechanism as the last step of *Courage* as it allows us to analyze and view our fitted model's data.
+
+Although we can review the posteriors of the parameters by looking at `fit_gauss`, it can bse useful to present the numbers in a formatted table. 
+
+```{r}
+#| echo: false
+gtsummary::tbl_regression(fit_gauss, intercept = TRUE) 
+```
+
+`(Intercept)` corresponds to 10.0 which is $\beta_0$. As always, R has, behind the scenes, estimated the entire posterior probability distribution for $\beta_0$. We are 95% confident that the true, but unknowable, average attitude toward immigration among the Treated in the population to be between 9.2 and 11. The posterior of $b_1$, which is the coefficient of $control_i$, is centered around -1.5 with a 95% confidence interval between -2.5 and -0,5.
+
+Up until now, we have used the Bayesian interpretation of "confidence interval." This is also the intuitive meaning which, outside of academia, is almost universal. There is a truth out there. We don't know, and sometimes can't know, the truth. A confidence interval, and its associated confidence level, tells us how likely the truth is to lie within a specific range. If your boss asks you for a confidence interval, she almost certainly is using this interpretation.
+
+But, in contemporary academic research, the phrase "confidence interval" is usually given a "Frequentist" interpretation. (The biggest divide in statistics is between Bayesians and Frequentists. The Frequentist approach, also known as "Classical" statistics, has been dominant for 100 years. Its power is fading, which is why this textbook is Bayesian.) For a Frequentist, a 95% confidence interval means that, if we were to apply the procedure we used in an infinite number of future situations like this, we would expect the true value to fall within the calculated confidence intervals 95% of the time. In academia, a distinction is sometimes made between *confidence intervals* (which use the Frequentist interpretation) and *credible intervals* (which use the Bayesian interpretation). We won't worry about that difference in this *Primer*.
+
 
 We can now add a sentence which describes our model to our summary of the entire project.
 

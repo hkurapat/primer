@@ -13,6 +13,8 @@ library(patchwork)
 
 <!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! -->
 
+<!-- This chapter does not follow the standard Cardinal Virtue plan as closely as it might. Good or bad? -->
+
 
 {{< video https://www.youtube.com/embed/e3PJ3Du_zDc >}}
 

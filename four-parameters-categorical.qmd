@@ -291,6 +291,16 @@ fit_nes |>
 <!-- Provide comparison of male voting probabilities. Relate this to overall voting probabilities. -->
 
 
+
+### Tests
+
+As usual, we use `pp_check()` to examine if the "fake data" created from our DGM matches our actual data.
+
+```{r}
+#| code-fold: false
+pp_check(fit_nes, type = "bars")
+```
+
 ### Data Generating Mechanism
 
 Putting the mathematics together with the parameter estimates gives us the data generating mechanism
@@ -308,14 +318,6 @@ $$
 This is the last time we are going to go to the trouble of combining the mathematical formula of the DGM with the specific estimated values. First, these formulas are misleading! The value of $\beta_{0, clinton}$, for example, is not exactly 0.45. In fact, we don't know what the value is! Being Bayesians, we calculated a posterior probability distribution for $\beta_{0, clinton}$. We draw from that distribution when we calculate quantities of interest, as we did above with `add_epred_draws()`. Second, you probably did not even look that closely at these complex formulas. And we don't blame you! Being a good race car driver means focussing on how to drive better, not on the physics of carburetors. Similar, being a good data scientist means focusing on the Cardinal Virtues as a method for using data to answer questions. Leave the math to the computer.
 
 
-### Tests
-
-As usual, we use `pp_check()` to examine if the "fake data" created from our DGM matches our actual data.
-
-```{r}
-#| code-fold: false
-pp_check(fit_nes, type = "bars")
-```
 
 
 ## Temperance

@@ -574,6 +574,7 @@ pp_check(fit_bern, type = "bars")
 
 Using `type = "bars"` is a good choice for `pp_check()` when `family` is `bernoulli()`. Note how the 10 replications of $y_rep$ are indistinguishable from the true output values $y$. A good model produces replications, sometimes termed "fake data," which is indistinguishable for the actual data.
 
+### Data Generating Mechanism
 
 We now have our data generating mechansim:
 

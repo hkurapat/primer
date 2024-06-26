@@ -62,7 +62,7 @@ Which rows and columns of data do you need such that, if you had them all, the c
 
 *Covariates*: There are no (explicit) covariates in this model, although we will need to make use of variables like `age` and `sex` to construct our sample data. 
 
-*Moment in Time*: This is often implicit in the question itself. One of our key roles as data scientists is to clarify the questions which we are asked. In this case, it seems clear that the questions
+*Moment in Time*: This is often implicit in the question itself. One of our key roles as data scientists is to clarify the questions which we are asked. In this case, it seems clear that the questions refer to now, the present moment.
 
 Predictive models care nothing about causation. Causal models are often also concerned with prediction, if only as a means of measuring the quality of the model. Here, we are looking at *prediction*. 
 
@@ -429,9 +429,7 @@ knitr::include_graphics("other/images/Temperance.jpg")
 ```
 
 
-We have a data generating mechanism, a "model," to use the simpler term. What can we do with it? Let's answer the four questions with which we started.
-
-### Question 1
+### Questions and Answers
 
 * What is the probability that the next adult male we meet will be taller than 180 centimeters?
 
@@ -489,7 +487,6 @@ If 30% or so of the draws from the posterior probability distribution are greate
 
 Again, the key conceptual difficulty is the population. The problem we actually have involves walking around London, or wherever, today. The data we have involve America in 2010. Those are not the same things! But they are not totally different. Knowing whether the data we have is "close enough" to the problem we want to solve is at the heart of Wisdom. Yet that was the decision we made at the start of the process, the decision to create a model in the first place. Now that we have created a model, we look to the virtue of Temperance for guidance in using that model. The data we have is never a perfect match for the world we face. We need to temper our confidence and act with humility. Our forecasts will never be as good as a naive use of the model might suggest. Reality will surprise us. We need to take the model's claims with a family-sized portion of salt.
 
-### Question 2
 
 * What is the probability that, among the next 4 men we meet, the tallest is at least 10 cm taller than the shortest?
 
@@ -554,7 +551,6 @@ sum(draws$diff > 10) / length(draws$diff)
 
 <!-- DK: I am concerned that we are not providing uncertainty estimates when we answer these questions. The best answer is 77%. Fine. But how much uncertainty is there in this estimate? This strikes me as a hard question! -->
 
-### Question 3
 
 * What is our posterior probability distribution of the height of the 3rd tallest man out of the next 100 we meet?
 
@@ -600,13 +596,12 @@ draws |>
 
 
 
-### Three Levels of Knowledge
+### Humility
 
 When answering questions as we have been, it can be easy to falsely believe that we are delivering *the truth*. This is not the case. In fact, there are three primary levels of knowledge which we need to understand in order to account for our uncertainty. 
 
 The three primary levels of knowledge possible knowledge in our scenario include: the Truth (the Preceptor Table), the DGM Posterior, and Our Posterior.
 
-#### The Truth
 
 If we know the Truth (with a capital “T”), then we know the Preceptor Table. With that knowledge, we can directly answer our question precisely. We can calculate each individual’s height, and any summary measure we might be interested in, like the average height for different ages or countries. 
 
@@ -614,13 +609,10 @@ This level of knowledge is possible only under an omniscient power, one who can 
 
 The Truth represents the highest level of knowledge one can have — with it, our questions merely require algebra or, at worst, simulation. There is no need to estimate a treatment effect, or the different treatment effects for different groups of people. We would not need to predict at all — we would know.
 
-#### DGM posterior
 
 The DGM posterior is the next level of knowledge, which lacks the omniscient quality of The Truth. This posterior is the posterior we would calculate if we had perfect knowledge of the data generating mechanism, meaning we have the correct model structure and exact parameter values. This is often falsely conflated with “our posterior,” which is subject to error in model structure and parameter value estimations.
 
 What we do with the DGM posterior is the same as our posterior — we estimate parameters based on data and predict the future with the latest and most relevant information possible. The difference is that, when we calculate posteriors for an unknown value in the DGM posterior, we expect those posteriors to be perfect.
-
-#### Our posterior
 
 Unfortunately, our posterior possesses even less certainty! In the real world, we don’t have perfect knowledge of the DGM: the model structure and the exact parameter values. What does this mean?
 
@@ -631,25 +623,6 @@ Does this mean we are certain that the average height lies is the most probable 
 This is because a lot of the assumptions we make during the process of building a model, the processes in Wisdom, are subject to error. Perhaps our data did not match the future as well as we had hoped. Ultimately, we try to account for our uncertainty in our estimates. Even with this safeguard, we aren’t surprised if we are a bit off.
 
 <!-- DK: Need more text. Explain all the things that could be wrong with the model. Explain what is going on in different columns. Explain all the cool R code tricks. Discuss difference between predict and epred.  -->
-
-
-
-
-
-## Summary
-
-<!-- DK: Discuss meaning of "Posterior" in all plot titles. Show the key code examples. -->
-
-The rest of the *Primer* will follow the same process we have just completed here. We start with a decision we have to make. With luck, we will have some data to guide us. (Without data, even the best data scientist will struggle to make progress.) *Wisdom* asks us: "Is the data we have close enough to the decision we face to make using that data helpful?" Often times, the answer is "No." 
-
-Once we start to build the model, *Justice* will guide us. Is the model descriptive or causal? What is the mathematical relationship between the dependent variable we are trying to explain and the independent variables we can use to explain it? What assumptions are we making about distribution of the error term?
-
-Having set up the model framework, we need *Courage* to implement the model in code. Without code, all the math in the world is useless. Once we have created the model, we need to understand it. What are the posterior distributions of the unknown parameters? Do they seem sensible? How should we interpret them?
-
-*Temperance* guides the final step. With a model, we can finally get back to the decision which motivated the exercise in the first place. We can use the model to make statements about the world, both to confirm that the model is consistent with the world and to use the model to make predictions about numbers which we do not know. 
-
-Let's practice this process another dozen or so times.
-
 
 
 
