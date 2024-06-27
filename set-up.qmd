@@ -158,6 +158,8 @@ This command bundles up a bunch of git commands (which you could do by hand) int
 
 ## Common Problems
 
+0) Always use the "Source" view --- not the "Visual" view --- in RStudio to edit. The Visual view will often reformat your code, without you asking, in unhelpful ways. You don't want RStudio to make changes in your code. 
+
 <!-- DK: And 1) and 2) still problems? -->
 <!-- TM: Make sure RTools has been downloaded if error with downloading terra after running renv::restore() in setup -->
 
