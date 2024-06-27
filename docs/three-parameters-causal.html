@@ -322,8 +322,8 @@ window.Quarto = {
 <a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">6.3</span> Courage</a>
   <ul class="collapse">
 <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models"><span class="header-section-number">6.3.1</span> Models</a></li>
-  <li><a href="#data-generating-mechanism" id="toc-data-generating-mechanism" class="nav-link" data-scroll-target="#data-generating-mechanism"><span class="header-section-number">6.3.2</span> Data Generating Mechanism</a></li>
-  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing"><span class="header-section-number">6.3.3</span> Testing</a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing"><span class="header-section-number">6.3.2</span> Testing</a></li>
+  <li><a href="#data-generating-mechanism" id="toc-data-generating-mechanism" class="nav-link" data-scroll-target="#data-generating-mechanism"><span class="header-section-number">6.3.3</span> Data Generating Mechanism</a></li>
   </ul>
 </li>
   <li>
@@ -352,7 +352,7 @@ window.Quarto = {
   
 
 
-</header><!-- Remove sampling & assignment mechanism --><!-- Important point: *Predictive models and causal models use the same math and the same code.* The differences, and they are very important, lie in the interpretation of the results, not in their creation. --><!-- Come up with common ways in which a lack of representativeness causes problems. This is a list of things that we can check each time when we are interrogating a data science problem. Key issue is the correlation, if anything, between the "assignment mechanism" or "sampling mechanism" and other variables. Discuss sampling mechanism in all cases except att_end ~ treatment. For that, use "assignment mechanism." --><!-- Is there a fun meme for this experiment? Ideally, we do this at the start and end of each chapter. --><p>Models have parameters. In <a href="sampling.html" class="quarto-xref"><span>Chapter 3</span></a> we created a model with a single parameter <span class="math inline">\(\rho\)</span>, the proportion of red beads in an urn. In <a href="two-parameters.html" class="quarto-xref"><span>Chapter 5</span></a>, we used models with two parameters: <span class="math inline">\(\mu\)</span> (the average height in the population, generically known as a model “intercept”) and <span class="math inline">\(\sigma\)</span> (the variation in height in the population). Here — can you guess where this is going? — we will build models with three parameters: <span class="math inline">\(\sigma\)</span> and two “coefficients.” The two coefficient parameters will be labeled <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. All this notation is confusing, not least because different academic fields use inconsistent schemes. Follow the Cardinal Virtues and tackle your problem step by step.</p>
+</header><!-- Check the order of paragrapgs in Courage section. I moved things around wily-nily. --><!-- Remove sampling & assignment mechanism --><!-- Important point: *Predictive models and causal models use the same math and the same code.* The differences, and they are very important, lie in the interpretation of the results, not in their creation. --><!-- Come up with common ways in which a lack of representativeness causes problems. This is a list of things that we can check each time when we are interrogating a data science problem. Key issue is the correlation, if anything, between the "assignment mechanism" or "sampling mechanism" and other variables. Discuss sampling mechanism in all cases except att_end ~ treatment. For that, use "assignment mechanism." --><!-- Is there a fun meme for this experiment? Ideally, we do this at the start and end of each chapter. --><p>Models have parameters. In <a href="sampling.html" class="quarto-xref"><span>Chapter 3</span></a> we created a model with a single parameter <span class="math inline">\(\rho\)</span>, the proportion of red beads in an urn. In <a href="two-parameters.html" class="quarto-xref"><span>Chapter 5</span></a>, we used models with two parameters: <span class="math inline">\(\mu\)</span> (the average height in the population, generically known as a model “intercept”) and <span class="math inline">\(\sigma\)</span> (the variation in height in the population). Here — can you guess where this is going? — we will build models with three parameters: <span class="math inline">\(\sigma\)</span> and two “coefficients.” The two coefficient parameters will be labeled <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. All this notation is confusing, not least because different academic fields use inconsistent schemes. Follow the Cardinal Virtues and tackle your problem step by step.</p>
 <p>Perhaps more importantly, a focus on parameters is less relevant now than it was decades ago, when computational limitations made answering our actual questions harder. <em>Parameters are imaginary.</em> They don’t exist. They, in general, are not the answer to a real world question. They are tools, along with the models of which they are a part, we use to answer questions.</p>
 <p>Packages:</p>
 <div class="cell">
@@ -392,23 +392,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="ajqduqbnsk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ajqduqbnsk table {
+<div id="hdjsevidvp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hdjsevidvp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ajqduqbnsk thead, #ajqduqbnsk tbody, #ajqduqbnsk tfoot, #ajqduqbnsk tr, #ajqduqbnsk td, #ajqduqbnsk th {
+#hdjsevidvp thead, #hdjsevidvp tbody, #hdjsevidvp tfoot, #hdjsevidvp tr, #hdjsevidvp td, #hdjsevidvp th {
   border-style: none;
 }
 
-#ajqduqbnsk p {
+#hdjsevidvp p {
   margin: 0;
   padding: 0;
 }
 
-#ajqduqbnsk .gt_table {
+#hdjsevidvp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -434,12 +434,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ajqduqbnsk .gt_caption {
+#hdjsevidvp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ajqduqbnsk .gt_title {
+#hdjsevidvp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -451,7 +451,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ajqduqbnsk .gt_subtitle {
+#hdjsevidvp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -463,7 +463,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ajqduqbnsk .gt_heading {
+#hdjsevidvp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -475,13 +475,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ajqduqbnsk .gt_bottom_border {
+#hdjsevidvp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ajqduqbnsk .gt_col_headings {
+#hdjsevidvp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -496,7 +496,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ajqduqbnsk .gt_col_heading {
+#hdjsevidvp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -516,7 +516,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ajqduqbnsk .gt_column_spanner_outer {
+#hdjsevidvp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -528,15 +528,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ajqduqbnsk .gt_column_spanner_outer:first-child {
+#hdjsevidvp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ajqduqbnsk .gt_column_spanner_outer:last-child {
+#hdjsevidvp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ajqduqbnsk .gt_column_spanner {
+#hdjsevidvp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -548,11 +548,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ajqduqbnsk .gt_spanner_row {
+#hdjsevidvp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ajqduqbnsk .gt_group_heading {
+#hdjsevidvp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -578,7 +578,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ajqduqbnsk .gt_empty_group_heading {
+#hdjsevidvp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -593,15 +593,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ajqduqbnsk .gt_from_md > :first-child {
+#hdjsevidvp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ajqduqbnsk .gt_from_md > :last-child {
+#hdjsevidvp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ajqduqbnsk .gt_row {
+#hdjsevidvp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -620,7 +620,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ajqduqbnsk .gt_stub {
+#hdjsevidvp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -633,7 +633,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ajqduqbnsk .gt_stub_row_group {
+#hdjsevidvp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -647,15 +647,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ajqduqbnsk .gt_row_group_first td {
+#hdjsevidvp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ajqduqbnsk .gt_row_group_first th {
+#hdjsevidvp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ajqduqbnsk .gt_summary_row {
+#hdjsevidvp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -665,16 +665,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ajqduqbnsk .gt_first_summary_row {
+#hdjsevidvp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ajqduqbnsk .gt_first_summary_row.thick {
+#hdjsevidvp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ajqduqbnsk .gt_last_summary_row {
+#hdjsevidvp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -684,7 +684,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ajqduqbnsk .gt_grand_summary_row {
+#hdjsevidvp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -694,7 +694,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ajqduqbnsk .gt_first_grand_summary_row {
+#hdjsevidvp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -704,7 +704,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ajqduqbnsk .gt_last_grand_summary_row_top {
+#hdjsevidvp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -714,11 +714,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ajqduqbnsk .gt_striped {
+#hdjsevidvp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ajqduqbnsk .gt_table_body {
+#hdjsevidvp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -727,7 +727,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ajqduqbnsk .gt_footnotes {
+#hdjsevidvp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -741,7 +741,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ajqduqbnsk .gt_footnote {
+#hdjsevidvp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -750,7 +750,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ajqduqbnsk .gt_sourcenotes {
+#hdjsevidvp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -764,7 +764,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ajqduqbnsk .gt_sourcenote {
+#hdjsevidvp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -772,63 +772,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ajqduqbnsk .gt_left {
+#hdjsevidvp .gt_left {
   text-align: left;
 }
 
-#ajqduqbnsk .gt_center {
+#hdjsevidvp .gt_center {
   text-align: center;
 }
 
-#ajqduqbnsk .gt_right {
+#hdjsevidvp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ajqduqbnsk .gt_font_normal {
+#hdjsevidvp .gt_font_normal {
   font-weight: normal;
 }
 
-#ajqduqbnsk .gt_font_bold {
+#hdjsevidvp .gt_font_bold {
   font-weight: bold;
 }
 
-#ajqduqbnsk .gt_font_italic {
+#hdjsevidvp .gt_font_italic {
   font-style: italic;
 }
 
-#ajqduqbnsk .gt_super {
+#hdjsevidvp .gt_super {
   font-size: 65%;
 }
 
-#ajqduqbnsk .gt_footnote_marks {
+#hdjsevidvp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ajqduqbnsk .gt_asterisk {
+#hdjsevidvp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ajqduqbnsk .gt_indent_1 {
+#hdjsevidvp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ajqduqbnsk .gt_indent_2 {
+#hdjsevidvp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ajqduqbnsk .gt_indent_3 {
+#hdjsevidvp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ajqduqbnsk .gt_indent_4 {
+#hdjsevidvp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ajqduqbnsk .gt_indent_5 {
+#hdjsevidvp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -992,23 +992,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="qzhstapvah" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qzhstapvah table {
+<div id="fcrkwjoyaa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fcrkwjoyaa table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qzhstapvah thead, #qzhstapvah tbody, #qzhstapvah tfoot, #qzhstapvah tr, #qzhstapvah td, #qzhstapvah th {
+#fcrkwjoyaa thead, #fcrkwjoyaa tbody, #fcrkwjoyaa tfoot, #fcrkwjoyaa tr, #fcrkwjoyaa td, #fcrkwjoyaa th {
   border-style: none;
 }
 
-#qzhstapvah p {
+#fcrkwjoyaa p {
   margin: 0;
   padding: 0;
 }
 
-#qzhstapvah .gt_table {
+#fcrkwjoyaa .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1034,12 +1034,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#qzhstapvah .gt_caption {
+#fcrkwjoyaa .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qzhstapvah .gt_title {
+#fcrkwjoyaa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1051,7 +1051,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#qzhstapvah .gt_subtitle {
+#fcrkwjoyaa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1063,7 +1063,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#qzhstapvah .gt_heading {
+#fcrkwjoyaa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1075,13 +1075,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#qzhstapvah .gt_bottom_border {
+#fcrkwjoyaa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qzhstapvah .gt_col_headings {
+#fcrkwjoyaa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1096,7 +1096,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#qzhstapvah .gt_col_heading {
+#fcrkwjoyaa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1116,7 +1116,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#qzhstapvah .gt_column_spanner_outer {
+#fcrkwjoyaa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1128,15 +1128,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#qzhstapvah .gt_column_spanner_outer:first-child {
+#fcrkwjoyaa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qzhstapvah .gt_column_spanner_outer:last-child {
+#fcrkwjoyaa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qzhstapvah .gt_column_spanner {
+#fcrkwjoyaa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1148,11 +1148,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#qzhstapvah .gt_spanner_row {
+#fcrkwjoyaa .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qzhstapvah .gt_group_heading {
+#fcrkwjoyaa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1178,7 +1178,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#qzhstapvah .gt_empty_group_heading {
+#fcrkwjoyaa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1193,15 +1193,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#qzhstapvah .gt_from_md > :first-child {
+#fcrkwjoyaa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qzhstapvah .gt_from_md > :last-child {
+#fcrkwjoyaa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qzhstapvah .gt_row {
+#fcrkwjoyaa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1220,7 +1220,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#qzhstapvah .gt_stub {
+#fcrkwjoyaa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1233,7 +1233,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#qzhstapvah .gt_stub_row_group {
+#fcrkwjoyaa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1247,15 +1247,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#qzhstapvah .gt_row_group_first td {
+#fcrkwjoyaa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qzhstapvah .gt_row_group_first th {
+#fcrkwjoyaa .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qzhstapvah .gt_summary_row {
+#fcrkwjoyaa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1265,16 +1265,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#qzhstapvah .gt_first_summary_row {
+#fcrkwjoyaa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qzhstapvah .gt_first_summary_row.thick {
+#fcrkwjoyaa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qzhstapvah .gt_last_summary_row {
+#fcrkwjoyaa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1284,7 +1284,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#qzhstapvah .gt_grand_summary_row {
+#fcrkwjoyaa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1294,7 +1294,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#qzhstapvah .gt_first_grand_summary_row {
+#fcrkwjoyaa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1304,7 +1304,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#qzhstapvah .gt_last_grand_summary_row_top {
+#fcrkwjoyaa .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1314,11 +1314,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#qzhstapvah .gt_striped {
+#fcrkwjoyaa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qzhstapvah .gt_table_body {
+#fcrkwjoyaa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1327,7 +1327,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#qzhstapvah .gt_footnotes {
+#fcrkwjoyaa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1341,7 +1341,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#qzhstapvah .gt_footnote {
+#fcrkwjoyaa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1350,7 +1350,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#qzhstapvah .gt_sourcenotes {
+#fcrkwjoyaa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1364,7 +1364,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#qzhstapvah .gt_sourcenote {
+#fcrkwjoyaa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1372,63 +1372,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#qzhstapvah .gt_left {
+#fcrkwjoyaa .gt_left {
   text-align: left;
 }
 
-#qzhstapvah .gt_center {
+#fcrkwjoyaa .gt_center {
   text-align: center;
 }
 
-#qzhstapvah .gt_right {
+#fcrkwjoyaa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qzhstapvah .gt_font_normal {
+#fcrkwjoyaa .gt_font_normal {
   font-weight: normal;
 }
 
-#qzhstapvah .gt_font_bold {
+#fcrkwjoyaa .gt_font_bold {
   font-weight: bold;
 }
 
-#qzhstapvah .gt_font_italic {
+#fcrkwjoyaa .gt_font_italic {
   font-style: italic;
 }
 
-#qzhstapvah .gt_super {
+#fcrkwjoyaa .gt_super {
   font-size: 65%;
 }
 
-#qzhstapvah .gt_footnote_marks {
+#fcrkwjoyaa .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qzhstapvah .gt_asterisk {
+#fcrkwjoyaa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qzhstapvah .gt_indent_1 {
+#fcrkwjoyaa .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qzhstapvah .gt_indent_2 {
+#fcrkwjoyaa .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qzhstapvah .gt_indent_3 {
+#fcrkwjoyaa .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qzhstapvah .gt_indent_4 {
+#fcrkwjoyaa .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qzhstapvah .gt_indent_5 {
+#fcrkwjoyaa .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1614,31 +1614,103 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <ul>
 <li><p>Note that the formula applies to everyone in the population, not just the 115 people for whom we have data. This is what the stability assumption buys us. The index <span class="math inline">\(i\)</span> does not just go from 1 through 115. It goes from 1 through <span class="math inline">\(N\)</span>, where <span class="math inline">\(N\)</span> is the number of individuals in the population. Conceptually, everyone has an <code>att_end</code> under both treatment and under control, even we can only ever observe one of these.</p></li>
 <li><p>The small <span class="math inline">\(i\)</span>’s are an index for the data set. It is equivalent to the “ID” column in our Preceptor Table and simply states that the outcome for person <span class="math inline">\(i\)</span> is explained by the predictor variables (<span class="math inline">\(treatment_i\)</span> and <span class="math inline">\(control_i\)</span>) for person <span class="math inline">\(i\)</span>, along with an error term.</p></li>
-</ul></section><section id="data-generating-mechanism" class="level3" data-number="6.3.2"><h3 data-number="6.3.2" class="anchored" data-anchor-id="data-generating-mechanism">
-<span class="header-section-number">6.3.2</span> Data Generating Mechanism</h3>
+</ul></section><section id="testing" class="level3" data-number="6.3.2"><h3 data-number="6.3.2" class="anchored" data-anchor-id="testing">
+<span class="header-section-number">6.3.2</span> Testing</h3>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_gauss</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="three-parameters-causal_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Our graph in the darker blue represents the actual data. As we can see with the lighter blue graph, our fitted model is able to generate a distribution of the data that is similar when compared to the actual data. However, the “fake-data” produces some values for <code>att_end</code> which are <em>impossible.</em> We know from the survey details that the lowest possible value for <code>att_end</code> is 3 and the highest is 15. But, with our “fake-data” simulations, we see several values that are less than 3 and great than 15. Consider:</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_gauss</span>, type <span class="op">=</span> <span class="st">"hist"</span>, bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="three-parameters-causal_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Again, we see the problem. The true data is always within the range of 3 to 15. Our simulated (or “fake”) data sometimes strays outside this range, even if not very far and not very often. Is it a serious flaw? That is tough to decide.</p>
+<p>Let’s explore the issue by first changing <code>treat_end</code> from a continuous to an integer variable, which is probably more correct, and then re-estimate the model. Besides changing <code>att_end</code> to an integer, we also change the family to <code><a href="https://rdrr.io/r/stats/family.html">poisson()</a></code> since this is the recommended model for dealing with “count” data</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trains2</span> <span class="op">&lt;-</span> <span class="va">trains</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>att_end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">att_end</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit_poisson</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">att_end</span> <span class="op">~</span> <span class="va">treatment</span>,</span>
+<span>                   data <span class="op">=</span> <span class="va">trains2</span>,</span>
+<span>                   family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                   silent <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                   refresh <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>                   seed <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Because the poisson mode has a very different structure, the parameter estimates do not have a simple interpretation.</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_poisson</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: poisson 
+  Links: mu = log 
+Formula: att_end ~ treatment 
+   Data: trains2 (Number of observations: 115) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Regression Coefficients:
+                 Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept            2.30      0.04     2.21     2.39 1.00     4291     3127
+treatmentControl    -0.17      0.06    -0.30    -0.04 1.00     3722     2343
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<p>The posterior predictive check looks better:</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_poisson</span>, type <span class="op">=</span> <span class="st">"hist"</span>, bins <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stderr">
+<pre><code>Using 10 posterior draws for ppc type 'hist' by default.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="three-parameters-causal_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The check is better but not perfect. We still have predicted values that are below three or above 15, even though that is impossible. A common approach at this point would be to use the negative binomial family. We save that exercise for another day.</p>
+<p>The purpose of the virtue of <em>Courage</em> is to create a data generating mechanism which is consistent with our understanding of how the world works and not-contradicted by he data which we have. Although there are some problems with <code>fit_gauss</code>, it is good enough for our purposes. So, the DGM looks like:</p>
+<p><span class="math display">\[ attitude_i = 10 - 1.5  * control_i + \epsilon_i\]</span></p>
+<p>where <span class="math display">\[control_i \in \{0,1\}\]</span> and <span class="math display">\[\epsilon_i \sim N(0, 2.8^2)\]</span>.</p>
+</section><section id="data-generating-mechanism" class="level3" data-number="6.3.3"><h3 data-number="6.3.3" class="anchored" data-anchor-id="data-generating-mechanism">
+<span class="header-section-number">6.3.3</span> Data Generating Mechanism</h3>
 <p>Recall the Preceptor Table and the units from the beginning. We are concerned with three main ideas from the Preceptor Table: our units (individuals at the train station), our outcome (individual’s attitude toward immigration) covariates (the treatment that each individual received).</p>
 <p>With the help of the data generating mechanism that we have created from our fitted model we can fill in the missing values to the Preceptor Tables. We use the data generating mechanism as the last step of <em>Courage</em> as it allows us to analyze and view our fitted model’s data.</p>
 <p>Although we can review the posteriors of the parameters by looking at <code>fit_gauss</code>, it can bse useful to present the numbers in a formatted table.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="skqxnzlqmf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#skqxnzlqmf table {
+<div id="pawcceneyu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pawcceneyu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#skqxnzlqmf thead, #skqxnzlqmf tbody, #skqxnzlqmf tfoot, #skqxnzlqmf tr, #skqxnzlqmf td, #skqxnzlqmf th {
+#pawcceneyu thead, #pawcceneyu tbody, #pawcceneyu tfoot, #pawcceneyu tr, #pawcceneyu td, #pawcceneyu th {
   border-style: none;
 }
 
-#skqxnzlqmf p {
+#pawcceneyu p {
   margin: 0;
   padding: 0;
 }
 
-#skqxnzlqmf .gt_table {
+#pawcceneyu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1664,12 +1736,12 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#skqxnzlqmf .gt_caption {
+#pawcceneyu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#skqxnzlqmf .gt_title {
+#pawcceneyu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1681,7 +1753,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-width: 0;
 }
 
-#skqxnzlqmf .gt_subtitle {
+#pawcceneyu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1693,7 +1765,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-top-width: 0;
 }
 
-#skqxnzlqmf .gt_heading {
+#pawcceneyu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1705,13 +1777,13 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#skqxnzlqmf .gt_bottom_border {
+#pawcceneyu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#skqxnzlqmf .gt_col_headings {
+#pawcceneyu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1726,7 +1798,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#skqxnzlqmf .gt_col_heading {
+#pawcceneyu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1746,7 +1818,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   overflow-x: hidden;
 }
 
-#skqxnzlqmf .gt_column_spanner_outer {
+#pawcceneyu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1758,15 +1830,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 4px;
 }
 
-#skqxnzlqmf .gt_column_spanner_outer:first-child {
+#pawcceneyu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#skqxnzlqmf .gt_column_spanner_outer:last-child {
+#pawcceneyu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#skqxnzlqmf .gt_column_spanner {
+#pawcceneyu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1778,11 +1850,11 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   width: 100%;
 }
 
-#skqxnzlqmf .gt_spanner_row {
+#pawcceneyu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#skqxnzlqmf .gt_group_heading {
+#pawcceneyu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1808,7 +1880,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   text-align: left;
 }
 
-#skqxnzlqmf .gt_empty_group_heading {
+#pawcceneyu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1823,15 +1895,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   vertical-align: middle;
 }
 
-#skqxnzlqmf .gt_from_md > :first-child {
+#pawcceneyu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#skqxnzlqmf .gt_from_md > :last-child {
+#pawcceneyu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#skqxnzlqmf .gt_row {
+#pawcceneyu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1850,7 +1922,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   overflow-x: hidden;
 }
 
-#skqxnzlqmf .gt_stub {
+#pawcceneyu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1863,7 +1935,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#skqxnzlqmf .gt_stub_row_group {
+#pawcceneyu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1877,15 +1949,15 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   vertical-align: top;
 }
 
-#skqxnzlqmf .gt_row_group_first td {
+#pawcceneyu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#skqxnzlqmf .gt_row_group_first th {
+#pawcceneyu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#skqxnzlqmf .gt_summary_row {
+#pawcceneyu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1895,16 +1967,16 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#skqxnzlqmf .gt_first_summary_row {
+#pawcceneyu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#skqxnzlqmf .gt_first_summary_row.thick {
+#pawcceneyu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#skqxnzlqmf .gt_last_summary_row {
+#pawcceneyu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1914,7 +1986,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#skqxnzlqmf .gt_grand_summary_row {
+#pawcceneyu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1924,7 +1996,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#skqxnzlqmf .gt_first_grand_summary_row {
+#pawcceneyu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1934,7 +2006,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#skqxnzlqmf .gt_last_grand_summary_row_top {
+#pawcceneyu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1944,11 +2016,11 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#skqxnzlqmf .gt_striped {
+#pawcceneyu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#skqxnzlqmf .gt_table_body {
+#pawcceneyu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1957,7 +2029,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#skqxnzlqmf .gt_footnotes {
+#pawcceneyu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1971,7 +2043,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#skqxnzlqmf .gt_footnote {
+#pawcceneyu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1980,7 +2052,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#skqxnzlqmf .gt_sourcenotes {
+#pawcceneyu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1994,7 +2066,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#skqxnzlqmf .gt_sourcenote {
+#pawcceneyu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2002,63 +2074,63 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
   padding-right: 5px;
 }
 
-#skqxnzlqmf .gt_left {
+#pawcceneyu .gt_left {
   text-align: left;
 }
 
-#skqxnzlqmf .gt_center {
+#pawcceneyu .gt_center {
   text-align: center;
 }
 
-#skqxnzlqmf .gt_right {
+#pawcceneyu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#skqxnzlqmf .gt_font_normal {
+#pawcceneyu .gt_font_normal {
   font-weight: normal;
 }
 
-#skqxnzlqmf .gt_font_bold {
+#pawcceneyu .gt_font_bold {
   font-weight: bold;
 }
 
-#skqxnzlqmf .gt_font_italic {
+#pawcceneyu .gt_font_italic {
   font-style: italic;
 }
 
-#skqxnzlqmf .gt_super {
+#pawcceneyu .gt_super {
   font-size: 65%;
 }
 
-#skqxnzlqmf .gt_footnote_marks {
+#pawcceneyu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#skqxnzlqmf .gt_asterisk {
+#pawcceneyu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#skqxnzlqmf .gt_indent_1 {
+#pawcceneyu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#skqxnzlqmf .gt_indent_2 {
+#pawcceneyu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#skqxnzlqmf .gt_indent_3 {
+#pawcceneyu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#skqxnzlqmf .gt_indent_4 {
+#pawcceneyu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#skqxnzlqmf .gt_indent_5 {
+#pawcceneyu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2109,78 +2181,6 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p><code>(Intercept)</code> corresponds to 10.0 which is <span class="math inline">\(\beta_0\)</span>. As always, R has, behind the scenes, estimated the entire posterior probability distribution for <span class="math inline">\(\beta_0\)</span>. We are 95% confident that the true, but unknowable, average attitude toward immigration among the Treated in the population to be between 9.2 and 11. The posterior of <span class="math inline">\(b_1\)</span>, which is the coefficient of <span class="math inline">\(control_i\)</span>, is centered around -1.5 with a 95% confidence interval between -2.5 and -0,5.</p>
 <p>Up until now, we have used the Bayesian interpretation of “confidence interval.” This is also the intuitive meaning which, outside of academia, is almost universal. There is a truth out there. We don’t know, and sometimes can’t know, the truth. A confidence interval, and its associated confidence level, tells us how likely the truth is to lie within a specific range. If your boss asks you for a confidence interval, she almost certainly is using this interpretation.</p>
 <p>But, in contemporary academic research, the phrase “confidence interval” is usually given a “Frequentist” interpretation. (The biggest divide in statistics is between Bayesians and Frequentists. The Frequentist approach, also known as “Classical” statistics, has been dominant for 100 years. Its power is fading, which is why this textbook is Bayesian.) For a Frequentist, a 95% confidence interval means that, if we were to apply the procedure we used in an infinite number of future situations like this, we would expect the true value to fall within the calculated confidence intervals 95% of the time. In academia, a distinction is sometimes made between <em>confidence intervals</em> (which use the Frequentist interpretation) and <em>credible intervals</em> (which use the Bayesian interpretation). We won’t worry about that difference in this <em>Primer</em>.</p>
-</section><section id="testing" class="level3" data-number="6.3.3"><h3 data-number="6.3.3" class="anchored" data-anchor-id="testing">
-<span class="header-section-number">6.3.3</span> Testing</h3>
-<div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_gauss</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="three-parameters-causal_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Our graph in the darker blue represents the actual data. As we can see with the lighter blue graph, our fitted model is able to generate a distribution of the data that is similar when compared to the actual data. However, the “fake-data” produces some values for <code>att_end</code> which are <em>impossible.</em> We know from the survey details that the lowest possible value for <code>att_end</code> is 3 and the highest is 15. But, with our “fake-data” simulations, we see several values that are less than 3 and great than 15. Consider:</p>
-<div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_gauss</span>, type <span class="op">=</span> <span class="st">"hist"</span>, bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="three-parameters-causal_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Again, we see the problem. The true data is always within the range of 3 to 15. Our simulated (or “fake”) data sometimes strays outside this range, even if not very far and not very often. Is it a serious flaw? That is tough to decide.</p>
-<p>Let’s explore the issue by first changing <code>treat_end</code> from a continuous to an integer variable, which is probably more correct, and then re-estimate the model. Besides changing <code>att_end</code> to an integer, we also change the family to <code><a href="https://rdrr.io/r/stats/family.html">poisson()</a></code> since this is the recommended model for dealing with “count” data</p>
-<div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trains2</span> <span class="op">&lt;-</span> <span class="va">trains</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>att_end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">att_end</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">fit_poisson</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">att_end</span> <span class="op">~</span> <span class="va">treatment</span>,</span>
-<span>                   data <span class="op">=</span> <span class="va">trains2</span>,</span>
-<span>                   family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>                   silent <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>                   refresh <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>                   seed <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Because the poisson mode has a very different structure, the parameter estimates do not have a simple interpretation.</p>
-<div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_poisson</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Family: poisson 
-  Links: mu = log 
-Formula: att_end ~ treatment 
-   Data: trains2 (Number of observations: 115) 
-  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
-         total post-warmup draws = 4000
-
-Regression Coefficients:
-                 Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept            2.30      0.04     2.21     2.39 1.00     4291     3127
-treatmentControl    -0.17      0.06    -0.30    -0.04 1.00     3722     2343
-
-Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
-and Tail_ESS are effective sample size measures, and Rhat is the potential
-scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-</div>
-</div>
-<p>The posterior predictive check looks better:</p>
-<div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/pp_check.html">pp_check</a></span><span class="op">(</span><span class="va">fit_poisson</span>, type <span class="op">=</span> <span class="st">"hist"</span>, bins <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stderr">
-<pre><code>Using 10 posterior draws for ppc type 'hist' by default.</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="three-parameters-causal_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The check is better but not perfect. We still have predicted values that are below three or above 15, even though that is impossible. A common approach at this point would be to use the negative binomial family. We save that exercise for another day.</p>
-<p>The purpose of the virtue of <em>Courage</em> is to create a data generating mechanism which is consistent with our understanding of how the world works and not-contradicted by he data which we have. Although there are some problems with <code>fit_gauss</code>, it is good enough for our purposes. So, the DGM looks like:</p>
-<p><span class="math display">\[ attitude_i = 10 - 1.5  * control_i + \epsilon_i\]</span></p>
-<p>where <span class="math display">\[control_i \in \{0,1\}\]</span> and <span class="math display">\[\epsilon_i \sim N(0, 2.8^2)\]</span>.</p>
 <p>We can now add a sentence which describes our model to our summary of the entire project.</p>
 <blockquote class="blockquote">
 <p><em>Using data from a 2012 survey of Boston-area commuters, we seek to measure the causal effect of exposure to Spanish-speakers on attitudes toward immigration among adults in Chicago and similar cities in 2024. There is some concern that the relationship has changed since our data was collected. We modeled <code>att_end</code>, a summary measure of attitude toward immigration measured on a 3 to 15 integer scale, as a linear function of treatment.</em></p>

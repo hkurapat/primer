@@ -355,6 +355,7 @@ window.Quarto = {
 
 
 <!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! -->
+<!-- This chapter does not follow the standard Cardinal Virtue plan as closely as it might. Good or bad? -->
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/e3PJ3Du_zDc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p><em>The Hunger Games</em> is a dystopian novel in which children are chosen via lottery to fight to the death. Primrose Everdeen is selected from the urn. Why does she have the misfortune of being selected? Or, as we data scientists say, <em>sampled</em>?</p>
 <p>In <a href="probability.html" class="quarto-xref"><span>Chapter 2</span></a>, we learned about probability, the framework for quantifying uncertainty. In this chapter, we will learn about <em>sampling</em>, the beginning of our journey toward inference. When we sample, we take some <em>units</em> from a <em>population</em>. With the data collected via sampling, we will create statistical models with just one unknown parameter. With such models, we can make inferences in order to answer questions.</p>
@@ -451,18 +452,18 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 33 × 4
-   group           red_beads prop_red group_ID
-   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Katie, Anthony         20     0.4         1
- 2 Damani, Melissa        15     0.3         2
- 3 Ellie, Terrance        17     0.34        3
- 4 Claire, Cloud          16     0.32        4
- 5 Conrad, Vlad           16     0.32        5
- 6 Dohyun, Estel          18     0.36        6
- 7 Maddie, Brent          19     0.38        7
- 8 Aaron, Mike            11     0.22        8
- 9 Dania, Derek           21     0.42        9
-10 Paddy, Matt            16     0.32       10
+   group          red_beads prop_red group_ID
+   &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
+ 1 Vignesh, Eliot        16     0.32        1
+ 2 Caroline, Edna        15     0.3         2
+ 3 Conrad, Vlad          16     0.32        3
+ 4 Dohyun, Estel         18     0.36        4
+ 5 Griffin, Mary         18     0.36        5
+ 6 Mak, Sophie           17     0.34        6
+ 7 Aaron, Mike           11     0.22        7
+ 8 Ace, Chris            18     0.36        8
+ 9 Yuki, Harry           21     0.42        9
+10 Ishan, Cass           15     0.3        10
 # ℹ 23 more rows</code></pre>
 </div>
 </div>

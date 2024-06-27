@@ -308,13 +308,10 @@ window.Quarto = {
   <li>
 <a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">5.4</span> Temperance</a>
   <ul class="collapse">
-<li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">5.4.1</span> Question 1</a></li>
-  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><span class="header-section-number">5.4.2</span> Question 2</a></li>
-  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3"><span class="header-section-number">5.4.3</span> Question 3</a></li>
-  <li><a href="#three-levels-of-knowledge" id="toc-three-levels-of-knowledge" class="nav-link" data-scroll-target="#three-levels-of-knowledge"><span class="header-section-number">5.4.4</span> Three Levels of Knowledge</a></li>
+<li><a href="#questions-and-answers" id="toc-questions-and-answers" class="nav-link" data-scroll-target="#questions-and-answers"><span class="header-section-number">5.4.1</span> Questions and Answers</a></li>
+  <li><a href="#humility" id="toc-humility" class="nav-link" data-scroll-target="#humility"><span class="header-section-number">5.4.2</span> Humility</a></li>
   </ul>
 </li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5.5</span> Summary</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/PPBDS/primer/edit/main/two-parameters.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -372,30 +369,30 @@ window.Quarto = {
 <p><em>Treatment</em>: There are not treatment variables.</p>
 <p><em>Causal or predictive model</em>: We have only one outcome, so the model is predictive.</p>
 <p><em>Covariates</em>: There are no (explicit) covariates in this model, although we will need to make use of variables like <code>age</code> and <code>sex</code> to construct our sample data.</p>
-<p><em>Moment in Time</em>: This is often implicit in the question itself. One of our key roles as data scientists is to clarify the questions which we are asked. In this case, it seems clear that the questions</p>
+<p><em>Moment in Time</em>: This is often implicit in the question itself. One of our key roles as data scientists is to clarify the questions which we are asked. In this case, it seems clear that the questions refer to now, the present moment.</p>
 <p>Predictive models care nothing about causation. Causal models are often also concerned with prediction, if only as a means of measuring the quality of the model. Here, we are looking at <em>prediction</em>.</p>
 <p>So, what does our Preceptor Table look like? Assuming we are predicting height for every adult male on Earth at this moment in time, we would have height data for every male at least 18 years of age. This means that we would have about 4 billion rows, one for each male, along with a column for each individual’s height.</p>
 <p>Here are some rows from our Preceptor Table:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="xamnholhjo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xamnholhjo table {
+<div id="osfixlbvfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#osfixlbvfi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xamnholhjo thead, #xamnholhjo tbody, #xamnholhjo tfoot, #xamnholhjo tr, #xamnholhjo td, #xamnholhjo th {
+#osfixlbvfi thead, #osfixlbvfi tbody, #osfixlbvfi tfoot, #osfixlbvfi tr, #osfixlbvfi td, #osfixlbvfi th {
   border-style: none;
 }
 
-#xamnholhjo p {
+#osfixlbvfi p {
   margin: 0;
   padding: 0;
 }
 
-#xamnholhjo .gt_table {
+#osfixlbvfi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -421,12 +418,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#xamnholhjo .gt_caption {
+#osfixlbvfi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xamnholhjo .gt_title {
+#osfixlbvfi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -438,7 +435,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#xamnholhjo .gt_subtitle {
+#osfixlbvfi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -450,7 +447,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#xamnholhjo .gt_heading {
+#osfixlbvfi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -462,13 +459,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xamnholhjo .gt_bottom_border {
+#osfixlbvfi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xamnholhjo .gt_col_headings {
+#osfixlbvfi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -483,7 +480,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xamnholhjo .gt_col_heading {
+#osfixlbvfi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -503,7 +500,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#xamnholhjo .gt_column_spanner_outer {
+#osfixlbvfi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -515,15 +512,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#xamnholhjo .gt_column_spanner_outer:first-child {
+#osfixlbvfi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xamnholhjo .gt_column_spanner_outer:last-child {
+#osfixlbvfi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xamnholhjo .gt_column_spanner {
+#osfixlbvfi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -535,11 +532,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#xamnholhjo .gt_spanner_row {
+#osfixlbvfi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xamnholhjo .gt_group_heading {
+#osfixlbvfi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -565,7 +562,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#xamnholhjo .gt_empty_group_heading {
+#osfixlbvfi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -580,15 +577,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#xamnholhjo .gt_from_md > :first-child {
+#osfixlbvfi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xamnholhjo .gt_from_md > :last-child {
+#osfixlbvfi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xamnholhjo .gt_row {
+#osfixlbvfi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -607,7 +604,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#xamnholhjo .gt_stub {
+#osfixlbvfi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -620,7 +617,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xamnholhjo .gt_stub_row_group {
+#osfixlbvfi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -634,15 +631,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#xamnholhjo .gt_row_group_first td {
+#osfixlbvfi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xamnholhjo .gt_row_group_first th {
+#osfixlbvfi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xamnholhjo .gt_summary_row {
+#osfixlbvfi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -652,16 +649,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xamnholhjo .gt_first_summary_row {
+#osfixlbvfi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xamnholhjo .gt_first_summary_row.thick {
+#osfixlbvfi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xamnholhjo .gt_last_summary_row {
+#osfixlbvfi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -671,7 +668,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xamnholhjo .gt_grand_summary_row {
+#osfixlbvfi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -681,7 +678,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xamnholhjo .gt_first_grand_summary_row {
+#osfixlbvfi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -691,7 +688,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#xamnholhjo .gt_last_grand_summary_row_top {
+#osfixlbvfi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -701,11 +698,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xamnholhjo .gt_striped {
+#osfixlbvfi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xamnholhjo .gt_table_body {
+#osfixlbvfi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -714,7 +711,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xamnholhjo .gt_footnotes {
+#osfixlbvfi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -728,7 +725,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xamnholhjo .gt_footnote {
+#osfixlbvfi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -737,7 +734,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xamnholhjo .gt_sourcenotes {
+#osfixlbvfi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -751,7 +748,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xamnholhjo .gt_sourcenote {
+#osfixlbvfi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -759,63 +756,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xamnholhjo .gt_left {
+#osfixlbvfi .gt_left {
   text-align: left;
 }
 
-#xamnholhjo .gt_center {
+#osfixlbvfi .gt_center {
   text-align: center;
 }
 
-#xamnholhjo .gt_right {
+#osfixlbvfi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xamnholhjo .gt_font_normal {
+#osfixlbvfi .gt_font_normal {
   font-weight: normal;
 }
 
-#xamnholhjo .gt_font_bold {
+#osfixlbvfi .gt_font_bold {
   font-weight: bold;
 }
 
-#xamnholhjo .gt_font_italic {
+#osfixlbvfi .gt_font_italic {
   font-style: italic;
 }
 
-#xamnholhjo .gt_super {
+#osfixlbvfi .gt_super {
   font-size: 65%;
 }
 
-#xamnholhjo .gt_footnote_marks {
+#osfixlbvfi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xamnholhjo .gt_asterisk {
+#osfixlbvfi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xamnholhjo .gt_indent_1 {
+#osfixlbvfi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xamnholhjo .gt_indent_2 {
+#osfixlbvfi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xamnholhjo .gt_indent_3 {
+#osfixlbvfi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xamnholhjo .gt_indent_4 {
+#osfixlbvfi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xamnholhjo .gt_indent_5 {
+#osfixlbvfi .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -914,11 +911,11 @@ $ sleep          &lt;int&gt; 4, 4, 4, NA, 8, NA, NA, 8, 8, 8, 7, 5, 4, NA, 5, 7,
 <pre><code># A tibble: 5 × 3
     age sex    height
   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
-1    49 Female   168.
-2     4 Female   108.
-3    49 Male     163.
-4    25 Female   170.
-5    60 Female   161.</code></pre>
+1    54 Female   161.
+2    10 Male     148 
+3     5 Female   104.
+4    31 Female   165.
+5     0 Female    NA </code></pre>
 </div>
 </div>
 <p>We think of both <code>age</code> and <code>height</code> as numbers. And they are numbers! But R distinguishes between “integers” and “doubles,” only the second of which allow for decimal values. In the <code>nhanes</code> data, <code>age</code> is an integer and <code>height</code> is a double.</p>
@@ -1145,23 +1142,23 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="cknsgypadd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cknsgypadd table {
+<div id="alwgssziea" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#alwgssziea table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cknsgypadd thead, #cknsgypadd tbody, #cknsgypadd tfoot, #cknsgypadd tr, #cknsgypadd td, #cknsgypadd th {
+#alwgssziea thead, #alwgssziea tbody, #alwgssziea tfoot, #alwgssziea tr, #alwgssziea td, #alwgssziea th {
   border-style: none;
 }
 
-#cknsgypadd p {
+#alwgssziea p {
   margin: 0;
   padding: 0;
 }
 
-#cknsgypadd .gt_table {
+#alwgssziea .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1187,12 +1184,12 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-left-color: #D3D3D3;
 }
 
-#cknsgypadd .gt_caption {
+#alwgssziea .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cknsgypadd .gt_title {
+#alwgssziea .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1204,7 +1201,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-width: 0;
 }
 
-#cknsgypadd .gt_subtitle {
+#alwgssziea .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1216,7 +1213,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-top-width: 0;
 }
 
-#cknsgypadd .gt_heading {
+#alwgssziea .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1228,13 +1225,13 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#cknsgypadd .gt_bottom_border {
+#alwgssziea .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cknsgypadd .gt_col_headings {
+#alwgssziea .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1249,7 +1246,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#cknsgypadd .gt_col_heading {
+#alwgssziea .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1269,7 +1266,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   overflow-x: hidden;
 }
 
-#cknsgypadd .gt_column_spanner_outer {
+#alwgssziea .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1281,15 +1278,15 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 4px;
 }
 
-#cknsgypadd .gt_column_spanner_outer:first-child {
+#alwgssziea .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cknsgypadd .gt_column_spanner_outer:last-child {
+#alwgssziea .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cknsgypadd .gt_column_spanner {
+#alwgssziea .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1301,11 +1298,11 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   width: 100%;
 }
 
-#cknsgypadd .gt_spanner_row {
+#alwgssziea .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cknsgypadd .gt_group_heading {
+#alwgssziea .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1331,7 +1328,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   text-align: left;
 }
 
-#cknsgypadd .gt_empty_group_heading {
+#alwgssziea .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1346,15 +1343,15 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   vertical-align: middle;
 }
 
-#cknsgypadd .gt_from_md > :first-child {
+#alwgssziea .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cknsgypadd .gt_from_md > :last-child {
+#alwgssziea .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cknsgypadd .gt_row {
+#alwgssziea .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1373,7 +1370,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   overflow-x: hidden;
 }
 
-#cknsgypadd .gt_stub {
+#alwgssziea .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1386,7 +1383,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#cknsgypadd .gt_stub_row_group {
+#alwgssziea .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1400,15 +1397,15 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   vertical-align: top;
 }
 
-#cknsgypadd .gt_row_group_first td {
+#alwgssziea .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cknsgypadd .gt_row_group_first th {
+#alwgssziea .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cknsgypadd .gt_summary_row {
+#alwgssziea .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1418,16 +1415,16 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#cknsgypadd .gt_first_summary_row {
+#alwgssziea .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cknsgypadd .gt_first_summary_row.thick {
+#alwgssziea .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cknsgypadd .gt_last_summary_row {
+#alwgssziea .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1437,7 +1434,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-color: #D3D3D3;
 }
 
-#cknsgypadd .gt_grand_summary_row {
+#alwgssziea .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1447,7 +1444,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#cknsgypadd .gt_first_grand_summary_row {
+#alwgssziea .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1457,7 +1454,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-top-color: #D3D3D3;
 }
 
-#cknsgypadd .gt_last_grand_summary_row_top {
+#alwgssziea .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1467,11 +1464,11 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-color: #D3D3D3;
 }
 
-#cknsgypadd .gt_striped {
+#alwgssziea .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cknsgypadd .gt_table_body {
+#alwgssziea .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1480,7 +1477,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-bottom-color: #D3D3D3;
 }
 
-#cknsgypadd .gt_footnotes {
+#alwgssziea .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1494,7 +1491,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#cknsgypadd .gt_footnote {
+#alwgssziea .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1503,7 +1500,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#cknsgypadd .gt_sourcenotes {
+#alwgssziea .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1517,7 +1514,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   border-right-color: #D3D3D3;
 }
 
-#cknsgypadd .gt_sourcenote {
+#alwgssziea .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1525,63 +1522,63 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
   padding-right: 5px;
 }
 
-#cknsgypadd .gt_left {
+#alwgssziea .gt_left {
   text-align: left;
 }
 
-#cknsgypadd .gt_center {
+#alwgssziea .gt_center {
   text-align: center;
 }
 
-#cknsgypadd .gt_right {
+#alwgssziea .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cknsgypadd .gt_font_normal {
+#alwgssziea .gt_font_normal {
   font-weight: normal;
 }
 
-#cknsgypadd .gt_font_bold {
+#alwgssziea .gt_font_bold {
   font-weight: bold;
 }
 
-#cknsgypadd .gt_font_italic {
+#alwgssziea .gt_font_italic {
   font-style: italic;
 }
 
-#cknsgypadd .gt_super {
+#alwgssziea .gt_super {
   font-size: 65%;
 }
 
-#cknsgypadd .gt_footnote_marks {
+#alwgssziea .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cknsgypadd .gt_asterisk {
+#alwgssziea .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cknsgypadd .gt_indent_1 {
+#alwgssziea .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cknsgypadd .gt_indent_2 {
+#alwgssziea .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cknsgypadd .gt_indent_3 {
+#alwgssziea .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cknsgypadd .gt_indent_4 {
+#alwgssziea .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cknsgypadd .gt_indent_5 {
+#alwgssziea .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1822,9 +1819,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 </div>
-<p>We have a data generating mechanism, a “model,” to use the simpler term. What can we do with it? Let’s answer the four questions with which we started.</p>
-<section id="question-1" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="question-1">
-<span class="header-section-number">5.4.1</span> Question 1</h3>
+<section id="questions-and-answers" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="questions-and-answers">
+<span class="header-section-number">5.4.1</span> Questions and Answers</h3>
 <ul>
 <li>What is the probability that the next adult male we meet will be taller than 180 centimeters?</li>
 </ul>
@@ -1895,8 +1891,6 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>If 30% or so of the draws from the posterior probability distribution are greater than 180 cm, then there is about a 30% chance that the next individual will be taller than 180 cm.</p>
 <p>Again, the key conceptual difficulty is the population. The problem we actually have involves walking around London, or wherever, today. The data we have involve America in 2010. Those are not the same things! But they are not totally different. Knowing whether the data we have is “close enough” to the problem we want to solve is at the heart of Wisdom. Yet that was the decision we made at the start of the process, the decision to create a model in the first place. Now that we have created a model, we look to the virtue of Temperance for guidance in using that model. The data we have is never a perfect match for the world we face. We need to temper our confidence and act with humility. Our forecasts will never be as good as a naive use of the model might suggest. Reality will surprise us. We need to take the model’s claims with a family-sized portion of salt.</p>
-</section><section id="question-2" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="question-2">
-<span class="header-section-number">5.4.2</span> Question 2</h3>
 <ul>
 <li>What is the probability that, among the next 4 men we meet, the tallest is at least 10 cm taller than the shortest?</li>
 </ul>
@@ -1985,8 +1979,6 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 <!-- DK: I am concerned that we are not providing uncertainty estimates when we answer these questions. The best answer is 77%. Fine. But how much uncertainty is there in this estimate? This strikes me as a hard question! -->
-</section><section id="question-3" class="level3" data-number="5.4.3"><h3 data-number="5.4.3" class="anchored" data-anchor-id="question-3">
-<span class="header-section-number">5.4.3</span> Question 3</h3>
 <ul>
 <li>What is our posterior probability distribution of the height of the 3rd tallest man out of the next 100 we meet?</li>
 </ul>
@@ -2047,37 +2039,23 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 </div>
-</section><section id="three-levels-of-knowledge" class="level3" data-number="5.4.4"><h3 data-number="5.4.4" class="anchored" data-anchor-id="three-levels-of-knowledge">
-<span class="header-section-number">5.4.4</span> Three Levels of Knowledge</h3>
+</section><section id="humility" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="humility">
+<span class="header-section-number">5.4.2</span> Humility</h3>
 <p>When answering questions as we have been, it can be easy to falsely believe that we are delivering <em>the truth</em>. This is not the case. In fact, there are three primary levels of knowledge which we need to understand in order to account for our uncertainty.</p>
 <p>The three primary levels of knowledge possible knowledge in our scenario include: the Truth (the Preceptor Table), the DGM Posterior, and Our Posterior.</p>
-<section id="the-truth" class="level4" data-number="5.4.4.1"><h4 data-number="5.4.4.1" class="anchored" data-anchor-id="the-truth">
-<span class="header-section-number">5.4.4.1</span> The Truth</h4>
 <p>If we know the Truth (with a capital “T”), then we know the Preceptor Table. With that knowledge, we can directly answer our question precisely. We can calculate each individual’s height, and any summary measure we might be interested in, like the average height for different ages or countries.</p>
 <p>This level of knowledge is possible only under an omniscient power, one who can see every outcome in every individual under every treatment. The Truth would show, for any given individual, their actions under control, their actions under treatment, and each little factor that impacted those decisions.</p>
 <p>The Truth represents the highest level of knowledge one can have — with it, our questions merely require algebra or, at worst, simulation. There is no need to estimate a treatment effect, or the different treatment effects for different groups of people. We would not need to predict at all — we would know.</p>
-</section><section id="dgm-posterior" class="level4" data-number="5.4.4.2"><h4 data-number="5.4.4.2" class="anchored" data-anchor-id="dgm-posterior">
-<span class="header-section-number">5.4.4.2</span> DGM posterior</h4>
 <p>The DGM posterior is the next level of knowledge, which lacks the omniscient quality of The Truth. This posterior is the posterior we would calculate if we had perfect knowledge of the data generating mechanism, meaning we have the correct model structure and exact parameter values. This is often falsely conflated with “our posterior,” which is subject to error in model structure and parameter value estimations.</p>
 <p>What we do with the DGM posterior is the same as our posterior — we estimate parameters based on data and predict the future with the latest and most relevant information possible. The difference is that, when we calculate posteriors for an unknown value in the DGM posterior, we expect those posteriors to be perfect.</p>
-</section><section id="our-posterior" class="level4" data-number="5.4.4.3"><h4 data-number="5.4.4.3" class="anchored" data-anchor-id="our-posterior">
-<span class="header-section-number">5.4.4.3</span> Our posterior</h4>
 <p>Unfortunately, our posterior possesses even less certainty! In the real world, we don’t have perfect knowledge of the DGM: the model structure and the exact parameter values. What does this mean?</p>
 <p>When we go to our boss, we tell them that this is our best guess. It is an informed estimate based on the most relevant data possible. From that data, we have created a posterior for the average height of males.</p>
 <p>Does this mean we are certain that the average height lies is the most probable outcome in our posterior? Of course not! As we would tell our boss, it would not be shocking to find out that the actual average height was less or more than our estimate.</p>
 <p>This is because a lot of the assumptions we make during the process of building a model, the processes in Wisdom, are subject to error. Perhaps our data did not match the future as well as we had hoped. Ultimately, we try to account for our uncertainty in our estimates. Even with this safeguard, we aren’t surprised if we are a bit off.</p>
 <!-- DK: Need more text. Explain all the things that could be wrong with the model. Explain what is going on in different columns. Explain all the cool R code tricks. Discuss difference between predict and epred.  -->
-</section></section></section><section id="summary" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">5.5</span> Summary</h2>
-<!-- DK: Discuss meaning of "Posterior" in all plot titles. Show the key code examples. -->
-<p>The rest of the <em>Primer</em> will follow the same process we have just completed here. We start with a decision we have to make. With luck, we will have some data to guide us. (Without data, even the best data scientist will struggle to make progress.) <em>Wisdom</em> asks us: “Is the data we have close enough to the decision we face to make using that data helpful?” Often times, the answer is “No.”</p>
-<p>Once we start to build the model, <em>Justice</em> will guide us. Is the model descriptive or causal? What is the mathematical relationship between the dependent variable we are trying to explain and the independent variables we can use to explain it? What assumptions are we making about distribution of the error term?</p>
-<p>Having set up the model framework, we need <em>Courage</em> to implement the model in code. Without code, all the math in the world is useless. Once we have created the model, we need to understand it. What are the posterior distributions of the unknown parameters? Do they seem sensible? How should we interpret them?</p>
-<p><em>Temperance</em> guides the final step. With a model, we can finally get back to the decision which motivated the exercise in the first place. We can use the model to make statements about the world, both to confirm that the model is consistent with the world and to use the model to make predictions about numbers which we do not know.</p>
-<p>Let’s practice this process another dozen or so times.</p>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
