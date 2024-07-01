@@ -227,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./key-concepts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Key Concepts</span></a>
+ <span class="menu-text">Cardinal Virtues</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -260,12 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#project-set-up" id="toc-project-set-up" class="nav-link" data-scroll-target="#project-set-up">Project Set Up</a></li>
   <li><a href="#daily-work" id="toc-daily-work" class="nav-link" data-scroll-target="#daily-work">Daily Work</a></li>
   <li><a href="#common-problems" id="toc-common-problems" class="nav-link" data-scroll-target="#common-problems">Common Problems</a></li>
-  <li>
-<a href="#style-guide" id="toc-style-guide" class="nav-link" data-scroll-target="#style-guide">Style Guide</a>
-  <ul class="collapse">
-<li><a href="#stray-thoughts" id="toc-stray-thoughts" class="nav-link" data-scroll-target="#stray-thoughts">Stray thoughts</a></li>
-  </ul>
-</li>
+  <li><a href="#style-guide" id="toc-style-guide" class="nav-link" data-scroll-target="#style-guide">Style Guide</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/PPBDS/primer/edit/main/set-up.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -374,8 +369,9 @@ GitHub
 <p>Make sure the branch name is sensible. Again, this is a command that you only need to issue once, at least for our current workflow. You should always be “on” this branch, never on the default (master) branch. You can check this in the upper right corner of the git panel on R Studio.</p>
 <p>In more professional settings, you will often work on several different branches at once. So, if you are comfortable, you should feel free to create more than one branch, use it, delete it and so on. Never work on the default branch, however. And, if you use multiple branches, be careful where you are and what you are doing.</p>
 </section><section id="daily-work" class="level2"><h2 class="anchored" data-anchor-id="daily-work">Daily Work</h2>
-<ol type="1">
-<li>Pull regularly:</li>
+<ol start="0" type="1">
+<li><p>Always use the “Source” view — not the “Visual” view — in RStudio to edit. The Visual view will often reformat your code, without you asking, in unhelpful ways. You don’t want RStudio to make changes in your code.</p></li>
+<li><p>Pull regularly:</p></li>
 </ol>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -397,10 +393,9 @@ GitHub
 <li><p>You can now continue on. There is no need to wait for me to deal with your pull request. There is no need to fork/clone/download again. You don’t need to create a new branch, although many people do, with a branch name which describes what they are working on now. You just keep editing your files, knitting, and committing then pushing to your forked repo. When you feel you have completed another chunk of work, just run <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push()</a></code> again.</p></li>
 <li><p>Read the <strong>usethis</strong> <a href="https://usethis.r-lib.org/articles/articles/usethis-setup">setup help page</a> at least once, perhaps after a week or two of working within this framework. It has lots of good stuff!</p></li>
 </ol></section><section id="common-problems" class="level2"><h2 class="anchored" data-anchor-id="common-problems">Common Problems</h2>
-<ol start="0" type="1">
-<li>Always use the “Source” view — not the “Visual” view — in RStudio to edit. The Visual view will often reformat your code, without you asking, in unhelpful ways. You don’t want RStudio to make changes in your code.</li>
-</ol>
-<!-- DK: And 1) and 2) still problems? --><!-- TM: Make sure RTools has been downloaded if error with downloading terra after running renv::restore() in setup --><ol type="1">
+<!-- DK: And 1) and 2) still problems? -->
+<!-- TM: Make sure RTools has been downloaded if error with downloading terra after running renv::restore() in setup -->
+<ol type="1">
 <li><p>In the immediate aftermath of this creation process, the blue/green arrows (in the Git panel) for pulling/pushing may be grayed out. This is a sign that the connection between your computer and your forked repo has not “settled in.” (I am not sure of the cause or even if this is the right terminology.) I think that just issuing your first <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main()</a></code> fixes it. If not, it always goes away. Until it does, however, you can’t pull/push to your repo. That doesn’t really matter, however, since the key commands you need are <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main()</a></code> and <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push()</a></code>, both of which always work immediately.</p></li>
 <li><p>After running <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main()</a></code>, <em>you will often see a bunch of files in your Git tab in the top right corner of Rstudio</em> marked with an M (for Modified), including files which you know you did not edit. These are the files that have been updated on the “truth” — on <strong>PPBDS/primer</strong>, for example — since your last <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main()</a></code>. Since you pulled them directly from the <strong>PPBDS/primer</strong> repo, your forked repo sees all the changes other people have made and thinks that <em>you made them</em>. This is easily fixed, however — just commit all the changes to your forked repo. (Strangely, this seems to not always happen. If you don’t see this effect, don’t worry.)</p></li>
 <li><p>Always run <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main()</a></code> before committing a file. Otherwise, you may create lots of merge conflicts. If this happens, save a copy of the file(s) you personally were editing off to the side. Then, <a href="https://knowyourmeme.com/memes/nuke-it-from-orbit">nuke it from orbit</a>, following the instructions above. Repeat the Project Set Up process. Then move in your file(s) by hand into the new repo, and commit/push them as normal.</p></li>
@@ -422,7 +417,6 @@ GitHub
 <p>Complications can also arise if <strong>aprob</strong> was, in the last day or two, updated on CRAN. If you go to the page for <strong>aprob</strong> you can see that the source file is version 1.2.7, or whatever, while the binary versions are still 1.2.6. It takes a day or two for new binaries to be created on CRAN, especially for Windows. Again, situations like this are tricky enough that you should reach out to me for guidance.</p>
 </section><section id="style-guide" class="level2"><h2 class="anchored" data-anchor-id="style-guide">Style Guide</h2>
 <ul>
-<li><p>Never use just a single <code>#</code> after using it for the chapter title. The first subpart uses a <code>##</code>. There should be 5 to 8 subparts for each chapter. Within each subpart, you may have sub-subparts, indicated with <code>###</code>. There should be 3 to 10 of those. You may use <code>####</code> if you like.</p></li>
 <li><p>Section headings (other than Chapter titles) are in sentence case (with only the first word capitalized, unless it is something always capitalized) rather than title case (in which all words except small words like “the” and “of” are capitalized). Chapter titles are in title case. Headings do not end with a period.</p></li>
 <li><p>Never hard code stuff like “A tibble with 336,776 rows and 19 columns.” What happens when you update the data? Instead, calculate all numbers on the fly, with “r scales::comma(x)” whenever x is a number in the thousands or greater. Example: “A tibble with ‘r scales::comma(nrow(x))’ rows and ‘r ncol(x)’ columns.”</p></li>
 <li><p>“We” are writing this book.</p></li>
@@ -430,7 +424,7 @@ GitHub
 <li><p>R code, anything you might type in the console, is always within backticks. Example: <code>mtcars</code> is a built-in data set.</p></li>
 <li><p>Function names always include the parentheses: we write <code>pivot_wider()</code>, not <code>pivot_wider</code>.</p></li>
 <li><p>Add lots of memes and videos and cartoons.</p></li>
-<li><p>Make ample use of comments, placed with the handy CMD-Shift-/ shortcut. These are notes for everyone else working on the chapter, and for future you.</p></li>
+<li><p>Make ample use of comments, placed with the handy <code>Command/Ctrl + Shift + /</code> shortcut. These are notes for everyone else working on the chapter, and for future you.</p></li>
 <li><p>All tables should be created with the <strong>gt</strong> package.</p></li>
 <li><p>All images and gifs are loaded with <code>knitr::include_graphics().</code></p></li>
 <li><p>Interim data sets should be called <code>x</code> or something sensible to the situation, like <code>ch7</code> for a data set you are working with in Chapter 7. Do not use names like <code>data</code> and <code>df</code>, both of which are R commands.</p></li>
@@ -438,21 +432,9 @@ GitHub
 <li><p>If you make an mp4, you can convert it to .gif using https://convertio.co/mp4-gif.</p></li>
 <li><p>Everything is Bayesian. The confidence interval for a regression means that there is a 95% chance that the true value lies within that interval. Use Rubin Causal Model and potential outcomes to define precisely what “true value” you are talking about. And so on.</p></li>
 </ul>
-<section id="stray-thoughts" class="level3"><h3 class="anchored" data-anchor-id="stray-thoughts">Stray thoughts</h3>
-<p>Every chapter 5+ begins with a problem, and the decision we must make. These are often toy, highly stylized problems. The decisions are not realistic. But, in structure, these problems parallel the real problems that people face, the actual decisions which they must make.</p>
-<p>The problem is specified at the end of the “preamble,” the untitled part of the chapter after the title and before the first subpart. Example from Chapter 8:</p>
-<blockquote class="blockquote">
-<p>A person arrives at a Boston commuter station. The only thing you know is their political party. How old are they? Two people arrive: A Democrat and a Republican. What are the odds that the Democrat is 10% older than the Republican?</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>A different person arrives at the station. You know nothing about them. What will their attitude toward immigration be if they are exposed to Spanish-speakers on the platform? What will it be if they are not? How certain are you?</p>
-</blockquote>
-<p>Is this an actual problem that someone might face? No! But it is like such problems. The first requires the creation of a predictive model. The second necessitates a causal model. The rest of the chapter teaches the reader how to create such models. The end of the chapter harkens back to the questions from the beginning.</p>
-<p>Might it be nice to put more meat on the story than that? Perhaps. In an ideal world, the “decision” you faced would be more complex than just playing the prediction game. Begin with a decision. What real world problem are you trying to solve? What are the costs and benefits of different approaches? What unknown thing are you trying to estimate? With Sampling, it might be: How many people should I call? With estimating one parameter — like vote share as the ballots come in — it might be: How much should I bet on the election outcome?</p>
-<p>The data we have might not be directly connected to our problem. For example, we might be running a Senate campaign and trying to decide what to spend money on. The Spanish-speakers-on-a-train-platform data set is not directly related to that problem, but it isn’t unrelated. Indeed, the first theme of “validity” is directly related to this issue: Is the data we have relevant to the problem we want to solve?</p>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -861,8 +843,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./key-concepts.html" class="pagination-link" aria-label="Key Concepts">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Key Concepts</span>
+      <a href="./key-concepts.html" class="pagination-link" aria-label="Cardinal Virtues">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Cardinal Virtues</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

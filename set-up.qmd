@@ -128,6 +128,8 @@ In more professional settings, you will often work on several different branches
 
 ## Daily Work
 
+0) Always use the "Source" view --- not the "Visual" view --- in RStudio to edit. The Visual view will often reformat your code, without you asking, in unhelpful ways. You don't want RStudio to make changes in your code. 
+
 1) Pull regularly:
 
 ```{r, eval = FALSE}
@@ -157,8 +159,6 @@ This command bundles up a bunch of git commands (which you could do by hand) int
 6) Read the **usethis** [setup help page](https://usethis.r-lib.org/articles/articles/usethis-setup) at least once, perhaps after a week or two of working within this framework. It has lots of good stuff!
 
 ## Common Problems
-
-0) Always use the "Source" view --- not the "Visual" view --- in RStudio to edit. The Visual view will often reformat your code, without you asking, in unhelpful ways. You don't want RStudio to make changes in your code. 
 
 <!-- DK: And 1) and 2) still problems? -->
 <!-- TM: Make sure RTools has been downloaded if error with downloading terra after running renv::restore() in setup -->
@@ -192,7 +192,6 @@ Complications can also arise if **aprob** was, in the last day or two, updated o
   
 ## Style Guide
 
-* Never use just a single `#` after using it for the chapter title. The first subpart uses a `##`. There should be 5 to 8 subparts for each chapter. Within each subpart, you may have sub-subparts, indicated with `###`. There should be 3 to 10 of those. You may use `####` if you like.
 
 * Section headings (other than Chapter titles) are in sentence case (with only the first word capitalized, unless it is something always capitalized) rather than title case (in which all words except small words like "the" and "of" are capitalized). Chapter titles are in title case. Headings do not end with a period.
 
@@ -208,7 +207,7 @@ Complications can also arise if **aprob** was, in the last day or two, updated o
 
 * Add lots of memes and videos and cartoons.
 
-* Make ample use of comments, placed with the handy CMD-Shift-/ shortcut. These are notes for everyone else working on the chapter, and for future you.
+* Make ample use of comments, placed with the handy `Command/Ctrl + Shift + /` shortcut. These are notes for everyone else working on the chapter, and for future you.
 
 * All tables should be created with the **gt** package. 
 
@@ -222,18 +221,4 @@ Complications can also arise if **aprob** was, in the last day or two, updated o
 
 * Everything is Bayesian. The confidence interval for a regression means that there is a 95% chance that the true value lies within that interval. Use Rubin Causal Model and potential outcomes to define precisely what "true value" you are talking about. And so on.
 
-### Stray thoughts
 
-Every chapter 5+ begins with a problem, and the decision we must make. These are often toy, highly stylized problems. The decisions are not realistic. But, in structure, these problems parallel the real problems that people face, the actual decisions which they must make.
-
-The problem is specified at the end of the "preamble," the untitled part of the chapter after the title and before the first subpart. Example from Chapter 8:
-
-> A person arrives at a Boston commuter station. The only thing you know is their political party. How old are they? Two people arrive: A Democrat and a Republican. What are the odds that the Democrat is 10% older than the Republican?
-
-> A different person arrives at the station. You know nothing about them. What will their attitude toward immigration be if they are exposed to Spanish-speakers on the platform? What will it be if they are not? How certain are you? 
-
-Is this an actual problem that someone might face? No! But it is like such problems. The first requires the creation of a predictive model. The second necessitates a causal model. The rest of the chapter teaches the reader how to create such models. The end of the chapter harkens back to the questions from the beginning.
-
-Might it be nice to put more meat on the story than that? Perhaps. In an ideal world, the "decision" you faced would be more complex than just playing the prediction game. Begin with a decision. What real world problem are you trying to solve? What are the costs and benefits of different approaches? What unknown thing are you trying to estimate? With Sampling, it might be: How many people should I call? With estimating one parameter --- like vote share as the ballots come in --- it might be: How much should I bet on the election outcome? 
-
-The data we have might not be directly connected to our problem. For example, we might be running a Senate campaign and trying to decide what to spend money on. The Spanish-speakers-on-a-train-platform data set is not directly related to that problem, but it isn't unrelated. Indeed, the first theme of "validity" is directly related to this issue: Is the data we have relevant to the problem we want to solve? 

@@ -335,7 +335,7 @@ remotes::install_github("PPBDS/r4ds.tutorials")
 remotes::install_github("PPBDS/primer.tutorials")
 ```
 
-  - Completed the Getting Started tutorial from the **tutorial.helpers** package.
+  - Completed the "Getting Started with Tutorials" tutorial from the **tutorial.helpers** package.
 
 Let's get started.
 

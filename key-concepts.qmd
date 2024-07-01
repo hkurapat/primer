@@ -1,4 +1,4 @@
-# Key Concepts {-}
+# Cardinal Virtues {-}
 
 ```{r}
 #| label: hidden-libraries
@@ -10,8 +10,6 @@ library(gt)
 ```
 
 
-<!-- Need a good definition for each assumption, and then begin each section devoted to that assumption with this definition. -->
-
 <!-- When starting a new chapter, copy/paste this: 
 
 ## Wisdom
@@ -22,11 +20,11 @@ library(gt)
 
 *Outcome*:
 
-*Treatment*:
-
 *Causal or predictive model*:
 
 *Covariates*:
+
+*Treatment*:
 
 *Moment in Time*:
 
@@ -60,77 +58,72 @@ library(gt)
 
 -->
 
+In the spirit of transparency, here are the guidelines which we provide to colleagues updating chapters in the *Primer* and the associated tutorials in the [**primer.tutorials**](https://ppbds.github.io/primer.tutorials/) package. This is how we think data science ought to be taught. It is also, perhaps unsurprisingly, how we think data science ought to be done, at least at this introductory level. Key concepts are bolded when they are first used.
 
-These are the key concepts from the *Primer*. You should apply them whenever you face a choice, and some data to help you make it. The world confronts us. Make decisions we must.
+## Question
 
-**Quantity of Interest** is the number which you want to estimate. You will almost always calculate a posterior probability distribution for your Quantity of Interest since, in the real world, you will never know your QoI precisely. Most problems involve more than one QoI.
-
-**Predictive Models and Causal Models** are different because predictive models have only one outcome column. Causal models have more than one (potential) outcome column because we need more than one potential outcome in order to estimate a *causal effect*. The first step in a data science problem is to determine if your QoI requires a causal or a predictive model.
-
-**Units**, **outcomes** and **covariates** are important parts of every data science model. Causal, but not predictive, models also include at least one **treatment**, which is just a covariate which we can, at least in theory, manipulate. The QoI determines the units and outcomes for your model.
-
-**Preceptor Table** is the smallest possible table of data with rows and columns such that, if there is no missing data, it is easy to calculate the quantities of interest.
-
-**Potential Outcome** is the outcome for an individual under a specified treatment. A *potential outcome* is just a regular outcome in the case of a causal model. In a predictive model, we just have an outcome. It is just another variable, the one that, in the context of this problem, we are interested in explaining/modeling/predicting. In a casual model, on the other hand, there are at least two outcomes: the outcome which happens if the unit gets the treatment and the outcome which happens if that same unit gets the control. We refer to both of these outcomes as *potential outcomes*.
-
-
-**Causal Effect** is the difference between two potential outcomes.
-
-[**Rubin Causal Model**](https://en.wikipedia.org/wiki/Rubin_causal_model) is an approach to the statistical analysis of cause and effect based on the framework of potential outcomes.
-
-**Wisdom** is the first [Cardinal Virtue](https://en.wikipedia.org/wiki/Cardinal_virtues) in data science. Begin with the quantity of interest. Is that QoI a causal effect or simply a forecast? Which units and outcomes does it imply? What Preceptor Table would allow you to calculate your QoI easily? Perform an exploratory data analysis (EDA) on the data you have. Is it *valid* to consider the data you have and the (theoretical) data from the Preceptor Table to have arisen out of the same population? If so, you may continue. If not, your attempt to estimate your QoI ends now.
-
-**Validity** is the consistency, or lack thereof, in the columns of your data set and the corresponding columns in your Preceptor Table. In order to consider the two data sets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*, which is the first step in Justice.
-
-**Population Table** includes a row for each unit/time combination in the underlying population from which both the Preceptor Table and the data are drawn. It can be constructed if the validity assumption is (mostly) true. It includes all the rows from the Preceptor Table. It also includes the rows from the data set. It usually has other rows as well, rows which represent unit/time combinations from other parts of the population.
-
-**Justice** is the second [Cardinal Virtue](https://en.wikipedia.org/wiki/Cardinal_virtues) in data science. Justice starts with the Population Table – the data we want to have, the data which we actually have, and all the other data from that same population. Each row of the Population Table is defined by a unique unit/time combination. We explore three key issues. First, does the relationship among the variables demonstrate *stability*, meaning is the model stable across different time periods? Second, are the rows associated with the data and, separately, the rows associated with the Preceptor Table, *representative* of all the units from the population? Third, for causal models only, we consider *unconfoundedness*. 
-
-**Stability** means that the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn. 
-
-**Representativeness**, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows. Ideally, we would like both the Preceptor Table *and* our data to be random samples from the population. Sadly, this is almost never the case.
-
-**Unconfoundedness** means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. This assumption is only relevant for causal models. We describe a model as "confounded" if this is not true. The easiest way to ensure unconfoundedness is to assign treatment randomly.
-
-**Courage** is the third [Cardinal Virtue](https://en.wikipedia.org/wiki/Cardinal_virtues) in data science. Justice gives us the Population Table. Courage creates the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have. We explore different models. We need to decide which variables to include and to estimate the values of unknown parameters. We check our models for consistency with the data we have. We avoid hypothesis tests. We select one model.
-
-**Data Generating Mechanism** (DGM) is also called the data generating model or the [data generating process](https://en.wikipedia.org/wiki/Data_generating_process). The *true* DGM is the reality of the world, the physical process which actually generates the data which we observe. The *estimated* DGM is the mathematical formula we create which models the true DGM, which we can never know. We use the estimated DGM to draw inferences about our Quantities of Interest.
-
-**Temperance** is the fourth [Cardinal Virtue](https://en.wikipedia.org/wiki/Cardinal_virtues) in data science. Courage gave us the data generating mechanism. Temperance guides us in the use of the DGM --- or the "model" ---  we have created to answer the questions with which we began. We create posteriors for the quantities of interest. We should be modest in the claims we make. The posteriors we create are never the “truth.” The assumptions we made to create the model are never perfect. Yet decisions made with flawed posteriors are almost always better than decisions made without them.
-
-Wisdom clarifies the question. Justice gives us the Population Table. Courage creates the data generating mechanism. Temperance answers the question.
-
-## Steps to Take in Every Data Science Problem
-
-In the spirit of transparency, here are the guidelines which we provide to colleagues updating chapters in the *Primer*. This is how we think data science ought to be taught. It is also, perhaps unsurprisingly, how we think data science ought to be done, at least at this introductory level.
-
-### Question
-
-Start with the question. This will generally be something simple, easily expressed in just a sentence, using colloquial language. Every data science problem starts with a question. Your goal is to provide an answer to the question, along with your uncertainty about that answer. The most common form for the answer is a posterior probability distribution. This PPD is either the answer itself, or the tool we use to answer the question. Example:
+Start with the question. These generally come in two types. First is a specific unknown number. Example:
 
 > *What proportion of people who make $100,000 are liberal?*
+
+Second is a more general query about the connection between variables. Example:
+
+> *What is the relationship between income and political ideology?*
+
+The first type of question is a subset of the second. We might estimate dozens of specific numbers when exploring the connection between income and ideology.
+
+Your goal is to provide an answer to the question, along with your uncertainty about that answer. The most common form for the answer is a posterior probability distribution. This PPD is either the answer itself, or the tool we use to answer the question. The answer to the second type of question will generally involves many posterior probability distributions.
 
 The question should be indented and italicized. As we progress, questions become less precise and more general. We don't know what to focus on when we start. We narrow as we proceed.
 
 Of course, every data science problem does not start with a question. It actually starts with a *decision*. The world confronts us. Make decisions we must. Yet, in this introductory textbook, starting with a decision to make is too hard. So, we simplify and start with a question. But we should always at least mention the sort of decision which the answer to the question might help us to make.
 
-Note that the sophistication of these discussions increases as we go further into the book. Your discussion should be more sophisticated than the one found in the previous chapter and less sophisticated than what comes later. Later one, we don't so much start with a specific *question* as with a *variable* in which we are interested.
+Note that the sophistication of these discussions increases as we go further into the book. Your discussion should be more sophisticated than the one found in the previous chapter and less sophisticated than what comes later. 
 
-Each chapter features all the same sections and sub-sections as we use below. That is, there are three sub-sections to Wisdom, four sub-sections for Justice, and so on. 
+The more sophisticated the situation, the more likely we are to start with broader instructions.
+
+Each chapter features all the same sections and sub-sections as we use below. That is, there are three sub-sections to Wisdom, four sub-sections for Justice, three for Courage and two for Temperance. 
+
+**Quantity of Interest** is the number which you want to estimate. It is the answer to the question with which you begin. You will almost always calculate a posterior probability distribution for your Quantity of Interest since, in the real world, you will never know your QoI precisely. More sophisticated problems involve more than one QoI.
 
 Once we have our question, we can start with the Cardinal Virtues. Each section begins with a one sentence summary about the component steps of the relevant virtue. These will, obviously, be highly similar from chapter to chapter. But that is OK! We want to reinforce the steps in the path over and over again.
 
-No battle plan survives first contact with the enemy intact. The same applies to questions and the data we use to answer them. Our questions evolve as our analysis continues. Ultimately, we can only answer some questions with the data we have. Those questions may be close to the ones that we started with, but they will rarely be identical.
+No battle plan survives first contact with the enemy intact. The same applies to questions and the data we use to answer them. Our questions evolve as our analysis continues. Ultimately, we can only answer some questions with the data we have. Those questions may be close to the ones with which we started, but they will rarely be identical.
 
-### Wisdom
+## Wisdom
 
 > Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of validity, as to whether or not we can (reasonably!) assume that the two come from the same population.
 
-#### Preceptor Table
+**Wisdom** is the first [Cardinal Virtue](https://en.wikipedia.org/wiki/Cardinal_virtues) in data science. Begin with the quantity of interest. Is that QoI a causal effect or simply a forecast? Which units and outcomes does it imply? What Preceptor Table would allow you to calculate your QoI easily? Perform an exploratory data analysis (EDA) on the data you have. Is it *valid* to consider the data you have and the (theoretical) data from the Preceptor Table to have arisen out of the same population? If so, you may continue. If not, your attempt to estimate your QoI ends now.
 
-The Preceptor Table always begins with a restatement of the definition: "A Preceptor Table is smallest possible table with rows and columns such that, if there is no missing data, our question is easy to answer."
+
+### Preceptor Table
+
+> A Preceptor Table is smallest possible table with rows and columns such that, if there is no missing data, our question is easy to answer.
+
+**Predictive Models and Causal Models** are different because predictive models have only one outcome column. Causal models have more than one (potential) outcome column because we need more than one potential outcome in order to estimate a *causal effect*. The first step in a data science problem is to determine if your QoI requires a causal or a predictive model.
+
+**Units** are determined by the original question, which also determines the QoI. They are the **rows**, both in the *Preceptor Table* and in the data. 
+
+**Variables** is the general term for the **columns** in both the Preceptor Table and the data. In fact, the term is even more general since it may refer to data vectors which we would like to have in order to answer the question but which are, sadly, not available in the data. The columns in the data are a subset of all the variables in which we might be interested.
+
+**The outcome** is the most important variable. It is determined by the question/QoI. By definition, it must be present in both the data and the Preceptor Table. Different problems might be answered with the same data set, with different variables playing the role of the outcome in each case.
+
+**Covariates** is the general term for all the variables which are not the **outcome**. As with **variables**, there are three different contexts in which we might use the term covariates. First, covariates are all the variables which might have some connection with our outcome, even if they are not included in the data. Second, covariates are all the variables in the data other than the outcome.  Third, covariates can refer to just the subset of the variables in the data which we actually use in our model. The second usage is, obviously, a subset of the first, and the third usage is a subset of the second.
+
+
+**Units**, **outcomes** and **covariates** are important parts of every data science model. Causal, but not predictive, models also include at least one **treatment**, which is just a covariate which we can, at least in theory, manipulate. The QoI determines the units and outcomes for your model.
+
+
+
+**Potential Outcome** is the outcome for an individual under a specified treatment. A *potential outcome* is just a regular outcome in the case of a causal model. In a predictive model, we just have an outcome. It is just another variable, the one that, in the context of this problem, we are interested in explaining/modeling/predicting. In a casual model, on the other hand, there are at least two outcomes: the outcome which happens if the unit gets the treatment and the outcome which happens if that same unit gets the control. We refer to both of these outcomes as *potential outcomes*.
 
 To create the Preceptor Table, we answer a series of questions. (Don't ask these questions rhetorically. Just describe the answer. There is also no need to number them, although you should always use this order.)
+
+**Causal Effect** is the difference between two potential outcomes.
+
+[**Rubin Causal Model**](https://en.wikipedia.org/wiki/Rubin_causal_model) is an approach to the statistical analysis of cause and effect based on the framework of potential outcomes.
+
 
 * Is the question causal?  Look for verbs like "cause" or "affect" or "influence." Look for a question which implies a comparison, *for a single individual unit*, between two states of the world, one in which the unit receives treatment $X$ and one in which the unit gets treatment $Y$. Look for a discussion of something which we can *manipulate*. Remember the motto: *No causation without manipulation*. We look to see if the question seeks to compare two potential outcomes *within the same unit*, rather than the same outcome between two different units.
 
@@ -138,15 +131,15 @@ If none of this is present, use a predictive model. If all you need to know to a
 
 * What is the moment in time to which the question refers? Every question refers to a moment in time, even if that moment stretches a bit. The set of adults *today* is different from the set 10 years ago, or even yesterday. We need to *refine* the original question. Assume that we are referring to July 1, 2020 even though, in most cases, people are interested in *now*. We have changed the original question from: 
 
-"What proportion of people who make $100,000 are liberal?" 
+> *What proportion of people who make $100,000 are liberal?* 
 
 to
 
-"On July 1, 2020, what proportion of people who make $100,000 were liberal?"
+> *On July 1, 2020, what proportion of people who made $100,000 were liberal?*
 
 * What are the units? The question often makes this fairly clear, at least in terms of what each row corresponds to, whether it be individuals, classrooms, countries, or whatever. But, questions often fail to make clear the total number of the rows. Our example question above does not specify the relevant population. Is it about all the people in the world? All the adults? All the adults in the United States? The purpose of this paragraph is to *refine* the question, to make it more specific. Assume that we are interested in all the adults in Chicago. Our question now is:
 
-"On July 1, 2020, what proportion of the adults in Chicago who make $100,000 were liberal?"
+> *On July 1, 2020, what proportion of the adults in Chicago who made $100,000 were liberal?*
 
 This back-and-forth between the question and the analysis is a standard part of data science. We rarely answer the exact question we started with, especially because that question is never specific enough to answer without further qualifications. Furthermore, the data we have may not allow us to answer that question, but it may be enough to answer a related question. Is that good enough for the boss/client/colleague who asked the original question? Maybe? You won't know until you ask. 
 
@@ -183,13 +176,18 @@ tibble(ID = c("1", "2", "...", "10", "11", "...", "N"),
 
 If we have the Preceptor Table, with no missing data, then it is trivial to calculate the percentage of adults (who make more than $100,000) who are liberal.
 
-#### EDA
+### EDA
 
-There is always short section devoted to exploratory data analysis. You can never look at the data too much. Each EDA will include at least one textual look at the data, usually using `summary()`, but with `skim()`, `glimpse()`, `print()` and `slice_sample()` also available. It will also include at least one graphic, almost always with the outcome variable on the y-axis and one of the covariates on the x-axis. The data set will often include columns and rows which are irrelevant to the question. Those columns and rows are removed, creating a tibble which will be used in the Courage section. The name of that tibble will often be something convenient like `ch_7`.
+> You can never look at the data too much.
+
+There is always short section devoted to exploratory data analysis.  Each EDA will include at least one textual look at the data, usually using `summary()`, but with `skim()`, `glimpse()`, `print()` and `slice_sample()` also available. It will also include at least one graphic, almost always with the outcome variable on the y-axis and one of the covariates on the x-axis. The data set will often include columns and rows which are irrelevant to the question. Those columns and rows are removed, creating a tibble which will be used in the Courage section. The name of that tibble will often be something convenient like `ch_7`.
 
 It also makes sense to include some discussion about where this data comes from. What are the definitions of the variables? Who chose the sample? Where is the documentation? This sort of background sets the stage for examining validity.
 
-#### Validity
+### Validity
+
+
+**Validity** is the consistency, or lack thereof, in the columns of your data set and the corresponding columns in your Preceptor Table. In order to consider the two data sets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*, which is the first step in Justice.
 
 Validity discussions always have one (short) paragraph about each relevant variable (the outcome and any relevant covariates), with examples of why validity might *not* hold. Validity discussion finishes with a brief discussion along the lines of: "Despite these concerns, we will assume that validity does hold."
 
@@ -197,20 +195,23 @@ These section can be longer of course, depending on how many details you discuss
 
 We conclude the Wisdom section by summarizing how we hope to use the data we have to answer the question we started with. Example:
 
-> *Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020. In particular, what percentage of individuals who make more than $100,000 per year are liberal?*
+> Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020. In particular, what percentage of individuals who make more than $100,000 per year are liberal?
 
 Note how the specific question has morphed into a general examination of the "relationship" between income and political ideology. In order to answer any specific question, we always have to examine a more general relationship. We always have to build a model. We can then use this model to answer both the question we started with as well as other related questions.
 
 By thinking hard about the original question and the data, we have come up with a question which *may* be possible to answer with the data we have. Note that each Cardinal Virtue section finishes with a sentence or two summarizing what you have learned. Those sentences are combined at the end of the analysis. One of the key products of a data science project is a paragraph which summarizes the key conclusions.
 
-### Justice
-
-<!--  Just because Wisdom points us toward a Population Table with X rows does not mean we need to keep all X rows, especially if creating a model which covers all rows is hard/impossible. We can just simplify the claims we are making about the world by removing some rows. Getting rid of rows will usually necessitate an adjustment to the question we are trying to answer. Again, data science is an iterative process. -->
+## Justice
 
  > Justice concerns four topics: the Population Table, stability, representativeness, and unconfoundedness.
+ 
+ **Justice** is the second [Cardinal Virtue](https://en.wikipedia.org/wiki/Cardinal_virtues) in data science. Justice starts with the Population Table – the data we want to have, the data which we actually have, and all the other data from that same population. Each row of the Population Table is defined by a unique unit/time combination. We explore three key issues. First, does the relationship among the variables demonstrate *stability*, meaning is the model stable across different time periods? Second, are the rows associated with the data and, separately, the rows associated with the Preceptor Table, *representative* of all the units from the population? Third, for causal models only, we consider *unconfoundedness*. 
 
 
-#### Population Table
+### Population Table
+
+
+The **Population Table** includes a row for each unit/time combination in the underlying population from which both the Preceptor Table and the data are drawn. It can be constructed if the validity assumption is (mostly) true. It includes all the rows from the Preceptor Table. It also includes the rows from the data set. It usually has other rows as well, rows which represent unit/time combinations from other parts of the population.
 
 If validity holds, then we can create a Population Table. 
 
@@ -257,7 +258,9 @@ tibble(source = c("...", "Data", "Data", "...",
 * The "Covariates" are all the columns other than those already discussed. 
 
 
-#### Stability
+### Stability
+
+**Stability** means that the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn. 
 
 If the assumption of stability holds, then the relationships between the columns in the Population Table is the same *across time*. First, the relationship among columns from the same moment in time as the data is the same as the relationship among columns for the entire table. Second, the relationship among columns from the same moment in time as the Preceptor Table is the same as the relationship among columns for the entire table. 
 
@@ -269,7 +272,9 @@ Regardless of those concerns, we always conclude that, although the assumption o
 
 *The longer the time period covered by the Preceptor Table (and the data), the more suspect the assumption of stability becomes.* 
 
-#### Representativeness
+### Representativeness
+
+**Representativeness**, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows. Ideally, we would like both the Preceptor Table *and* our data to be random samples from the population. Sadly, this is almost never the case.
 
 As with all our assumptions, we always begin by restating the definition. **Representativeness**, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows from the same moment in time. The second is between our data and the other rows of equivalent vintage.
 
@@ -285,13 +290,17 @@ But, to continue the analysis, we always assume/pretend that the rows from both 
 
 *The more expansive your Preceptor Table, the more important the assumption of representativeness becomes.*
 
-#### Unconfoundedness
+### Unconfoundedness
+
+**Unconfoundedness** means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. This assumption is only relevant for causal models. We describe a model as "confounded" if this is not true. The easiest way to ensure unconfoundedness is to assign treatment randomly.
 
 If the model is predictive, then unconfoundedness is not a concern. Just mention that fact in a sentence at the end of the section on representativeness. But, if the model is causal, then we need a section devoted to this topic.
 
 As always, start by restating the definition, something along the lines of "Unconfoundedness means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. A model is *confounded* if this is not true."
 
 If treatment assignment was random, then unconfoundedness is guaranteed, although experienced researchers often worry about the exact process involved in such "random" assignment. If, however, treatment assignment was not random, then there will always be a concern that it is correlated with potential outcomes. Discuss at least two scenarios in which this might be a concern. But then, as usual, conclude that, although there might be some issues with confoundedness, they are probably small enough to not worry about.
+
+ Just because Wisdom points us toward a Population Table with X rows does not mean we need to keep all X rows, especially if creating a model which covers all rows is hard/impossible. We can just simplify the claims we are making about the world by removing some rows. Getting rid of rows will usually necessitate an adjustment to the question we are trying to answer. Again, data science is an iterative process.
 
 The Justice section concludes with a sentence or two about how, despite any problems with the core assumptions of stability, representativeness and unconfoundedness, we can still proceed to next steps because the assumptions hold enough.
 
@@ -309,32 +318,36 @@ There is no need to use technical terms like "stability." However, most readers 
 
 > *Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020. In particular, what percentage of individuals who make more than $100,000 per year are liberal? The relationship between income and ideology may have changed over that eight year period.*
 
-### Courage
+## Courage
 
-> Justice gave us the Population Table. Courage selects the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have. We explore different models. We need to decide which variables to include and to estimate the values of unknown parameters. We check our models for consistency with the data we have. We avoid hypothesis tests. We select one model.
+> Courage begins with the exploration and testing of different models. It concludes with the creation of a Data Generating Mechanism.
 
-The structure of the Courage section begins with a version of this opening paragraph, followed by a discussion of the functional form we will be using. This is usually straight-forward because it follows directly from the type of the outcome variable: continuous implies a linear model and binary implies logistic. We provide the mathematical formula for this model, using `y` and `x` as variables. The rest of the discussion is broken up into three sections: "Models," "Data Generating Mechanism," and "Tests."
+**Courage** is the third [Cardinal Virtue](https://en.wikipedia.org/wiki/Cardinal_virtues) in data science. Justice gives us the Population Table. Courage creates the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have. We explore different models. We need to decide which variables to include and to estimate the values of unknown parameters. We check our models for consistency with the data we have. We avoid hypothesis tests. We select one model, the data generating mechanism.
 
-#### Models
+Courage begins by a discussion of the functional form we will be using. This is usually straight-forward because it follows directly from the type of the outcome variable: continuous implies a linear model and binary implies logistic. We provide the mathematical formula for this model, using `y` and `x` as variables. The rest of the discussion is broken up into three sections: "Models," "Tests," and "Data Generating Mechanism."
+
+### Models
 
 When exploring different models, we need to decide which variables to include and to estimate the values of unknown parameters. We estimate the models and then print out the model results. We do not give another version of the math, or use `tbl_regression()` yet. The goal is to explore and interpret different models.
 
-If a parameter's estimated value is more than 2 or 3 MAD_SD's away from zero, we generally keep that parameter (and its associated variable) in the model. This is, probably, a variable which "matters." The main exception to this rule is a parameter whose value is so close to zero that changes in its associated variable, within the general range of that variable, can't change the value of the outcome by much.
+If a parameter's estimated value is more than 2 or 3 standard errors away from zero, we generally keep that parameter (and its associated variable) in the model. This is, probably, a variable which "matters." The main exception to this rule is a parameter whose value is so close to zero that changes in its associated variable, within the general range of that variable, can't change the value of the outcome by much.
 
 Depending on the chapter, we will use different tools to choose among the different possible models.
 
-#### Tests
+### Tests
 
 We check our models for consistency with the data we have using posterior predictive testing. We avoid hypothesis tests.
 
-#### Data Generating Mechanism
+### Data Generating Mechanism
 
-We create a final model, the data generating mechanism. We provide the math for this model, using variable names instead of `y` and `x` as we did at the start of the chapter. We present the final parameter estimates nicely, using `tbl_regression()`. 
+**Data Generating Mechanism** (DGM) is also called the data generating model or the [data generating process](https://en.wikipedia.org/wiki/Data_generating_process). The *true* DGM is the reality of the world, the physical process which actually generates the data which we observe. The *estimated* DGM is the mathematical formula we create which models the true DGM, which we can never know. In Temperance, we will use the estimated DGM to draw inferences about our Quantities of Interest.
+
+We create a final model, the data generating mechanism. We provide the math for this model, using variable names instead of `y` and `x` as we did at the start of the chapter. We present the final parameter estimates nicely, using the **gtsummary** package. 
 
 The model you have made by the end of Courage is almost always too complex to answer the simple question you started with, because the question rarely specifies the values of all the covariates which are included in the model. But any covariates or treatments which are part of the initial question(s) must be included in the model, otherwise we can't answer any questions about them at all.
 
 
-The DGM  section ends with a clear statement in English, in its own paragraph, describing the model. That is, what are the two sentences which a student would say at a presentation describing the model. First sentence specifies the model, including making clear the units, outcome and key covariates. (No need to use the terms "units," "outcomes," and so on.) The second sentence tells us something about the model, generally the relationship between one of the covariates and the outcome variable. In general, there is no discussion af specific numbers or their uncertainty. First, who cares? Parameter estimates are boring and irrelevant. Second, the Temperance section is where we answer the original question. Example:
+The DGM  section ends with a clear statement in English, in its own paragraph, describing the model. That is, what are the two sentences which a student would say at a presentation describing the model. The first sentence specifies the model, including making clear the units, outcome and key covariates. (No need to use the terms "units," "outcomes," and so on.) The second sentence tells us something about the model, generally the relationship between one of the covariates and the outcome variable. In general, there is no discussion af specific numbers or their uncertainty. First, who cares? Parameter estimates are boring and irrelevant. Second, the Temperance section is where we answer the original question. Example:
 
 > *We modeled `liberal`, a binary TRUE/FALSE variable, as a logistic function of income. Individuals with higher income were more likely to be liberal.* 
 
@@ -344,10 +357,11 @@ Update our concluding paragraph with this addition:
 
 Feel free to use "I" instead of "We" if the project is solo.
 
+## Temperance
 
-### Temperance
-
-> Courage produced the data generating mechanism. Temperance guides us in the use of the DGM --- or the "model" ---  we have created to answer the questions with which we began. We create posteriors for the quantities of interest. We should be modest in the claims we make. The posteriors we create are never the “truth.” The assumptions we made to create the model are never perfect. Yet decisions made with flawed posteriors are almost always better than decisions made without them.
+> Temperance uses the Data Generating Mechanism to answer the question with which we began. Humility reminds us that this answer is always a lie.
+ 
+**Temperance** is the fourth [Cardinal Virtue](https://en.wikipedia.org/wiki/Cardinal_virtues) in data science. Courage gave us the data generating mechanism. Temperance guides us in the use of the DGM --- or the "model" ---  we have created to answer the questions with which we began. We create posteriors for the quantities of interest. We should be modest in the claims we make. The posteriors we create are never the “truth.” The assumptions we made to create the model are never perfect. Yet decisions made with flawed posteriors are almost always better than decisions made without them.
 
 The two sub-sections of Temperance are: Questions and Answers, and Humility.
 
@@ -355,7 +369,7 @@ It is important to monitor our language. We do not believe that changes in `elec
 
 
 
-#### Questions and Answers
+### Questions and Answers
 
 We go back to the question(s) with which we started the journey. We discuss how that question has evolved, in a back-and-forth process by which we try to ensure that the data we have and the question we ask are close enough to make the process plausible.
 
@@ -391,11 +405,13 @@ Depending on the context, you might have more than one Quantity of Interest to d
 
 The final result of data science project is a paragraph like this one. We begin with a question and some data. We produce a paragraph. 
 
-Of course, real data science projects never involve a single question. Instead, the starting question leads you to create a DGM which can answer it but which also can answer lots and lots of other questions. Which is cool. In fact, it is often possible to create a graphic which answers lots of questions at once. That is ideal. (The Michigan postcard example is great.) In fact, a really good data science project always ends with a cool graphic which answers lots of questions and a paragraph like the one above which picks out one answer to highlight.
+Of course, real data science projects never involve a single question. Instead, the starting question leads you to create a DGM which can answer it but which also can answer lots and lots of other questions. Which is cool. In fact, it is often possible to create a graphic which answers lots of questions at once. That is ideal. (The Michigan postcard example is great.) 
+
+A really good data science project always ends with a cool graphic which answers lots of questions and a paragraph like the one above which picks out one answer to highlight.
 
 The Questions and Answers section ends with that final paragraph.
 
-#### Humility
+### Humility
 
 Temperance guides us in the use of the DGM to answer the questions with which we began.
 
