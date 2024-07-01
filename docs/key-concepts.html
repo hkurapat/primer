@@ -344,24 +344,24 @@ window.Quarto = {
 
 ### Humility
 
---><p>In the spirit of transparency, here are the guidelines which we provide to colleagues updating chapters in the <em>Primer</em> and the associated tutorials in the <a href="https://ppbds.github.io/primer.tutorials/"><strong>primer.tutorials</strong></a> package. This is how we think data science ought to be taught. It is also, perhaps unsurprisingly, how we think data science ought to be done, at least at this introductory level. Key concepts are bolded when they are first used.</p>
+--><p>In the spirit of transparency, here are the guidelines which we provide to colleagues updating chapters in the <em>Primer</em> and the associated tutorials in the <a href="https://ppbds.github.io/primer.tutorials/"><strong>primer.tutorials</strong></a> package. This is how we think data science ought to be taught. It is also, perhaps unsurprisingly, how we think data science ought to be done, at least at this introductory level. Key concepts are bolded when they are first introduced.</p>
 <section id="question" class="level2"><h2 class="anchored" data-anchor-id="question">Question</h2>
-<p>Start with the question. These generally come in two types. First is a specific unknown number. Example:</p>
-<blockquote class="blockquote">
-<p><em>What proportion of people who make $100,000 are liberal?</em></p>
-</blockquote>
-<p>Second is a more general query about the connection between variables. Example:</p>
+<p>Start with the question. These generally start very broadly. Example:</p>
 <blockquote class="blockquote">
 <p><em>What is the relationship between income and political ideology?</em></p>
 </blockquote>
-<p>The first type of question is a subset of the second. We might estimate dozens of specific numbers when exploring the connection between income and ideology.</p>
+<p>If you are working in a specific fields, then the questions you and your colleagues/competitors examine will be very similar. In baseball, you will all care about the relationship between minor league statistics and major league performance. In political campaigns, you will all want to know what factors influence both donations and voting.</p>
+<p>In order to make progress, you will then drill down to a more specific question, one with a numerical answer. Example:</p>
+<blockquote class="blockquote">
+<p><em>What proportion of people who make $100,000 are liberal?</em></p>
+</blockquote>
+<p>Specifics help you to fix ideas as you start to work on a project. Just because you start looking for this number does not mean that we can’t consider other questions. We might estimate dozens of specific numbers when exploring the connection between income and ideology.</p>
 <p>Your goal is to provide an answer to the question, along with your uncertainty about that answer. The most common form for the answer is a posterior probability distribution. This PPD is either the answer itself, or the tool we use to answer the question. The answer to the second type of question will generally involves many posterior probability distributions.</p>
-<p>The question should be indented and italicized. As we progress, questions become less precise and more general. We don’t know what to focus on when we start. We narrow as we proceed.</p>
-<p>Of course, every data science problem does not start with a question. It actually starts with a <em>decision</em>. The world confronts us. Make decisions we must. Yet, in this introductory textbook, starting with a decision to make is too hard. So, we simplify and start with a question. But we should always at least mention the sort of decision which the answer to the question might help us to make.</p>
+<p>The question should be indented and italicized.</p>
+<p>Of course, every data science problem does not start with a question. It actually starts with a <em>decision</em>. The world confronts us. Make decisions we must. Yet, in this introductory textbook, starting with a decision to make is too hard. So, we simplify and start with a question. But we should always at least mention the sort of decision which the answer to the question might help us to make. In baseball, we use statistics to help us decide which players to draft. In politics, we use statistics to craft political ads.</p>
 <p>Note that the sophistication of these discussions increases as we go further into the book. Your discussion should be more sophisticated than the one found in the previous chapter and less sophisticated than what comes later.</p>
-<p>The more sophisticated the situation, the more likely we are to start with broader instructions.</p>
 <p>Each chapter features all the same sections and sub-sections as we use below. That is, there are three sub-sections to Wisdom, four sub-sections for Justice, three for Courage and two for Temperance.</p>
-<p><strong>Quantity of Interest</strong> is the number which you want to estimate. It is the answer to the question with which you begin. You will almost always calculate a posterior probability distribution for your Quantity of Interest since, in the real world, you will never know your QoI precisely. More sophisticated problems involve more than one QoI.</p>
+<p><strong>Quantity of Interest</strong> is the number which you want to estimate. It is the answer to a specific question. You will almost always calculate a posterior probability distribution for your Quantity of Interest since, in the real world, you will never know your QoI precisely. More sophisticated problems involve more than one QoI.</p>
 <p>Once we have our question, we can start with the Cardinal Virtues. Each section begins with a one sentence summary about the component steps of the relevant virtue. These will, obviously, be highly similar from chapter to chapter. But that is OK! We want to reinforce the steps in the path over and over again.</p>
 <p>No battle plan survives first contact with the enemy intact. The same applies to questions and the data we use to answer them. Our questions evolve as our analysis continues. Ultimately, we can only answer some questions with the data we have. Those questions may be close to the ones with which we started, but they will rarely be identical.</p>
 </section><section id="wisdom" class="level2"><h2 class="anchored" data-anchor-id="wisdom">Wisdom</h2>
@@ -414,23 +414,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="siqycugaot" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#siqycugaot table {
+<div id="ftltydwcaq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ftltydwcaq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#siqycugaot thead, #siqycugaot tbody, #siqycugaot tfoot, #siqycugaot tr, #siqycugaot td, #siqycugaot th {
+#ftltydwcaq thead, #ftltydwcaq tbody, #ftltydwcaq tfoot, #ftltydwcaq tr, #ftltydwcaq td, #ftltydwcaq th {
   border-style: none;
 }
 
-#siqycugaot p {
+#ftltydwcaq p {
   margin: 0;
   padding: 0;
 }
 
-#siqycugaot .gt_table {
+#ftltydwcaq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -456,12 +456,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#siqycugaot .gt_caption {
+#ftltydwcaq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#siqycugaot .gt_title {
+#ftltydwcaq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -473,7 +473,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#siqycugaot .gt_subtitle {
+#ftltydwcaq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -485,7 +485,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#siqycugaot .gt_heading {
+#ftltydwcaq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -497,13 +497,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#siqycugaot .gt_bottom_border {
+#ftltydwcaq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#siqycugaot .gt_col_headings {
+#ftltydwcaq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -518,7 +518,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#siqycugaot .gt_col_heading {
+#ftltydwcaq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -538,7 +538,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#siqycugaot .gt_column_spanner_outer {
+#ftltydwcaq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -550,15 +550,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#siqycugaot .gt_column_spanner_outer:first-child {
+#ftltydwcaq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#siqycugaot .gt_column_spanner_outer:last-child {
+#ftltydwcaq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#siqycugaot .gt_column_spanner {
+#ftltydwcaq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -570,11 +570,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#siqycugaot .gt_spanner_row {
+#ftltydwcaq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#siqycugaot .gt_group_heading {
+#ftltydwcaq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -600,7 +600,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#siqycugaot .gt_empty_group_heading {
+#ftltydwcaq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -615,15 +615,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#siqycugaot .gt_from_md > :first-child {
+#ftltydwcaq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#siqycugaot .gt_from_md > :last-child {
+#ftltydwcaq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#siqycugaot .gt_row {
+#ftltydwcaq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -642,7 +642,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#siqycugaot .gt_stub {
+#ftltydwcaq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -655,7 +655,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#siqycugaot .gt_stub_row_group {
+#ftltydwcaq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -669,15 +669,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#siqycugaot .gt_row_group_first td {
+#ftltydwcaq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#siqycugaot .gt_row_group_first th {
+#ftltydwcaq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#siqycugaot .gt_summary_row {
+#ftltydwcaq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -687,16 +687,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#siqycugaot .gt_first_summary_row {
+#ftltydwcaq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#siqycugaot .gt_first_summary_row.thick {
+#ftltydwcaq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#siqycugaot .gt_last_summary_row {
+#ftltydwcaq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -706,7 +706,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#siqycugaot .gt_grand_summary_row {
+#ftltydwcaq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -716,7 +716,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#siqycugaot .gt_first_grand_summary_row {
+#ftltydwcaq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -726,7 +726,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#siqycugaot .gt_last_grand_summary_row_top {
+#ftltydwcaq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -736,11 +736,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#siqycugaot .gt_striped {
+#ftltydwcaq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#siqycugaot .gt_table_body {
+#ftltydwcaq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -749,7 +749,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#siqycugaot .gt_footnotes {
+#ftltydwcaq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -763,7 +763,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#siqycugaot .gt_footnote {
+#ftltydwcaq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -772,7 +772,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#siqycugaot .gt_sourcenotes {
+#ftltydwcaq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -786,7 +786,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#siqycugaot .gt_sourcenote {
+#ftltydwcaq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -794,63 +794,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#siqycugaot .gt_left {
+#ftltydwcaq .gt_left {
   text-align: left;
 }
 
-#siqycugaot .gt_center {
+#ftltydwcaq .gt_center {
   text-align: center;
 }
 
-#siqycugaot .gt_right {
+#ftltydwcaq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#siqycugaot .gt_font_normal {
+#ftltydwcaq .gt_font_normal {
   font-weight: normal;
 }
 
-#siqycugaot .gt_font_bold {
+#ftltydwcaq .gt_font_bold {
   font-weight: bold;
 }
 
-#siqycugaot .gt_font_italic {
+#ftltydwcaq .gt_font_italic {
   font-style: italic;
 }
 
-#siqycugaot .gt_super {
+#ftltydwcaq .gt_super {
   font-size: 65%;
 }
 
-#siqycugaot .gt_footnote_marks {
+#ftltydwcaq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#siqycugaot .gt_asterisk {
+#ftltydwcaq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#siqycugaot .gt_indent_1 {
+#ftltydwcaq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#siqycugaot .gt_indent_2 {
+#ftltydwcaq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#siqycugaot .gt_indent_3 {
+#ftltydwcaq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#siqycugaot .gt_indent_4 {
+#ftltydwcaq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#siqycugaot .gt_indent_5 {
+#ftltydwcaq .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -944,23 +944,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="tmsdauxpyl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tmsdauxpyl table {
+<div id="rdorxawhhn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rdorxawhhn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tmsdauxpyl thead, #tmsdauxpyl tbody, #tmsdauxpyl tfoot, #tmsdauxpyl tr, #tmsdauxpyl td, #tmsdauxpyl th {
+#rdorxawhhn thead, #rdorxawhhn tbody, #rdorxawhhn tfoot, #rdorxawhhn tr, #rdorxawhhn td, #rdorxawhhn th {
   border-style: none;
 }
 
-#tmsdauxpyl p {
+#rdorxawhhn p {
   margin: 0;
   padding: 0;
 }
 
-#tmsdauxpyl .gt_table {
+#rdorxawhhn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -986,12 +986,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#tmsdauxpyl .gt_caption {
+#rdorxawhhn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tmsdauxpyl .gt_title {
+#rdorxawhhn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1003,7 +1003,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#tmsdauxpyl .gt_subtitle {
+#rdorxawhhn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1015,7 +1015,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#tmsdauxpyl .gt_heading {
+#rdorxawhhn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1027,13 +1027,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tmsdauxpyl .gt_bottom_border {
+#rdorxawhhn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tmsdauxpyl .gt_col_headings {
+#rdorxawhhn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1048,7 +1048,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tmsdauxpyl .gt_col_heading {
+#rdorxawhhn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1068,7 +1068,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#tmsdauxpyl .gt_column_spanner_outer {
+#rdorxawhhn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1080,15 +1080,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#tmsdauxpyl .gt_column_spanner_outer:first-child {
+#rdorxawhhn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tmsdauxpyl .gt_column_spanner_outer:last-child {
+#rdorxawhhn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tmsdauxpyl .gt_column_spanner {
+#rdorxawhhn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1100,11 +1100,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#tmsdauxpyl .gt_spanner_row {
+#rdorxawhhn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tmsdauxpyl .gt_group_heading {
+#rdorxawhhn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1130,7 +1130,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#tmsdauxpyl .gt_empty_group_heading {
+#rdorxawhhn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1145,15 +1145,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#tmsdauxpyl .gt_from_md > :first-child {
+#rdorxawhhn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tmsdauxpyl .gt_from_md > :last-child {
+#rdorxawhhn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tmsdauxpyl .gt_row {
+#rdorxawhhn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1172,7 +1172,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#tmsdauxpyl .gt_stub {
+#rdorxawhhn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1185,7 +1185,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tmsdauxpyl .gt_stub_row_group {
+#rdorxawhhn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1199,15 +1199,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#tmsdauxpyl .gt_row_group_first td {
+#rdorxawhhn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tmsdauxpyl .gt_row_group_first th {
+#rdorxawhhn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tmsdauxpyl .gt_summary_row {
+#rdorxawhhn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1217,16 +1217,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tmsdauxpyl .gt_first_summary_row {
+#rdorxawhhn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tmsdauxpyl .gt_first_summary_row.thick {
+#rdorxawhhn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tmsdauxpyl .gt_last_summary_row {
+#rdorxawhhn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1236,7 +1236,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tmsdauxpyl .gt_grand_summary_row {
+#rdorxawhhn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1246,7 +1246,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tmsdauxpyl .gt_first_grand_summary_row {
+#rdorxawhhn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1256,7 +1256,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#tmsdauxpyl .gt_last_grand_summary_row_top {
+#rdorxawhhn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1266,11 +1266,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tmsdauxpyl .gt_striped {
+#rdorxawhhn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tmsdauxpyl .gt_table_body {
+#rdorxawhhn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1279,7 +1279,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#tmsdauxpyl .gt_footnotes {
+#rdorxawhhn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1293,7 +1293,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tmsdauxpyl .gt_footnote {
+#rdorxawhhn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1302,7 +1302,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tmsdauxpyl .gt_sourcenotes {
+#rdorxawhhn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1316,7 +1316,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#tmsdauxpyl .gt_sourcenote {
+#rdorxawhhn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1324,63 +1324,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#tmsdauxpyl .gt_left {
+#rdorxawhhn .gt_left {
   text-align: left;
 }
 
-#tmsdauxpyl .gt_center {
+#rdorxawhhn .gt_center {
   text-align: center;
 }
 
-#tmsdauxpyl .gt_right {
+#rdorxawhhn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tmsdauxpyl .gt_font_normal {
+#rdorxawhhn .gt_font_normal {
   font-weight: normal;
 }
 
-#tmsdauxpyl .gt_font_bold {
+#rdorxawhhn .gt_font_bold {
   font-weight: bold;
 }
 
-#tmsdauxpyl .gt_font_italic {
+#rdorxawhhn .gt_font_italic {
   font-style: italic;
 }
 
-#tmsdauxpyl .gt_super {
+#rdorxawhhn .gt_super {
   font-size: 65%;
 }
 
-#tmsdauxpyl .gt_footnote_marks {
+#rdorxawhhn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tmsdauxpyl .gt_asterisk {
+#rdorxawhhn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tmsdauxpyl .gt_indent_1 {
+#rdorxawhhn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tmsdauxpyl .gt_indent_2 {
+#rdorxawhhn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tmsdauxpyl .gt_indent_3 {
+#rdorxawhhn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tmsdauxpyl .gt_indent_4 {
+#rdorxawhhn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tmsdauxpyl .gt_indent_5 {
+#rdorxawhhn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
