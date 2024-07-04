@@ -401,9 +401,11 @@ This is correct, as far as it goes, but we have no idea if 1.5 is a "big" or "sm
 
 Depending on the context, you might have more than one Quantity of Interest to discuss. But there must be at least one. You are now ready to provide the entire concluding paragraph.
 
-> *Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020. In particular, what percentage of individuals who make more than $100,000 per year are liberal? The relationship between income and ideology may have changed over that eight year period. We modeled `liberal`, a binary TRUE/FALSE variable, as a logistic function of income. Individuals with higher income were more likely to be liberal. Of the people making $100,000 or more per year, about 55% are liberal, although the true number could be as low as 53% or as high as 57%.*
+> *Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020.  The relationship between income and ideology may have changed over that eight year period. We modeled `liberal`, a binary TRUE/FALSE variable, as a logistic function of income. Individuals with higher income were more likely to be liberal. Of the people making $100,000 or more per year, about 55% are liberal, although the true number could be as low as 53% or as high as 57%.*
 
-The final result of data science project is a paragraph like this one. We begin with a question and some data. We produce a paragraph. 
+Note that we have deleted the rhetorical question --- "In particular, what percentage of individuals who make more than $100,000 per year are liberal?" --- from the start of the paragraph. It is no longer necessary. 
+
+The final result of data science project is a paragraph like this one. Data science begins with a question and some data. It ends with a paragraph and, ideally, some graphics. 
 
 Of course, real data science projects never involve a single question. Instead, the starting question leads you to create a DGM which can answer it but which also can answer lots and lots of other questions. Which is cool. In fact, it is often possible to create a graphic which answers lots of questions at once. That is ideal. (The Michigan postcard example is great.) 
 
