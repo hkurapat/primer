@@ -272,7 +272,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./key-concepts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Key Concepts</span></a>
+ <span class="menu-text">Cardinal Virtues</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -351,7 +351,7 @@ window.Quarto = {
   
 
 
-</header><!-- drop_na() the data at the start. Remove #| warning from graphs. --><!-- There most be a cleaner way to create these plots with the fitted lines. Also, add a similar plot to the sex-only model. --><!-- Are we handling election_age correctly. Do we center or it or not? If not, then how can our news use age as 10? --><p>Let’s learn about <em>interactions</em>. The effect of a treatment relative to a control is almost never uniform. The effect might be bigger in women than in men, smaller in the rich relative to the poor. The technical term for such effects is “heterogeneous,” which is just Ph.D.’ese for “different.” With enough data, all effects are heterogeneous. Causal effects, at least in the social science, always vary across units. To model this reality, we rely on interactions, on allowing the effect size to differ. The same applies for predictive models. The relationship between our outcome variable <span class="math inline">\(y\)</span> and a predictor variable <span class="math inline">\(x\)</span> is rarely constant. The relationship varies based on the values of other variables. To take account of interactions, we need models with at least 5 parameters.</p>
+</header><!-- We should go back to primer.data and change governors so that it includes all the data they have in the original. Then, we can clean it up here and restrict to post 1945. --><!-- drop_na() the data at the start. Remove #| warning from graphs. --><!-- There most be a cleaner way to create these plots with the fitted lines. Also, add a similar plot to the sex-only model. --><!-- Are we handling election_age correctly. Do we center or it or not? If not, then how can our news use age as 10? --><p>Let’s learn about <em>interactions</em>. The effect of a treatment relative to a control is almost never uniform. The effect might be bigger in women than in men, smaller in the rich relative to the poor. The technical term for such effects is “heterogeneous,” which is just Ph.D.’ese for “different.” With enough data, all effects are heterogeneous. Causal effects, at least in the social science, always vary across units. To model this reality, we rely on interactions, on allowing the effect size to differ. The same applies for predictive models. The relationship between our outcome variable <span class="math inline">\(y\)</span> and a predictor variable <span class="math inline">\(x\)</span> is rarely constant. The relationship varies based on the values of other variables. To take account of interactions, we need models with at least 5 parameters.</p>
 <p>Packages:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">primer.data</span><span class="op">)</span></span>
@@ -374,19 +374,23 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p><em>Wisdom</em> is the first Cardinal Virtue. It requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of “validity,” as to whether or not we can (reasonably!) assume that the two come from the same population.</p>
+<blockquote class="blockquote">
+<p>Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of validity, as to whether or not we can (reasonably!) assume that the two come from the same population.</p>
+</blockquote>
 <p>Consider the following question:</p>
 <p><em>How long do political candidates live after the election?</em></p>
 <section id="preceptor-table" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="preceptor-table">
 <span class="header-section-number">9.1.1</span> Preceptor Table</h3>
-<p>A <em>Preceptor Table</em> is the smallest possible table of data with rows and columns such that, if there is no missing data, then it is easy to estimate the quantities of interest.</p>
+<blockquote class="blockquote">
+<p>A Preceptor Table is smallest possible table with rows and columns such that, if there is no missing data, our question is easy to answer.</p>
+</blockquote>
 <p>To create our Preceptor Table, we examine:</p>
 <p><em>Causal or predictive model</em>: We have a <strong>predictive model</strong> since there is just one outcome: a candidate’s longevity.</p>
-<p><em>Units</em>: Our units for this scenario would be candidates because the questions are about the life expectancy of unique candidates.</p>
+<p><em>Units</em>: Our units for this scenario would be candidates because the questions are about the life expectancy of unique individuals.</p>
 <p><em>Outcome</em>: The number of years a candidate lives after the election.</p>
 <p><em>Treatment</em>: Since this is a predictive model there is no treatment <em>per se</em>. Any variable which one might consider a treatment is just another covariate in this context.</p>
 <p><em>Covariates</em>: We know a variety of information about each candidate.</p>
-<p><em>Moment in Time</em>: It is unclear to what moment in time the question refers. Is it interested in all candidates who are running in next election? All those running in the future? Any candidate who has or will run between 2000 and 2050?</p>
+<p><em>Moment in Time</em>: It is unclear to what moment in time the question refers. Is it interested in all candidates who are running in the next election? All those running in the future? Let’s choose to focus in candidate longevity in this century.</p>
 <blockquote class="blockquote">
 <p><em>How many years would we expect political candidates in election years after 2000 to live?</em></p>
 </blockquote>
@@ -394,23 +398,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="zbkbsfwdow" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zbkbsfwdow table {
+<div id="ndvezloyml" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ndvezloyml table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zbkbsfwdow thead, #zbkbsfwdow tbody, #zbkbsfwdow tfoot, #zbkbsfwdow tr, #zbkbsfwdow td, #zbkbsfwdow th {
+#ndvezloyml thead, #ndvezloyml tbody, #ndvezloyml tfoot, #ndvezloyml tr, #ndvezloyml td, #ndvezloyml th {
   border-style: none;
 }
 
-#zbkbsfwdow p {
+#ndvezloyml p {
   margin: 0;
   padding: 0;
 }
 
-#zbkbsfwdow .gt_table {
+#ndvezloyml .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -436,12 +440,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#zbkbsfwdow .gt_caption {
+#ndvezloyml .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zbkbsfwdow .gt_title {
+#ndvezloyml .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -453,7 +457,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#zbkbsfwdow .gt_subtitle {
+#ndvezloyml .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -465,7 +469,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#zbkbsfwdow .gt_heading {
+#ndvezloyml .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -477,13 +481,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zbkbsfwdow .gt_bottom_border {
+#ndvezloyml .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zbkbsfwdow .gt_col_headings {
+#ndvezloyml .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -498,7 +502,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zbkbsfwdow .gt_col_heading {
+#ndvezloyml .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -518,7 +522,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#zbkbsfwdow .gt_column_spanner_outer {
+#ndvezloyml .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -530,15 +534,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#zbkbsfwdow .gt_column_spanner_outer:first-child {
+#ndvezloyml .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zbkbsfwdow .gt_column_spanner_outer:last-child {
+#ndvezloyml .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zbkbsfwdow .gt_column_spanner {
+#ndvezloyml .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -550,11 +554,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#zbkbsfwdow .gt_spanner_row {
+#ndvezloyml .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zbkbsfwdow .gt_group_heading {
+#ndvezloyml .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -580,7 +584,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#zbkbsfwdow .gt_empty_group_heading {
+#ndvezloyml .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -595,15 +599,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#zbkbsfwdow .gt_from_md > :first-child {
+#ndvezloyml .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zbkbsfwdow .gt_from_md > :last-child {
+#ndvezloyml .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zbkbsfwdow .gt_row {
+#ndvezloyml .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -622,7 +626,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#zbkbsfwdow .gt_stub {
+#ndvezloyml .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -635,7 +639,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zbkbsfwdow .gt_stub_row_group {
+#ndvezloyml .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -649,15 +653,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#zbkbsfwdow .gt_row_group_first td {
+#ndvezloyml .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zbkbsfwdow .gt_row_group_first th {
+#ndvezloyml .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zbkbsfwdow .gt_summary_row {
+#ndvezloyml .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -667,16 +671,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zbkbsfwdow .gt_first_summary_row {
+#ndvezloyml .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zbkbsfwdow .gt_first_summary_row.thick {
+#ndvezloyml .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zbkbsfwdow .gt_last_summary_row {
+#ndvezloyml .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -686,7 +690,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zbkbsfwdow .gt_grand_summary_row {
+#ndvezloyml .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -696,7 +700,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zbkbsfwdow .gt_first_grand_summary_row {
+#ndvezloyml .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -706,7 +710,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#zbkbsfwdow .gt_last_grand_summary_row_top {
+#ndvezloyml .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -716,11 +720,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zbkbsfwdow .gt_striped {
+#ndvezloyml .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zbkbsfwdow .gt_table_body {
+#ndvezloyml .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -729,7 +733,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#zbkbsfwdow .gt_footnotes {
+#ndvezloyml .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -743,7 +747,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zbkbsfwdow .gt_footnote {
+#ndvezloyml .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -752,7 +756,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zbkbsfwdow .gt_sourcenotes {
+#ndvezloyml .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -766,7 +770,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#zbkbsfwdow .gt_sourcenote {
+#ndvezloyml .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -774,63 +778,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#zbkbsfwdow .gt_left {
+#ndvezloyml .gt_left {
   text-align: left;
 }
 
-#zbkbsfwdow .gt_center {
+#ndvezloyml .gt_center {
   text-align: center;
 }
 
-#zbkbsfwdow .gt_right {
+#ndvezloyml .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zbkbsfwdow .gt_font_normal {
+#ndvezloyml .gt_font_normal {
   font-weight: normal;
 }
 
-#zbkbsfwdow .gt_font_bold {
+#ndvezloyml .gt_font_bold {
   font-weight: bold;
 }
 
-#zbkbsfwdow .gt_font_italic {
+#ndvezloyml .gt_font_italic {
   font-style: italic;
 }
 
-#zbkbsfwdow .gt_super {
+#ndvezloyml .gt_super {
   font-size: 65%;
 }
 
-#zbkbsfwdow .gt_footnote_marks {
+#ndvezloyml .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zbkbsfwdow .gt_asterisk {
+#ndvezloyml .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zbkbsfwdow .gt_indent_1 {
+#ndvezloyml .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zbkbsfwdow .gt_indent_2 {
+#ndvezloyml .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zbkbsfwdow .gt_indent_3 {
+#ndvezloyml .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zbkbsfwdow .gt_indent_4 {
+#ndvezloyml .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zbkbsfwdow .gt_indent_5 {
+#ndvezloyml .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -915,6 +919,11 @@ window.Quarto = {
 </div>
 </div>
 <p>With the Preceptor Table, we can calculate anything related to longevity because we know how many years each candidate lived after an election. But, in reality, many of these candidates are still alive, so we don’t know how long they will live.</p>
+<p>Note also that the Preceptor Table stops with elections in 2050. So, implicitly, we have changed our question to:</p>
+<blockquote class="blockquote">
+<p><em>How many years would we expect political candidates in election years between 2000 and 2050 to live?</em></p>
+</blockquote>
+<p>The question, the Preceptor Table and the data evolve together in an iterative process.</p>
 </section><section id="eda-of-governors" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="eda-of-governors">
 <span class="header-section-number">9.1.2</span> EDA of <code>governors</code>
 </h3>
@@ -940,7 +949,6 @@ $ death_age    &lt;dbl&gt; 79.11567, 80.66530, 63.31006, 59.88227, 79.11567, 87.
 $ lived_after  &lt;dbl&gt; 41.043121, 2.116359, 14.562628, 13.336071, 33.043121, 54.…</code></pre>
 </div>
 </div>
-<p>Recall that we use <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>, <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code>, <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code>, <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample()</a></code> to take a look at the data. We also aim to include at least one graphic (outcome variable on the y-axis and one of the covariates on the x-axis).</p>
 <p>There are 14 variables and 1,092 observations. In this Chapter, we will only be looking at the variables <code>last_name</code>, <code>year</code>, <code>state</code>, <code>sex</code>, <code>lived_after</code>, and <code>election_age</code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ch7_a</span> <span class="op">&lt;-</span> <span class="va">governors</span> <span class="op">|&gt;</span> </span>
@@ -1149,7 +1157,7 @@ $ lived_after  &lt;dbl&gt; 41.043121, 2.116359, 14.562628, 13.336071, 33.043121,
 </table>
 </div>
 </div>
-<p><code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> groups the variable together by type, and provides some analysis for each variable. We are also given histograms of the numeric data.</p>
+<p><code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> groups the variables together by type and provides some analysis for each variable. We are also given histograms of the numeric data.</p>
 <p>Looking at the histogram for <code>year</code>, we see that it is skewed right — meaning that most of the data is bunched to the left and that there is a smaller tail to the right — with half of the observations from election years between 1945 and 1962. This makes sense logically, because we are only looking at deceased candidates, and candidates from more recent elections are more likely to still be alive.</p>
 <p>In using this data set, our left-side variable will be <code>lived_after</code>. We are trying to understand/predict how many years a candidate will live after the election.</p>
 <div class="cell">
@@ -1212,10 +1220,11 @@ $ lived_after  &lt;dbl&gt; 41.043121, 2.116359, 14.562628, 13.336071, 33.043121,
 </div>
 </div>
 <p>Younger candidates tend to live much longer than older candidates after election. This makes sense. It is hard for an 80 year-old candidate to live for another 40 years after the election.</p>
+<!-- DK: Maybe we should drop some of the older data? Really, we should go recreate the governors data to include all the data and then delete pre-war data here. -->
 </section><section id="validity" class="level3" data-number="9.1.3"><h3 data-number="9.1.3" class="anchored" data-anchor-id="validity">
 <span class="header-section-number">9.1.3</span> Validity</h3>
-<!-- DK: Rewrite to include an clear counter argument. -->
-<p>Is the meaning of the columns consistent, i.e., can we assume validity? That is the heart of validity. To put it simply, does the <code>lived_after</code> column in our Preceptor Table equate to same column in our data set. Again, we look to the source of our data: <span class="citation" data-cites="barfort2020">Barfort, Klemmensen, and Larsen (<a href="references.html#ref-barfort2020" role="doc-biblioref">2020</a>)</span>.</p>
+<!-- DK: Rewrite to include a clear counter argument. -->
+<p>Is the meaning of the columns consistent, i.e., can we assume validity? To put it simply, does the <code>lived_after</code> column in our Preceptor Table equate to same column in our data set. Again, we look to the source of our data: <span class="citation" data-cites="barfort2020">Barfort, Klemmensen, and Larsen (<a href="references.html#ref-barfort2020" role="doc-biblioref">2020</a>)</span>.</p>
 <p>The collection of birth and death dates for <em>winning</em> candidates is well documented. The birth and death dates for losing candidates, however, is not as easily gathered. In fact, <span class="citation" data-cites="barfort2020">Barfort, Klemmensen, and Larsen (<a href="references.html#ref-barfort2020" role="doc-biblioref">2020</a>)</span> had to perform independent research for this information:</p>
 <blockquote class="blockquote">
 <p>“For losing candidates, we use information gathered from several online sources, including Wikipedia, The Political Graveyard…, Find a Grave… and Our Campaigns.”</p>
@@ -1224,10 +1233,11 @@ $ lived_after  &lt;dbl&gt; 41.043121, 2.116359, 14.562628, 13.336071, 33.043121,
 <blockquote class="blockquote">
 <p>“In a few cases, we are only able to identify the year of birth or death, not the exact date of the event. For these candidates, we impute the date as July 1 of the given year.”</p>
 </blockquote>
-<p>For these candidates, then, our estimate for longevity will be inaccurate. We also have to <em>hope</em> that the birth and death dates listed on unreliable internet sources are accurate. It is possible that they are not, especially for older candidates.</p>
+<p>For these candidates, then, our estimate for longevity will be inaccurate.</p>
 <p>The assumption of validity seems reasonable. Our data and The Preceptor Table can “stack” on top of each other. We will assume that both are drawn from the same population.</p>
+<p>Note that there is some overlap between our Preceptor Table and our data. For example, <a href="https://en.wikipedia.org/wiki/Kathleen_Blanco">Kathleen Babineaux</a> won the 2003 election for governor in Louisana. She died in 2019, so she is both in our data and in our Preceptor Table.</p>
 <blockquote class="blockquote">
-<p><em>Using data from all deceased gubernatorial candidates in the United States between 1945 and 2012, we seek to forecast candidate longevity post-election.</em></p>
+<p><em>Using data from all deceased gubernatorial candidates in the United States between 1945 and 2012, we seek to forecast candidate longevity post-election for candidates running in campaigns between 2000 and 2050.</em></p>
 </blockquote>
 </section></section><section id="justice" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="justice">
 <span class="header-section-number">9.2</span> Justice</h2>
@@ -1239,7 +1249,9 @@ $ lived_after  &lt;dbl&gt; 41.043121, 2.116359, 14.562628, 13.336071, 33.043121,
 </div>
 </div>
 </div>
+<blockquote class="blockquote">
 <p>Justice concerns four topics: the Population Table, stability, representativeness, and unconfoundedness.</p>
+</blockquote>
 <section id="population-table" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="population-table">
 <span class="header-section-number">9.2.1</span> Population Table</h3>
 <p>The Population Table is a structure which includes a row for every unit in the population. We generally break the rows in the Population Table into three categories: the data for units we have (the actual data set), the data for units which we actually want to have (the Preceptor Table), and the data for units we do not care about (the rest of the population, not included in the data or the Preceptor Table).</p>
@@ -1826,6 +1838,9 @@ $ lived_after  &lt;dbl&gt; 41.043121, 2.116359, 14.562628, 13.336071, 33.043121,
 </div>
 </div>
 </div>
+<blockquote class="blockquote">
+<p>Courage begins with the exploration and testing of different models. It concludes with the creation of a Data Generating Mechanism.</p>
+</blockquote>
 <p>Justice gave us the Population Table. Courage selects the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have. We explore different models. We need to decide which variables to include and to estimate the values of unknown parameters. We check our models for consistency with the data we have. We avoid hypothesis tests. We select one model.</p>
 <p>Since our outcome variable is ages lived after an election, a linear model with a normal error term seems reasonable.</p>
 <p><span class="math display">\[ y_i = \beta_0  + \beta_1 x_{1,i} +  \beta_2 x_{2,i} + \beta_2 x_{1,i} x_{2,i} + \epsilon_i\]</span> with <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span>. This is an “interaction” model because one of the terms features the multiplication of two variables together.</p>
@@ -2351,7 +2366,507 @@ term naming may be unreliable!</code></pre>
 </div>
 </div>
 <p>This is our final interaction model! There are some interesting takeaways. First, we may note that there are far fewer data points for female candidates — a concern we previously mentioned. It makes sense, then, that the slope would be less dramatic when compared with male candidates. We also see that most female candidates run when they are older, as compared with male candidates. This might explain why our intercept for years lived post-election is lower for female candidates.</p>
-<p>The male line seems more sensible, as we might expect with far more datapoints. For male candidates, we see a clear (logical) pattern: the older candidates are at the time of election, the less years post-election they live. This makes sense, as we are limited by the human lifespan.</p>
+<p>The male line seems more sensible, as we might expect with far more data points. For male candidates, we see a clear (logical) pattern: the older candidates are at the time of election, the less years post-election they live. This makes sense, as we are limited by the human lifespan.</p>
+<p>We have decided that <code>fit_all</code> is our data generating mechanism. Let’s show its main components in a nice looking table with the help of the <strong>gtsummary</strong> package. First, load the necessary packages:</p>
+<div class="cell">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bbolker/broom.mixed">broom.mixed</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Second, create the table:</p>
+<div class="cell">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_all</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<div id="mkrieqkfcx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mkrieqkfcx table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mkrieqkfcx thead, #mkrieqkfcx tbody, #mkrieqkfcx tfoot, #mkrieqkfcx tr, #mkrieqkfcx td, #mkrieqkfcx th {
+  border-style: none;
+}
+
+#mkrieqkfcx p {
+  margin: 0;
+  padding: 0;
+}
+
+#mkrieqkfcx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mkrieqkfcx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mkrieqkfcx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mkrieqkfcx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mkrieqkfcx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mkrieqkfcx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mkrieqkfcx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mkrieqkfcx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mkrieqkfcx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mkrieqkfcx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mkrieqkfcx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mkrieqkfcx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mkrieqkfcx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mkrieqkfcx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mkrieqkfcx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mkrieqkfcx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mkrieqkfcx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mkrieqkfcx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mkrieqkfcx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mkrieqkfcx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mkrieqkfcx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mkrieqkfcx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mkrieqkfcx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mkrieqkfcx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mkrieqkfcx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mkrieqkfcx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mkrieqkfcx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mkrieqkfcx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mkrieqkfcx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mkrieqkfcx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mkrieqkfcx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mkrieqkfcx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mkrieqkfcx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mkrieqkfcx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mkrieqkfcx .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mkrieqkfcx .gt_left {
+  text-align: left;
+}
+
+#mkrieqkfcx .gt_center {
+  text-align: center;
+}
+
+#mkrieqkfcx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mkrieqkfcx .gt_font_normal {
+  font-weight: normal;
+}
+
+#mkrieqkfcx .gt_font_bold {
+  font-weight: bold;
+}
+
+#mkrieqkfcx .gt_font_italic {
+  font-style: italic;
+}
+
+#mkrieqkfcx .gt_super {
+  font-size: 65%;
+}
+
+#mkrieqkfcx .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mkrieqkfcx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mkrieqkfcx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mkrieqkfcx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mkrieqkfcx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mkrieqkfcx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mkrieqkfcx .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="header gt_col_headings">
+<th id="<strong>Characteristic</strong>" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="<strong>Beta</strong>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
+<th id="<strong>95% CI</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">sex</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="ci"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;sexMale</td>
+<td class="gt_row gt_center" headers="estimate">54</td>
+<td class="gt_row gt_center" headers="ci">14, 95</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">election_age</td>
+<td class="gt_row gt_center" headers="estimate">-0.05</td>
+<td class="gt_row gt_center" headers="ci">-0.72, 0.65</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">sex * election_age</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="ci"><br></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;sexMale * election_age</td>
+<td class="gt_row gt_center" headers="estimate">-0.81</td>
+<td class="gt_row gt_center" headers="ci">-1.5, -0.13</td>
+</tr>
+</tbody>
+<tfoot class="gt_footnotes"><tr class="even">
+<td colspan="3" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> CI = Credible Interval</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
 </section></section><section id="temperance" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="temperance">
 <span class="header-section-number">9.4</span> Temperance</h2>
 <div class="cell">
@@ -2362,11 +2877,19 @@ term naming may be unreliable!</code></pre>
 </div>
 </div>
 </div>
-<p><strong>Courage</strong> gave us the fitted model. With <strong>Temperance</strong> we can create posteriors of the quantities of interest. We should be modest in the claims we make.</p>
+<blockquote class="blockquote">
+<p>Temperance uses the Data Generating Mechanism to answer the question with which we began. Humility reminds us that this answer is always a lie.</p>
+</blockquote>
 <section id="questions-and-answers" class="level3" data-number="9.4.1"><h3 data-number="9.4.1" class="anchored" data-anchor-id="questions-and-answers">
 <span class="header-section-number">9.4.1</span> Questions and Answers</h3>
 <p>Recall the questions with which we began the chapter:</p>
+<blockquote class="blockquote">
+<p><em>How long do political candidates live after the election?</em></p>
+</blockquote>
+<p>Because our model for longevity includes age and sex, we need to specify the values for those variables if we want to look at specific cases. So:</p>
+<blockquote class="blockquote">
 <p><em>How many years would we expect two gubernatorial candidates — one male and one female, both 10 years older than the average candidate — to live after the election?</em></p>
+</blockquote>
 <p>These questions are, purposely, less precise than the ones we tackled in earlier chapters, written more in a conversational style. This is how normal people talk.</p>
 <p>However, as data scientists, our job is to bring precision to these questions. There are two commonsense interpretations. First, we could be curious about the <em>expected values</em> for these questions. If we averaged the data for a thousand candidates like these, what would the answer be? Second, we could be curious about two specific individuals. How long will they live? <em>Averages involve questions about parameters. The fates of individuals require predictions.</em> Those are general claims, violated too often to be firm rules. Yet, they highlight a key point: <em>expected values are less variable than individual predictions</em>.</p>
 <p>To calculate expected values, use <code><a href="https://mc-stan.org/rstantools/reference/posterior_epred.html">posterior_epred()</a></code>. To forecast for individuals, use <code><a href="https://mc-stan.org/rstantools/reference/posterior_predict.html">posterior_predict()</a></code>.</p>
@@ -2376,12 +2899,12 @@ term naming may be unreliable!</code></pre>
 <p><span class="math display">\[ lived\_after_i =  \beta_0 + \beta_1 male_i + \beta_2 c\_election\_age_i + \\
 \beta_3 male_i *  c\_election\_age_i + \epsilon_i \]</span></p>
 <div class="cell">
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">newobs</span> <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Male"</span>, <span class="st">"Female"</span><span class="op">)</span>, </span>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">newobs</span> <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Male"</span>, <span class="st">"Female"</span><span class="op">)</span>, </span>
 <span>                 election_age <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With <code>newobs</code> we are want to generate a sample of what a scenario may look like for a candidate’s longevity. Here we establish the two sexes and the election age that we want to deal with for our candidates.</p>
 <div class="cell">
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_all</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_all</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="va">newobs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8,000 × 7
@@ -2403,7 +2926,7 @@ term naming may be unreliable!</code></pre>
 </div>
 <p>When we put this in terms of our mathematics the <span class="math inline">\(beta_1\)</span> becomes <code>1</code> as our <code>"Male"</code> term corresponds to <code>1</code>. The code that we have above is able to use our fitted model from above to generate a similar distribution of longevity for our candidates with the possiblity of how long they may live and whether male candidates will live longer than female candidates.</p>
 <div class="cell">
-<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_all</span> <span class="op">|&gt;</span> </span>
+<details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fit_all</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="http://mjskay.github.io/tidybayes/reference/add_predicted_draws.html">add_epred_draws</a></span><span class="op">(</span>newdata <span class="op">=</span> <span class="va">newobs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">.epred</span>, fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">count</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -2421,7 +2944,7 @@ term naming may be unreliable!</code></pre>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="five-parameters_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="five-parameters_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2431,6 +2954,7 @@ term naming may be unreliable!</code></pre>
 </section><section id="humility" class="level3" data-number="9.4.2"><h3 data-number="9.4.2" class="anchored" data-anchor-id="humility">
 <span class="header-section-number">9.4.2</span> Humility</h3>
 <p><em>We can never know the truth.</em></p>
+<!-- DK: People are living much longer now then they did in the 50s, so our mean estimate is almost certainly an underestimate. -->
 <p>When we end <strong>Temperance</strong> we want to end with the Preceptor’s Posterior. The Preceptor’s Posterior is the posterior you would calculate if all the assumptions you made under Wisdom and Justice were correct. With all of the assumptions that we have analyzed and taken a look at, we can see that there are several possibilities where this may not hold true. Most of the times they never are! So, you can never know the Preceptor’s Posterior. In turn we hope that our posterior will be a close approximation of the Preceptor’s Posterior.</p>
 
 
