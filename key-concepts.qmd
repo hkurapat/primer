@@ -62,7 +62,7 @@ In the spirit of transparency, here are the guidelines which we provide to colle
 
 ## Question
 
-Start with the question. These generally start very broadly. Example:
+Begin with the question. These generally start very broadly. Example:
 
 > *What is the relationship between income and political ideology?*
 
@@ -74,9 +74,9 @@ In order to make progress, you will then drill down to a more specific question,
 
 Specifics help you to fix ideas as you start to work on a project. Just because you start looking for this number does not mean that we can't consider other questions. We might estimate dozens of specific numbers when exploring the connection between income and ideology.
 
-Your goal is to provide an answer to the question, along with your uncertainty about that answer. The most common form for the answer is a posterior probability distribution. This PPD is either the answer itself, or the tool we use to answer the question. The answer to the second type of question will generally involves many posterior probability distributions.
+Your interim goal is to provide an answer to the specific question, along with your uncertainty about that answer. The most common form for the answer is a posterior probability distribution. This PPD is either the answer itself, or the tool we use to answer the question. To caclulate the PPD, you will create a series of models, the final version of which we refer to as the Data Generating Mechanism (DGM). Once you have the DGM, you can not only answer the specific question. You can also answer lots of similar questions, thereby allowing you to discuss the original general question in excellent detail.
 
-The question should be indented and italicized. 
+Both questions should be indented and italicized. 
 
 Of course, every data science problem does not start with a question. It actually starts with a *decision*. The world confronts us. Make decisions we must. Yet, in this introductory textbook, starting with a decision to make is too hard. So, we simplify and start with a question. But we should always at least mention the sort of decision which the answer to the question might help us to make. In baseball, we use statistics to help us decide which players to draft. In politics, we use statistics to craft political ads. 
 
@@ -84,9 +84,9 @@ Note that the sophistication of these discussions increases as we go further int
 
 Each chapter features all the same sections and sub-sections as we use below. That is, there are three sub-sections to Wisdom, four sub-sections for Justice, three for Courage and two for Temperance. 
 
-**Quantity of Interest** is the number which you want to estimate. It is the answer to a specific question. You will almost always calculate a posterior probability distribution for your Quantity of Interest since, in the real world, you will never know your QoI precisely. More sophisticated problems involve more than one QoI.
+**Quantity of Interest** is the number which you want to estimate. It is the answer to a specific question. You will almost always calculate a posterior probability distribution for your Quantity of Interest since, in the real world, you will never know your QoI precisely. Answering the general question will require the calculation of many Quantities of Interest.
 
-Once we have our question, we can start with the Cardinal Virtues. Each section begins with a one sentence summary about the component steps of the relevant virtue. These will, obviously, be highly similar from chapter to chapter. But that is OK! We want to reinforce the steps in the path over and over again.
+Once we have our specific question, we can start with the Cardinal Virtues. Each section begins with a one sentence summary about the component steps of the relevant virtue. These will, obviously, be highly similar from chapter to chapter. But that is OK! We want to reinforce the steps in the path over and over again.
 
 No battle plan survives first contact with the enemy intact. The same applies to questions and the data we use to answer them. Our questions evolve as our analysis continues. Ultimately, we can only answer some questions with the data we have. Those questions may be close to the ones with which we started, but they will rarely be identical.
 
@@ -324,7 +324,9 @@ There is no need to use technical terms like "stability." However, most readers 
 
 **Courage** is the third [Cardinal Virtue](https://en.wikipedia.org/wiki/Cardinal_virtues) in data science. Justice gives us the Population Table. Courage creates the data generating mechanism. We first specify the mathematical formula which connects the outcome variable we are interested in with the other data that we have. We explore different models. We need to decide which variables to include and to estimate the values of unknown parameters. We check our models for consistency with the data we have. We avoid hypothesis tests. We select one model, the data generating mechanism.
 
-Courage begins by a discussion of the functional form we will be using. This is usually straight-forward because it follows directly from the type of the outcome variable: continuous implies a linear model and binary implies logistic. We provide the mathematical formula for this model, using `y` and `x` as variables. The rest of the discussion is broken up into three sections: "Models," "Tests," and "Data Generating Mechanism."
+Courage begins by a discussion of the functional form we will be using. This is usually straight-forward because it follows directly from the type of the outcome variable: continuous means a linear model, two categories (binary) implies logistic, and more-than-two categories suggests multinomial logistic. We provide the mathematical formula for this model, using `y` and `x` as variables. We don't yet know the number of right-hand side variables to include, much less which ones. So, the formula is generic.
+
+The rest of the discussion is broken up into three sections: "Models," "Tests," and "Data Generating Mechanism."
 
 ### Models
 
@@ -359,7 +361,7 @@ Feel free to use "I" instead of "We" if the project is solo.
 
 ## Temperance
 
-> Temperance uses the Data Generating Mechanism to answer the question with which we began. Humility reminds us that this answer is always a lie.
+> Temperance uses the Data Generating Mechanism to answer the specific question with which we began. Humility reminds us that this answer is always a lie. We can also explore the general question by using the DGM to calculate many similar quantities of interest, displaying the results graphically. 
  
 **Temperance** is the fourth [Cardinal Virtue](https://en.wikipedia.org/wiki/Cardinal_virtues) in data science. Courage gave us the data generating mechanism. Temperance guides us in the use of the DGM --- or the "model" ---  we have created to answer the questions with which we began. We create posteriors for the quantities of interest. We should be modest in the claims we make. The posteriors we create are never the “truth.” The assumptions we made to create the model are never perfect. Yet decisions made with flawed posteriors are almost always better than decisions made without them.
 

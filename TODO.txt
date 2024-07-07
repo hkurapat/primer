@@ -1,5 +1,9 @@
 # Priorities
 
+Make more use of "When Shall We Use Our Heads
+Instead of the Formula?" https://meehl.umn.edu/sites/meehl.umn.edu/files/files/043_when_use_heads.pdf
+
+
 Maybe stop using tidy() since it gives an annoying warning since brms models have variables, by default, with underscores in the names?
 
 Should predictive/causal question come at the end of the Preceptor Table reasoning?
