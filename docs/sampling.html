@@ -353,12 +353,13 @@ window.Quarto = {
 </header>
 
 
+<!-- DK: Key question. Should our question for Cardinal Virtues be something like: "What are the chances of getting 10 red beads with a shovel of size 20?" Or should we just stick with rho? -->
+<!-- DK: Could do more to make this Cardinal Virtue section more like others. -->
 <!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! -->
-<!-- This chapter does not follow the standard Cardinal Virtue plan as closely as it might. Good or bad? -->
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/e3PJ3Du_zDc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p><em>The Hunger Games</em> is a dystopian novel in which children are chosen via lottery to fight to the death. Primrose Everdeen is selected from the urn. Why does she have the misfortune of being selected? Or, as we data scientists say, <em>sampled</em>?</p>
 <p>In <a href="probability.html" class="quarto-xref"><span>Chapter 2</span></a>, we learned about probability, the framework for quantifying uncertainty. In this chapter, we will learn about <em>sampling</em>, the beginning of our journey toward inference. When we sample, we take some <em>units</em> from a <em>population</em>. With the data collected via sampling, we will create statistical models with just one unknown parameter. With such models, we can make inferences in order to answer questions.</p>
-<p>We always use the Cardinal Virtues. Wisdom helps us to clarify the questions with which we begin. We build the Preceptor Table which, if no data were missing, would allow us to answer the question. We check for validity. Justice creates the Population Table and examines the assumptions of stability, representativeness, and unconfoundedness. With Courage, we estimate a data generating mechanism. Temperance helps us to use that DGM to answer the question with which we began.</p>
+<p>We always use the Cardinal Virtues. Wisdom helps us to clarify the questions with which we begin. We build the Preceptor Table which, if no data were missing, would allow us to answer the question. We check for validity. Justice creates the Population Table and examines the assumptions of stability, representativeness, and unconfoundedness. With Courage, we create a data generating mechanism. Temperance helps us to use that DGM to answer the question with which we began.</p>
 <section id="sec-sampling-activity" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-sampling-activity"><span class="header-section-number">3.1</span> Real sampling activity</h2>
 <p>The urn below has a certain number of red and a certain number of white beads all of equal size, mixed well together. What proportion, <span class="math inline">\(\rho\)</span>, of this urn’s beads are red?</p>
@@ -373,7 +374,8 @@ window.Quarto = {
 </div>
 </div>
 <p>One way to answer this question would be to perform an exhaustive count: remove each bead individually, count the number of red beads, count the number of white beads, and divide the number of red beads by the total number of beads. Call that ratio <span class="math inline">\(\rho\)</span>, the proportion of red beads in the urn. However, this would be a long and tedious process. Therefore, we will use sampling!</p>
-<p>To begin this chapter, we will look at a real sampling activity: the urn. Then, we will simulate the urn example using R code. This will help us to understand the <em>standard error</em> and the ways in which uncertainty factors into our predictions. We then attempt to estimate a single parameter, the proportion of red beads in the urn. Use the <strong>tidyverse</strong> package.</p>
+<p>To begin this chapter, we will look at a real sampling activity: the urn. Then, we will simulate the urn example using R code. This will help us to understand the <em>standard error</em> and the ways in which uncertainty factors into our predictions.</p>
+<p>Use the <strong>tidyverse</strong> package.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -451,18 +453,18 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 33 × 4
-   group          red_beads prop_red group_ID
-   &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Paddy, Matt           16     0.32        1
- 2 Mark, Ramses          21     0.42        2
- 3 Ian, Iman             18     0.36        3
- 4 Ilyas, Yohan          21     0.42        4
- 5 Griffin, Mary         18     0.36        5
- 6 Katie, Anthony        20     0.4         6
- 7 Mark, Jane            21     0.42        7
- 8 Yuki, Harry           21     0.42        8
- 9 Mia, James            15     0.3         9
-10 Maeve, Josh           18     0.36       10
+   group           red_beads prop_red group_ID
+   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
+ 1 Ian, Iman              18     0.36        1
+ 2 Caroline, Edna         15     0.3         2
+ 3 Conrad, Vlad           16     0.32        3
+ 4 Mia, James             15     0.3         4
+ 5 Aaron, Mike            11     0.22        5
+ 6 Mal, Francis           17     0.34        6
+ 7 Sophie, Brian          21     0.42        7
+ 8 Dohyun, Estel          18     0.36        8
+ 9 Ace, Chris             18     0.36        9
+10 Ellie, Terrance        17     0.34       10
 # ℹ 23 more rows</code></pre>
 </div>
 </div>
@@ -3412,7 +3414,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 <p>First, the percentage of red beads in the sample, <span class="math inline">\(17/50 = 0.34\)</span>, is a good estimate for the center of the posterior. Throughout this section, we are leaving formalism behind. We have not proved that the sample provides a good estimate of the center of the posterior but common sense suggests that it does.</p>
 <p>Second, calculate the standard error:</p>
 <p><span class="math display">\[  SE = \frac{\sigma\text{ of data}}{\sqrt{\text{sample size}}} = \frac{.4785}{\sqrt{50}} \approx .067\]</span></p>
-<p>The <span class="math inline">\(\sigma\)</span> of the data might seem to be a strange concept. What data do we have, besides 17 red beads and 33 white beads? The answer is that this is the data, and t is most sensibily represented as a vector of length 50, with 17 1’s and 33 0’s. The standard deviation of <code>sd(c(rep(0, 17), rep(1, 33)))</code> is 0.4785181.</p>
+<p>The <span class="math inline">\(\sigma\)</span> of the data might seem to be a strange concept. What data do we have, besides 17 red beads and 33 white beads? The answer is that this is the data, and it is most sensibily represented as a vector of length 50, with 17 1’s and 33 0’s. The standard deviation of <code>sd(c(rep(0, 17), rep(1, 33)))</code> is 0.4785181.</p>
 <p>You can then use the standard error to create a 95% confidence interval:</p>
 <p><span class="math display">\[  CI = \bar{x} \hspace{.1cm} \pm 2SE = .34 \hspace{.1cm} \pm .134\]</span></p>
 <p>With 95% confidence, the proportion of red beads in the urn is between 21% and 47%.</p>
@@ -3434,8 +3436,12 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 <p>The <em>data generating mechanism</em>, or DGM, is a mathematical formula which mimics the process by which the data comes to us. The DGM for sampling scenarios with only two possible values is called <em>Bernoulli</em> and is often denoted as:</p>
 <p><span class="math display">\[ red_i  \sim Bernoulli(\rho) \]</span></p>
 <p>Each bead <span class="math inline">\(i\)</span> which we sample can be either red or white. It is convenient to define the model in terms of whether or not the bead was red. If bead <span class="math inline">\(i\)</span> is red, the value drawn is <code>1</code>, which is the standard way of representing <code>TRUE</code>. In other words, <span class="math inline">\(red_i = 1\)</span> means that bead <span class="math inline">\(i\)</span> was red. Similarly, a white bead is indicated with <code>0</code>, meaning that it is <code>FALSE</code> that the bead was red. <span class="math inline">\(\rho\)</span> is the only parameter in a Bernoulli model. It is the probability that a <code>1</code>, instead of a <code>0</code>, is drawn. That is, <span class="math inline">\(\rho\)</span> is the probability of a red bead.</p>
-<p>Using our rough calculations above, we conclude that our posterior for <span class="math inline">\(\rho\)</span> is <span class="math inline">\(N(0.34, 0.134)\)</span>. So, our full data generating mechanism is:</p>
-<p><span class="math display">\[ red_i  \sim Bernoulli(\rho) \text{with} \rho \sim N(0.34, 0.134)\]</span></p>
+<p>Using our rough calculations above, we conclude that our posterior for <span class="math inline">\(\rho\)</span> is <span class="math inline">\(N(0.34, 0.067)\)</span>. So, our full data generating mechanism is:</p>
+<p><span class="math display">\[ red_i  \sim Bernoulli(\rho) \text{with} \rho \sim N(0.34, 0.134)\]</span> We conclude Courage by adding a sentence about our DGM to the summary paragraph.</p>
+<blockquote class="blockquote">
+<p><em>Using a sample of 50 beads drawn from an urn in which all beads are either red or white, we seek to determine the proportion of beads which are red. Our estimate would be flawed if someone has changed the beads in the urn since we drew our sample. We model the color of an individual bead as a draw from a Bernoulli distribution with unknown parameter <span class="math inline">\(\rho\)</span>.</em></p>
+</blockquote>
+<!-- DK: Does \rho belong here? Maybe? It is no more opaque to readers than Bernoulli or logistic. -->
 </section>
 </section>
 <section id="temperance" class="level3" data-number="3.4.4">
@@ -3449,7 +3455,9 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 </div>
 </div>
-<p>Temperance uses the Data Generating Mechanism to answer the specific question with which we began. Humility reminds us that this answer is always a lie. We can also explore the general question by using the DGM to calculate many similar quantities of interest, displaying the results graphically.</p>
+<p>Temperance uses the Data Generating Mechanism to answer the specific question with which we began. Humility reminds us that this answer is always a lie.</p>
+<section id="questions-and-answers" class="level4" data-number="3.4.4.1">
+<h4 data-number="3.4.4.1" class="anchored" data-anchor-id="questions-and-answers"><span class="header-section-number">3.4.4.1</span> Questions and Answers</h4>
 <p>Knowing that the standard error is the standard deviation of the posterior (and that the posterior is approximately normal) allows us to create a graphic.</p>
 <div class="cell">
 <details class="code-fold">
@@ -3475,10 +3483,21 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 <p><strong>This is not precisely accurate.</strong> The full machinery of a proper Bayesian analysis would generate a (very) slightly different answer. To get that correct answer, we could either do everything by hand, as in <a href="probability.html" class="quarto-xref"><span>Chapter 2</span></a>, or use an R package, as in <a href="models.html" class="quarto-xref"><span>Chapter 4</span></a>. However, the purpose of this chapter is to develop your intuition. Generating a 95% confidence interval using two times the standard error along with a normality assumption is good enough.</p>
 <!-- DK: This is very simplified, but maybe that is good! Could discuss that we could use this DGM to answer other questions, like how likely it is to draw 10 red with a shovel of size 20. -->
+<p>We conclude Temperance by adding a sentence which answers our question:</p>
+<blockquote class="blockquote">
+<p><em>Using a sample of 50 beads drawn from an urn in which all beads are either red or white, we seek to determine the proportion of beads which are red. Our estimate would be flawed if someone has changed the beads in the urn since we drew our sample. We model the color of an individual bead as a draw from a Bernoulli distribution with unknown parameter <span class="math inline">\(\rho\)</span>. The percentage of red beads in the urn is about 34%, with a 95% credible interval from 21% to 47%.</em></p>
+</blockquote>
+</section>
+<section id="humility" class="level4" data-number="3.4.4.2">
+<h4 data-number="3.4.4.2" class="anchored" data-anchor-id="humility"><span class="header-section-number">3.4.4.2</span> Humility</h4>
+<p><em>We can never know the truth.</em></p>
 <p>There is a truth! There is a true value for <span class="math inline">\(\rho\)</span> which we do not know. We want to create a posterior probability distribution which summarizes our knowledge. We care about the posterior probability distribution of <span class="math inline">\(\rho\)</span>. The center of that distribution is around the mean or median of the proportion in your sample. The standard deviation of that posterior is the standard deviation of the sample divided by the square root of our sample size. Note that this is the same thing as the standard deviation of the repeated samples.</p>
 <p>We journey from reality, to our predictions, to the standard error of our predictions, to the posterior probability distribution for <span class="math inline">\(\rho\)</span>. This is our sequence:</p>
 <p><strong><span class="math inline">\(\rho\)</span> (i.e., the truth) <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(\hat{\rho}\)</span> (i.e., my estimate) <span class="math inline">\(\Rightarrow\)</span> the standard error of <span class="math inline">\(\hat{\rho}\)</span> (i.e., black box of math mumbo jumbo and computer simulation magic) <span class="math inline">\(\Rightarrow\)</span> our posterior probability distribution for <span class="math inline">\(\rho\)</span> (i.e., our beliefs about the truth).</strong></p>
-<p>This journey shows how our beliefs about the truth develop through our work. We begin with <span class="math inline">\(\rho\)</span>; <span class="math inline">\(\rho\)</span> is the truth, the true but unknown value we are estimating. <span class="math inline">\(\hat{\rho}\)</span> is our estimate for <span class="math inline">\(\rho\)</span>. There can be millions and millions of <span class="math inline">\(\hat{\rho}\)</span>’s. Next, we must estimate the standard error of our estimates (our <span class="math inline">\(\hat{\rho}\)</span>’s) to account for the uncertainty of our predictions. Finally, we create a posterior probability distribution for <span class="math inline">\(\rho\)</span>. This distribution is used to answer any questions about <span class="math inline">\(\rho\)</span>.</p>
+<p>This journey shows how our beliefs about the truth develop through our work. We begin with <span class="math inline">\(\rho\)</span>; <span class="math inline">\(\rho\)</span> is the truth, the true but unknown value we are estimating. <span class="math inline">\(\hat{\rho}\)</span> is our estimate for <span class="math inline">\(\rho\)</span>. There can be millions and millions of <span class="math inline">\(\hat{\rho}\)</span>’s. Next, we must estimate the standard error of our estimates (our <span class="math inline">\(\hat{\rho}\)</span>’s) to account for the uncertainty of our predictions. Finally, we create a posterior probability distribution for <span class="math inline">\(\rho\)</span>. This distribution is used to answer any questions about our urn.</p>
+<p>But we must retain our humility. Even with toy examples, there is a great deal of uncertainty, more uncertainity than our models might suggest. How can we be sure, for example, that no one has surreptitiously added more beads to the urn? How can we know that the shovels are not biased in some way? In any real world project, we must remain more cautious than a naive use of our models might suggest. Given these uncertainties, we should probably estimate a broader confidence interval for <span class="math inline">\(\rho\)</span>, more like 14% to 54%.</p>
+<p>Is that increase based on <em>data</em>? No.&nbsp;We use all our data in our models. The increase is based on our <em>experience</em>. Stay humble. You don’t know as much as you think.</p>
+<p><em>The world is always more uncertain than our models would have us believe.</em></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -3490,6 +3509,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 
 
+</section>
 </section>
 </section>
 
