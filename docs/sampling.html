@@ -328,7 +328,6 @@ window.Quarto = {
   <li><a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="header-section-number">3.4.3</span> Courage</a></li>
   <li><a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="header-section-number">3.4.4</span> Temperance</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">3.5</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/PPBDS/primer/edit/main/sampling.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -452,18 +451,18 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 33 × 4
-   group           red_beads prop_red group_ID
-   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Ian, Iman              18     0.36        1
- 2 Mia, James             15     0.3         2
- 3 Damani, Melissa        15     0.3         3
- 4 Ishan, Cass            15     0.3         4
- 5 Dohyun, Estel          18     0.36        5
- 6 Paddy, Matt            16     0.32        6
- 7 Mark, Jane             21     0.42        7
- 8 Morgan, Emily          21     0.42        8
- 9 Mark, Ramses           21     0.42        9
-10 Claire, Cloud          16     0.32       10
+   group          red_beads prop_red group_ID
+   &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
+ 1 Paddy, Matt           16     0.32        1
+ 2 Mark, Ramses          21     0.42        2
+ 3 Ian, Iman             18     0.36        3
+ 4 Ilyas, Yohan          21     0.42        4
+ 5 Griffin, Mary         18     0.36        5
+ 6 Katie, Anthony        20     0.4         6
+ 7 Mark, Jane            21     0.42        7
+ 8 Yuki, Harry           21     0.42        8
+ 9 Mia, James            15     0.3         9
+10 Maeve, Josh           18     0.36       10
 # ℹ 23 more rows</code></pre>
 </div>
 </div>
@@ -1729,10 +1728,16 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 </div>
 </div>
-<p>Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of “validity,” as to whether or not we can (reasonably!) assume that the two come from the same <em>population</em>.</p>
+<p>Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of validity, as to whether or not we can (reasonably!) assume that the two come from the same population.</p>
 <section id="preceptor-table" class="level4" data-number="3.4.1.1">
 <h4 data-number="3.4.1.1" class="anchored" data-anchor-id="preceptor-table"><span class="header-section-number">3.4.1.1</span> Preceptor Table</h4>
-<p>A Preceptor Table is a table with rows and columns, such that, if no data is missing, we can easily answer our questions.</p>
+<p>A Preceptor Table is smallest possible table with rows and columns such that, if there is no missing data, our question is easy to answer.</p>
+<p>The <em>units</em> are, obviously, the individual beads.</p>
+<p>The <em>outcome</em> for each unit is its color. Note how the outcome is not the same as the answer to the question. The question concerns a summary measure for the urn as a whole. The outcome is always measured for each unit, which is an individual bead in this case.</p>
+<p>The is a <em>predictive</em> model because there is only one outcome. We want to know what percentage of the beads would be red if we were to dump all the beads out of the urn and then count up the number of white and red beads.</p>
+<p>There are no <em>covariates</em> because this is such a simple question. If there were some other measure, like size or texture, which allowed us to distinguish among beads, then we might use those as part of our model. But, in this case, the only thing which distinguishes beads is their color.</p>
+<p>There is not a <em>treatment</em> because this is a predictive model.</p>
+<p>The <em>moment in time</em> to which the Preceptor Table refers is now.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -2233,8 +2238,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 <p>&nbsp;</p>
 <p>Note that the beads do not have ID numbers printed on them. The numbering is arbitrary. Having an ID just reminds us that there are actual units under consideration, even if we can not tell them apart, other than by color. We also include the ID to help visualize the fact that we don’t know the total number of beads in the urn, because our question never tells us! There could be 1,000 beads like our physical urn from earlier, or there could be a million beads. The ellipse at the bottom of the Preceptor Table denotes our uncertainty regarding urn size.</p>
-<p>There is only one outcome column, “Color,” because this is not a causal model, for which we need to have (at least) two potential outcomes. Predictive models require only one outcome.</p>
-<p>If we know the color of every bead, then calculating the proportion of beads which are red, <span class="math inline">\(\rho\)</span>, is simple algebra.</p>
+<p>If we knew the color of every bead, then calculating the proportion of beads which are red, <span class="math inline">\(\rho\)</span>, is simple algebra. As always, a Preceptor Table is the smallest such table which would still allow us to answer our question.</p>
 </section>
 <section id="eda" class="level4" data-number="3.4.1.2">
 <h4 data-number="3.4.1.2" class="anchored" data-anchor-id="eda"><span class="header-section-number">3.4.1.2</span> EDA</h4>
@@ -2731,7 +2735,11 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 <section id="validity" class="level4" data-number="3.4.1.3">
 <h4 data-number="3.4.1.3" class="anchored" data-anchor-id="validity"><span class="header-section-number">3.4.1.3</span> Validity</h4>
 <p>The last step of Wisdom is to decide whether or not we can consider the units from the Preceptor Table and the units from the data to have been drawn from the same <em>population</em>. In this case, as with many sampling scenarios, it is trivial that we may make this assumption. If all the rows from the data are also rows in the Preceptor Table, we may assume that they are drawn from the same distribution.</p>
-<p><em>Validity</em> involves the columns of our data set. Is the meaning of our columns consistent across the different data sources? In our urn scenario, does bead color in our sampled data and bead color in our Preceptor Table mean the same thing? The answer is yes, and validity can be assumed very easily.</p>
+<p><em>Validity</em> involves the columns of our data set. Is the meaning of our columns consistent across the different data sources? In our urn scenario, does bead color in our sampled data and bead color in our Preceptor Table mean the same thing? The answer is “Yes.” Validity can be assumed very easily.</p>
+<p>We end Wisdom by summarizing our data and our question.</p>
+<blockquote class="blockquote">
+<p><em>Using a sample of 50 beads drawn from an urn in which all beads are either red or white, we seek to determine the proportion of beads which are red.</em></p>
+</blockquote>
 </section>
 </section>
 <section id="justice" class="level3" data-number="3.4.2">
@@ -2745,7 +2753,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 </div>
 </div>
-<p>Justice examines the assumptions of stability, representativeness, and unconfoundedness with regard to the Population Table.</p>
+<p>Justice concerns four topics: the Population Table, stability, representativeness, and unconfoundedness.</p>
 <section id="population-table" class="level4" data-number="3.4.2.1">
 <h4 data-number="3.4.2.1" class="anchored" data-anchor-id="population-table"><span class="header-section-number">3.4.2.1</span> Population Table</h4>
 <p>We use <em>The Population Table</em> to acknowledge the wider source from which we could have collected our data.</p>
@@ -3353,24 +3361,32 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 </div>
 <p>&nbsp;</p>
-<p>Each specific row represents one subject, which are individual beads in our urn scenario. Because there could be thousands or even millions of beads, we provide 3 examples for each category, and use ellipses to denote that there are many more subjects that we have yet to record.</p>
+<p>Each specific row represents one subject, which are individual beads in our urn. Because there could be thousands or even millions of beads, we provide 3 examples for each category, and use ellipses to denote that there are many more subjects that we have yet to record.</p>
 <p>Each Population Table will usually have several types of columns: id, time, covariates, and outcome(s):</p>
-<p>When we construct a Preceptor Table to answer our question, we must select some <em>covariates</em> that we <strong>want</strong> all of our subjects to have. Our urn scenario has no covariates, however, so we will explore this issue in later chapters.</p>
 <ul>
 <li>Because we draw our sample from the exact same urn our question asks us about, the data we collect comes directly from the Preceptor Table, all subjects in our population have the same location (“Known, specific urn”). The Preceptor Table and Population categories are essentially identical. This is the perfect scenario for us, but this rarely occurs in real life.</li>
 </ul>
-<p>Population Tables always have a column for <em>Time</em>. When answering a question we must specify the moment in time to which it applies, because stuff happens and things change.</p>
+<p>Population Tables always have a column for <em>Time</em>. When answering a question, we must specify the moment in time to which it applies, because stuff happens and things change.</p>
 <p>We must acknowledge that the sample from the urn could have been taken at any time, so the contents of the urn in the past (our data) <em>could be</em> different from the contents of the urn when we want to answer our question now (the Preceptor Table). As such, there is a wider population we could have collected our data from: any time before collecting the sample, or anytime after collecting it.</p>
-<p>Finally, Population Tables have an <em>outcome</em>. Sometimes there will be multiple outcome columns, as in the case of casual models in which we need the values for two or more potential outcomes so that we can calculate a causal effect.</p>
 </section>
-<section id="assumptions" class="level4" data-number="3.4.2.2">
-<h4 data-number="3.4.2.2" class="anchored" data-anchor-id="assumptions"><span class="header-section-number">3.4.2.2</span> Assumptions</h4>
-<!-- DK: Make these three separate sections, even if each is only a paragraph or two.  -->
-<p>Now that we have created our Population Table, we can analyze the key assumptions of stability, representativeness and unconfoundedness.</p>
-<p><em>Stability</em> involves time. Is the model — meaning both the mathematical formula and the value of the parameters — stable over time? Realistically, an urn will be the same today, tomorrow or next year. However, what if someone dumps some red beads into the urn after we take our sample? Then we cannot assume stability, because the proportion of red beads in the urn, <span class="math inline">\(\rho\)</span>, the instant before the dump is different than the proportion red in the urn after. We will assume no one is tampering with our urn, and assume stability across time periods.</p>
-<p><em>Representativeness</em> involves the data rows, specifically the rows for which we <em>have data</em> versus the rows for which we <em>might have had data</em>. Are the rows that we do have data for representative of the rows for which we do not have data? For the sample proportion to be similar to the actual population proportion, we ideally want the data we have to be a random, unbiased selection from our population. In the context of our problem, the sampling mechanism of using a shovel of size 50 to sample beads from an urn in which the beads are thoroughly mixed should be enough to consider our sample representative of the population.</p>
+<section id="stability" class="level4" data-number="3.4.2.2">
+<h4 data-number="3.4.2.2" class="anchored" data-anchor-id="stability"><span class="header-section-number">3.4.2.2</span> Stability</h4>
+<p>Stability means that the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn.</p>
+<p>Stability involves time. Is the model — meaning both the mathematical formula and the value of the parameters — stable over time? Realistically, an urn will be the same today, tomorrow or next year. However, what if someone dumps some red beads into the urn after we take our sample? Then we cannot assume stability, because the proportion of red beads in the urn, <span class="math inline">\(\rho\)</span>, the instant before the dump is different than the proportion red in the urn after. We will assume no one is tampering with our urn, and assume stability across time periods.</p>
+</section>
+<section id="representativeness" class="level4" data-number="3.4.2.3">
+<h4 data-number="3.4.2.3" class="anchored" data-anchor-id="representativeness"><span class="header-section-number">3.4.2.3</span> Representativeness</h4>
+<p>Representativeness, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows. Ideally, we would like both the Preceptor Table <em>and</em> our data to be random samples from the population. Sadly, this is almost never the case.</p>
 <p>The <em>sampling mechanism</em> is the technical term for the process by which some beads were sampled and some were not. We hope that all members of the population have the same chance of being sampled, or else our data might be unrepresentative of the larger population. Another term for this would be having a “biased” sample. Almost all samples have some bias, but we must make a judgement call to see if the data we have is close enough to the data we want (i.e., the Preceptor Table) that we can consider both as coming from the same population. Our sample of 50 beads is taken from a <em>mixed</em> urn, so hopefully there is a near equal chance of selecting each bead, and our samples are representative of the population.</p>
-<p><em>Unconfoundedness</em> involves the potential correlation between treatment assignment and the outcome. It is only a concern for causal models. Since this is a predictive model, we do not have to worry about unconfoundedness. There is no “treatment” which might be confounded with anything.</p>
+</section>
+<section id="unconfoundedness" class="level4" data-number="3.4.2.4">
+<h4 data-number="3.4.2.4" class="anchored" data-anchor-id="unconfoundedness"><span class="header-section-number">3.4.2.4</span> Unconfoundedness</h4>
+<p>Unconfoundedness means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. This assumption is only relevant for causal models. We describe a model as “confounded” if this is not true. The easiest way to ensure unconfoundedness is to assign treatment randomly.</p>
+<p>Since this is a predictive model, we do not have to worry about unconfoundedness. There is no “treatment” which might be confounded with anything.</p>
+<p>We conclude Justice by adding one sentence about potential problems in our approach to our summary paragraph.</p>
+<blockquote class="blockquote">
+<p><em>Using a sample of 50 beads drawn from an urn in which all beads are either red or white, we seek to determine the proportion of beads which are red. Our estimate would be flawed if someone has changed the beads in the urn since we drew our sample.</em></p>
+</blockquote>
 </section>
 </section>
 <section id="courage" class="level3" data-number="3.4.3">
@@ -3384,19 +3400,43 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 </div>
 </div>
-<p>Justice verifies the Population Table. Courage creates a mathematical model which connects the outcome variable to the covariates, if any.</p>
-<p>The <em>data generating mechanism</em>, or DGM, is a mathematical formula which mimics the process by which the data comes to us. The DGM for sampling scenarios with only two possible values is called <em>Bernoulli</em> and is often denoted as:</p>
-<p><span class="math display">\[ red_i  \sim Bernoulli(\rho) \]</span> Each bead <span class="math inline">\(i\)</span> which we sample can be either red or white. It is convenient to define the model in terms of whether or not the bead was red. If bead <span class="math inline">\(i\)</span> is red, the value drawn is <code>1</code>, which is the standard way of representing <code>TRUE</code>. In other words, <span class="math inline">\(red_i = 1\)</span> means that bead <span class="math inline">\(i\)</span> was red. Similarly, a white bead is indicated with <code>0</code>, meaning that it is <code>FALSE</code> that the bead was red. <span class="math inline">\(\rho\)</span> is the only parameter in a Bernoulli model. It is the probability that a <code>1</code>, instead of a <code>0</code>, is drawn. That is, <span class="math inline">\(\rho\)</span> is the probability of a red bead.</p>
-<p>We are Bayesian statisticians who make Bayesian models. This means that we make specific assumptions and consider data to be fixed and parameters to be variable. One of the most important distinctions is that in Bayesian data science, <strong>we don’t know the values of our parameters</strong>.</p>
-<p>Some non-Bayesian frameworks are concerned with the probability distribution of our observed data, but do not care much about the probability distribution for <span class="math inline">\(\rho\)</span> and assume it to be fixed. If <span class="math inline">\(\rho\)</span> is fixed, the equation above becomes one simple binomial distribution. Think of this as a standard 2 dimensional plot.</p>
-<p>We Bayesians consider our observed data to be fixed. We don’t consider alternate realities where our observed data is different due to sampling variation. Instead, we are concerned with the probability distribution of our parameter. In our urn scenario, <span class="math inline">\(\rho\)</span> is variable, so we have to create a separate binomial distribution for each possible value of <span class="math inline">\(\rho\)</span>. Think of this as a 3 dimensional joint distribution, as we created in <a href="probability.html#sec-n-models" class="quarto-xref"><span>Section 2.6</span></a>.</p>
-<p>It is essential to understand the joint distribution and the posterior, two concepts Bayesians use to solve problems. We will provide quick a quick review here, including statistical notation that may be helpful to some.</p>
-<p><strong>The joint distribution</strong>, <span class="math inline">\(p(y | \theta)\)</span>, models the outcome <span class="math inline">\(y\)</span> given one or more unknown parameter(s), <span class="math inline">\(\theta\)</span>. The equation illustrates exact same concept we addressed while discussing the distinctions of Bayesian science: because our parameters are variable, we have to create separate distributions for each potential value. Combining all these distributions together creates a joint distribution that is 3 dimensional when plotted.</p>
-<p><strong>The posterior</strong>, <span class="math inline">\(p(\theta | y)\)</span>, is the probability distribution of our parameter(s) <span class="math inline">\(\theta\)</span>, created using data <span class="math inline">\(y\)</span> that updates our beliefs. We have referenced the posterior many times before, and this definition does not change its meaning.</p>
+<p>Courage begins with the exploration and testing of different models. It concludes with the creation of a Data Generating Mechanism.</p>
+<section id="models" class="level4" data-number="3.4.3.1">
+<h4 data-number="3.4.3.1" class="anchored" data-anchor-id="models"><span class="header-section-number">3.4.3.1</span> Models</h4>
+<p><strong>The joint distribution</strong>, <span class="math inline">\(p(y | \theta)\)</span>, models the outcome <span class="math inline">\(y\)</span> given one or more unknown parameter(s), <span class="math inline">\(\theta\)</span>. The equation illustrates the exact same concept we addressed while discussing the distinctions of Bayesian science: because our parameters are variable, we have to create separate distributions for each potential value.</p>
+<p><strong>The posterior</strong>, <span class="math inline">\(p(\theta | y)\)</span>, is the probability distribution of our parameter(s) <span class="math inline">\(\theta\)</span>, created using data <span class="math inline">\(y\)</span>.</p>
 <p>In our urn scenario, obtaining the posterior involves first creating many binomial distributions for each possible population proportion. This is the joint distribution, and it is a 3 dimensional model. We then select the distribution that corresponds with our data: 17 red beads are sampled. We can represent the posterior with the following:</p>
 <p><span class="math display">\[\text{Prob}(\text{models} | \text{data} = 17)\]</span></p>
 <p>This is equivalent to taking a 2 dimensional slice of the 3 dimensional model. We are left with a probability distribution for our parameter, <span class="math inline">\(\rho\)</span>.</p>
 <p>In this chapter, we will neither calculate that posterior “by hand,” as we did in <a href="probability.html" class="quarto-xref"><span>Chapter 2</span></a>. Nor will we use an R package to do so, as in <a href="models.html" class="quarto-xref"><span>Chapter 4</span></a>. Instead, we will create a rough posterior using simple calculations with our data.</p>
+<p>First, the percentage of red beads in the sample, <span class="math inline">\(17/50 = 0.34\)</span>, is a good estimate for the center of the posterior. Throughout this section, we are leaving formalism behind. We have not proved that the sample provides a good estimate of the center of the posterior but common sense suggests that it does.</p>
+<p>Second, calculate the standard error:</p>
+<p><span class="math display">\[  SE = \frac{\sigma\text{ of data}}{\sqrt{\text{sample size}}} = \frac{.4785}{\sqrt{50}} \approx .067\]</span></p>
+<p>The <span class="math inline">\(\sigma\)</span> of the data might seem to be a strange concept. What data do we have, besides 17 red beads and 33 white beads? The answer is that this is the data, and t is most sensibily represented as a vector of length 50, with 17 1’s and 33 0’s. The standard deviation of <code>sd(c(rep(0, 17), rep(1, 33)))</code> is 0.4785181.</p>
+<p>You can then use the standard error to create a 95% confidence interval:</p>
+<p><span class="math display">\[  CI = \bar{x} \hspace{.1cm} \pm 2SE = .34 \hspace{.1cm} \pm .134\]</span></p>
+<p>With 95% confidence, the proportion of red beads in the urn is between 21% and 47%.</p>
+<!-- DK: Explain confidence intervals. -->
+</section>
+<section id="tests" class="level4" data-number="3.4.3.2">
+<h4 data-number="3.4.3.2" class="anchored" data-anchor-id="tests"><span class="header-section-number">3.4.3.2</span> Tests</h4>
+<p>Statisticians also use hypothesis tests to quickly <strong>try</strong> to answer questions. Our view on hypothesis tests is that:</p>
+<p><strong>Amateurs test. Professionals summarize.</strong></p>
+<p>Traditionally, most scientific papers are not so much interested in estimating <span class="math inline">\(\rho\)</span>. They are interested in testing specific hypotheses. What do we mean by that?</p>
+<p>Let’s look at a possible hypothesis in our urn paradigm: there are equal number of red and white beads in the urn. The null hypothesis, denoted by <span class="math inline">\(H_0\)</span>, is the theory we are testing, while the alternative hypothesis, denoted by <span class="math inline">\(H_a\)</span>, represents the opposite of our theory. Therefore, our hypothesis is designed as such:</p>
+<p><span class="math inline">\(H_0\)</span>: There are an equal number of red and white beads in the urn.</p>
+<p><span class="math inline">\(H_a\)</span>: There are <em>not</em> an equal number of red and white beads in the urn.</p>
+<p>Can we reject that hypothesis? Convention: if the 95% confidence interval excludes the null hypothesis, then we reject it. Here, that would mean if our estimate (plus or minus 2 standard errors) <em>excluded</em> the possibility of the red and white beads being equal (<span class="math inline">\(\rho = .5\)</span>) we can reject the null hypothesis. In the previous section we determined that the 95% confidence interval is between 21% and 47%. Because 50% is outside of this interval, we could reject the null hypothesis, and conclude that it is unlikely that the proportion of beads in the urn is 50%.</p>
+<p>If we were testing the theory that <span class="math inline">\(\rho = .45\)</span> instead, our null hypothesis would fall within the confidence interval. <strong>This does not mean that we accept the null hypothesis</strong>. Instead, we simply don’t reject it. In our scenario we only know that there is some possibility that <span class="math inline">\(\rho = .45\)</span>. We’re just back where we started! This is why we never test — unless your boss demands a test. <strong>Use your judgment, make your models, summarize your knowledge of the world, and use that summary to make decisions.</strong></p>
+</section>
+<section id="data-generating-mechanism" class="level4" data-number="3.4.3.3">
+<h4 data-number="3.4.3.3" class="anchored" data-anchor-id="data-generating-mechanism"><span class="header-section-number">3.4.3.3</span> Data generating mechanism</h4>
+<p>The <em>data generating mechanism</em>, or DGM, is a mathematical formula which mimics the process by which the data comes to us. The DGM for sampling scenarios with only two possible values is called <em>Bernoulli</em> and is often denoted as:</p>
+<p><span class="math display">\[ red_i  \sim Bernoulli(\rho) \]</span></p>
+<p>Each bead <span class="math inline">\(i\)</span> which we sample can be either red or white. It is convenient to define the model in terms of whether or not the bead was red. If bead <span class="math inline">\(i\)</span> is red, the value drawn is <code>1</code>, which is the standard way of representing <code>TRUE</code>. In other words, <span class="math inline">\(red_i = 1\)</span> means that bead <span class="math inline">\(i\)</span> was red. Similarly, a white bead is indicated with <code>0</code>, meaning that it is <code>FALSE</code> that the bead was red. <span class="math inline">\(\rho\)</span> is the only parameter in a Bernoulli model. It is the probability that a <code>1</code>, instead of a <code>0</code>, is drawn. That is, <span class="math inline">\(\rho\)</span> is the probability of a red bead.</p>
+<p>Using our rough calculations above, we conclude that our posterior for <span class="math inline">\(\rho\)</span> is <span class="math inline">\(N(0.34, 0.134)\)</span>. So, our full data generating mechanism is:</p>
+<p><span class="math display">\[ red_i  \sim Bernoulli(\rho) \text{with} \rho \sim N(0.34, 0.134)\]</span></p>
+</section>
 </section>
 <section id="temperance" class="level3" data-number="3.4.4">
 <h3 data-number="3.4.4" class="anchored" data-anchor-id="temperance"><span class="header-section-number">3.4.4</span> Temperance</h3>
@@ -3409,15 +3449,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 </div>
 </div>
-<p>Courage allowed us to assume a simple Bernoulli model and to calculate an estimate and its associated standard error.</p>
-<p>The two most important parts of any distribution are, first, its center and, second, its spread. We need reasonable estimates for the center and the spread of the posterior for <span class="math inline">\(\rho\)</span>.</p>
-<p>First, the percentage of red beads in the sample, $17/50 = 0.34%, is a good estimate for the center of the posterior. Throughout this section, we are leaving formalism behind. We have not proved that the sample provides a good estimate of the mean of the posterior but common sense suggests that it does.</p>
-<p>Second, calculate the standard error:</p>
-<p><span class="math display">\[  SE = \frac{\sigma\text{ of data}}{\sqrt{\text{sample size}}} = \frac{.4785}{\sqrt{50}} \approx .067\]</span></p>
-<p>The <span class="math inline">\(\sigma\)</span> of the data might seem to be a strange concept. What data do we have, besides 17 red beads and 33 white beads? The answer is that this is the data, and t is most sensibily represented as a vector of length 50, with 17 1’s and 33 0’s. The standard deviation of <code>sd(c(rep(0, 17), rep(1, 33)))</code> is 0.4785181.</p>
-<p>You can then use the standard error to create a 95% confidence interval:</p>
-<p><span class="math display">\[  CI = \bar{x} \hspace{.1cm} \pm 2SE = .34 \hspace{.1cm} \pm .134\]</span></p>
-<p>With 95% confidence, the proportion of red beads in the urn is between 21% and 47%.</p>
+<p>Temperance uses the Data Generating Mechanism to answer the specific question with which we began. Humility reminds us that this answer is always a lie. We can also explore the general question by using the DGM to calculate many similar quantities of interest, displaying the results graphically.</p>
 <p>Knowing that the standard error is the standard deviation of the posterior (and that the posterior is approximately normal) allows us to create a graphic.</p>
 <div class="cell">
 <details class="code-fold">
@@ -3442,39 +3474,11 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 </div>
 <p><strong>This is not precisely accurate.</strong> The full machinery of a proper Bayesian analysis would generate a (very) slightly different answer. To get that correct answer, we could either do everything by hand, as in <a href="probability.html" class="quarto-xref"><span>Chapter 2</span></a>, or use an R package, as in <a href="models.html" class="quarto-xref"><span>Chapter 4</span></a>. However, the purpose of this chapter is to develop your intuition. Generating a 95% confidence interval using two times the standard error along with a normality assumption is good enough.</p>
-<p>More important than the subtle issue</p>
-<!-- DK: Something about frequentist versus Bayesian interpretations. -->
-<section id="hypothesis-tests" class="level4" data-number="3.4.4.1">
-<h4 data-number="3.4.4.1" class="anchored" data-anchor-id="hypothesis-tests"><span class="header-section-number">3.4.4.1</span> Hypothesis tests</h4>
-<p>Statisticians also use hypothesis tests to quickly <strong>try</strong> to answer questions. Our view on hypothesis tests is that:</p>
-<p><strong>Amateurs test. Professionals summarize.</strong></p>
-<p>Traditionally, most scientific papers are not so much interested in estimating <span class="math inline">\(\rho\)</span>. They are interested in testing specific hypotheses. What do we mean by that?</p>
-<p>Let’s look at a possible hypothesis in our urn paradigm: there are equal number of red and white beads in the urn. The null hypothesis, denoted by <span class="math inline">\(H_0\)</span>, is the theory we are testing, while the alternative hypothesis, denoted by <span class="math inline">\(H_a\)</span>, represents the opposite of our theory. Therefore, our hypothesis is designed as such:</p>
-<p><span class="math inline">\(H_0\)</span>: There are an equal number of red and white beads in the urn.</p>
-<p><span class="math inline">\(H_a\)</span>: There are <em>not</em> an equal number of red and white beads in the urn.</p>
-<p>Can we reject that hypothesis? Convention: if the 95% confidence interval excludes the null hypothesis, then we reject it. Here, that would mean if our estimate (plus or minus 2 standard errors) <em>excluded</em> the possibility of the red and white beads being equal (<span class="math inline">\(\rho = .5\)</span>) we can reject the null hypothesis. In the previous section we determined that the 95% confidence interval is between 21% and 47%. Because 50% is outside of this interval, we could reject the null hypothesis, and conclude that it is unlikely that the proportion of beads in the urn is 50%.</p>
-<p>If we were testing the theory that <span class="math inline">\(\rho = .45\)</span> instead, our null hypothesis would fall within the confidence interval. <strong>This does not mean that we accept the null hypothesis</strong>. Instead, we simply don’t reject it. In our scenario we only know that there is some possibility that <span class="math inline">\(\rho = .45\)</span>. We’re just back where we started! This is why we never test — unless your boss demands a test. <strong>Use your judgment, make your models, summarize your knowledge of the world, and use that summary to make decisions.</strong></p>
-</section>
-</section>
-</section>
-<section id="summary" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">3.5</span> Summary</h2>
-<p>In this chapter, we performed both tactile and virtual sampling exercises to make inferences about an unknown parameter <span class="math inline">\(\rho\)</span>: the proportion of red beads in the urn. We used the sample proportion <span class="math inline">\(\hat{\rho}\)</span> to estimate the true proportion <span class="math inline">\(\rho\)</span>.</p>
+<!-- DK: This is very simplified, but maybe that is good! Could discuss that we could use this DGM to answer other questions, like how likely it is to draw 10 red with a shovel of size 20. -->
 <p>There is a truth! There is a true value for <span class="math inline">\(\rho\)</span> which we do not know. We want to create a posterior probability distribution which summarizes our knowledge. We care about the posterior probability distribution of <span class="math inline">\(\rho\)</span>. The center of that distribution is around the mean or median of the proportion in your sample. The standard deviation of that posterior is the standard deviation of the sample divided by the square root of our sample size. Note that this is the same thing as the standard deviation of the repeated samples.</p>
 <p>We journey from reality, to our predictions, to the standard error of our predictions, to the posterior probability distribution for <span class="math inline">\(\rho\)</span>. This is our sequence:</p>
 <p><strong><span class="math inline">\(\rho\)</span> (i.e., the truth) <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(\hat{\rho}\)</span> (i.e., my estimate) <span class="math inline">\(\Rightarrow\)</span> the standard error of <span class="math inline">\(\hat{\rho}\)</span> (i.e., black box of math mumbo jumbo and computer simulation magic) <span class="math inline">\(\Rightarrow\)</span> our posterior probability distribution for <span class="math inline">\(\rho\)</span> (i.e., our beliefs about the truth).</strong></p>
 <p>This journey shows how our beliefs about the truth develop through our work. We begin with <span class="math inline">\(\rho\)</span>; <span class="math inline">\(\rho\)</span> is the truth, the true but unknown value we are estimating. <span class="math inline">\(\hat{\rho}\)</span> is our estimate for <span class="math inline">\(\rho\)</span>. There can be millions and millions of <span class="math inline">\(\hat{\rho}\)</span>’s. Next, we must estimate the standard error of our estimates (our <span class="math inline">\(\hat{\rho}\)</span>’s) to account for the uncertainty of our predictions. Finally, we create a posterior probability distribution for <span class="math inline">\(\rho\)</span>. This distribution is used to answer any questions about <span class="math inline">\(\rho\)</span>.</p>
-<p>Other highlights:</p>
-<ul>
-<li><p>Standard error is just a fancy term for your uncertainty about something you don’t know. Standard error <span class="math inline">\(\approx\)</span> our (uncertain) beliefs.</p></li>
-<li><p>Larger sample sizes <span class="math inline">\(\implies\)</span> lower standard errors <span class="math inline">\(\implies\)</span> more accurate estimates.</p></li>
-</ul>
-<!-- DK: Cut next point? -->
-<ul>
-<li><p>If we could only know two pieces of information from our data, we would need a measure of the <strong>center</strong> of the distribution (like mean or median) and a measure of the <strong>variability</strong> of the distribution (like standard deviation or median absolute deviation).</p></li>
-<li><p>The standard error refers to the standard deviation of a sample statistic (also known as a “point estimate”), such as the mean or median. Therefore, the “standard error of the mean” refers to the standard deviation of the distribution of sample means taken from a population.</p></li>
-</ul>
-<p>As we continue our journey, recall the case of Primrose Everdeen and what she represents: no matter how realistic our model is, our predictions are <strong>never certain</strong>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -3486,6 +3490,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

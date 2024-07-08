@@ -22,6 +22,8 @@ Sadly, https://datalorax.github.io/equatiomatic/ does not support objects of brm
 
 Try to use gtsummary() and make it standard.
 
+"The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use." -- Hal Stern
+
 ## Students
 
 
