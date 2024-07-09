@@ -311,7 +311,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#shovel-one-time" id="toc-shovel-one-time" class="nav-link" data-scroll-target="#shovel-one-time"><span class="header-section-number">3.2.1</span> Using the virtual shovel once</a></li>
   <li><a href="#shovel-33-times" id="toc-shovel-33-times" class="nav-link" data-scroll-target="#shovel-33-times"><span class="header-section-number">3.2.2</span> Using the virtual shovel 33 times</a></li>
-  <li><a href="#shovel-1000-times" id="toc-shovel-1000-times" class="nav-link" data-scroll-target="#shovel-1000-times"><span class="header-section-number">3.2.3</span> Using the virtual shovel 1,000 times</a></li>
+  <li><a href="#shovel-1000-times" id="toc-shovel-1000-times" class="nav-link" data-scroll-target="#shovel-1000-times"><span class="header-section-number">3.2.3</span> Using the virtual shovel 10,000 times</a></li>
   <li><a href="#different-shovels" id="toc-different-shovels" class="nav-link" data-scroll-target="#different-shovels"><span class="header-section-number">3.2.4</span> The effect of different shovel sizes</a></li>
   </ul></li>
   <li><a href="#sec-standard-errors" id="toc-sec-standard-errors" class="nav-link" data-scroll-target="#sec-standard-errors"><span class="header-section-number">3.3</span> Standard error</a>
@@ -354,7 +354,6 @@ window.Quarto = {
 
 
 <!-- DK: Key question. Should our question for Cardinal Virtues be something like: "What are the chances of getting 10 red beads with a shovel of size 20?" Or should we just stick with rho? -->
-<!-- DK: Could do more to make this Cardinal Virtue section more like others. -->
 <!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! -->
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/e3PJ3Du_zDc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p><em>The Hunger Games</em> is a dystopian novel in which children are chosen via lottery to fight to the death. Primrose Everdeen is selected from the urn. Why does she have the misfortune of being selected? Or, as we data scientists say, <em>sampled</em>?</p>
@@ -377,10 +376,7 @@ window.Quarto = {
 <p>To begin this chapter, we will look at a real sampling activity: the urn. Then, we will simulate the urn example using R code. This will help us to understand the <em>standard error</em> and the ways in which uncertainty factors into our predictions.</p>
 <p>Use the <strong>tidyverse</strong> package.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <section id="using-the-shovel-method-once" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="using-the-shovel-method-once"><span class="header-section-number">3.1.1</span> Using the shovel method once</h3>
@@ -453,18 +449,18 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 33 × 4
-   group         red_beads prop_red group_ID
-   &lt;chr&gt;             &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Dohyun, Estel        18     0.36        1
- 2 Mak, Sophie          17     0.34        2
- 3 Nam, Joshua          19     0.38        3
- 4 Paddy, Matt          16     0.32        4
- 5 Yao, Kate            23     0.46        5
- 6 Conrad, Vlad         16     0.32        6
- 7 Morgan, Emily        21     0.42        7
- 8 Ian, Iman            18     0.36        8
- 9 Frank, Clara         21     0.42        9
-10 Aayush, Karen        15     0.3        10
+   group          red_beads prop_red group_ID
+   &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
+ 1 Mak, Sophie           17     0.34        1
+ 2 Vignesh, Eliot        16     0.32        2
+ 3 Dohyun, Estel         18     0.36        3
+ 4 Maeve, Josh           18     0.36        4
+ 5 Maddie, Brent         19     0.38        5
+ 6 Yao, Kate             23     0.46        6
+ 7 Caroline, Edna        15     0.3         7
+ 8 Nam, Joshua           19     0.38        8
+ 9 Paddy, Matt           16     0.32        9
+10 Siobhan, Jane         11     0.22       10
 # ℹ 23 more rows</code></pre>
 </div>
 </div>
@@ -526,7 +522,7 @@ window.Quarto = {
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># order. This ensures that the figures in the book match their written</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># descriptions. We want 40% of the beads to be red.</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>urn <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">color =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"red"</span>, <span class="dv">400</span>), </span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">rep</span>(<span class="st">"white"</span>, <span class="dv">600</span>))) <span class="sc">|&gt;</span></span>
@@ -536,30 +532,30 @@ window.Quarto = {
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># beads. But we find it aesthetically pleasing to mix them up.</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_frac</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bead_ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) </span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>urn  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bead_ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bead_ID, color)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>urn  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,000 × 2
-   color bead_ID
-   &lt;chr&gt;   &lt;int&gt;
- 1 white       1
- 2 white       2
- 3 red         3
- 4 red         4
- 5 white       5
- 6 white       6
- 7 white       7
- 8 white       8
- 9 white       9
-10 white      10
+   bead_ID color
+     &lt;int&gt; &lt;chr&gt;
+ 1       1 white
+ 2       2 red  
+ 3       3 red  
+ 4       4 white
+ 5       5 white
+ 6       6 red  
+ 7       7 white
+ 8       8 white
+ 9       9 red  
+10      10 red  
 # ℹ 990 more rows</code></pre>
 </div>
 </div>
 <p>Observe that <code>urn</code> has 1,000 rows, meaning that the urn contains 1,000 beads. The first variable <code>bead_ID</code> is used as an <em>identification variable</em>. None of the beads in the actual urn are marked with numbers. The second variable <code>color</code> indicates whether a particular virtual bead is red or white.</p>
-<p>Note that in this section, we used the variable <code>bead_ID</code> to keep track of each bead in our urn, while in the last section we used <code>group_ID</code> to keep track of the samples drawn by the 33 individual teams. This is a better strategy than naming both variables <code>ID</code>, as it would be much more likely for us to get them confused later on.</p>
-<p>Our virtual urn needs a virtual shovel. We use <code>slice_sample()</code> and some list-column mapping wizardry learned in <a href="probability.html#sec-rlist-columns-and-map-functions" class="quarto-xref"><span>Section 2.3</span></a> to take a sample of 50 beads from our virtual urn.</p>
+<p>Our virtual urn needs a virtual shovel. We use <code>slice_sample()</code> and some list-column mapping wizardry to take a sample of 50 beads from our virtual urn.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -590,8 +586,8 @@ window.Quarto = {
  $ trial_ID: num 1
  $ shovel  :List of 1
   ..$ : tibble [50 × 2] (S3: tbl_df/tbl/data.frame)
-  .. ..$ color  : chr [1:50] "white" "white" "white" "red" ...
-  .. ..$ bead_ID: int [1:50] 812 903 227 283 229 160 523 893 66 277 ...</code></pre>
+  .. ..$ bead_ID: int [1:50] 391 171 24 703 399 404 134 145 272 487 ...
+  .. ..$ color  : chr [1:50] "white" "white" "white" "white" ...</code></pre>
 </div>
 </div>
 <p>There are two levels. There is one row in the tibble for each sample. So far, we have only drawn one sample. Within each row, there is a second level, the tibble which is the sample. That tibble has two variables: <code>trial_ID</code> and <code>color</code>. This is the advantage to using <code>slice_sample()</code>, because it selects all columns of our urn, whereas <code>sample()</code> can only sample from a single column. While identifying each individual bead may be irrelevant in our urn scenario, with other problems it could be very useful to have additional data about each individual.</p>
@@ -615,7 +611,7 @@ window.Quarto = {
 <pre><code># A tibble: 1 × 3
   trial_ID shovel            numb_red
      &lt;dbl&gt; &lt;list&gt;               &lt;int&gt;
-1        1 &lt;tibble [50 × 2]&gt;       20</code></pre>
+1        1 &lt;tibble [50 × 2]&gt;       17</code></pre>
 </div>
 </div>
 <p>How does this work? R evaluates if <code>color == red</code>, and treats <code>TRUE</code> values like the number <code>1</code> and <code>FALSE</code> values like the number <code>0</code>. So summing the number of <code>TRUE</code>s and <code>FALSE</code>s is equivalent to summing <code>1</code>’s and <code>0</code>’s. In the end, this operation counts the number of beads where <code>color</code> equals “red”.</p>
@@ -632,7 +628,7 @@ window.Quarto = {
 <pre><code># A tibble: 1 × 4
   trial_ID shovel            numb_red prop_red
      &lt;dbl&gt; &lt;list&gt;               &lt;int&gt;    &lt;dbl&gt;
-1        1 &lt;tibble [50 × 2]&gt;       23     0.46</code></pre>
+1        1 &lt;tibble [50 × 2]&gt;       17     0.34</code></pre>
 </div>
 </div>
 <p>Careful readers will note that the <code>numb_red</code> is changing in each example above. The reason, of course, is that each block re-runs the shovel exercise, and slice_sample will return a random number of red beads. If we wanted the same number in each block, we would need to use <code>set.seed()</code> each time, always providing the same <code>seed</code> each time.</p>
@@ -645,7 +641,7 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9</span>)</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">13</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a> virtual_samples <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">trial_ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">33</span>) <span class="sc">|&gt;</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">shovel =</span> <span class="fu">map</span>(trial_ID, <span class="sc">~</span> <span class="fu">slice_sample</span>(urn, <span class="at">n =</span> <span class="dv">50</span>))) <span class="sc">|&gt;</span> </span>
@@ -659,15 +655,15 @@ window.Quarto = {
    trial_ID shovel            numb_red prop_red
       &lt;int&gt; &lt;list&gt;               &lt;int&gt;    &lt;dbl&gt;
  1        1 &lt;tibble [50 × 2]&gt;       21     0.42
- 2        2 &lt;tibble [50 × 2]&gt;       19     0.38
- 3        3 &lt;tibble [50 × 2]&gt;       17     0.34
- 4        4 &lt;tibble [50 × 2]&gt;       15     0.3 
- 5        5 &lt;tibble [50 × 2]&gt;       17     0.34
- 6        6 &lt;tibble [50 × 2]&gt;       21     0.42
- 7        7 &lt;tibble [50 × 2]&gt;        9     0.18
+ 2        2 &lt;tibble [50 × 2]&gt;       21     0.42
+ 3        3 &lt;tibble [50 × 2]&gt;       20     0.4 
+ 4        4 &lt;tibble [50 × 2]&gt;       17     0.34
+ 5        5 &lt;tibble [50 × 2]&gt;       20     0.4 
+ 6        6 &lt;tibble [50 × 2]&gt;       18     0.36
+ 7        7 &lt;tibble [50 × 2]&gt;       24     0.48
  8        8 &lt;tibble [50 × 2]&gt;       21     0.42
- 9        9 &lt;tibble [50 × 2]&gt;       16     0.32
-10       10 &lt;tibble [50 × 2]&gt;       20     0.4 
+ 9        9 &lt;tibble [50 × 2]&gt;       17     0.34
+10       10 &lt;tibble [50 × 2]&gt;       21     0.42
 # ℹ 23 more rows</code></pre>
 </div>
 </div>
@@ -718,7 +714,7 @@ window.Quarto = {
 <p>This visualization allows us to see how our results differed between our tactile and virtual urn results. As we can see, there is some variation between our results. This is not a cause for concern, as there is always expected sampling variation between results.</p>
 </section>
 <section id="shovel-1000-times" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="shovel-1000-times"><span class="header-section-number">3.2.3</span> Using the virtual shovel 1,000 times</h3>
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="shovel-1000-times"><span class="header-section-number">3.2.3</span> Using the virtual shovel 10,000 times</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -729,21 +725,21 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Although we took 33 samples from the urn in the previous section, we should never do that again! The advantage of modern technology is that we can use virtual simulation as many times as we choose, so we have no restrictions on resources. No longer are the days where we have to recruit our friends to tirelessly sample from the physical urn. We are now data scientists! 33 samples are useless to us. Instead, we use our simulations hundreds or thousands of times to create mathematical models that we can combine with our knowledge to answer our questions. In this section we’ll examine the effects of sampling from the urn 1,000 times.</p>
-<p>We can reuse our code from above, making sure to replace 33 trials with 1,000.</p>
+<p>Although we took 33 samples from the urn in the previous section, we should use so few samples. Instead, in this section we’ll examine the effects of sampling from the urn 10,000 times.</p>
+<p>We can reuse our code from above, making sure to replace 33 trials with 10,000.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a> virtual_samples <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">trial_ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a> virtual_samples <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">trial_ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) <span class="sc">|&gt;</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">shovel =</span> <span class="fu">map</span>(trial_ID, <span class="sc">~</span> <span class="fu">slice_sample</span>(urn, <span class="at">n =</span> <span class="dv">50</span>))) <span class="sc">|&gt;</span> </span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">numb_red =</span> <span class="fu">map_int</span>(shovel, <span class="sc">~</span> <span class="fu">sum</span>(.<span class="sc">$</span>color <span class="sc">==</span> <span class="st">"red"</span>))) <span class="sc">|&gt;</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">numb_beads =</span> <span class="fu">map_int</span>(shovel, <span class="sc">~</span> <span class="fu">length</span>(.<span class="sc">$</span>color))) <span class="sc">|&gt;</span> </span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">prop_red =</span> numb_red <span class="sc">/</span> numb_beads) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Now we have 1,000 values for <code>prop_red</code>, each representing the proportion of 50 beads that are red in a sample. Using the same code as earlier, let’s visualize the distribution of these 1,000 replicates of <code>prop_red</code> in a histogram:</p>
+<p>Now we have 10,000 values for <code>prop_red</code>, each representing the proportion of 50 beads that are red in a sample. Using the same code as earlier, let’s visualize the distribution of these 10,000 replicates of <code>prop_red</code> in a histogram:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -754,7 +750,7 @@ window.Quarto = {
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">hat</span>(rho)),</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Count"</span>,</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Distribution of 1,000 proportions red"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Distribution of 10,000 proportions red"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -780,14 +776,14 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Instead of just one shovel, imagine we have three choices of shovels to extract a sample of beads with: shovels of size 25, 50, and 100. Using our newly developed tools for virtual sampling, let’s unpack the effect of having different sample sizes. Start by creating a tibble with 1,000 rows, each row representing an instance of us sampling from the urn with our chosen shovel size. Then, compute the resulting 1,000 replicates of proportion red. Finally, plot the distribution using a histogram.</p>
+<p>Instead of just one shovel, imagine we have three choices of shovels to extract a sample of beads with: shovels of size 25, 50, and 100. Using our newly developed tools for virtual sampling, let’s unpack the effect of having different sample sizes. Start by creating a tibble with 10,000 rows, each row representing an instance of us sampling from the urn with our chosen shovel size. Then, compute the resulting 10,000 replicates of proportion red. Finally, plot the distribution using a histogram.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Within slice_sample(), n = 25 represents our shovel of size 25. We also divide</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># by 25 to compute the proportion red.</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>virtual_samples_25 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">trial_ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>virtual_samples_25 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">trial_ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">shovel =</span> <span class="fu">map</span>(trial_ID, <span class="sc">~</span> <span class="fu">slice_sample</span>(urn, <span class="at">n =</span> <span class="dv">25</span>))) <span class="sc">|&gt;</span> </span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">numb_red =</span> <span class="fu">map_int</span>(shovel, <span class="sc">~</span> <span class="fu">sum</span>(.<span class="sc">$</span>color <span class="sc">==</span> <span class="st">"red"</span>))) <span class="sc">|&gt;</span> </span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_red =</span> numb_red <span class="sc">/</span> <span class="dv">25</span>)</span>
@@ -812,7 +808,7 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>virtual_samples_50 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">trial_ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>virtual_samples_50 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">trial_ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">shovel =</span> <span class="fu">map</span>(trial_ID, <span class="sc">~</span> <span class="fu">slice_sample</span>(urn, <span class="at">n =</span> <span class="dv">50</span>))) <span class="sc">|&gt;</span> </span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">numb_red =</span> <span class="fu">map_int</span>(shovel, <span class="sc">~</span> <span class="fu">sum</span>(.<span class="sc">$</span>color <span class="sc">==</span> <span class="st">"red"</span>))) <span class="sc">|&gt;</span> </span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_red =</span> numb_red <span class="sc">/</span> <span class="dv">50</span>)</span>
@@ -835,11 +831,11 @@ window.Quarto = {
 </div>
 </div>
 <p>We choose a bin width of .04 for all histograms to more easily compare different shovel sizes. Using a smaller bin size would result in gaps between the bars, as a shovel of size 50 has more possible <span class="math inline">\(\hat{\rho}\)</span> values than a shovel of size 25.</p>
-<p>Finally, we will perform the same process with 1000 replicates to map the histogram using a shovel size of <strong>100</strong>.</p>
+<p>Finally, we will perform the same process with 10,000 replicates to map the histogram using a shovel size of <strong>100</strong>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>virtual_samples_100 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">trial_ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>virtual_samples_100 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">trial_ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">shovel =</span> <span class="fu">map</span>(trial_ID, <span class="sc">~</span> <span class="fu">slice_sample</span>(urn, <span class="at">n =</span> <span class="dv">100</span>))) <span class="sc">|&gt;</span> </span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">numb_red =</span> <span class="fu">map_int</span>(shovel, <span class="sc">~</span> <span class="fu">sum</span>(.<span class="sc">$</span>color <span class="sc">==</span> <span class="st">"red"</span>))) <span class="sc">|&gt;</span> </span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_red =</span> numb_red <span class="sc">/</span> <span class="dv">100</span>)</span>
@@ -935,23 +931,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="kqavcuevlu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kqavcuevlu table {
+<div id="nykcbvvilg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nykcbvvilg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kqavcuevlu thead, #kqavcuevlu tbody, #kqavcuevlu tfoot, #kqavcuevlu tr, #kqavcuevlu td, #kqavcuevlu th {
+#nykcbvvilg thead, #nykcbvvilg tbody, #nykcbvvilg tfoot, #nykcbvvilg tr, #nykcbvvilg td, #nykcbvvilg th {
   border-style: none;
 }
 
-#kqavcuevlu p {
+#nykcbvvilg p {
   margin: 0;
   padding: 0;
 }
 
-#kqavcuevlu .gt_table {
+#nykcbvvilg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -977,12 +973,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_caption {
+#nykcbvvilg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kqavcuevlu .gt_title {
+#nykcbvvilg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -994,7 +990,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#kqavcuevlu .gt_subtitle {
+#nykcbvvilg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1006,7 +1002,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#kqavcuevlu .gt_heading {
+#nykcbvvilg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1018,13 +1014,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_bottom_border {
+#nykcbvvilg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_col_headings {
+#nykcbvvilg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1039,7 +1035,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_col_heading {
+#nykcbvvilg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1059,7 +1055,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#kqavcuevlu .gt_column_spanner_outer {
+#nykcbvvilg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1071,15 +1067,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#kqavcuevlu .gt_column_spanner_outer:first-child {
+#nykcbvvilg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kqavcuevlu .gt_column_spanner_outer:last-child {
+#nykcbvvilg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kqavcuevlu .gt_column_spanner {
+#nykcbvvilg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1091,11 +1087,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#kqavcuevlu .gt_spanner_row {
+#nykcbvvilg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kqavcuevlu .gt_group_heading {
+#nykcbvvilg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1121,7 +1117,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#kqavcuevlu .gt_empty_group_heading {
+#nykcbvvilg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1136,15 +1132,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#kqavcuevlu .gt_from_md > :first-child {
+#nykcbvvilg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kqavcuevlu .gt_from_md > :last-child {
+#nykcbvvilg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kqavcuevlu .gt_row {
+#nykcbvvilg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1163,7 +1159,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#kqavcuevlu .gt_stub {
+#nykcbvvilg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1176,7 +1172,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kqavcuevlu .gt_stub_row_group {
+#nykcbvvilg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1190,15 +1186,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#kqavcuevlu .gt_row_group_first td {
+#nykcbvvilg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kqavcuevlu .gt_row_group_first th {
+#nykcbvvilg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kqavcuevlu .gt_summary_row {
+#nykcbvvilg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1208,16 +1204,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kqavcuevlu .gt_first_summary_row {
+#nykcbvvilg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_first_summary_row.thick {
+#nykcbvvilg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kqavcuevlu .gt_last_summary_row {
+#nykcbvvilg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1227,7 +1223,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_grand_summary_row {
+#nykcbvvilg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1237,7 +1233,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kqavcuevlu .gt_first_grand_summary_row {
+#nykcbvvilg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1247,7 +1243,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_last_grand_summary_row_top {
+#nykcbvvilg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1257,11 +1253,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_striped {
+#nykcbvvilg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kqavcuevlu .gt_table_body {
+#nykcbvvilg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1270,7 +1266,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_footnotes {
+#nykcbvvilg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1284,7 +1280,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_footnote {
+#nykcbvvilg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1293,7 +1289,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kqavcuevlu .gt_sourcenotes {
+#nykcbvvilg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1307,7 +1303,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_sourcenote {
+#nykcbvvilg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1315,63 +1311,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kqavcuevlu .gt_left {
+#nykcbvvilg .gt_left {
   text-align: left;
 }
 
-#kqavcuevlu .gt_center {
+#nykcbvvilg .gt_center {
   text-align: center;
 }
 
-#kqavcuevlu .gt_right {
+#nykcbvvilg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kqavcuevlu .gt_font_normal {
+#nykcbvvilg .gt_font_normal {
   font-weight: normal;
 }
 
-#kqavcuevlu .gt_font_bold {
+#nykcbvvilg .gt_font_bold {
   font-weight: bold;
 }
 
-#kqavcuevlu .gt_font_italic {
+#nykcbvvilg .gt_font_italic {
   font-style: italic;
 }
 
-#kqavcuevlu .gt_super {
+#nykcbvvilg .gt_super {
   font-size: 65%;
 }
 
-#kqavcuevlu .gt_footnote_marks {
+#nykcbvvilg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kqavcuevlu .gt_asterisk {
+#nykcbvvilg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kqavcuevlu .gt_indent_1 {
+#nykcbvvilg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kqavcuevlu .gt_indent_2 {
+#nykcbvvilg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kqavcuevlu .gt_indent_3 {
+#nykcbvvilg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kqavcuevlu .gt_indent_4 {
+#nykcbvvilg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kqavcuevlu .gt_indent_5 {
+#nykcbvvilg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1389,15 +1385,15 @@ window.Quarto = {
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_right" headers="Number of slots in shovel">25</td>
-<td class="gt_row gt_right" headers="Standard deviation of proportions red">0.099</td>
+<td class="gt_row gt_right" headers="Standard deviation of proportions red">0.098</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_right" headers="Number of slots in shovel">50</td>
-<td class="gt_row gt_right" headers="Standard deviation of proportions red">0.067</td>
+<td class="gt_row gt_right" headers="Standard deviation of proportions red">0.068</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_right" headers="Number of slots in shovel">100</td>
-<td class="gt_row gt_right" headers="Standard deviation of proportions red">0.045</td>
+<td class="gt_row gt_right" headers="Standard deviation of proportions red">0.046</td>
 </tr>
 </tbody>
 </table>
@@ -1481,15 +1477,15 @@ window.Quarto = {
 <pre><code># A tibble: 9 × 5
   trial_ID shovel_size shovel             numb_red prop_red
      &lt;int&gt;       &lt;dbl&gt; &lt;list&gt;                &lt;int&gt;    &lt;dbl&gt;
-1        1          25 &lt;tibble [25 × 2]&gt;         7     0.28
-2        1          50 &lt;tibble [50 × 2]&gt;        19     0.38
-3        1         100 &lt;tibble [100 × 2]&gt;       39     0.39
-4        2          25 &lt;tibble [25 × 2]&gt;         8     0.32
-5        2          50 &lt;tibble [50 × 2]&gt;        19     0.38
-6        2         100 &lt;tibble [100 × 2]&gt;       34     0.34
-7        3          25 &lt;tibble [25 × 2]&gt;         7     0.28
-8        3          50 &lt;tibble [50 × 2]&gt;        19     0.38
-9        3         100 &lt;tibble [100 × 2]&gt;       36     0.36</code></pre>
+1        1          25 &lt;tibble [25 × 2]&gt;        12     0.48
+2        1          50 &lt;tibble [50 × 2]&gt;        17     0.34
+3        1         100 &lt;tibble [100 × 2]&gt;       40     0.4 
+4        2          25 &lt;tibble [25 × 2]&gt;        13     0.52
+5        2          50 &lt;tibble [50 × 2]&gt;        16     0.32
+6        2         100 &lt;tibble [100 × 2]&gt;       43     0.43
+7        3          25 &lt;tibble [25 × 2]&gt;         5     0.2 
+8        3          50 &lt;tibble [50 × 2]&gt;        14     0.28
+9        3         100 &lt;tibble [100 × 2]&gt;       40     0.4 </code></pre>
 </div>
 </div>
 <p>Again, we changed the second line to use <code>shovel_size</code> rather than <code>trial_ID</code> as the mapping variable since we can no longer hard code the shovel size into the call to <code>slice_sample()</code>. Expand to 1,000 simulations for each value of <code>shovel_size</code> and finish with a calculation of standard deviation.</p>
@@ -3437,7 +3433,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 <p><span class="math display">\[ red_i  \sim Bernoulli(\rho) \]</span></p>
 <p>Each bead <span class="math inline">\(i\)</span> which we sample can be either red or white. It is convenient to define the model in terms of whether or not the bead was red. If bead <span class="math inline">\(i\)</span> is red, the value drawn is <code>1</code>, which is the standard way of representing <code>TRUE</code>. In other words, <span class="math inline">\(red_i = 1\)</span> means that bead <span class="math inline">\(i\)</span> was red. Similarly, a white bead is indicated with <code>0</code>, meaning that it is <code>FALSE</code> that the bead was red. <span class="math inline">\(\rho\)</span> is the only parameter in a Bernoulli model. It is the probability that a <code>1</code>, instead of a <code>0</code>, is drawn. That is, <span class="math inline">\(\rho\)</span> is the probability of a red bead.</p>
 <p>Using our rough calculations above, we conclude that our posterior for <span class="math inline">\(\rho\)</span> is <span class="math inline">\(N(0.34, 0.067)\)</span>. So, our full data generating mechanism is:</p>
-<p><span class="math display">\[ red_i  \sim Bernoulli(\rho) \text{with} \rho \sim N(0.34, 0.134)\]</span> We conclude Courage by adding a sentence about our DGM to the summary paragraph.</p>
+<p><span class="math display">\[ red_i  \sim Bernoulli(\rho) \text{with} \rho \sim N(0.34, 0.067)\]</span> We conclude Courage by adding a sentence about our DGM to the summary paragraph.</p>
 <blockquote class="blockquote">
 <p><em>Using a sample of 50 beads drawn from an urn in which all beads are either red or white, we seek to determine the proportion of beads which are red. Our estimate would be flawed if someone has changed the beads in the urn since we drew our sample. We model the color of an individual bead as a draw from a Bernoulli distribution with unknown parameter <span class="math inline">\(\rho\)</span>.</em></p>
 </blockquote>

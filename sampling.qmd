@@ -10,8 +10,6 @@ library(gt)
 
 <!-- DK: Key question. Should our question for Cardinal Virtues be something like: "What are the chances of getting 10 red beads with a shovel of size 20?" Or should we just stick with rho? -->
 
-<!-- DK: Could do more to make this Cardinal Virtue section more like others. -->
-
 <!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! -->
 
 
@@ -43,6 +41,7 @@ Use the **tidyverse** package.
 
 ```{r}
 #| message: false
+#| code-fold: false
 library(tidyverse)
 ```
 
@@ -185,7 +184,7 @@ Virtual sampling requires a virtual urn and a virtual shovel. Create a tibble na
 # order. This ensures that the figures in the book match their written
 # descriptions. We want 40% of the beads to be red.
 
-set.seed(10)
+set.seed(8)
 
 urn <- tibble(color = c(rep("red", 400), 
                         rep("white", 600))) |>
@@ -195,7 +194,8 @@ urn <- tibble(color = c(rep("red", 400),
   # beads. But we find it aesthetically pleasing to mix them up.
   
   sample_frac() |> 
-  mutate(bead_ID = 1:1000) 
+  mutate(bead_ID = 1:1000) |> 
+  select(bead_ID, color)
 
 urn  
 ```
@@ -203,9 +203,7 @@ urn
 Observe that `urn` has `r scales::comma(nrow(urn))` rows, meaning that the urn contains 
 `r scales::comma(nrow(urn))` beads. The first variable `bead_ID` is used as an *identification variable*. None of the beads in the actual urn are marked with numbers. The second variable `color` indicates whether a particular virtual bead is red or white. 
 
-Note that in this section, we used the variable `bead_ID` to keep track of each bead in our urn, while in the last section we used `group_ID` to keep track of the samples drawn by the 33 individual teams. This is a better strategy than naming both variables `ID`, as it would be much more likely for us to get them confused later on. 
-
-Our virtual urn needs a virtual shovel. We use `slice_sample()` and some list-column mapping wizardry learned in @sec-rlist-columns-and-map-functions to take a sample of 50 beads from our virtual urn.  
+Our virtual urn needs a virtual shovel. We use `slice_sample()` and some list-column mapping wizardry to take a sample of 50 beads from our virtual urn.  
 
 ```{r}
 # Define trial_ID as one instance of us sampling 50 beads from the urn. When
@@ -266,7 +264,7 @@ In our tactile sampling exercise in @sec-sampling-activity, we had 33 groups of 
 Let's use our virtual sampling to replicate the tactile sampling activity in a virtual format. We'll save these results in a data frame called `virtual_samples`. 
 
 ```{r}
-set.seed(9)
+set.seed(13)
 
  virtual_samples <- tibble(trial_ID = 1:33) |>
     mutate(shovel = map(trial_ID, ~ slice_sample(urn, n = 50))) |> 
@@ -363,7 +361,7 @@ facet_compare
 
 This visualization allows us to see how our results differed between our tactile and virtual urn results. As we can see, there is some variation between our results. This is not a cause for concern, as there is always expected sampling variation between results.
 
-### Using the virtual shovel 1,000 times {#shovel-1000-times}
+### Using the virtual shovel 10,000 times {#shovel-1000-times}
 
 ```{r}
 #| echo: false
@@ -371,21 +369,21 @@ This visualization allows us to see how our results differed between our tactile
 knitr::include_graphics("sampling/images/sample_bernie.png")
 ```
 
-Although we took 33 samples from the urn in the previous section, we should never do that again! The advantage of modern technology is that we can use virtual simulation as many times as we choose, so we have no restrictions on resources. No longer are the days where we have to recruit our friends to tirelessly sample from the physical urn. We are now data scientists! 33 samples are useless to us. Instead, we use our simulations hundreds or thousands of times to create mathematical models that we can combine with our knowledge to answer our questions. In this section we'll examine the effects of sampling from the urn 1,000 times. 
+Although we took 33 samples from the urn in the previous section, we should use so few samples. Instead, in this section we'll examine the effects of sampling from the urn 10,000 times. 
 
-We can reuse our code from above, making sure to replace 33 trials with 1,000.
+We can reuse our code from above, making sure to replace 33 trials with 10,000.
 
 ```{r, cache = TRUE}
 set.seed(9)
 
- virtual_samples <- tibble(trial_ID = 1:1000) |>
+ virtual_samples <- tibble(trial_ID = 1:10000) |>
     mutate(shovel = map(trial_ID, ~ slice_sample(urn, n = 50))) |> 
     mutate(numb_red = map_int(shovel, ~ sum(.$color == "red"))) |>
     mutate(numb_beads = map_int(shovel, ~ length(.$color))) |> 
     mutate(prop_red = numb_red / numb_beads) 
 ```
 
-Now we have 1,000 values for `prop_red`, each representing the proportion of 50 beads that are red in a sample. Using the same code as earlier, let’s visualize the distribution of these 1,000 replicates of `prop_red` in a histogram:
+Now we have 10,000 values for `prop_red`, each representing the proportion of 50 beads that are red in a sample. Using the same code as earlier, let’s visualize the distribution of these 10,000 replicates of `prop_red` in a histogram:
 
 ```{r}
 virtual_samples |> 
@@ -395,7 +393,7 @@ ggplot(aes(x = prop_red)) +
                  color = "white") +
   labs(x = expression(hat(rho)),
        y = "Count",
-       title = "Distribution of 1,000 proportions red") 
+       title = "Distribution of 10,000 proportions red") 
 ```
 
 Why the empty spaces among the bars? Recall that, with only 50 beads, there are only 51 possible values for $\hat{\rho}$: 0, 0.02, 0.04, ..., 0.98, 1. A value of 0.31 or 0.47 is impossible, hence the gaps.
@@ -412,13 +410,13 @@ Now that we have a good understanding of virtual sampling, we can apply our know
 knitr::include_graphics("sampling/images/three_shovels.png")
 ```
 
-Instead of just one shovel, imagine we have three choices of shovels to extract a sample of beads with: shovels of size 25, 50, and 100. Using our newly developed tools for virtual sampling, let's unpack the effect of having different sample sizes. Start by creating a tibble with 1,000 rows, each row representing an instance of us sampling from the urn with our chosen shovel size. Then, compute the resulting 1,000 replicates of proportion red. Finally, plot the distribution using a histogram. 
+Instead of just one shovel, imagine we have three choices of shovels to extract a sample of beads with: shovels of size 25, 50, and 100. Using our newly developed tools for virtual sampling, let's unpack the effect of having different sample sizes. Start by creating a tibble with 10,000 rows, each row representing an instance of us sampling from the urn with our chosen shovel size. Then, compute the resulting 10,000 replicates of proportion red. Finally, plot the distribution using a histogram. 
 
 ```{r, cache = TRUE}
 # Within slice_sample(), n = 25 represents our shovel of size 25. We also divide
 # by 25 to compute the proportion red.
 
-virtual_samples_25 <- tibble(trial_ID = 1:1000) |> 
+virtual_samples_25 <- tibble(trial_ID = 1:10000) |> 
   mutate(shovel = map(trial_ID, ~ slice_sample(urn, n = 25))) |> 
   mutate(numb_red = map_int(shovel, ~ sum(.$color == "red"))) |> 
   mutate(prop_red = numb_red / 25)
@@ -435,7 +433,7 @@ virtual_samples_25 |>
 We will repeat this process with a shovel size of **50**. 
 
 ```{r, cache = TRUE}
-virtual_samples_50 <- tibble(trial_ID = 1:1000) |> 
+virtual_samples_50 <- tibble(trial_ID = 1:10000) |> 
   mutate(shovel = map(trial_ID, ~ slice_sample(urn, n = 50))) |> 
   mutate(numb_red = map_int(shovel, ~ sum(.$color == "red"))) |> 
   mutate(prop_red = numb_red / 50)
@@ -452,11 +450,11 @@ virtual_samples_50  |>
 
 We choose a bin width of .04 for all histograms to more easily compare different shovel sizes. Using a smaller bin size would result in gaps between the bars, as a shovel of size 50 has more possible $\hat{\rho}$ values than a shovel of size 25. 
 
-Finally, we will perform the same process with 1000 replicates to map the histogram using a shovel size of **100**.
+Finally, we will perform the same process with 10,000 replicates to map the histogram using a shovel size of **100**.
 
 
 ```{r, cache = TRUE}
-virtual_samples_100 <- tibble(trial_ID = 1:1000) |> 
+virtual_samples_100 <- tibble(trial_ID = 1:10000) |> 
   mutate(shovel = map(trial_ID, ~ slice_sample(urn, n = 100))) |> 
   mutate(numb_red = map_int(shovel, ~ sum(.$color == "red"))) |> 
   mutate(prop_red = numb_red / 100)
@@ -1103,7 +1101,7 @@ Each bead $i$ which we sample can be either red or white. It is convenient to de
 
 Using our rough calculations above, we conclude that our posterior for $\rho$ is $N(0.34, 0.067)$. So, our full data generating mechanism is:
 
-$$ red_i  \sim Bernoulli(\rho) \text{with} \rho \sim N(0.34, 0.134)$$
+$$ red_i  \sim Bernoulli(\rho) \text{with} \rho \sim N(0.34, 0.067)$$
 We conclude Courage by adding a sentence about our DGM to the summary paragraph.
 
 > *Using a sample of 50 beads drawn from an urn in which all beads are either red or white, we seek to determine the proportion of beads which are red. Our estimate would be flawed if someone has changed the beads in the urn since we drew our sample. We model the color of an individual bead as a draw from a Bernoulli distribution with unknown parameter $\rho$.*
