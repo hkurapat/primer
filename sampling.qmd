@@ -19,7 +19,7 @@ library(gt)
 
 *The Hunger Games* is a dystopian novel in which children are chosen via lottery to fight to the death. Primrose Everdeen is selected from the urn. Why does she have the misfortune of being selected? Or, as we data scientists say, *sampled*?
 
-In @sec-probability, we learned about probability, the framework for quantifying uncertainty. In this chapter, we will learn about *sampling*, the beginning of our journey toward inference. When we sample, we take some *units* from a *population*. With the data collected via sampling, we will create statistical models with just one unknown parameter. With such models, we can make inferences in order to answer questions.
+In @sec-probability, we learned about probability, the framework for quantifying uncertainty. In this chapter, we will learn about *sampling*, the beginning of our journey toward inference. When we sample, we take some *units* from a *population*. With the data collected via sampling, we use inference to create statistical models. With such models, we can answer questions.
 
 We always use the Cardinal Virtues. Wisdom helps us to clarify the questions with which we begin. We build the Preceptor Table which, if no data were missing, would allow us to answer the question. We check for validity. Justice creates the Population Table and examines the assumptions of stability, representativeness, and unconfoundedness. With Courage, we create a data generating mechanism. Temperance helps us to use that DGM to answer the question with which we began.
 
@@ -698,7 +698,7 @@ All of the concepts underlying this terminology, notation, and definitions tie d
 
 First, a **population** is the set of relevant units. The population's size is upper-case $N$.  In our sampling activities, the population is the collection of $N$ = 1,000 identically-sized red and white beads in the urn. This is about the simplest possible population. Other examples are all the adult men in the US, all the classrooms in a school, all the wheelbarrows in Massachusetts, all the values of your blood pressure, read at five minute intervals, for your entire life. Often, the population is extends over time, as with your blood pressure readings and is, therefore, more amorphous. Consider all the people who have run for governor of a US state since 1900, or all the people who will run for governor through 2050. Those are also populations.
 
-Second, a **population parameter** is a numeric statistic about the population that is unknown, but you wish you knew. For example, when this quantity is the mean, the population parameter of interest is the *population mean*. This is mathematically denoted with the Greek letter $\mu$ pronounced "mu." In our earlier sampling from the urn activity, however, since we were interested in the *proportion* of the urn's beads that were red, the population parameter is the *population proportion*, denoted with $\rho$. 
+Second, a **population parameter** is a numeric statistic about the population that is unknown, but you wish you knew. For example, when this quantity is the mean, the population parameter of interest is the *population mean*. This is mathematically denoted with the Greek letter $\mu$ pronounced "mu." In our earlier sampling from the urn activity, however, since we were interested in the *proportion* of the urn's beads that were red, the population parameter is the *population proportion*, denoted with $\rho$. Different academic fields often use different Greek letters to denote the same population parameter.
 
 Third, a **census** is an exhaustive enumeration or counting of all $N$ units in the population in order to compute the population parameter's value *exactly*. In our sampling activity, this would correspond to counting the number of red beads out of the $N$ total in the urn and then computing the red *population proportion*, $\rho$, *exactly*. When the number $N$ of individuals or observations in our population is large as was the case with our urn, a census can be quite expensive in terms of time, energy, and money. A census is impossible for any populations which includes the future, like our blood pressure next year or candidates for governor in 2050. There is a *truth* but we could not, even in theory, determine it.
 
@@ -850,6 +850,8 @@ In regards to the fifth layer of the hierarchy, we may wonder:
 MADs and standard deviations are, more or less, the same thing. They are both measures of the **variability** of a distribution. In most cases, they have very similar values. A *standard error* is also a standard deviation. Specifically, it is the standard deviation of the distribution of the estimates, and that distribution of estimates is, more or less, your posterior. Therefore, we can use MAD, like standard error, to describe that distribution and the variability of that distribution. 
 
 You must understand what the standard error of $\hat{\rho}$ means. You do not need to understand why. 
+
+**Central lesson: Your posterior for (almost) any population parameter is normally distributed with a mean equal to the sample mean and a standard deviation equal to the standard error.**
 
 ## Cardinal Virtues
 
