@@ -706,13 +706,11 @@ Fourth, **sampling** is the act of collecting a sample from the population when 
 
 Fifth, a **point estimate**, also known as a **sample statistic**, is a measure computed from a sample that *estimates* an unknown population parameter. In our sampling activities, recall that the unknown population parameter was the proportion of red beads and that this is mathematically denoted by $\rho$. Our point estimate is the *sample proportion*: the proportion of the shovel's beads that are red. In other words, it is our guess at the proportion of the urn's beads that are red. The point estimate of the parameter $\rho$ is $\hat{\rho}$. The "hat" on top of the $\rho$ indicates that it is an estimate of the unknown population proportion $\rho$. 
 
-<!-- RS: consider moving last 4 definitions to end discussion about sampling mechanisms, and first 4 definitions to the very start of the chapter. This vocab (with exception of point statistics) doesn't really have a purpose here, and should be used in a section where the words are actually used.  -->
-
-Sixth, a sample is said to be **representative** if it roughly *looks like* the population. In other words, are the sample's characteristics a good representation of the population's characteristics? In our sampling activity, are the samples of $n$ beads extracted using our shovels representative of the urn's $N$ = 1000 beads?
+Sixth, a sample is said to be **representative** if it roughly *looks like* the population. In other words, are the sample's characteristics a good representation of the population's characteristics? In our sampling activity, are the samples of $n$ beads extracted using our shovels representative of the urn's $N = 1,000$ beads?
 
 Seventh, a sample is **generalizable** if any results based on the sample can generalize to the population. In our sampling activity, can we generalize the sample proportion from our shovels to the entire urn? Using our mathematical notation, this is akin to asking if $\hat{\rho}$ is a "good guess" of $\rho$?
 
-Eighth, **biased sampling** occurs if certain individuals or observations in a population have a higher chance of being included in a sample than others. We say a sampling procedure is **unbiased** if every observation in a population had an equal chance of being sampled. Had the red beads been much smaller than the white beads, and therefore more prone to falling out of the shovel, our sample would have been **biased**. In our sampling activities, since we mixed all $N = 1000$ beads prior to each group's sampling and since each of the equally sized beads had an equal chance of being sampled, our samples were unbiased.
+Eighth, **biased sampling** occurs if certain individuals or observations in a population have a higher chance of being included in a sample than others. We say a sampling procedure is **unbiased** if every observation in a population had an equal chance of being sampled. Had the red beads been much smaller than the white beads, and therefore more prone to falling out of the shovel, our sample would have been **biased**. In our sampling activities, since we mixed all $N = 1,000$ beads prior to each group's sampling and since each of the equally-sized beads had an equal chance of being sampled, our samples were unbiased.
 
 Ninth, a sampling procedure is *random* if we sample randomly from the population in an unbiased fashion. In our sampling activities, this would correspond to sufficiently mixing the urn before each use of the shovel. 
 
@@ -735,16 +733,16 @@ knitr::include_graphics("sampling/images/cant_breathe_sponge.png")
 
 **Specific to our sampling activity:**
 
-* If we extract a sample of $n=50$ beads at **random**, in other words, we mix all of the equally sized beads before using the shovel, then
-* the contents of the shovel are an **unbiased representation** of the contents of the urn's 1000 beads, thus
+* If we extract a sample of $n=50$ beads at **random**, in other words, we mix all of the equally-sized beads before using the shovel, then
+* the contents of the shovel are an **unbiased representation** of the contents of the urn's 1,000 beads, thus
 * any result based on the shovel's beads can **generalize** to the urn, thus
-* the sample proportion $\hat{\rho}$ of the $n=50$ beads in the shovel that are red is a **"good guess"** of the population proportion $\rho$ of the $N=1000$ beads that are red, thus
+* the sample proportion $\hat{\rho}$ of the $n=50$ beads in the shovel that are red is a **"good guess"** of the population proportion $\rho$ of the $N=1,000$ beads that are red, thus
 * instead of manually going over all 1,000 beads in the urn, we can make **inferences** about the urn by using the results from the shovel. 
 
 
 ### Statistical definitions {#sec-sampling-definitions}
 
-Now, for some important statistical definitions related to sampling. As a refresher of our 1,000 repeated/replicated virtual samples of size $n$ = 25, $n$ = 50, and $n$ = 100 in @sec-virtual-sampling, let's display our figure showing the difference in proportions red according to different shovel sizes.  
+For our 1,000 repeated/replicated virtual samples of size $n = 25$, $n = 50$, and $n = 100$ in @sec-virtual-sampling, let's display our figure showing the difference in proportions red according to different shovel sizes.  
 
 ```{r}
 #| echo: false
@@ -754,7 +752,7 @@ comparing_sampling_distributions
 
 These types of distributions have a special name: **sampling distributions**; their visualization displays the effect of sampling variation on the distribution of a point estimate; in this case, the sample proportion $\hat{\rho}$. Using these sampling distributions, for a given sample size $n$, we can make statements about what values we typically expect. 
 
-For example, observe the centers of all three sampling distributions: they are all roughly centered around $0.4 = 40\%$. Furthermore, observe that while we are somewhat likely to observe sample proportions of red beads of $0.2 = 20\%$ when using the shovel with 25 slots, we will almost never observe a proportion of 20% when using the shovel with 100 slots. Observe also the effect of sample size on the sampling variation. As the sample size $n$ increases from 25 to 50 to 100, the variation of the sampling distribution decreases and thus the values cluster more and more tightly around the same center of around 40%. We quantified this variation using the standard deviation of our sample proportions, seeing that the standard deviation decreases with the square root of the sample size:
+For example, observe the centers of all three sampling distributions: they are all roughly centered around $0.4 = 40\%$. Furthermore, observe that while we are somewhat likely to observe sample proportions of red beads of $0.2 = 20\%$ when using the shovel with 25 slots, we will almost never observe a proportion of 20% when using the shovel with 100 slots. Observe also the effect of sample size on the sampling variation. As the sample size $n$ increases from 25 to 50 to 100, the variation of the sampling distribution decreases and thus the values cluster more and more tightly around the same center: about 40%. 
 
 ```{r}
 #| echo: false
