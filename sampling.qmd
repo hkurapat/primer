@@ -8,7 +8,17 @@
 library(gt)
 ```
 
+<!-- What are the goals of this chapter? Students need to know: -->
+
+<!-- 1) Your posterior for (almost) any population parameter is normally distributed with a mean equal to the sample mean and a standard deviation equal to the standard error. And that means that your posterior has the same shape as the sampling distribution. -->
+
+<!-- 2) Confidence/credible/uncertainty intervals. -->
+
+<!-- Practice the Cardinal Virtues. -->
+
 <!-- DK: Key question. Should our question for Cardinal Virtues be something like: "What are the chances of getting 10 red beads with a shovel of size 20?" Or should we just stick with rho? -->
+
+<!-- Redo the excellent standard error knowledge pyramid. No more MAD stuff. Add "standard deviation of data" to the bottom. -->
 
 <!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! -->
 
@@ -835,7 +845,7 @@ Recall that $\hat{\rho}$ is the estimated value of p which comes from taking a s
 
 You must understand what the standard error of $\hat{\rho}$ means. You do not need to understand why. 
 
-**Central lesson: Your posterior for (almost) any population parameter is normally distributed with a mean equal to the sample mean and a standard deviation equal to the standard error.**
+**Central lesson: Your posterior for (almost) any population parameter is normally distributed with a mean equal to the sample mean and a standard deviation equal to the standard error. And that means that your posterior has the same shape as the sampling distribution.**
 
 ## Cardinal Virtues
 
@@ -891,6 +901,8 @@ If we knew the color of every bead, then calculating the proportion of beads whi
 #### EDA
 
 The data we have, unfortunately, only provides the color for 50 beads. 
+
+<!-- DK: Add a column with is shovel_id and which goes from 1 to 50. Highlight that IDs, even two of them, don't really exist, but that they are conceptually convenient. -->
 
 ```{r}
 #| echo: false

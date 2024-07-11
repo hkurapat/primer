@@ -30,6 +30,9 @@ library(primer.data)
 ```
 
 
+<!-- Is the two model plot wrong, with that weird dark dot in one quadrant? -->
+
+
 <!-- Need a clear discussion of confidence, credible, uncertainty intervals. This is needed so that the discussion of standard errors in the next chapter makes sense. This is among the most important things in statistics! It should be a main focus of the chapter. -->
 
 <!-- Why bother teaching them how to calculate the probabilities by hand, with list-columns and map_* functions in the first place? After all, we are never going to do this again! (If we get rid of them, we would need to remove them from the tutorials, of course.) In the same way that we don't teach them rayshader, we just use it as a teaching tool, we could avoid teaching them map_* functions and then just use the outputs. On the other hand, aren't there some examples in later chapters in which, in fact, we do need map_* functions to answer the question? -->

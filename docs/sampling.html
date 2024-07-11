@@ -353,7 +353,12 @@ window.Quarto = {
 </header>
 
 
+<!-- What are the goals of this chapter? Students need to know: -->
+<!-- 1) Your posterior for (almost) any population parameter is normally distributed with a mean equal to the sample mean and a standard deviation equal to the standard error. And that means that your posterior has the same shape as the sampling distribution. -->
+<!-- 2) Confidence/credible/uncertainty intervals. -->
+<!-- Practice the Cardinal Virtues. -->
 <!-- DK: Key question. Should our question for Cardinal Virtues be something like: "What are the chances of getting 10 red beads with a shovel of size 20?" Or should we just stick with rho? -->
+<!-- Redo the excellent standard error knowledge pyramid. No more MAD stuff. Add "standard deviation of data" to the bottom. -->
 <!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! -->
 <!-- Do we know or not know that the urn has 1,000 beads. -->
 <p>“The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use.” – Hal Stern</p>
@@ -451,18 +456,18 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 33 × 4
-   group           red_beads prop_red group_ID
-   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Claire, Cloud          16     0.32        1
- 2 Ellie, Terrance        17     0.34        2
- 3 Morgan, Emily          21     0.42        3
- 4 Dania, Derek           21     0.42        4
- 5 Paddy, Matt            16     0.32        5
- 6 Siobhan, Jane          11     0.22        6
- 7 Vignesh, Eliot         16     0.32        7
- 8 Yuki, Harry            21     0.42        8
- 9 Mark, Jane             21     0.42        9
-10 Mia, James             15     0.3        10
+   group          red_beads prop_red group_ID
+   &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
+ 1 Aaron, Mike           11     0.22        1
+ 2 Mark, Ramses          21     0.42        2
+ 3 Ishan, Cass           15     0.3         3
+ 4 Ian, Iman             18     0.36        4
+ 5 Dohyun, Estel         18     0.36        5
+ 6 Paddy, Matt           16     0.32        6
+ 7 Maddie, Brent         19     0.38        7
+ 8 Mak, Sophie           17     0.34        8
+ 9 Caroline, Edna        15     0.3         9
+10 Claire, Cloud         16     0.32       10
 # ℹ 23 more rows</code></pre>
 </div>
 </div>
@@ -1698,7 +1703,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 <p>If I know your estimate plus or minus <em>two</em> standard errors, I know your 95% confidence interval. This is valuable information. Standard error is really just a measure for how uncertain we are about something we do not know, the thing we are estimating. Speaking loosely, standard error is the way old people talk about confidence intervals.</p>
 <p>Recall that <span class="math inline">\(\hat{\rho}\)</span> is the estimated value of p which comes from taking a sample. There can be billions and billions of <span class="math inline">\(\hat{\rho}\)</span>’s. We look at a large group of <span class="math inline">\(\hat{\rho}\)</span>’s, create a distribution of results to represent the possible values of <span class="math inline">\(\rho\)</span> based on our findings, and then we compute a standard error to account for our own uncertainty about our predictions. Our 95% confidence interval for our prediction is our estimate plus or minus <strong>two</strong> standard errors.</p>
 <p>You must understand what the standard error of <span class="math inline">\(\hat{\rho}\)</span> means. You do not need to understand why.</p>
-<p><strong>Central lesson: Your posterior for (almost) any population parameter is normally distributed with a mean equal to the sample mean and a standard deviation equal to the standard error.</strong></p>
+<p><strong>Central lesson: Your posterior for (almost) any population parameter is normally distributed with a mean equal to the sample mean and a standard deviation equal to the standard error. And that means that your posterior has the same shape as the sampling distribution.</strong></p>
 </section>
 </section>
 <section id="cardinal-virtues" class="level2" data-number="3.4">
@@ -2230,6 +2235,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 <section id="eda" class="level4" data-number="3.4.1.2">
 <h4 data-number="3.4.1.2" class="anchored" data-anchor-id="eda"><span class="header-section-number">3.4.1.2</span> EDA</h4>
 <p>The data we have, unfortunately, only provides the color for 50 beads.</p>
+<!-- DK: Add a column with is shovel_id and which goes from 1 to 50. Highlight that IDs, even two of them, don't really exist, but that they are conceptually convenient. -->
 <div class="cell">
 <div class="cell-output-display">
 <div>

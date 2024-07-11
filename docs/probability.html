@@ -357,7 +357,7 @@ window.Quarto = {
   
 
 
-</header><!-- Need a clear discussion of confidence, credible, uncertainty intervals. This is needed so that the discussion of standard errors in the next chapter makes sense. --><!-- Why bother teaching them how to calculate the probabilities by hand, with list-columns and map_* functions in the first place? After all, we are never going to do this again! (If we get rid of them, we would need to remove them from the tutorials, of course.) In the same way that we don't teach them rayshader, we just use it as a teaching tool, we could avoid teaching them map_* functions and then just use the outputs. On the other hand, aren't there some examples in later chapters in which, in fact, we do need map_* functions to answer the question? --><!-- Perhaps change the joint and conditional distribution section to use sex/height from NHANES? It is true that this is a discrete and continuous joint distribution, but that is probably fine. Certainly connects nicely with the male height example. Certainly works well with the joint and conditional together. Certainly would be nice to do the empirical/mathematical/posterior trypycht as in the first three examples. Posterior could be for a WNBA practice session. Most of the women will be tall, but the men will be of more typical height. --><!-- Shouldn't we have a question which we answer with a dgm for each distribution example, as we do with three heads in a row? --><!-- Should we discuss more the interplay of the use of data and math? For example, in the Presidential election example, we recognize that the (naive) mathematical distribution is inconsistent with the data. So, we need to change the math. And then see if the new math is more consistent with the data. Perhaps an important point worth repeating. --><!-- Need more clarity on when/whether a distribution is empirical, meaning it is a histogram of the whole population (or a sample from it), and when it is an expectation, like what we expect to happen if we sample one more person. Not even sure that this distinction is sensible . . . --><!-- Major change is that each example needs to have a simple question. Then it needs a DGM. Then we use the DGM to answer the question.  --><!-- In the list column section, is using a dot the best approach to working with map* functions and list-columns? Isn't there something new, with _ being a cool symbol for this? --><!-- Topics we don't currently address in the chapter but which we might add: population, Preceptor Table, Population Table. --><!-- How do we introduce the Question? We certainly need a question each time because, once we have the model, we have to show readers how to "work with" the distribution, and that requires a question to answer. Revisit this sentence: "All data science problems". --><!-- If A and B are independent, you can make a draw from the joint distribution of A and B --- p(A, B) --- by first taking a draw from A and combining it with a draw from B. Maybe this means discussing independence in the section of joint distributions? --><!-- The way that one does does so, is one draws 4,000 values from them, does some manipulation *row-by_row*, and then, hooray, you have you answer.  --><!-- You can consider these pdfs to be independent, so you can draw them independently and then --- this is the magic! --- you can treat a row as a draw from their joint distribution. --><!-- The joint distribution of a collection of random variables --- which we are working with by considering 4,000 draws from their pdfs --- is  . . . . the same as picking a random value from each member of the collection.  --><!-- There are two kinds of questions. The first asks for the value of a specific "real" number, like the height of the tallest person out of a 100. We answer this type of question with a posterior probability distribution. The second asks for the chances/likelihood/probability/odds of something --- like what are the chances that the tallest person will be above 200 cm. We answer this by first making a probability distribution and then calculating the appropriate area under the curve. --><!-- What would be a fun theme/gif/movie clip to start and end the chapter with, like we do in chapters 4 and 6? Something having to do with betting . . . Connected to Kant? --><!-- Add, after N models, a section on Infinite models, meaning a continuous parameter p. Note that we have a continuous distribution section now. Want to set the stage for Chapter 6, in which we are generating a posterior for p which we may think of as taking an infinite number of values. This is a key dimension on which chapter 5 and 6 need to connect. --><!-- Revisit these references and see if there is other stuff we should include. Rethinking marbles would make a nice tutorial. --><!-- Teaching Bayes' Rule: A Data-Oriented Approach by Jim Albert. --><!-- Rethinking Chapter 2. Garden of forking data is just excellent stuff. --><!-- Bayesian Workshop --><!-- Get rid of list-columns stuff? --><!-- Kant quote is OK, but not great. Would be nicer to start and end with a video, as in Chapters 4 and 6. --><!-- Consider how we might better connect the two model, three model, n model sections to the distribution sections. In all those cases, we are setting up a joint distribution and then marginalizing it (?) to create a conditional distribution, which looks a lot like a simple one dimensional distribution. --><!-- This makes the *dual nature of distributions* more clear. A distribution is the "thing" you see in this plot. A mathematical object with several different parts, including a set of possible values (1 through 6, in this case) and a record of the number of times each value appears. A distribution is *also* the simple vector of numbers we used to create this plot. --><!-- In general, we travel back-and-forth between *distribution as a thing* and *distribution as a vector of draws* from the thing, depending on what we are trying to accomplish. --><blockquote class="blockquote">
+</header><!-- Is the two model plot wrong, with that weird dark dot in one quadrant? --><!-- Need a clear discussion of confidence, credible, uncertainty intervals. This is needed so that the discussion of standard errors in the next chapter makes sense. This is among the most important things in statistics! It should be a main focus of the chapter. --><!-- Why bother teaching them how to calculate the probabilities by hand, with list-columns and map_* functions in the first place? After all, we are never going to do this again! (If we get rid of them, we would need to remove them from the tutorials, of course.) In the same way that we don't teach them rayshader, we just use it as a teaching tool, we could avoid teaching them map_* functions and then just use the outputs. On the other hand, aren't there some examples in later chapters in which, in fact, we do need map_* functions to answer the question? --><!-- Perhaps change the joint and conditional distribution section to use sex/height from NHANES? It is true that this is a discrete and continuous joint distribution, but that is probably fine. Certainly connects nicely with the male height example. Certainly works well with the joint and conditional together. Certainly would be nice to do the empirical/mathematical/posterior trypycht as in the first three examples. Posterior could be for a WNBA practice session. Most of the women will be tall, but the men will be of more typical height. --><!-- Shouldn't we have a question which we answer with a dgm for each distribution example, as we do with three heads in a row? --><!-- Should we discuss more the interplay of the use of data and math? For example, in the Presidential election example, we recognize that the (naive) mathematical distribution is inconsistent with the data. So, we need to change the math. And then see if the new math is more consistent with the data. Perhaps an important point worth repeating. --><!-- Need more clarity on when/whether a distribution is empirical, meaning it is a histogram of the whole population (or a sample from it), and when it is an expectation, like what we expect to happen if we sample one more person. Not even sure that this distinction is sensible . . . --><!-- Major change is that each example needs to have a simple question. Then it needs a DGM. Then we use the DGM to answer the question.  --><!-- In the list column section, is using a dot the best approach to working with map* functions and list-columns? Isn't there something new, with _ being a cool symbol for this? --><!-- Topics we don't currently address in the chapter but which we might add: population, Preceptor Table, Population Table. --><!-- How do we introduce the Question? We certainly need a question each time because, once we have the model, we have to show readers how to "work with" the distribution, and that requires a question to answer. Revisit this sentence: "All data science problems". --><!-- If A and B are independent, you can make a draw from the joint distribution of A and B --- p(A, B) --- by first taking a draw from A and combining it with a draw from B. Maybe this means discussing independence in the section of joint distributions? --><!-- The way that one does does so, is one draws 4,000 values from them, does some manipulation *row-by_row*, and then, hooray, you have you answer.  --><!-- You can consider these pdfs to be independent, so you can draw them independently and then --- this is the magic! --- you can treat a row as a draw from their joint distribution. --><!-- The joint distribution of a collection of random variables --- which we are working with by considering 4,000 draws from their pdfs --- is  . . . . the same as picking a random value from each member of the collection.  --><!-- There are two kinds of questions. The first asks for the value of a specific "real" number, like the height of the tallest person out of a 100. We answer this type of question with a posterior probability distribution. The second asks for the chances/likelihood/probability/odds of something --- like what are the chances that the tallest person will be above 200 cm. We answer this by first making a probability distribution and then calculating the appropriate area under the curve. --><!-- What would be a fun theme/gif/movie clip to start and end the chapter with, like we do in chapters 4 and 6? Something having to do with betting . . . Connected to Kant? --><!-- Add, after N models, a section on Infinite models, meaning a continuous parameter p. Note that we have a continuous distribution section now. Want to set the stage for Chapter 6, in which we are generating a posterior for p which we may think of as taking an infinite number of values. This is a key dimension on which chapter 5 and 6 need to connect. --><!-- Revisit these references and see if there is other stuff we should include. Rethinking marbles would make a nice tutorial. --><!-- Teaching Bayes' Rule: A Data-Oriented Approach by Jim Albert. --><!-- Rethinking Chapter 2. Garden of forking data is just excellent stuff. --><!-- Bayesian Workshop --><!-- Get rid of list-columns stuff? --><!-- Kant quote is OK, but not great. Would be nicer to start and end with a video, as in Chapters 4 and 6. --><!-- Consider how we might better connect the two model, three model, n model sections to the distribution sections. In all those cases, we are setting up a joint distribution and then marginalizing it (?) to create a conditional distribution, which looks a lot like a simple one dimensional distribution. --><!-- This makes the *dual nature of distributions* more clear. A distribution is the "thing" you see in this plot. A mathematical object with several different parts, including a set of possible values (1 through 6, in this case) and a record of the number of times each value appears. A distribution is *also* the simple vector of numbers we used to create this plot. --><!-- In general, we travel back-and-forth between *distribution as a thing* and *distribution as a vector of draws* from the thing, depending on what we are trying to accomplish. --><blockquote class="blockquote">
 <p>The usual touchstone of whether what someone asserts is mere persuasion or at least a subjective conviction, i.e., firm belief, is betting. Often someone pronounces his propositions with such confident and inflexible defiance that he seems to have entirely laid aside all concern for error. A bet disconcerts him. Sometimes he reveals that he is persuaded enough for one ducat but not for ten. For he would happily bet one, but at ten he suddenly becomes aware of what he had not previously noticed, namely that it is quite possible that he has erred. -— Immanuel Kant, <em>Critique of Pure Reason</em></p>
 </blockquote>
 <p>The central tension, and opportunity, in data science is the interplay between the <em>data</em> and the <em>science</em>, between our empirical observations and the models which we use to understand them. Probability is the language we use to explore that interplay; it connects models to data, and data to models.</p>
@@ -399,23 +399,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="xqvwbwqffo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xqvwbwqffo table {
+<div id="unhxgxfzxg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#unhxgxfzxg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xqvwbwqffo thead, #xqvwbwqffo tbody, #xqvwbwqffo tfoot, #xqvwbwqffo tr, #xqvwbwqffo td, #xqvwbwqffo th {
+#unhxgxfzxg thead, #unhxgxfzxg tbody, #unhxgxfzxg tfoot, #unhxgxfzxg tr, #unhxgxfzxg td, #unhxgxfzxg th {
   border-style: none;
 }
 
-#xqvwbwqffo p {
+#unhxgxfzxg p {
   margin: 0;
   padding: 0;
 }
 
-#xqvwbwqffo .gt_table {
+#unhxgxfzxg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -441,12 +441,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#xqvwbwqffo .gt_caption {
+#unhxgxfzxg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xqvwbwqffo .gt_title {
+#unhxgxfzxg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -458,7 +458,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#xqvwbwqffo .gt_subtitle {
+#unhxgxfzxg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -470,7 +470,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#xqvwbwqffo .gt_heading {
+#unhxgxfzxg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -482,13 +482,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xqvwbwqffo .gt_bottom_border {
+#unhxgxfzxg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xqvwbwqffo .gt_col_headings {
+#unhxgxfzxg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -503,7 +503,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xqvwbwqffo .gt_col_heading {
+#unhxgxfzxg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -523,7 +523,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#xqvwbwqffo .gt_column_spanner_outer {
+#unhxgxfzxg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -535,15 +535,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#xqvwbwqffo .gt_column_spanner_outer:first-child {
+#unhxgxfzxg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xqvwbwqffo .gt_column_spanner_outer:last-child {
+#unhxgxfzxg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xqvwbwqffo .gt_column_spanner {
+#unhxgxfzxg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -555,11 +555,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#xqvwbwqffo .gt_spanner_row {
+#unhxgxfzxg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xqvwbwqffo .gt_group_heading {
+#unhxgxfzxg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -585,7 +585,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#xqvwbwqffo .gt_empty_group_heading {
+#unhxgxfzxg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -600,15 +600,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#xqvwbwqffo .gt_from_md > :first-child {
+#unhxgxfzxg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xqvwbwqffo .gt_from_md > :last-child {
+#unhxgxfzxg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xqvwbwqffo .gt_row {
+#unhxgxfzxg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -627,7 +627,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#xqvwbwqffo .gt_stub {
+#unhxgxfzxg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -640,7 +640,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xqvwbwqffo .gt_stub_row_group {
+#unhxgxfzxg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -654,15 +654,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#xqvwbwqffo .gt_row_group_first td {
+#unhxgxfzxg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xqvwbwqffo .gt_row_group_first th {
+#unhxgxfzxg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xqvwbwqffo .gt_summary_row {
+#unhxgxfzxg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -672,16 +672,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xqvwbwqffo .gt_first_summary_row {
+#unhxgxfzxg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xqvwbwqffo .gt_first_summary_row.thick {
+#unhxgxfzxg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xqvwbwqffo .gt_last_summary_row {
+#unhxgxfzxg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -691,7 +691,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xqvwbwqffo .gt_grand_summary_row {
+#unhxgxfzxg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -701,7 +701,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xqvwbwqffo .gt_first_grand_summary_row {
+#unhxgxfzxg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -711,7 +711,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#xqvwbwqffo .gt_last_grand_summary_row_top {
+#unhxgxfzxg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -721,11 +721,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xqvwbwqffo .gt_striped {
+#unhxgxfzxg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xqvwbwqffo .gt_table_body {
+#unhxgxfzxg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -734,7 +734,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#xqvwbwqffo .gt_footnotes {
+#unhxgxfzxg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -748,7 +748,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xqvwbwqffo .gt_footnote {
+#unhxgxfzxg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -757,7 +757,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xqvwbwqffo .gt_sourcenotes {
+#unhxgxfzxg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -771,7 +771,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#xqvwbwqffo .gt_sourcenote {
+#unhxgxfzxg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -779,63 +779,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#xqvwbwqffo .gt_left {
+#unhxgxfzxg .gt_left {
   text-align: left;
 }
 
-#xqvwbwqffo .gt_center {
+#unhxgxfzxg .gt_center {
   text-align: center;
 }
 
-#xqvwbwqffo .gt_right {
+#unhxgxfzxg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xqvwbwqffo .gt_font_normal {
+#unhxgxfzxg .gt_font_normal {
   font-weight: normal;
 }
 
-#xqvwbwqffo .gt_font_bold {
+#unhxgxfzxg .gt_font_bold {
   font-weight: bold;
 }
 
-#xqvwbwqffo .gt_font_italic {
+#unhxgxfzxg .gt_font_italic {
   font-style: italic;
 }
 
-#xqvwbwqffo .gt_super {
+#unhxgxfzxg .gt_super {
   font-size: 65%;
 }
 
-#xqvwbwqffo .gt_footnote_marks {
+#unhxgxfzxg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xqvwbwqffo .gt_asterisk {
+#unhxgxfzxg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xqvwbwqffo .gt_indent_1 {
+#unhxgxfzxg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xqvwbwqffo .gt_indent_2 {
+#unhxgxfzxg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xqvwbwqffo .gt_indent_3 {
+#unhxgxfzxg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xqvwbwqffo .gt_indent_4 {
+#unhxgxfzxg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xqvwbwqffo .gt_indent_5 {
+#unhxgxfzxg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

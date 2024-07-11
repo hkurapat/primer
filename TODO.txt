@@ -1,5 +1,16 @@
 # Priorities
 
+
+Rethink exactly what we want students to know at the end of the Primer. Given that goal, what should we be doing in each chapter? This framing makes clear that we don't really care about teaching students how to use map functions and list columns. Maybe that stuff is valuable. Maybe not. I leave that judgment to R4DS. But it is nowhere in the top 20 (50?) things I want students to get out of the Primer.
+
+With our focus on Cardinal Virtues, we are doing a much better job of having the Primer focus on what we care about. Excellent! But there is a lot more that could be done. Examples:
+
+1) Students need to understand quantiles, along with confidence/credible/uncertainty intervals in a deep way. This needs to be taught well in the Probability and Sampling chapters, and then reinforced in the Cardinal Virtues. (Presumably, we need a related question somewhere in the Courage/Temperance sections of each chapter.)
+
+2) Be quick with creating/modifying Preceptor Tables. Examples: What is the difference between the PT for the trains example if we think of it as predictive rather than causal? Are the units in a change in reading instruction approach students or classrooms? They need lots of practice going from questions to PTs and then back again.
+
+3) 
+
 Make more use of "When Shall We Use Our Heads
 Instead of the Formula?" https://meehl.umn.edu/sites/meehl.umn.edu/files/files/043_when_use_heads.pdf
 
