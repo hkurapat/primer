@@ -318,7 +318,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#sec-terminology-and-notation" id="toc-sec-terminology-and-notation" class="nav-link" data-scroll-target="#sec-terminology-and-notation"><span class="header-section-number">3.3.1</span> Terminology and notation</a></li>
   <li><a href="#sec-sampling-definitions" id="toc-sec-sampling-definitions" class="nav-link" data-scroll-target="#sec-sampling-definitions"><span class="header-section-number">3.3.2</span> Statistical definitions</a></li>
-  <li><a href="#what-is-a-standard-error" id="toc-what-is-a-standard-error" class="nav-link" data-scroll-target="#what-is-a-standard-error"><span class="header-section-number">3.3.3</span> What is a “standard error”?</a></li>
+  <li><a href="#what-is-a-standard-error" id="toc-what-is-a-standard-error" class="nav-link" data-scroll-target="#what-is-a-standard-error"><span class="header-section-number">3.3.3</span> What is a standard error?</a></li>
   <li><a href="#moral-of-the-story" id="toc-moral-of-the-story" class="nav-link" data-scroll-target="#moral-of-the-story"><span class="header-section-number">3.3.4</span> The moral of the story</a></li>
   </ul></li>
   <li><a href="#cardinal-virtues" id="toc-cardinal-virtues" class="nav-link" data-scroll-target="#cardinal-virtues"><span class="header-section-number">3.4</span> Cardinal Virtues</a>
@@ -356,6 +356,7 @@ window.Quarto = {
 <!-- DK: Key question. Should our question for Cardinal Virtues be something like: "What are the chances of getting 10 red beads with a shovel of size 20?" Or should we just stick with rho? -->
 <!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! -->
 <!-- Do we know or not know that the urn has 1,000 beads. -->
+<p>“The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use.” – Hal Stern</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/e3PJ3Du_zDc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p><em>The Hunger Games</em> is a dystopian novel in which children are chosen via lottery to fight to the death. Primrose Everdeen is selected from the urn. Why does she have the misfortune of being selected? Or, as we data scientists say, <em>sampled</em>?</p>
 <p>In <a href="probability.html" class="quarto-xref"><span>Chapter 2</span></a>, we learned about probability, the framework for quantifying uncertainty. In this chapter, we will learn about <em>sampling</em>, the beginning of our journey toward inference. When we sample, we take some <em>units</em> from a <em>population</em>. With the data collected via sampling, we use inference to create statistical models. With such models, we can answer questions.</p>
@@ -450,18 +451,18 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 33 × 4
-   group          red_beads prop_red group_ID
-   &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Nam, Joshua           19     0.38        1
- 2 Dania, Derek          21     0.42        2
- 3 Mal, Francis          17     0.34        3
- 4 Yao, Kate             23     0.46        4
- 5 Caroline, Edna        15     0.3         5
- 6 Mak, Sophie           17     0.34        6
- 7 Griffin, Mary         18     0.36        7
- 8 Mark, Ramses          21     0.42        8
- 9 Mark, Jane            21     0.42        9
-10 Ace, Chris            18     0.36       10
+   group           red_beads prop_red group_ID
+   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
+ 1 Claire, Cloud          16     0.32        1
+ 2 Ellie, Terrance        17     0.34        2
+ 3 Morgan, Emily          21     0.42        3
+ 4 Dania, Derek           21     0.42        4
+ 5 Paddy, Matt            16     0.32        5
+ 6 Siobhan, Jane          11     0.22        6
+ 7 Vignesh, Eliot         16     0.32        7
+ 8 Yuki, Harry            21     0.42        8
+ 9 Mark, Jane             21     0.42        9
+10 Mia, James             15     0.3        10
 # ℹ 23 more rows</code></pre>
 </div>
 </div>
@@ -1632,8 +1633,8 @@ ho}\)</span>.</figcaption>
 </div>
 </div>
 </div>
-<p>These types of distributions have a special name: <strong>sampling distributions</strong>; their visualization displays the effect of sampling variation on the distribution of a point estimate; in this case, the sample proportion <span class="math inline">\(\hat{\rho}\)</span>. Using these sampling distributions, for a given sample size <span class="math inline">\(n\)</span>, we can make statements about what values we typically expect.</p>
-<p>For example, observe the centers of all three sampling distributions: they are all roughly centered around <span class="math inline">\(0.4 = 40\%\)</span>. Furthermore, observe that while we are somewhat likely to observe sample proportions of red beads of <span class="math inline">\(0.2 = 20\%\)</span> when using the shovel with 25 slots, we will almost never observe a proportion of 20% when using the shovel with 100 slots. Observe also the effect of sample size on the sampling variation. As the sample size <span class="math inline">\(n\)</span> increases from 25 to 50 to 100, the variation of the sampling distributions decreases and thus the values cluster more and more tightly around the same center: about 40%.</p>
+<p>These types of distributions have a special name: <strong>sampling distributions</strong>. The visualization displays the effect of sampling variation on the distribution of a point estimate: the sample proportion <span class="math inline">\(\hat{\rho}\)</span>. Using these sampling distributions, for a given sample size <span class="math inline">\(n\)</span>, we can make statements about what range of values we typically expect.</p>
+<p>For example, observe the centers of all three sampling distributions: all around <span class="math inline">\(0.4 = 40\%\)</span>. Furthermore, observe that while we are somewhat likely to observe sample proportions of red beads of <span class="math inline">\(0.2 = 20\%\)</span> when using the shovel with 25 slots, we will almost never observe a proportion of 20% when using the shovel with 100 slots. Observe also the effect of sample size on the sampling variation. As the sample size <span class="math inline">\(n\)</span> increases from 25 to 50 to 100, the variation of the sampling distributions decreases and thus the values cluster more and more tightly around the same center: about 40%.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1644,17 +1645,17 @@ ho}\)</span>.</figcaption>
 </div>
 </div>
 </div>
-<p>So as the sample size increases, the standard deviation of the proportion of red beads decreases. This type of standard deviation has another special name: <strong>standard error</strong></p>
+<p>So as the sample size increases, the standard deviation of the proportion of red beads across the 1,000 replications decreases. This type of standard deviation has another special name: <strong>standard error</strong></p>
 </section>
 <section id="what-is-a-standard-error" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="what-is-a-standard-error"><span class="header-section-number">3.3.3</span> What is a “standard error”?</h3>
-<p>The “standard error” (SE) is a term that measures the accuracy with which a sample distribution represents a population through the use of standard deviation. Specifically, SE is used to refer to the standard deviation of a sample statistic (aka point estimate), such as the mean or median. For example, the “standard error of the mean” refers to the standard deviation of the distribution of sample means taken from a population.</p>
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="what-is-a-standard-error"><span class="header-section-number">3.3.3</span> What is a standard error?</h3>
+<p>The <em>standard error</em> (SE) is the standard deviation of a sample statistic (aka point estimate), such as the mean or median. For example, the “standard error of the mean” refers to the standard deviation of the distribution of sample means taken from a population.</p>
 <blockquote class="blockquote">
 <p>In statistics, a sample mean deviates from the actual mean of a population; this deviation is the standard error of the mean.</p>
 </blockquote>
-<p>Many students struggle to differentiate the standard error from the standard deviation. The relationship between the standard error and the standard deviation is such that, for a given sample size, the standard error equals the standard deviation divided by the square root of the sample size. Accordingly, the standard error is inversely proportional to the sample size; the larger the sample size, the smaller the standard error because the statistic will approach the actual value.</p>
+<p>Many students struggle to differentiate the standard error from the standard deviation. The relationship between the standard error and the standard deviation is such that, for a given sample size, the standard error equals the standard deviation divided by the square root of the sample size.</p>
 <!-- Insert visual aid for students who are not mathematically inclined showing that larger sample sizes = closer to actual value -->
-<p>The more data points involved in the calculations of the mean, the smaller the standard error tends to be. When the standard error is small, the data is said to be more representative of the true mean. In cases where the standard error is large, the data may have some notable irregularities. Thus, larger sample size = smaller standard error = more representative of the truth.</p>
+<p>Larger sample size = smaller standard error = more representative of the truth.</p>
 <p>To help reinforce these concepts, let’s re-display our previous figure but using our new sampling terminology, notation, and definitions:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1682,12 +1683,7 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </section>
 <section id="moral-of-the-story" class="level3" data-number="3.3.4">
 <h3 data-number="3.3.4" class="anchored" data-anchor-id="moral-of-the-story"><span class="header-section-number">3.3.4</span> The moral of the story</h3>
-<p>If we could only know two pieces of information from our data, what would they be? First, you need a measure of the <strong>center</strong> of the distribution. This would include the mean or median, which shows the center of our data points. Second, we need a measure of the <strong>variability</strong> of the distribution. To understand our center, we must understand how different (or how spread) our data points are from one another. Thus, we need a measure like sd() or MAD. These are summary statistics which are necessary to understanding a distribution. Do those two figures encompass all you need to know about a distribution? No! But, if you are only allowed two numbers to keep, those are the most valuable.</p>
-<blockquote class="blockquote">
-<p>The mean or median is a good estimate for the center of the posterior and the standard error or mad is a good estimate for the variability of the posterior, with +/- 2 standard errors covering 95% of the outcomes.</p>
-</blockquote>
-<p>The standard error measures the accuracy of a sample distribution as compared to the population by using the standard deviation. Specifically, the standard deviation of our data points divided by the square root of the sample size. As such, we find that larger sample sizes = lower standard errors = more accurate and representative guesses.</p>
-<p>To really drive home our point: standard error is just a fancy term for your uncertainty about something you don’t know. Standard error == our (uncertain) beliefs.</p>
+<p>Standard error is just a fancy term for your uncertainty about something you don’t know. Standard error is the precision of our (uncertain) beliefs.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1698,15 +1694,9 @@ ho}\)</span>. Note the increased concentration on the bins around .4 as our samp
 </div>
 </div>
 </div>
-<p>This hierarchy represents the knowledge we need to understand standard error (SE). At the bottom, we have math. It’s the foundation for our understanding, but it doesn’t need to be what we take away from this lesson. As we go up, we simplify the topic. The top of the pyramid are the basic levels of understanding that will help you to remember in the future.</p>
-<p>If I know your estimate plus or minus <em>two</em> standard errors, I know your 95% confidence interval. This is valuable information. Standard error is really just a measure for how uncertain we are about something we do not know, the thing we are estimating. When we recall SE, we should remember that, all in all, it’s a complicated concept that can be distilled into: the way old people talk about confidence intervals.</p>
-<!-- RS: Explain what confidence interval is.  -->
-<p>Recall that <span class="math inline">\(\hat{\rho}\)</span> is the estimated value of p which comes from taking a sample. There can be billions and billions of <span class="math inline">\(\hat{\rho}\)</span>’s. We look at a large group of <span class="math inline">\(\hat{\rho}\)</span>’s, create a distribution of results to represent the possible values of p based on our findings, and then we compute a standard error to account for our own uncertainty about our predictions. Our 95% confidence interval for our prediction == our estimate plus or minus <strong>two</strong> standard errors.</p>
-<p>In regards to the fifth layer of the hierarchy, we may wonder:</p>
-<blockquote class="blockquote">
-<p>“I thought that MADs were the same thing as standard deviations. Now you say they are the same things as standard errors. Which is it?”</p>
-</blockquote>
-<p>MADs and standard deviations are, more or less, the same thing. They are both measures of the <strong>variability</strong> of a distribution. In most cases, they have very similar values. A <em>standard error</em> is also a standard deviation. Specifically, it is the standard deviation of the distribution of the estimates, and that distribution of estimates is, more or less, your posterior. Therefore, we can use MAD, like standard error, to describe that distribution and the variability of that distribution.</p>
+<p>This hierarchy represents the knowledge we need to understand standard errors. At the bottom, we have math. It’s the foundation for our understanding, but it doesn’t need to be what we take away from this lesson. As we go up, we simplify the topic. The top of the pyramid are the basic levels of understanding that will help you to remember in the future.</p>
+<p>If I know your estimate plus or minus <em>two</em> standard errors, I know your 95% confidence interval. This is valuable information. Standard error is really just a measure for how uncertain we are about something we do not know, the thing we are estimating. Speaking loosely, standard error is the way old people talk about confidence intervals.</p>
+<p>Recall that <span class="math inline">\(\hat{\rho}\)</span> is the estimated value of p which comes from taking a sample. There can be billions and billions of <span class="math inline">\(\hat{\rho}\)</span>’s. We look at a large group of <span class="math inline">\(\hat{\rho}\)</span>’s, create a distribution of results to represent the possible values of <span class="math inline">\(\rho\)</span> based on our findings, and then we compute a standard error to account for our own uncertainty about our predictions. Our 95% confidence interval for our prediction is our estimate plus or minus <strong>two</strong> standard errors.</p>
 <p>You must understand what the standard error of <span class="math inline">\(\hat{\rho}\)</span> means. You do not need to understand why.</p>
 <p><strong>Central lesson: Your posterior for (almost) any population parameter is normally distributed with a mean equal to the sample mean and a standard deviation equal to the standard error.</strong></p>
 </section>

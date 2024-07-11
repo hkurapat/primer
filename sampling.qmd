@@ -14,6 +14,7 @@ library(gt)
 
 <!-- Do we know or not know that the urn has 1,000 beads. -->
 
+"The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use." -- Hal Stern
 
 {{< video https://www.youtube.com/embed/e3PJ3Du_zDc >}}
 
@@ -747,9 +748,9 @@ For our 1,000 repeated/replicated virtual samples of size $n = 25$, $n = 50$, an
 comparing_sampling_distributions
 ```
 
-These types of distributions have a special name: **sampling distributions**; their visualization displays the effect of sampling variation on the distribution of a point estimate; in this case, the sample proportion $\hat{\rho}$. Using these sampling distributions, for a given sample size $n$, we can make statements about what values we typically expect. 
+These types of distributions have a special name: **sampling distributions**. The visualization displays the effect of sampling variation on the distribution of a point estimate: the sample proportion $\hat{\rho}$. Using these sampling distributions, for a given sample size $n$, we can make statements about what range of values we typically expect. 
 
-For example, observe the centers of all three sampling distributions: they are all roughly centered around $0.4 = 40\%$. Furthermore, observe that while we are somewhat likely to observe sample proportions of red beads of $0.2 = 20\%$ when using the shovel with 25 slots, we will almost never observe a proportion of 20% when using the shovel with 100 slots. Observe also the effect of sample size on the sampling variation. As the sample size $n$ increases from 25 to 50 to 100, the variation of the sampling distributions decreases and thus the values cluster more and more tightly around the same center: about 40%. 
+For example, observe the centers of all three sampling distributions: all around $0.4 = 40\%$. Furthermore, observe that while we are somewhat likely to observe sample proportions of red beads of $0.2 = 20\%$ when using the shovel with 25 slots, we will almost never observe a proportion of 20% when using the shovel with 100 slots. Observe also the effect of sample size on the sampling variation. As the sample size $n$ increases from 25 to 50 to 100, the variation of the sampling distributions decreases and thus the values cluster more and more tightly around the same center: about 40%. 
 
 ```{r}
 #| echo: false
@@ -763,19 +764,19 @@ shovels_100 |>
        y = "Standard deviation of the proportion red")
 ```
 
-So as the sample size increases, the standard deviation of the proportion of red beads decreases. This type of standard deviation has another special name: **standard error**
+So as the sample size increases, the standard deviation of the proportion of red beads across the 1,000 replications decreases. This type of standard deviation has another special name: **standard error**
 
-### What is a "standard error"?
+### What is a standard error?
 
-The "standard error" (SE) is a term that measures the accuracy with which a sample distribution represents a population through the use of standard deviation. Specifically, SE is used to refer to the standard deviation of a sample statistic (aka point estimate), such as the mean or median. For example, the "standard error of the mean" refers to the standard deviation of the distribution of sample means taken from a population. 
+The *standard error* (SE) is the standard deviation of a sample statistic (aka point estimate), such as the mean or median. For example, the "standard error of the mean" refers to the standard deviation of the distribution of sample means taken from a population. 
 
 > In statistics, a sample mean deviates from the actual mean of a population; this deviation is the standard error of the mean. 
 
-Many students struggle to differentiate the standard error from the standard deviation.  The relationship between the standard error and the standard deviation is such that, for a given sample size, the standard error equals the standard deviation divided by the square root of the sample size. Accordingly, the standard error is inversely proportional to the sample size; the larger the sample size, the smaller the standard error because the statistic will approach the actual value. 
+Many students struggle to differentiate the standard error from the standard deviation.  The relationship between the standard error and the standard deviation is such that, for a given sample size, the standard error equals the standard deviation divided by the square root of the sample size. 
 
 <!-- Insert visual aid for students who are not mathematically inclined showing that larger sample sizes = closer to actual value -->
 
-The more data points involved in the calculations of the mean, the smaller the standard error tends to be. When the standard error is small, the data is said to be more representative of the true mean. In cases where the standard error is large, the data may have some notable irregularities. Thus, larger sample size = smaller standard error = more representative of the truth. 
+Larger sample size = smaller standard error = more representative of the truth. 
 
 To help reinforce these concepts, let's re-display our previous figure but using our new sampling terminology, notation, and definitions:
 
@@ -816,13 +817,7 @@ Remember the key message of this last table: that as the sample size $n$ goes up
 
 ### The moral of the story {#moral-of-the-story}
 
-If we could only know two pieces of information from our data, what would they be? First, you need a measure of the **center** of the distribution. This would include the mean or median, which shows the center of our data points. Second, we need a measure of the **variability** of the distribution. To understand our center, we must understand how different (or how spread) our data points are from one another. Thus, we need a measure like sd() or MAD. These are summary statistics which are necessary to understanding a distribution. Do those two figures encompass all you need to know about a distribution? No! But, if you are only allowed two numbers to keep, those are the most valuable. 
-
-> The mean or median is a good estimate for the center of the posterior and the standard error or mad is a good estimate for the variability of the posterior, with +/- 2 standard errors covering 95% of the outcomes.
-
-The standard error measures the accuracy of a sample distribution as compared to the population by using the standard deviation. Specifically, the standard deviation of our data points divided by the square root of the sample size. As such, we find that larger sample sizes = lower standard errors = more accurate and representative guesses. 
-
-To really drive home our point: standard error is just a fancy term for your uncertainty about something you don't know. Standard error == our (uncertain) beliefs. 
+Standard error is just a fancy term for your uncertainty about something you don't know. Standard error is the precision of our (uncertain) beliefs. 
 
 ```{r}
 #| echo: false
@@ -832,19 +827,11 @@ To really drive home our point: standard error is just a fancy term for your unc
 knitr::include_graphics("sampling/images/final_preceptor.png")
 ```
 
-This hierarchy represents the knowledge we need to understand standard error (SE). At the bottom, we have math. It's the foundation for our understanding, but it doesn't need to be what we take away from this lesson. As we go up, we simplify the topic. The top of the pyramid are the basic levels of understanding that will help you to remember in the future. 
+This hierarchy represents the knowledge we need to understand standard errors. At the bottom, we have math. It's the foundation for our understanding, but it doesn't need to be what we take away from this lesson. As we go up, we simplify the topic. The top of the pyramid are the basic levels of understanding that will help you to remember in the future. 
 
-If I know your estimate plus or minus *two* standard errors, I know your 95% confidence interval. This is valuable information. Standard error is really just a measure for how uncertain we are about something we do not know, the thing we are estimating. When we recall SE, we should remember that, all in all, it's a complicated concept that can be distilled into: the way old people talk about confidence intervals. 
+If I know your estimate plus or minus *two* standard errors, I know your 95% confidence interval. This is valuable information. Standard error is really just a measure for how uncertain we are about something we do not know, the thing we are estimating. Speaking loosely, standard error is the way old people talk about confidence intervals. 
 
-<!-- RS: Explain what confidence interval is.  -->
-
-Recall that $\hat{\rho}$ is the estimated value of p which comes from taking a sample. There can be billions and billions of $\hat{\rho}$'s. We look at a large group of $\hat{\rho}$'s, create a distribution of results to represent the possible values of p based on our findings, and then we compute a standard error to account for our own uncertainty about our predictions. Our 95% confidence interval for our prediction == our estimate plus or minus **two** standard errors. 
-
-In regards to the fifth layer of the hierarchy, we may wonder: 
-
-> "I thought that MADs were the same thing as standard deviations. Now you say they are the same things as standard errors. Which is it?"  
-
-MADs and standard deviations are, more or less, the same thing. They are both measures of the **variability** of a distribution. In most cases, they have very similar values. A *standard error* is also a standard deviation. Specifically, it is the standard deviation of the distribution of the estimates, and that distribution of estimates is, more or less, your posterior. Therefore, we can use MAD, like standard error, to describe that distribution and the variability of that distribution. 
+Recall that $\hat{\rho}$ is the estimated value of p which comes from taking a sample. There can be billions and billions of $\hat{\rho}$'s. We look at a large group of $\hat{\rho}$'s, create a distribution of results to represent the possible values of $\rho$ based on our findings, and then we compute a standard error to account for our own uncertainty about our predictions. Our 95% confidence interval for our prediction is our estimate plus or minus **two** standard errors. 
 
 You must understand what the standard error of $\hat{\rho}$ means. You do not need to understand why. 
 

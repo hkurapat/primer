@@ -10,7 +10,6 @@ Should predictive/causal question come at the end of the Preceptor Table reasoni
 
 We have run out of time to introduce tidymodels. I still think that this is an interesting idea, especially with the bayesian package. But not this time.
 
-We have enough chapters. There isn't time to do more than 10 chapters, and all this material is good stuff.
 
 I need to clean up the chapters. There is a lot of sloppiness.
 
@@ -18,11 +17,9 @@ I need to clean up the tutorials we have: rcm, probability, sampling.
 
 I need to add tutorials for the remaining 7 chapters.
 
-Sadly, https://datalorax.github.io/equatiomatic/ does not support objects of brmsfit.
-
 Try to use gtsummary() and make it standard.
 
-"The most important aspect of a statistical analysis is not what you do with the data, it’s what data you use." -- Hal Stern
+
 
 ## Students
 
