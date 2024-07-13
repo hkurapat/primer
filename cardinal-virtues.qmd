@@ -178,7 +178,7 @@ If we have the Preceptor Table, with no missing data, then it is trivial to calc
 
 ### EDA
 
-> You can never look at the data too much.
+> You can never look at the data too much. -- Mark Engerman
 
 There is always short section devoted to exploratory data analysis.  Each EDA will include at least one textual look at the data, usually using `summary()`, but with `skim()`, `glimpse()`, `print()` and `slice_sample()` also available. It will also include at least one graphic, almost always with the outcome variable on the y-axis and one of the covariates on the x-axis. The data set will often include columns and rows which are irrelevant to the question. Those columns and rows are removed, creating a tibble which will be used in the Courage section. The name of that tibble will often be something convenient like `ch_7`.
 
@@ -186,8 +186,9 @@ It also makes sense to include some discussion about where this data comes from.
 
 ### Validity
 
+> Validity is the consistency, or lack thereof, in the columns of your data set and the corresponding columns in your Preceptor Table. 
 
-**Validity** is the consistency, or lack thereof, in the columns of your data set and the corresponding columns in your Preceptor Table. In order to consider the two data sets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*, which is the first step in Justice.
+In order to consider the two data sets to be drawn from the same population, the columns from one must have a *valid correspondence* with the columns in the other. Validity, if true (or at least reasonable), allows us to construct the *Population Table*, which is the first step in Justice.
 
 Validity discussions always have one (short) paragraph about each relevant variable (the outcome and any relevant covariates), with examples of why validity might *not* hold. Validity discussion finishes with a brief discussion along the lines of: "Despite these concerns, we will assume that validity does hold."
 
@@ -262,7 +263,7 @@ tibble(source = c("...", "Data", "Data", "...",
 
 ### Stability
 
-**Stability** means that the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn. 
+> Stability means that the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn. 
 
 If the assumption of stability holds, then the relationships between the columns in the Population Table is the same *across time*. First, the relationship among columns from the same moment in time as the data is the same as the relationship among columns for the entire table. Second, the relationship among columns from the same moment in time as the Preceptor Table is the same as the relationship among columns for the entire table. 
 
@@ -276,9 +277,9 @@ Regardless of those concerns, we always conclude that, although the assumption o
 
 ### Representativeness
 
-**Representativeness**, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows. Ideally, we would like both the Preceptor Table *and* our data to be random samples from the population. Sadly, this is almost never the case.
+> Representativeness, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows. 
 
-As with all our assumptions, we always begin by restating the definition. **Representativeness**, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows from the same moment in time. The second is between our data and the other rows of equivalent vintage.
+Ideally, we would like both the Preceptor Table *and* our data to be random samples from the population. If so, then the assumption of representativeness is met. Sadly, this is almost never the case.
 
 Stability looks across time periods. Reprentativeness looks within time periods.
 
@@ -288,25 +289,22 @@ Provide specific examples of how a lack of representativeness might be a problem
 
 But, to continue the analysis, we always assume/pretend that the rows from both the data and the Preceptor Table are representative *enough* of the relevant time period from within the larger population from which both are drawn.
 
-<!-- DK: Is the below true? It sounds cool . . .-->
-
-*The more expansive your Preceptor Table, the more important the assumption of representativeness becomes.*
 
 ### Unconfoundedness
 
-**Unconfoundedness** means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. This assumption is only relevant for causal models. We describe a model as "confounded" if this is not true. The easiest way to ensure unconfoundedness is to assign treatment randomly.
+> Unconfoundedness means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. A model is *confounded* if this is not true.
+
+This assumption is only relevant for causal models. We describe a model as "confounded" if this is not true. The easiest way to ensure unconfoundedness is to assign treatment randomly.
 
 If the model is predictive, then unconfoundedness is not a concern. Just mention that fact in a sentence at the end of the section on representativeness. But, if the model is causal, then we need a section devoted to this topic.
 
-As always, start by restating the definition, something along the lines of "Unconfoundedness means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. A model is *confounded* if this is not true."
-
 If treatment assignment was random, then unconfoundedness is guaranteed, although experienced researchers often worry about the exact process involved in such "random" assignment. If, however, treatment assignment was not random, then there will always be a concern that it is correlated with potential outcomes. Discuss at least two scenarios in which this might be a concern. But then, as usual, conclude that, although there might be some issues with confoundedness, they are probably small enough to not worry about.
 
- Just because Wisdom points us toward a Population Table with X rows does not mean we need to keep all X rows, especially if creating a model which covers all rows is hard/impossible. We can just simplify the claims we are making about the world by removing some rows. Getting rid of rows will usually necessitate an adjustment to the question we are trying to answer. Again, data science is an iterative process.
+ Just because Wisdom points us toward a Population Table with $N$ rows does not mean we need to keep all $N$ rows, especially if creating a model which covers all rows is hard/impossible. We can just simplify the claims we are making about the world by removing some rows. Getting rid of rows will usually necessitate an adjustment to the question we are trying to answer. Again, data science is an iterative process.
 
 The Justice section concludes with a sentence or two about how, despite any problems with the core assumptions of stability, representativeness and unconfoundedness, we can still proceed to next steps because the assumptions hold enough.
 
-The last step may be to revisit the key sentences from the Wisdom section. Recall:
+The last step is to revisit the key sentences from the Wisdom section. Recall:
 
 > *Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020. In particular, what percentage of individuals who make more than $100,000 per year are liberal?*
 
@@ -316,7 +314,7 @@ Are these sentences still correct, or does a serious consideration of the assump
 
 > *The relationship between income and ideology may have changed over that eight year period.*
 
-There is no need to use technical terms like "stability." However, most readers will understand what "representative" means. The key point is *honesty*. We have an obligation to at least mention some possible concerns. At the end, we conclude with an update as to how the concluding paragraph looks now:
+There is no need to use technical terms like "stability." However, most readers will understand what "representative" means. The key point is *honesty*. We have an obligation to at least mention some possible concerns. Our new paragraph:
 
 > *Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020. In particular, what percentage of individuals who make more than $100,000 per year are liberal? The relationship between income and ideology may have changed over that eight year period.*
 
