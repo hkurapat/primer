@@ -211,7 +211,9 @@ By thinking hard about the original question and the data, we have come up with 
 ### Population Table
 
 
-The **Population Table** includes a row for each unit/time combination in the underlying population from which both the Preceptor Table and the data are drawn. It can be constructed if the validity assumption is (mostly) true. It includes all the rows from the Preceptor Table. It also includes the rows from the data set. It usually has other rows as well, rows which represent unit/time combinations from other parts of the population.
+> The Population Table includes a row for each unit/time combination in the underlying population from which both the Preceptor Table and the data are drawn. 
+
+The **Population Table** can be constructed if the validity assumption is (mostly) true. It includes all the rows from the Preceptor Table. It also includes the rows from the data set. It usually has other rows as well, rows which represent unit/time combinations from other parts of the population.
 
 If validity holds, then we can create a Population Table. 
 
