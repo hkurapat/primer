@@ -285,8 +285,8 @@ The *data generating mechanism*, or DGM, is a mathematical formula which mimics 
 
 <!-- DK: Should be y's and x's? -->
 
-$$ red_i  \sim Bernoulli(\rho) $$
-Each bead $i$ which we sample can be either red or white. It is convenient to define the model in terms of whether or not the bead was red. If bead $i$ is red, the value drawn is `1`, which is the standard way of representing `TRUE`. In other words, $red_i = 1$ means that bead $i$ was red. Similarly, a white bead is indicated with `0`, meaning that it is `FALSE` that the bead was red. $\rho$ is the only parameter in a Bernoulli model. It is the probability that a `1`, instead of a `0`, is drawn. That is, $\rho$ is the probability of a red bead, which is the same thing as the proportion of red beads in the urn, assuming again that the sampling mechanism is not biased.
+$$ biden_i  \sim Bernoulli(\rho) $$
+Each voter $i$ might vote for Biden or vote for someone else. It is convenient to define the model in terms of whether or not the vote was for Biden. If the vote was for Biden, the value drawn is `1`, which is the standard way of representing `TRUE`. In other words, $biden_i = 1$ means that voter $i$ voted for Biden. Similarly, a vote for anyone else but Biden is indicated with `0`, meaning that it is `FALSE` that the the vote was for Biden. $\rho$ is the only parameter in a Bernoulli model. It is the probability that a `1`, instead of a `0`, is drawn. That is, $\rho$ is the probability of a Biden vote, which is the same thing as the proportion of all votes which were cast for Biden, assuming again that the sampling mechanism is not biased.
 
 We typical estimate the unknown parameter $\rho$ from the Bernoulli model by using a logit regression:
 
