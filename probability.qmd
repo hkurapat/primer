@@ -875,7 +875,7 @@ Joint distributions are also mathematical objects that cover a set of outcomes, 
 
 Let's say that you are rolling two six-sided dice simultaneously. Dice 1 is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. Dice 2 is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both dice 1,000 times. In previous examples involving two dice, we cared about the sum of results and not the outcomes of the first versus the second dice of each simulation. With a joint distributions, the outcomes for individual dice matter; so instead of 11 possible outcomes on the x-axis of our distribution plot (ranging from 2 to 12), we have 36 outcomes. Furthermore, a 2D probability distribution is not sufficient to represent all of the variables involved, so the joint distribution for this example is displayed using a 3D plot.
 
-# AC: I noticed in the image that the column Dice 1 rolling a 6 and Dice 2 rolling a 5 is missing in the plot
+<!-- # AC: I noticed in the image that the column Dice 1 rolling a 6 and Dice 2 rolling a 5 is missing in the plot -->
 
 ```{r}
 #| echo: false
