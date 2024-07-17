@@ -60,21 +60,36 @@ library(gt)
 
 In the spirit of transparency, here are the guidelines which we provide to colleagues updating chapters in the *Primer* and the associated tutorials in the [**primer.tutorials**](https://ppbds.github.io/primer.tutorials/) package. This is how we think data science ought to be taught. It is also, perhaps unsurprisingly, how we think data science ought to be done, at least at this introductory level. Key concepts are bolded when they are first introduced.
 
+## Subject 
+
+Begin with a subject. These are often very broad: conquest, war, famine, and death are perennial favorites. But there are happier topics to pursue: marriage, birth, family, income, wealth, education, and so on. We want students to study subjects in which they are genuinely interested.
+
+Thinking about a subject often helps to clarify three topics: the outcome, the units and the important covariate/treatment. 
+The outcome is the variable which we are trying to understand/explain/predict/control. It is the "right-hand side" variable in the statistical model which we will construct. 
+
+The units are the level at which we measure the outcome. The general subject of income can be studied at many levels: individual, family, business, town, state and country, to name just a few.
+
+The covariate/treatment is the variable which we are most interested in, the one whose connection, if any, to the outcome is at center of our project. If are task is mere prediction, then there may not be a central covariate/treatment.
+
 ## Question
 
-Begin with the question. These generally start very broadly. Example:
+Once we have a subject, we move on to a broad question:
 
-> *What is the relationship between income and political ideology?*
+> *What is the relationship between political ideology and income?*
 
 If you are working in a specific fields, then the questions you and your colleagues/competitors examine will be very similar. In baseball, you will all care about the relationship between minor league statistics and major league performance. In political campaigns, you will all want to know what factors influence both donations and voting.
+
+The broad question might, or might not, mention the units. (Often, the units we can plausibly study are determined by the data which we have.) The outcome variable is often mentioned first. After all, it is at the center of our project. The most important covariate/treatment is mentioned second. At this stage, we are still probably at the level of general concepts. We have not yet determined the details of the specific variables.
 
 In order to make progress, you will then drill down to a more specific question, one with a numerical answer. Example:
 
 > *What proportion of people who make $100,000 are liberal?*
 
+Of course, our data must contain the variables which allow us to answer the question, otherwise we need a new question.
+
 Specifics help you to fix ideas as you start to work on a project. Just because you start looking for this number does not mean that we can't consider other questions. We might estimate dozens of specific numbers when exploring the connection between income and ideology.
 
-Your interim goal is to provide an answer to the specific question, along with your uncertainty about that answer. The most common form for the answer is a posterior probability distribution. This PPD is either the answer itself, or the tool we use to answer the question. To caclulate the PPD, you will create a series of models, the final version of which we refer to as the Data Generating Mechanism (DGM). Once you have the DGM, you can not only answer the specific question. You can also answer lots of similar questions, thereby allowing you to discuss the original general question in excellent detail.
+Your interim goal is to provide an answer to the specific question, along with your uncertainty about that answer. The most common form for the answer is a posterior probability distribution. This PPD is either the answer itself, or the tool we use to answer the question. To calculate the PPD, you will create a series of models, the final version of which we refer to as the Data Generating Mechanism (DGM). Once you have the DGM, you can not only answer the specific question. You can also answer lots of similar questions, thereby allowing you to discuss the original general question in excellent detail.
 
 Both questions should be indented and italicized. 
 

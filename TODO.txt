@@ -1,5 +1,6 @@
 # Priorities
 
+Spend more time and detail on how you make a Preceptor Table in Chapter 1, and in the associated tutorial. Students had a lot of trouble with this in class, even though they had one the tutorial. Maybe drop some other material, like the by-hand calculation of various quantities . . .
 
 Rethink exactly what we want students to know at the end of the Primer. Given that goal, what should we be doing in each chapter? This framing makes clear that we don't really care about teaching students how to use map functions and list columns. Maybe that stuff is valuable. Maybe not. I leave that judgment to R4DS. But it is nowhere in the top 20 (50?) things I want students to get out of the Primer.
 

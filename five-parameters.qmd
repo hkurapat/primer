@@ -415,7 +415,7 @@ There are three unknown parameters --- $\beta_0$, $\beta_1$ and $\sigma$ --- jus
 
 You may recall from middle school algebra that the equation of a line is $y = m x + b$. There are two parameters: $m$ and $b$. The intercept $b$ is the value of $y$ when $x = 0$. The slope coefficient $m$ for $x$ is the increase in $y$ for every one unit increase in $x$. When defining a regression line, we use slightly different notation but the fundamental relationship is the same. 
 
-Now we want to use `stan_glm()` to convert our mathematics into code through a fitted model. 
+Now we want to use `brm()` to convert our mathematics into code through a fitted model. 
 
 ```{r}
 #| code-fold: false
