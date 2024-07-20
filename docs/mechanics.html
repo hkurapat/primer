@@ -278,7 +278,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./set-up.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Set Up for Working on The Primer</span></a>
+ <span class="menu-text">Set Up for Working on PPBDS Projects</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -796,22 +796,22 @@ att_start 0.8146102 0.04254966 0.7299836 0.8971717</code></pre>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">att_end</span>, <span class="va">att_start</span>, <span class="va">liberal</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pred_lib <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">fit_liberal</span><span class="op">)</span><span class="op">[</span>,<span class="st">"Estimate"</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>resid_lib <span class="op">=</span> <span class="va">pred_lib</span> <span class="op">-</span> <span class="va">att_end</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pred_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">fit_liberal</span><span class="op">)</span><span class="op">[</span>,<span class="st">"Estimate"</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pred_as <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">fit_att_start</span><span class="op">)</span><span class="op">[</span>,<span class="st">"Estimate"</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>resid_as <span class="op">=</span> <span class="va">pred_as</span> <span class="op">-</span> <span class="va">att_end</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 115 × 7
    att_end att_start liberal pred_lib resid_lib pred_as resid_as
      &lt;dbl&gt;     &lt;dbl&gt; &lt;lgl&gt;      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
- 1      11        11 FALSE      10.0    -0.975    10.0   -0.975 
- 2      10         9 FALSE      10.0     0.0249   10.0    0.0249
- 3       5         3 TRUE        8.02    3.02      8.02   3.02  
- 4      11        11 FALSE      10.0    -0.975    10.0   -0.975 
- 5       5         8 TRUE        8.02    3.02      8.02   3.02  
- 6      13        13 FALSE      10.0    -2.98     10.0   -2.98  
- 7      13        13 FALSE      10.0    -2.98     10.0   -2.98  
- 8      11        10 FALSE      10.0    -0.975    10.0   -0.975 
- 9      12        12 FALSE      10.0    -1.98     10.0   -1.98  
-10      10         9 FALSE      10.0     0.0249   10.0    0.0249
+ 1      11        11 FALSE      10.0    -0.975    10.6    -0.385
+ 2      10         9 FALSE      10.0     0.0249    8.99   -1.01 
+ 3       5         3 TRUE        8.02    3.02      4.10   -0.901
+ 4      11        11 FALSE      10.0    -0.975    10.6    -0.385
+ 5       5         8 TRUE        8.02    3.02      8.17    3.17 
+ 6      13        13 FALSE      10.0    -2.98     12.2    -0.755
+ 7      13        13 FALSE      10.0    -2.98     12.2    -0.755
+ 8      11        10 FALSE      10.0    -0.975     9.80   -1.20 
+ 9      12        12 FALSE      10.0    -1.98     11.4    -0.570
+10      10         9 FALSE      10.0     0.0249    8.99   -1.01 
 # ℹ 105 more rows</code></pre>
 </div>
 </div>

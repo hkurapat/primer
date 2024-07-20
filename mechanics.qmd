@@ -8,6 +8,7 @@
 library(patchwork)
 ```
 
+
 <!-- Not sure where this chapter goes. It makes use of models with two independent variables, which means four parameters. -->
 
 *Our forecasts are more uncertain that a naive use of our models would suggest.*
@@ -510,7 +511,7 @@ trains |>
   select(att_end, att_start, liberal) |> 
   mutate(pred_lib = fitted(fit_liberal)[,"Estimate"]) |> 
   mutate(resid_lib = pred_lib - att_end) |> 
-  mutate(pred_as = fitted(fit_liberal)[,"Estimate"]) |> 
+  mutate(pred_as = fitted(fit_att_start)[,"Estimate"]) |> 
   mutate(resid_as = pred_as - att_end)
 ```
 
