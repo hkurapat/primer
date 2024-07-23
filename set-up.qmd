@@ -92,7 +92,7 @@ This may seem like overkill, but, as [*Pro Git*](https://git-scm.com/book/en/v2)
 
 Note that this command should automatically put you in a new RStudio session with the `primer` (or `primer.tutorials` or `primer.data`) RStudio project which resides on your computer
 
-2) The next step is to get **renv** setup so that you are running the same package versions as everyone else. (This does not apply to the **primer.tutorials** package, which does not use **renv**.) Run this once:
+2) The next step is to get **renv** setup so that you are running the same package versions as everyone else. Run this once:
 
 ```{r, eval=FALSE}
 #| code-fold: false
@@ -113,6 +113,8 @@ However, there are three other **renv** commands you might issue:
 `renv::restore()` looks at the `renv.lock` file and installs the packages it specifies. You will need to do this when I make a change to `renv.lock`, e.g., if I upgrade our version of **ggplot2** or add a new package.
 
 `renv::snapshot()` should only be issued if you know what you are doing. This changes the `renv.lock` file, which is something that, usually, only I do. Most common case for use would be if you need to add a new package to the project.
+
+**Warning:** The **renv** package commands are very sensitive to your current working directory. Ensure that you are in the main directory of your project --- something like `/Users/dkane/Desktop/projects/primer.tutorials` --- before you run any of them.
 
 
 3) Create a branch to work from:
