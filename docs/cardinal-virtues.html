@@ -299,7 +299,7 @@ window.Quarto = {
   
 
 
-</header><!-- When starting a new chapter, copy/paste this: 
+</header><!-- Add discussion of the different kinds of intervals. --><!-- When starting a new chapter, copy/paste this: 
 
 ## Wisdom
 
@@ -348,17 +348,21 @@ window.Quarto = {
 --><p>In the spirit of transparency, here are the guidelines which we provide to colleagues updating chapters in the <em>Primer</em> and the associated tutorials in the <a href="https://ppbds.github.io/primer.tutorials/"><strong>primer.tutorials</strong></a> package. This is how we think data science ought to be taught. It is also, perhaps unsurprisingly, how we think data science ought to be done, at least at this introductory level. Key concepts are bolded when they are first introduced.</p>
 <section id="subject" class="level2"><h2 class="anchored" data-anchor-id="subject">Subject</h2>
 <p>Begin with a subject. These are often very broad: conquest, war, famine, and death are perennial favorites. But there are happier topics to pursue: marriage, birth, family, income, wealth, education, and so on. We want students to study subjects in which they are genuinely interested.</p>
-<p>Thinking about a subject often helps to clarify three topics: the outcome, the units and the important covariate/treatment. The outcome is the variable which we are trying to understand/explain/predict/control. It is the “right-hand side” variable in the statistical model which we will construct.</p>
+<p>Thinking about a subject often helps to clarify three topics: the outcome, the units and the important covariate/treatment. The outcome is the variable which we are trying to understand/explain/predict/control. It is the “left-hand side” variable in the statistical model which we will construct.</p>
 <p>The units are the level at which we measure the outcome. The general subject of income can be studied at many levels: individual, family, business, town, state and country, to name just a few.</p>
-<p>The covariate/treatment is the variable which we are most interested in, the one whose connection, if any, to the outcome is at center of our project. If are task is mere prediction, then there may not be a central covariate/treatment.</p>
+<p>The covariate/treatment is the variable in which we are most interested, the one whose connection, if any, to the outcome is at center of our project. If are task is mere prediction, then there may not be a central covariate of interest. If the model is causal, then the treatment is almost the most important covariate.</p>
 </section><section id="question" class="level2"><h2 class="anchored" data-anchor-id="question">Question</h2>
 <p>Once we have a subject, we move on to a broad question:</p>
 <blockquote class="blockquote">
-<p><em>What is the relationship between political ideology and income?</em></p>
+<p><em>What is the relationship between ideology and income?</em></p>
 </blockquote>
 <p>If you are working in a specific fields, then the questions you and your colleagues/competitors examine will be very similar. In baseball, you will all care about the relationship between minor league statistics and major league performance. In political campaigns, you will all want to know what factors influence both donations and voting.</p>
 <p>The broad question might, or might not, mention the units. (Often, the units we can plausibly study are determined by the data which we have.) The outcome variable is often mentioned first. After all, it is at the center of our project. The most important covariate/treatment is mentioned second. At this stage, we are still probably at the level of general concepts. We have not yet determined the details of the specific variables.</p>
-<p>In order to make progress, you will then drill down to a more specific question, one with a numerical answer. Example:</p>
+<p>In order to make progress, you will then drill down to a more specific question, one which specifies variables for which you actually have data:</p>
+<blockquote class="blockquote">
+<p><em>What is the relationship between <code>liberal</code>, a binary variable which measures self-reported political views, <code>income</code>, a numeric variable derived a person’s W-2?</em></p>
+</blockquote>
+<p>The key refinement at this stage is that we have gone from general terms, like “ideology” and “income,” to a variable with a specific definition, available in a data set to which we have access. With specific variables, we can construct a statistical model. That statistical model can be used to answer all sorts of questions about the relationships.</p>
 <blockquote class="blockquote">
 <p><em>What proportion of people who make $100,000 are liberal?</em></p>
 </blockquote>
@@ -422,23 +426,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="mygdrrjydf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mygdrrjydf table {
+<div id="ugpoexfyri" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ugpoexfyri table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mygdrrjydf thead, #mygdrrjydf tbody, #mygdrrjydf tfoot, #mygdrrjydf tr, #mygdrrjydf td, #mygdrrjydf th {
+#ugpoexfyri thead, #ugpoexfyri tbody, #ugpoexfyri tfoot, #ugpoexfyri tr, #ugpoexfyri td, #ugpoexfyri th {
   border-style: none;
 }
 
-#mygdrrjydf p {
+#ugpoexfyri p {
   margin: 0;
   padding: 0;
 }
 
-#mygdrrjydf .gt_table {
+#ugpoexfyri .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -464,12 +468,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#mygdrrjydf .gt_caption {
+#ugpoexfyri .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mygdrrjydf .gt_title {
+#ugpoexfyri .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -481,7 +485,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#mygdrrjydf .gt_subtitle {
+#ugpoexfyri .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -493,7 +497,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#mygdrrjydf .gt_heading {
+#ugpoexfyri .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -505,13 +509,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mygdrrjydf .gt_bottom_border {
+#ugpoexfyri .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mygdrrjydf .gt_col_headings {
+#ugpoexfyri .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -526,7 +530,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mygdrrjydf .gt_col_heading {
+#ugpoexfyri .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -546,7 +550,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mygdrrjydf .gt_column_spanner_outer {
+#ugpoexfyri .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -558,15 +562,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#mygdrrjydf .gt_column_spanner_outer:first-child {
+#ugpoexfyri .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mygdrrjydf .gt_column_spanner_outer:last-child {
+#ugpoexfyri .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mygdrrjydf .gt_column_spanner {
+#ugpoexfyri .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -578,11 +582,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#mygdrrjydf .gt_spanner_row {
+#ugpoexfyri .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mygdrrjydf .gt_group_heading {
+#ugpoexfyri .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -608,7 +612,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#mygdrrjydf .gt_empty_group_heading {
+#ugpoexfyri .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -623,15 +627,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#mygdrrjydf .gt_from_md > :first-child {
+#ugpoexfyri .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mygdrrjydf .gt_from_md > :last-child {
+#ugpoexfyri .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mygdrrjydf .gt_row {
+#ugpoexfyri .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -650,7 +654,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#mygdrrjydf .gt_stub {
+#ugpoexfyri .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -663,7 +667,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mygdrrjydf .gt_stub_row_group {
+#ugpoexfyri .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -677,15 +681,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#mygdrrjydf .gt_row_group_first td {
+#ugpoexfyri .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mygdrrjydf .gt_row_group_first th {
+#ugpoexfyri .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mygdrrjydf .gt_summary_row {
+#ugpoexfyri .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -695,16 +699,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mygdrrjydf .gt_first_summary_row {
+#ugpoexfyri .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mygdrrjydf .gt_first_summary_row.thick {
+#ugpoexfyri .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mygdrrjydf .gt_last_summary_row {
+#ugpoexfyri .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -714,7 +718,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mygdrrjydf .gt_grand_summary_row {
+#ugpoexfyri .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -724,7 +728,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mygdrrjydf .gt_first_grand_summary_row {
+#ugpoexfyri .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -734,7 +738,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#mygdrrjydf .gt_last_grand_summary_row_top {
+#ugpoexfyri .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -744,11 +748,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mygdrrjydf .gt_striped {
+#ugpoexfyri .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mygdrrjydf .gt_table_body {
+#ugpoexfyri .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -757,7 +761,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#mygdrrjydf .gt_footnotes {
+#ugpoexfyri .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -771,7 +775,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mygdrrjydf .gt_footnote {
+#ugpoexfyri .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -780,7 +784,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mygdrrjydf .gt_sourcenotes {
+#ugpoexfyri .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -794,7 +798,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#mygdrrjydf .gt_sourcenote {
+#ugpoexfyri .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -802,63 +806,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#mygdrrjydf .gt_left {
+#ugpoexfyri .gt_left {
   text-align: left;
 }
 
-#mygdrrjydf .gt_center {
+#ugpoexfyri .gt_center {
   text-align: center;
 }
 
-#mygdrrjydf .gt_right {
+#ugpoexfyri .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mygdrrjydf .gt_font_normal {
+#ugpoexfyri .gt_font_normal {
   font-weight: normal;
 }
 
-#mygdrrjydf .gt_font_bold {
+#ugpoexfyri .gt_font_bold {
   font-weight: bold;
 }
 
-#mygdrrjydf .gt_font_italic {
+#ugpoexfyri .gt_font_italic {
   font-style: italic;
 }
 
-#mygdrrjydf .gt_super {
+#ugpoexfyri .gt_super {
   font-size: 65%;
 }
 
-#mygdrrjydf .gt_footnote_marks {
+#ugpoexfyri .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mygdrrjydf .gt_asterisk {
+#ugpoexfyri .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mygdrrjydf .gt_indent_1 {
+#ugpoexfyri .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mygdrrjydf .gt_indent_2 {
+#ugpoexfyri .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mygdrrjydf .gt_indent_3 {
+#ugpoexfyri .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mygdrrjydf .gt_indent_4 {
+#ugpoexfyri .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mygdrrjydf .gt_indent_5 {
+#ugpoexfyri .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -958,23 +962,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="ebbvhkzroa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ebbvhkzroa table {
+<div id="edocfuiwfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#edocfuiwfi table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ebbvhkzroa thead, #ebbvhkzroa tbody, #ebbvhkzroa tfoot, #ebbvhkzroa tr, #ebbvhkzroa td, #ebbvhkzroa th {
+#edocfuiwfi thead, #edocfuiwfi tbody, #edocfuiwfi tfoot, #edocfuiwfi tr, #edocfuiwfi td, #edocfuiwfi th {
   border-style: none;
 }
 
-#ebbvhkzroa p {
+#edocfuiwfi p {
   margin: 0;
   padding: 0;
 }
 
-#ebbvhkzroa .gt_table {
+#edocfuiwfi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1000,12 +1004,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ebbvhkzroa .gt_caption {
+#edocfuiwfi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ebbvhkzroa .gt_title {
+#edocfuiwfi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1017,7 +1021,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ebbvhkzroa .gt_subtitle {
+#edocfuiwfi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1029,7 +1033,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ebbvhkzroa .gt_heading {
+#edocfuiwfi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1041,13 +1045,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ebbvhkzroa .gt_bottom_border {
+#edocfuiwfi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ebbvhkzroa .gt_col_headings {
+#edocfuiwfi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1062,7 +1066,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ebbvhkzroa .gt_col_heading {
+#edocfuiwfi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1082,7 +1086,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ebbvhkzroa .gt_column_spanner_outer {
+#edocfuiwfi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1094,15 +1098,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ebbvhkzroa .gt_column_spanner_outer:first-child {
+#edocfuiwfi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ebbvhkzroa .gt_column_spanner_outer:last-child {
+#edocfuiwfi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ebbvhkzroa .gt_column_spanner {
+#edocfuiwfi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1114,11 +1118,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ebbvhkzroa .gt_spanner_row {
+#edocfuiwfi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ebbvhkzroa .gt_group_heading {
+#edocfuiwfi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1144,7 +1148,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ebbvhkzroa .gt_empty_group_heading {
+#edocfuiwfi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1159,15 +1163,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ebbvhkzroa .gt_from_md > :first-child {
+#edocfuiwfi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ebbvhkzroa .gt_from_md > :last-child {
+#edocfuiwfi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ebbvhkzroa .gt_row {
+#edocfuiwfi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1186,7 +1190,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ebbvhkzroa .gt_stub {
+#edocfuiwfi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1199,7 +1203,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ebbvhkzroa .gt_stub_row_group {
+#edocfuiwfi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1213,15 +1217,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ebbvhkzroa .gt_row_group_first td {
+#edocfuiwfi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ebbvhkzroa .gt_row_group_first th {
+#edocfuiwfi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ebbvhkzroa .gt_summary_row {
+#edocfuiwfi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1231,16 +1235,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ebbvhkzroa .gt_first_summary_row {
+#edocfuiwfi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ebbvhkzroa .gt_first_summary_row.thick {
+#edocfuiwfi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ebbvhkzroa .gt_last_summary_row {
+#edocfuiwfi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1250,7 +1254,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ebbvhkzroa .gt_grand_summary_row {
+#edocfuiwfi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1260,7 +1264,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ebbvhkzroa .gt_first_grand_summary_row {
+#edocfuiwfi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1270,7 +1274,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ebbvhkzroa .gt_last_grand_summary_row_top {
+#edocfuiwfi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1280,11 +1284,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ebbvhkzroa .gt_striped {
+#edocfuiwfi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ebbvhkzroa .gt_table_body {
+#edocfuiwfi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1293,7 +1297,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ebbvhkzroa .gt_footnotes {
+#edocfuiwfi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1307,7 +1311,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ebbvhkzroa .gt_footnote {
+#edocfuiwfi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1316,7 +1320,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ebbvhkzroa .gt_sourcenotes {
+#edocfuiwfi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1330,7 +1334,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ebbvhkzroa .gt_sourcenote {
+#edocfuiwfi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1338,63 +1342,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ebbvhkzroa .gt_left {
+#edocfuiwfi .gt_left {
   text-align: left;
 }
 
-#ebbvhkzroa .gt_center {
+#edocfuiwfi .gt_center {
   text-align: center;
 }
 
-#ebbvhkzroa .gt_right {
+#edocfuiwfi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ebbvhkzroa .gt_font_normal {
+#edocfuiwfi .gt_font_normal {
   font-weight: normal;
 }
 
-#ebbvhkzroa .gt_font_bold {
+#edocfuiwfi .gt_font_bold {
   font-weight: bold;
 }
 
-#ebbvhkzroa .gt_font_italic {
+#edocfuiwfi .gt_font_italic {
   font-style: italic;
 }
 
-#ebbvhkzroa .gt_super {
+#edocfuiwfi .gt_super {
   font-size: 65%;
 }
 
-#ebbvhkzroa .gt_footnote_marks {
+#edocfuiwfi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ebbvhkzroa .gt_asterisk {
+#edocfuiwfi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ebbvhkzroa .gt_indent_1 {
+#edocfuiwfi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ebbvhkzroa .gt_indent_2 {
+#edocfuiwfi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ebbvhkzroa .gt_indent_3 {
+#edocfuiwfi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ebbvhkzroa .gt_indent_4 {
+#edocfuiwfi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ebbvhkzroa .gt_indent_5 {
+#edocfuiwfi .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1503,10 +1507,10 @@ window.Quarto = {
 <p><em>The longer the time period covered by the Preceptor Table (and the data), the more suspect the assumption of stability becomes.</em></p>
 </section><section id="representativeness" class="level3"><h3 class="anchored" data-anchor-id="representativeness">Representativeness</h3>
 <blockquote class="blockquote">
-<p>Representativeness, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows.</p>
+<p>Representativeness, or the lack thereof, concerns two relationships among the rows in the Population Table. The first is between the data and the other rows. The second is between the other rows and the Preceptor Table.</p>
 </blockquote>
 <p>Ideally, we would like both the Preceptor Table <em>and</em> our data to be random samples from the population. If so, then the assumption of representativeness is met. Sadly, this is almost never the case.</p>
-<p>Stability looks across time periods. Reprentativeness looks within time periods.</p>
+<p>Stability looks across time periods. Representativeness looks within time periods.</p>
 <p>We mention specific examples of two potential problems. First, is our data representative of the population? Rarely! Second, are the rows associated with the Preceptor Table representative of the population? Again, almost never!</p>
 <p>Provide specific examples of how a lack of representativeness might be a problem, one large enough to affect your ability to answer the question.</p>
 <p>But, to continue the analysis, we always assume/pretend that the rows from both the data and the Preceptor Table are representative <em>enough</em> of the relevant time period from within the larger population from which both are drawn.</p>
@@ -1582,7 +1586,24 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><em>Of the people making $100,000 or more per year, about 55% are liberal, although the true number could be as low as 53% or as high as 57%.</em></p>
 </blockquote>
-<p>Some cases, like these, feature numbers which have a natural interpretation. We know what percentages are. But, often, the key numbers require some more discussion. For example:</p>
+<p>Some cases, like these, feature numbers which have a natural interpretation. We know what percentages are. But many outcomes are measured in units which are more difficult to interpret. For example:</p>
+<blockquote class="blockquote">
+<p><em>The causal effect of smaller class size on math exam scores was 10 points.</em></p>
+</blockquote>
+<p>The reader does not know if 10 points is a big or small effect because she doesn’t know anything about the range of scores which students get on this exam. The most common approach to this problem is to “standardize” the causal effect by dividing by the standard deviation of the outcome. For example, if the standard deviation of all the math exam scores is 50, then we would re-write this as:</p>
+<blockquote class="blockquote">
+<p><em>The standardized causal effect of smaller class size on math exam scores was 0.2.</em></p>
+</blockquote>
+<p>Depending on the field, there are a variety of terms for describing a raw causal effect divided by the standard deviation, including “sigmas” — derived from the use of the Greek letter <span class="math inline">\(\sigma\)</span> as a symbol for the standard deviation. So, we might also write:</p>
+<blockquote class="blockquote">
+<p><em>The causal effect of smaller class size on math exam scores was 0.2 sigmas.</em></p>
+</blockquote>
+<p>The raw effect size of 10 is 20% a standard deviation (50). If it were 50, we would speak instead one “one sigma” which is one standard deviation.</p>
+<p>Another common terms for this divide-by-the-standard deviation standardization is “effect size.” So:</p>
+<blockquote class="blockquote">
+<p><em>The effect size of smaller class size on math exam scores was 0.2.</em></p>
+</blockquote>
+<p>Here is another approach for tackling a problem in which the scale does not have a natural interpretation. Consider:</p>
 <blockquote class="blockquote">
 <p><em>The causal effect of hearing Spanish-speakers is a more conservative attitude toward immigration, a change of about 1.5 (<span class="math inline">\(\pm\)</span> 0.5) on a 15 point scale.</em></p>
 </blockquote>
@@ -1590,6 +1611,12 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><em>The causal effect of hearing Spanish-speakers is a more conservative attitude toward immigration, a change of about 1.5 (<span class="math inline">\(\pm\)</span> 0.5) on a 15 point scale. For perspective, the difference between Democrats and Republicans on that same scale is about 2.1.</em></p>
 </blockquote>
+<p>Terminology is important. The best words depend on your audience. An example involves how you describe your uncertainty, the interval around your best estimate of the quantity of interest. The terminology above — 1.5 (<span class="math inline">\(\pm\)</span> 0.5) — works well for a general audience. But you may want to be more precise as to the meaning of that interval. Consider some options:</p>
+<ul>
+<li><p><em>95% interval of 0.5 to 1.5</em>. The use of the word “interval,” without an associated adjective, is a way to avoid the entire debate. The meaning is almost certainly the Bayesian one: The 95% percentile range on my posterior for the causal effect goes from 0.5 to 1.5.</p></li>
+<li><p><em>95% confidence interval of 0.5 to 1.5</em>. The adjective “confidence” is used by two different sorts of people. First are Frequentists, whose philosophy is the traditional approach to statistics and still in control of institutions like the College Board. The Frequentist meaning is that, if we followed the same approach in 100 similar problems then, 95% of the time, our confidence interval would include the true value. If you don’t understand this, don’t worry. You will never work for a Frequentist. The second sort of person who uses the adjective “confidence” is someone who is actually Bayesian, like us, but doesn’t care about annoying Frequentists.</p></li>
+<li><p><em>95% uncertainty interval of 0.5 to 1.5</em>. <a href="https://statmodeling.stat.columbia.edu/2022/04/05/confidence-intervals-compatability-intervals-uncertainty-intervals/">Bayesians</a> who don’t want to annoy Frequentists will often replace “confidence” with “uncertainty” to be polite. But, being Bayesians, their meaning is always the same: There is a 95% chance that the true value is between 0.5 and 1.5.</p></li>
+</ul>
 <p>Depending on the context, you might have more than one Quantity of Interest to discuss. But there must be at least one. You are now ready to provide the entire concluding paragraph.</p>
 <blockquote class="blockquote">
 <p><em>Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020. The relationship between income and ideology may have changed over that eight year period. We modeled <code>liberal</code>, a binary TRUE/FALSE variable, as a logistic function of income. Individuals with higher income were more likely to be liberal. Of the people making $100,000 or more per year, about 55% are liberal, although the true number could be as low as 53% or as high as 57%.</em></p>

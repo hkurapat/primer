@@ -9,6 +9,7 @@ library(tidyverse)
 library(gt)
 ```
 
+<!-- Add discussion of the different kinds of intervals. -->
 
 <!-- When starting a new chapter, copy/paste this: 
 
@@ -65,23 +66,28 @@ In the spirit of transparency, here are the guidelines which we provide to colle
 Begin with a subject. These are often very broad: conquest, war, famine, and death are perennial favorites. But there are happier topics to pursue: marriage, birth, family, income, wealth, education, and so on. We want students to study subjects in which they are genuinely interested.
 
 Thinking about a subject often helps to clarify three topics: the outcome, the units and the important covariate/treatment. 
-The outcome is the variable which we are trying to understand/explain/predict/control. It is the "right-hand side" variable in the statistical model which we will construct. 
+The outcome is the variable which we are trying to understand/explain/predict/control. It is the "left-hand side" variable in the statistical model which we will construct. 
 
 The units are the level at which we measure the outcome. The general subject of income can be studied at many levels: individual, family, business, town, state and country, to name just a few.
 
-The covariate/treatment is the variable which we are most interested in, the one whose connection, if any, to the outcome is at center of our project. If are task is mere prediction, then there may not be a central covariate/treatment.
+The covariate/treatment is the variable in which we are most interested, the one whose connection, if any, to the outcome is at center of our project. If are task is mere prediction, then there may not be a central covariate of interest. If the model is causal, then the treatment is almost the most important covariate.
 
 ## Question
 
 Once we have a subject, we move on to a broad question:
 
-> *What is the relationship between political ideology and income?*
+> *What is the relationship between ideology and income?*
 
 If you are working in a specific fields, then the questions you and your colleagues/competitors examine will be very similar. In baseball, you will all care about the relationship between minor league statistics and major league performance. In political campaigns, you will all want to know what factors influence both donations and voting.
 
 The broad question might, or might not, mention the units. (Often, the units we can plausibly study are determined by the data which we have.) The outcome variable is often mentioned first. After all, it is at the center of our project. The most important covariate/treatment is mentioned second. At this stage, we are still probably at the level of general concepts. We have not yet determined the details of the specific variables.
 
-In order to make progress, you will then drill down to a more specific question, one with a numerical answer. Example:
+In order to make progress, you will then drill down to a more specific question, one which specifies variables for which you actually have data:
+
+> *What is the relationship between `liberal`, a binary variable which measures self-reported political views, `income`, a numeric variable derived a person's W-2?*
+
+The key refinement at this stage is that we have gone from general terms, like "ideology" and "income," to a variable with a specific definition, available in a data set to which we have access. With specific variables, we can construct a statistical model. That statistical model can be used to answer all sorts of questions about the relationships.
+
 
 > *What proportion of people who make $100,000 are liberal?*
 
@@ -292,11 +298,11 @@ Regardless of those concerns, we always conclude that, although the assumption o
 
 ### Representativeness
 
-> Representativeness, or the lack thereof, concerns two relationship, among the rows in the Population Table. The first is between the Preceptor Table and the other rows. The second is between our data and the other rows. 
+> Representativeness, or the lack thereof, concerns two relationships among the rows in the Population Table. The first is between the data and the other rows. The second is between the other rows and the Preceptor Table. 
 
 Ideally, we would like both the Preceptor Table *and* our data to be random samples from the population. If so, then the assumption of representativeness is met. Sadly, this is almost never the case.
 
-Stability looks across time periods. Reprentativeness looks within time periods.
+Stability looks across time periods. Representativeness looks within time periods.
 
 We mention specific examples of two potential problems. First, is our data representative of the population? Rarely! Second, are the rows associated with the Preceptor Table representative of the population? Again, almost never! 
 
@@ -408,13 +414,40 @@ or
 
 > *Of the people making $100,000 or more per year, about 55% are liberal, although the true number could be as low as 53% or as high as 57%.*
 
-Some cases, like these, feature numbers which have a natural interpretation. We know what percentages are. But, often, the key numbers require some more discussion. For example: 
+Some cases, like these, feature numbers which have a natural interpretation. We know what percentages are. But many outcomes are measured in units which are more difficult to interpret. For example:
+
+> *The causal effect of smaller class size on math exam scores was 10 points.* 
+
+The reader does not know if 10 points is a big or small effect because she doesn't know anything about the range of scores which students get on this exam. The most common approach to this problem is to "standardize" the causal effect by dividing by the standard deviation of the outcome. For example, if the standard deviation of all the math exam scores is 50, then we would re-write this as:
+
+> *The standardized causal effect of smaller class size on math exam scores was 0.2.*
+
+Depending on the field, there are a variety of terms for describing a raw causal effect divided by the standard deviation, including "sigmas" --- derived from the use of the Greek letter $\sigma$ as a symbol for the standard deviation. So, we might also write:
+
+> *The causal effect of smaller class size on math exam scores was 0.2 sigmas.*
+
+The raw effect size of 10 is 20% a standard deviation (50). If it were 50, we would speak instead one "one sigma" which is one standard deviation.
+
+Another common terms for this divide-by-the-standard deviation standardization is "effect size." So:
+
+> *The effect size of smaller class size on math exam scores was 0.2.*
+
+Here is another approach for tackling a problem in which the scale does not have a natural interpretation. Consider:
 
 > *The causal effect of hearing Spanish-speakers is a more conservative attitude toward immigration, a change of about 1.5 ($\pm$ 0.5) on a 15 point scale.*
 
 This is correct, as far as it goes, but we have no idea if 1.5 is a "big" or "small" change. We need some perspective. 
 
 > *The causal effect of hearing Spanish-speakers is a more conservative attitude toward immigration, a change of about 1.5 ($\pm$ 0.5) on a 15 point scale. For perspective, the difference between Democrats and Republicans on that same scale is about 2.1.*
+
+Terminology is important. The best words depend on your audience. An example involves how you describe your uncertainty, the interval around your best estimate of the quantity of interest. The terminology above --- 1.5 ($\pm$ 0.5) --- works well for a general audience. But you may want to be more precise as to the meaning of that interval. Consider some options:
+
+* *95% interval of 0.5 to 1.5*. The use of the word "interval," without an associated adjective, is a way to avoid the entire debate. The meaning is almost certainly the Bayesian one: The 95% percentile range on my posterior for the causal effect goes from 0.5 to 1.5. 
+
+* *95% confidence interval of 0.5 to 1.5*. The adjective "confidence" is used by two different sorts of people. First are Frequentists, whose philosophy is the traditional approach to statistics and still in control of institutions like the College Board. The Frequentist meaning is that, if we followed the same approach in 100 similar problems then, 95% of the time, our confidence interval would include the true value. If you don't understand this, don't worry. You will never work for a Frequentist. The second sort of person who uses the adjective "confidence" is someone who is actually Bayesian, like us, but doesn't care about annoying Frequentists.
+
+* *95% uncertainty interval of 0.5 to 1.5*. [Bayesians](https://statmodeling.stat.columbia.edu/2022/04/05/confidence-intervals-compatability-intervals-uncertainty-intervals/) who don't want to annoy Frequentists will often replace "confidence" with "uncertainty" to be polite. But, being Bayesians, their meaning is always the same: There is a 95% chance that the true value is between 0.5 and 1.5.
+
 
 Depending on the context, you might have more than one Quantity of Interest to discuss. But there must be at least one. You are now ready to provide the entire concluding paragraph.
 
