@@ -414,6 +414,8 @@ or
 
 > *Of the people making $100,000 or more per year, about 55% are liberal, although the true number could be as low as 53% or as high as 57%.*
 
+#### Scaling the QoI
+
 Some cases, like these, feature numbers which have a natural interpretation. We know what percentages are. But many outcomes are measured in units which are more difficult to interpret. For example:
 
 > *The causal effect of smaller class size on math exam scores was 10 points.* 
@@ -428,7 +430,7 @@ Depending on the field, there are a variety of terms for describing a raw causal
 
 The raw effect size of 10 is 20% a standard deviation (50). If it were 50, we would speak instead one "one sigma" which is one standard deviation.
 
-Another common terms for this divide-by-the-standard deviation standardization is "effect size." So:
+Another common term for this divide-by-the-standard deviation standardization is "effect size." So:
 
 > *The effect size of smaller class size on math exam scores was 0.2.*
 
