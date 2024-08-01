@@ -440,6 +440,8 @@ This is correct, as far as it goes, but we have no idea if 1.5 is a "big" or "sm
 
 > *The causal effect of hearing Spanish-speakers is a more conservative attitude toward immigration, a change of about 1.5 ($\pm$ 0.5) on a 15 point scale. For perspective, the difference between Democrats and Republicans on that same scale is about 2.1.*
 
+#### Confidence/Credible/Uncertainty Intervals
+
 Terminology is important. The best words depend on your audience. An example involves how you describe your uncertainty, the interval around your best estimate of the quantity of interest. The terminology above --- 1.5 ($\pm$ 0.5) --- works well for a general audience. But you may want to be more precise as to the meaning of that interval. Consider some options:
 
 * *95% interval of 0.5 to 1.5*. The use of the word "interval," without an associated adjective, is a way to avoid the entire debate. The meaning is almost certainly the Bayesian one: The 95% percentile range on my posterior for the true causal effect goes from 0.5 to 1.5. 
@@ -448,6 +450,9 @@ Terminology is important. The best words depend on your audience. An example inv
 
 * *95% credible interval of 0.5 to 1.5*. The adjective "credible" is the [Bayesian analogue](https://en.wikipedia.org/wiki/Credible_interval) to "confidence." Other [Bayesians](https://statmodeling.stat.columbia.edu/2022/04/05/confidence-intervals-compatability-intervals-uncertainty-intervals/) who don't want to annoy Frequentists will often replace "confidence" with "uncertainty" to be polite. But, being Bayesians, their meaning is always the same: There is a 95% chance that the true value is between 0.5 and 1.5.
 
+The main takeaway is that the vast majority of people will not care if you use "confidence interval" or "credible interval" or "uncertainty interval." They will interpret any of these phrases in the Bayesian way: there is an X% chance --- where X is most often 95 but can take on other values --- that the true value lies within the interval. 
+
+#### Final Paragraph
 
 Depending on the context, you might have more than one Quantity of Interest to discuss. But there must be at least one. You are now ready to provide the entire concluding paragraph.
 
