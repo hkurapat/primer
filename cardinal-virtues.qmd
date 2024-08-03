@@ -372,11 +372,11 @@ The model you have made by the end of Courage is almost always too complex to an
 
 The DGM  section ends with a clear statement in English, in its own paragraph, describing the model. That is, what are the two sentences which a student would say at a presentation describing the model. The first sentence specifies the model, including making clear the units, outcome and key covariates. (No need to use the terms "units," "outcomes," and so on.) The second sentence tells us something about the model, generally the relationship between one of the covariates and the outcome variable. In general, there is no discussion af specific numbers or their uncertainty. First, who cares? Parameter estimates are boring and irrelevant. Second, the Temperance section is where we answer the original question. Example:
 
-> *We modeled `liberal`, a binary TRUE/FALSE variable, as a logistic function of income. Individuals with higher income were more likely to be liberal.* 
+> *We modeled being liberal, a binary TRUE/FALSE variable, as a logistic function of income. Individuals with higher income were more likely to be liberal.* 
 
 Update our concluding paragraph with this addition:
 
-> *Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020. In particular, what percentage of individuals who make more than $100,000 per year are liberal? The relationship between income and ideology may have changed over that eight year period. We modeled `liberal`, a binary TRUE/FALSE variable, as a logistic function of income. Individuals with higher income were more likely to be liberal.*
+> *Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020. In particular, what percentage of individuals who make more than $100,000 per year are liberal? The relationship between income and ideology may have changed over that eight year period. We modeled being liberal, a binary TRUE/FALSE variable, as a logistic function of income. Individuals with higher income were more likely to be liberal.*
 
 Feel free to use "I" instead of "We" if the project is solo.
 
@@ -458,7 +458,7 @@ The main takeaway is that the vast majority of people will not care if you use "
 
 Depending on the context, you might have more than one Quantity of Interest to discuss. But there must be at least one. You are now ready to provide the entire concluding paragraph.
 
-> *Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020.  The relationship between income and ideology may have changed over that eight year period. We modeled `liberal`, a binary TRUE/FALSE variable, as a logistic function of income. Individuals with higher income were more likely to be liberal. Of the people making $100,000 or more per year, about 55% are liberal, although the true number could be as low as 53% or as high as 57%.*
+> *Using data from a 2012 survey of Boston-area commuters, we seek to understand the relationship between income and political ideology in Chicago and similar cities in 2020.  The relationship between income and ideology may have changed over that eight year period. We modeled the status of having a liberal political orientation, a binary TRUE/FALSE variable, as a logistic function of income. Individuals with higher income were more likely to be liberal. Of the people making $100,000 or more per year, about 55% are liberal, although the true number could be as low as 53% or as high as 57%.*
 
 Note that we have deleted the rhetorical question --- "In particular, what percentage of individuals who make more than $100,000 per year are liberal?" --- from the start of the paragraph. It is no longer necessary. 
 
