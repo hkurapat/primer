@@ -1,5 +1,3 @@
-<!-- We should go back to primer.data and change governors so that it includes all the data they have in the original. Then, we can clean it up here and restrict to post 1945. -->
-
 
 <!-- drop_na() the data at the start. Remove #| warning from graphs. -->
 
@@ -106,11 +104,12 @@ The **primer.data** package includes the `governors` data set which features dem
 glimpse(governors)
 ```
 
-There are `r ncol(governors)` variables and `r scales::comma(nrow(governors))` observations. In this Chapter, we will only be looking at the variables `last_name`, `year`, `state`, `sex`, `lived_after`, and `election_age`.
+There are `r ncol(governors)` variables and `r scales::comma(nrow(governors))` observations. In this Chapter, we will only be looking at the variables `last_name`, `year`, `state`, `sex`, `lived_after`, and `election_age`. We also restrict the sample to elections after 1945.
 
 ```{r}
 #| code-fold: false
 ch7_a <- governors |> 
+  filter(year > 1945) |> 
   select(last_name, year, state, sex, lived_after, election_age)
 ```
 

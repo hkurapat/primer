@@ -351,7 +351,7 @@ window.Quarto = {
   
 
 
-</header><!-- We should go back to primer.data and change governors so that it includes all the data they have in the original. Then, we can clean it up here and restrict to post 1945. --><!-- drop_na() the data at the start. Remove #| warning from graphs. --><!-- There most be a cleaner way to create these plots with the fitted lines. Also, add a similar plot to the sex-only model. --><!-- Are we handling election_age correctly. Do we center or it or not? If not, then how can our news use age as 10? --><p>Let’s learn about <em>interactions</em>. The effect of a treatment relative to a control is almost never uniform. The effect might be bigger in women than in men, smaller in the rich relative to the poor. The technical term for such effects is “heterogeneous,” which is just Ph.D.’ese for “different.” With enough data, all effects are heterogeneous. Causal effects, at least in the social science, always vary across units. To model this reality, we rely on interactions, on allowing the effect size to differ. The same applies for predictive models. The relationship between our outcome variable <span class="math inline">\(y\)</span> and a predictor variable <span class="math inline">\(x\)</span> is rarely constant. The relationship varies based on the values of other variables. To take account of interactions, we need models with at least 5 parameters.</p>
+</header><!-- drop_na() the data at the start. Remove #| warning from graphs. --><!-- There most be a cleaner way to create these plots with the fitted lines. Also, add a similar plot to the sex-only model. --><!-- Are we handling election_age correctly. Do we center or it or not? If not, then how can our news use age as 10? --><p>Let’s learn about <em>interactions</em>. The effect of a treatment relative to a control is almost never uniform. The effect might be bigger in women than in men, smaller in the rich relative to the poor. The technical term for such effects is “heterogeneous,” which is just Ph.D.’ese for “different.” With enough data, all effects are heterogeneous. Causal effects, at least in the social science, always vary across units. To model this reality, we rely on interactions, on allowing the effect size to differ. The same applies for predictive models. The relationship between our outcome variable <span class="math inline">\(y\)</span> and a predictor variable <span class="math inline">\(x\)</span> is rarely constant. The relationship varies based on the values of other variables. To take account of interactions, we need models with at least 5 parameters.</p>
 <p>Packages:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">primer.data</span><span class="op">)</span></span>
@@ -398,23 +398,23 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<div id="syatydrlxc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#syatydrlxc table {
+<div id="wxnppzwbfn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wxnppzwbfn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#syatydrlxc thead, #syatydrlxc tbody, #syatydrlxc tfoot, #syatydrlxc tr, #syatydrlxc td, #syatydrlxc th {
+#wxnppzwbfn thead, #wxnppzwbfn tbody, #wxnppzwbfn tfoot, #wxnppzwbfn tr, #wxnppzwbfn td, #wxnppzwbfn th {
   border-style: none;
 }
 
-#syatydrlxc p {
+#wxnppzwbfn p {
   margin: 0;
   padding: 0;
 }
 
-#syatydrlxc .gt_table {
+#wxnppzwbfn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -440,12 +440,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#syatydrlxc .gt_caption {
+#wxnppzwbfn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#syatydrlxc .gt_title {
+#wxnppzwbfn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -457,7 +457,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#syatydrlxc .gt_subtitle {
+#wxnppzwbfn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -469,7 +469,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#syatydrlxc .gt_heading {
+#wxnppzwbfn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -481,13 +481,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#syatydrlxc .gt_bottom_border {
+#wxnppzwbfn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#syatydrlxc .gt_col_headings {
+#wxnppzwbfn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -502,7 +502,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#syatydrlxc .gt_col_heading {
+#wxnppzwbfn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -522,7 +522,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#syatydrlxc .gt_column_spanner_outer {
+#wxnppzwbfn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -534,15 +534,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#syatydrlxc .gt_column_spanner_outer:first-child {
+#wxnppzwbfn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#syatydrlxc .gt_column_spanner_outer:last-child {
+#wxnppzwbfn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#syatydrlxc .gt_column_spanner {
+#wxnppzwbfn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -554,11 +554,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#syatydrlxc .gt_spanner_row {
+#wxnppzwbfn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#syatydrlxc .gt_group_heading {
+#wxnppzwbfn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -584,7 +584,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#syatydrlxc .gt_empty_group_heading {
+#wxnppzwbfn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -599,15 +599,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#syatydrlxc .gt_from_md > :first-child {
+#wxnppzwbfn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#syatydrlxc .gt_from_md > :last-child {
+#wxnppzwbfn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#syatydrlxc .gt_row {
+#wxnppzwbfn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -626,7 +626,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#syatydrlxc .gt_stub {
+#wxnppzwbfn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -639,7 +639,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#syatydrlxc .gt_stub_row_group {
+#wxnppzwbfn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -653,15 +653,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#syatydrlxc .gt_row_group_first td {
+#wxnppzwbfn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#syatydrlxc .gt_row_group_first th {
+#wxnppzwbfn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#syatydrlxc .gt_summary_row {
+#wxnppzwbfn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -671,16 +671,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#syatydrlxc .gt_first_summary_row {
+#wxnppzwbfn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#syatydrlxc .gt_first_summary_row.thick {
+#wxnppzwbfn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#syatydrlxc .gt_last_summary_row {
+#wxnppzwbfn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -690,7 +690,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#syatydrlxc .gt_grand_summary_row {
+#wxnppzwbfn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -700,7 +700,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#syatydrlxc .gt_first_grand_summary_row {
+#wxnppzwbfn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -710,7 +710,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#syatydrlxc .gt_last_grand_summary_row_top {
+#wxnppzwbfn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -720,11 +720,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#syatydrlxc .gt_striped {
+#wxnppzwbfn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#syatydrlxc .gt_table_body {
+#wxnppzwbfn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -733,7 +733,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#syatydrlxc .gt_footnotes {
+#wxnppzwbfn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -747,7 +747,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#syatydrlxc .gt_footnote {
+#wxnppzwbfn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -756,7 +756,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#syatydrlxc .gt_sourcenotes {
+#wxnppzwbfn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -770,7 +770,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#syatydrlxc .gt_sourcenote {
+#wxnppzwbfn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -778,63 +778,63 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#syatydrlxc .gt_left {
+#wxnppzwbfn .gt_left {
   text-align: left;
 }
 
-#syatydrlxc .gt_center {
+#wxnppzwbfn .gt_center {
   text-align: center;
 }
 
-#syatydrlxc .gt_right {
+#wxnppzwbfn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#syatydrlxc .gt_font_normal {
+#wxnppzwbfn .gt_font_normal {
   font-weight: normal;
 }
 
-#syatydrlxc .gt_font_bold {
+#wxnppzwbfn .gt_font_bold {
   font-weight: bold;
 }
 
-#syatydrlxc .gt_font_italic {
+#wxnppzwbfn .gt_font_italic {
   font-style: italic;
 }
 
-#syatydrlxc .gt_super {
+#wxnppzwbfn .gt_super {
   font-size: 65%;
 }
 
-#syatydrlxc .gt_footnote_marks {
+#wxnppzwbfn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#syatydrlxc .gt_asterisk {
+#wxnppzwbfn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#syatydrlxc .gt_indent_1 {
+#wxnppzwbfn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#syatydrlxc .gt_indent_2 {
+#wxnppzwbfn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#syatydrlxc .gt_indent_3 {
+#wxnppzwbfn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#syatydrlxc .gt_indent_4 {
+#wxnppzwbfn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#syatydrlxc .gt_indent_5 {
+#wxnppzwbfn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -931,27 +931,27 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">governors</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>Rows: 1,092
-Columns: 14
+<pre><code>Rows: 3,587
+Columns: 13
 $ state        &lt;chr&gt; "Alabama", "Alabama", "Alabama", "Alabama", "Alabama", "A…
-$ year         &lt;int&gt; 1946, 1946, 1950, 1954, 1954, 1958, 1962, 1966, 1966, 197…
-$ first_name   &lt;chr&gt; "James", "Lyman", "Gordon", "Tom", "James", "William", "G…
-$ last_name    &lt;chr&gt; "Folsom", "Ward", "Persons", "Abernethy", "Folsom", "Long…
-$ party        &lt;chr&gt; "Democrat", "Republican", "Democrat", "Republican", "Demo…
+$ year         &lt;int&gt; 1851, 1853, 1855, 1857, 1859, 1861, 1863, 1868, 1870, 187…
+$ first_name   &lt;chr&gt; "Henry", "John", "John", "Andrew", "Andrew", "John", "Joh…
+$ last_name    &lt;chr&gt; "Collier", "Winston", "Winston", "Moore", "Moore", "Short…
+$ party        &lt;chr&gt; "Democrat", "Democrat", "Democrat", "Democrat", "Democrat…
 $ sex          &lt;chr&gt; "Male", "Male", "Male", "Male", "Male", "Male", "Male", "…
-$ died         &lt;date&gt; 1987-11-21, 1948-12-17, 1965-05-29, 1968-03-07, 1987-11-…
+$ died         &lt;date&gt; 1855-08-28, 1871-12-21, 1871-12-21, 1873-04-05, 1873-04-…
 $ status       &lt;chr&gt; "Challenger", "Challenger", "Challenger", "Challenger", "…
-$ win_margin   &lt;dbl&gt; 77.334394, -77.334394, 82.206564, -46.748166, 46.748166, …
+$ win_margin   &lt;dbl&gt; 73.4021143, 46.1124743, 15.5809303, 100.0000000, 45.55431…
 $ region       &lt;chr&gt; "South", "South", "South", "South", "South", "South", "So…
-$ population   &lt;dbl&gt; 2906000, 2906000, 3058000, 3014000, 3014000, 3163000, 332…
-$ election_age &lt;dbl&gt; 38.07255, 78.54894, 48.74743, 46.54620, 46.07255, 33.2703…
-$ death_age    &lt;dbl&gt; 79.11567, 80.66530, 63.31006, 59.88227, 79.11567, 87.8193…
-$ lived_after  &lt;dbl&gt; 41.043121, 2.116359, 14.562628, 13.336071, 33.043121, 54.…</code></pre>
+$ election_age &lt;dbl&gt; 50.79808, 41.16906, 43.16769, 50.66667, 52.66530, 43.5373…
+$ death_age    &lt;dbl&gt; 54.60917, 59.29363, 59.29363, 66.08077, 66.08077, 54.0999…
+$ lived_after  &lt;dbl&gt; 3.811088, 18.124572, 16.125941, 15.414100, 13.415469, 10.…</code></pre>
 </div>
 </div>
-<p>There are 14 variables and 1,092 observations. In this Chapter, we will only be looking at the variables <code>last_name</code>, <code>year</code>, <code>state</code>, <code>sex</code>, <code>lived_after</code>, and <code>election_age</code>.</p>
+<p>There are 13 variables and 3,587 observations. In this Chapter, we will only be looking at the variables <code>last_name</code>, <code>year</code>, <code>state</code>, <code>sex</code>, <code>lived_after</code>, and <code>election_age</code>. We also restrict the sample to elections after 1945.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ch7_a</span> <span class="op">&lt;-</span> <span class="va">governors</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">&gt;</span> <span class="fl">1945</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">last_name</span>, <span class="va">year</span>, <span class="va">state</span>, <span class="va">sex</span>, <span class="va">lived_after</span>, <span class="va">election_age</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>election_age</code> and <code>lived_after</code> are how many years a candidate lived before and after the election, respectively. As a consequence, only politicians who are already deceased are included in this data set. This means that there are only a handful of observations from elections in the last 20 years. Most candidates from that time period are still alive and are, therefore, excluded.</p>
@@ -998,7 +998,7 @@ $ lived_after  &lt;dbl&gt; 41.043121, 2.116359, 14.562628, 13.336071, 33.043121,
 </tr>
 <tr class="even">
 <td style="text-align: left;">Number of rows</td>
-<td style="text-align: left;">1092</td>
+<td style="text-align: left;">1090</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Number of columns</td>
@@ -1060,7 +1060,7 @@ $ lived_after  &lt;dbl&gt; 41.043121, 2.116359, 14.562628, 13.336071, 33.043121,
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">615</td>
+<td style="text-align: right;">613</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
@@ -1118,25 +1118,25 @@ $ lived_after  &lt;dbl&gt; 41.043121, 2.116359, 14.562628, 13.336071, 33.043121,
 <td style="text-align: left;">year</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">1964.85</td>
-<td style="text-align: right;">13.38</td>
-<td style="text-align: right;">1945.00</td>
+<td style="text-align: right;">1964.89</td>
+<td style="text-align: right;">13.37</td>
+<td style="text-align: right;">1946.00</td>
 <td style="text-align: right;">1954.00</td>
 <td style="text-align: right;">1962.00</td>
 <td style="text-align: right;">1974.00</td>
 <td style="text-align: right;">2011.00</td>
-<td style="text-align: left;">▇▆▃▂▁</td>
+<td style="text-align: left;">▇▇▃▂▁</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">lived_after</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">28.23</td>
-<td style="text-align: right;">13.38</td>
+<td style="text-align: right;">28.21</td>
+<td style="text-align: right;">13.39</td>
 <td style="text-align: right;">0.13</td>
-<td style="text-align: right;">17.57</td>
-<td style="text-align: right;">29.60</td>
-<td style="text-align: right;">38.67</td>
+<td style="text-align: right;">17.55</td>
+<td style="text-align: right;">29.58</td>
+<td style="text-align: right;">38.68</td>
 <td style="text-align: right;">60.42</td>
 <td style="text-align: left;">▃▆▇▆▂</td>
 </tr>
@@ -2835,27 +2835,27 @@ term naming may be unreliable!</code></pre>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">sex</td>
 <td class="gt_row gt_center" headers="estimate"><br></td>
-<td class="gt_row gt_center" headers="ci"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;sexMale</td>
 <td class="gt_row gt_center" headers="estimate">54</td>
-<td class="gt_row gt_center" headers="ci">14, 95</td>
+<td class="gt_row gt_center" headers="conf.low">14, 95</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">election_age</td>
 <td class="gt_row gt_center" headers="estimate">-0.05</td>
-<td class="gt_row gt_center" headers="ci">-0.72, 0.65</td>
+<td class="gt_row gt_center" headers="conf.low">-0.72, 0.65</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">sex * election_age</td>
 <td class="gt_row gt_center" headers="estimate"><br></td>
-<td class="gt_row gt_center" headers="ci"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;sexMale * election_age</td>
 <td class="gt_row gt_center" headers="estimate">-0.81</td>
-<td class="gt_row gt_center" headers="ci">-1.5, -0.13</td>
+<td class="gt_row gt_center" headers="conf.low">-1.5, -0.13</td>
 </tr>
 </tbody>
 <tfoot class="gt_footnotes"><tr class="even">

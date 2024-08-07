@@ -131,7 +131,7 @@ glimpse(shaming)
 
 Variables of particular interest to us are `sex`, `hh_size`, and `primary_06`. The variable `hh_size` tells us the size of the respondent's household, `sex` tells us the sex of the respondent, and `primary_06` tells us whether or not the respondent voted in the 2006 primary election. 
 
-There are a few things to note while exploring this data set. You may -- or may not -- have noticed that the only response to the `general_04` variable is "Yes". In their published article, the authors note that "Only registered voters who voted in November 2004 were selected for our sample."  After this, the authors found their history then sent out the mailings. Thus, anyone who did not vote in the 2004 general election is excluded, by definition. Keep that fact in mind when we discuss representativeness below.
+There are a few things to note while exploring this data set. You may -- or may not -- have noticed that the only value for the `general_04` variable is `1`, meaning that every person in the data voted in the 2004 general election. In their published article, the authors note that "Only registered voters who voted in November 2004 were selected for our sample."  After this, the authors found the voting history for those individuals and then sent out the mailings. Thus, anyone who did not vote in the 2004 general election is excluded, by definition. Keep that fact in mind when we discuss representativeness below.
 
 The dependent variable is `primary_06`, which is coded either 1 or 0 for whether or not the respondent voted in the 2006 primary election. This is the dependent variable because the authors are trying to measure the **effect** that the treatments have on voting behavior in the 2006 general election. It is also the dependent variable from our point of view since our question also deals with voting behavior.
 
@@ -179,24 +179,14 @@ The original question mentions "civic engagement." Although `shaming` does not i
 
 x <- shaming |> 
     
-  # Converting the Y/N columns to binaries with the function we made 
-  # note that primary_06 is already binary and also that we don't 
-  # need it to construct a variable based on previous voting behavior.
-  
-  mutate(p_00 = (primary_00 == "Yes"),
-         p_02 = (primary_02 == "Yes"),
-         p_04 = (primary_04 == "Yes"),
-         g_00 = (general_00 == "Yes"),
-         g_02 = (general_02 == "Yes"),
-         g_04 = (general_04 == "Yes")) |> 
   
   # A sum of the voting action records across the election cycle columns gives
   # us an idea of the voters general level of civic involvement.
   
-  mutate(civ_engage = p_00 + p_02 + p_04 + 
-                      g_00 + g_02 + g_04) |> 
+  mutate(civ_engage = primary_00 + primary_02 + primary_04 + 
+                      general_00 + general_02 + general_04) |> 
   
-  # If you look closely at the data, you will note that g_04 is always Yes, so
+  # If you look closely at the data, you will note that general_04 is always Yes, so
   # the lowest possible value of civ_engage is 1. The reason for this is that
   # the sample was created by starting with a list of everyone who voted in the
   # 2004 general election. Note how that fact makes the interpretation of the
